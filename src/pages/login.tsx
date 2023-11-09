@@ -13,13 +13,14 @@ import InputError from '@/components/Inputs/InputError';
 import Label from '@/components/Inputs/Label';
 import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
+import { AppConfig } from '@/utils/AppConfig';
 
 const Login = () => {
   const { query } = useRouter();
 
   const { login } = useAuth({
     middleware: 'guest',
-    redirectUri: '/dashboard',
+    redirectUri: '/',
   });
 
   const [email, setEmail] = useState<string>('');
@@ -52,7 +53,7 @@ const Login = () => {
   return (
     <GuestLayout>
       <Head>
-        <title>Laravel - Login</title>
+        <title>Login | {AppConfig.site_name}</title>
       </Head>
       <AuthCard>
         {/* Session Status */}
@@ -102,16 +103,14 @@ const Login = () => {
                 checked={shouldRemember}
                 onChange={(event) => setShouldRemember(event.target.checked)}
               />
-              <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
-                Remember me
-              </span>
+              <span className="ml-2 text-sm text-gray-600">Remember me</span>
             </label>
           </div>
 
           <div className="mt-4 flex items-center justify-end">
             <Link
               href="/forgot-password"
-              className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
+              className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
               Forgot your password?
             </Link>

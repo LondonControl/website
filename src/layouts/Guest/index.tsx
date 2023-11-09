@@ -6,7 +6,7 @@ const GuestLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <div>
       <Head>
-        <title>Laravel</title>
+        <title>Home | London Control</title>
       </Head>
 
       <div className="font-sans text-gray-900 antialiased">{children}</div>

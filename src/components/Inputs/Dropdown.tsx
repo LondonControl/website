@@ -13,7 +13,7 @@ interface Props {
 const Dropdown: React.FC<PropsWithChildren<Props>> = ({
   align = 'right',
   width = '48',
-  contentClasses = 'py-1 bg-white dark:bg-gray-700',
+  contentClasses = 'py-1 bg-white',
   trigger,
   children,
 }) => {
@@ -38,6 +38,7 @@ const Dropdown: React.FC<PropsWithChildren<Props>> = ({
     widthClasses = 'w-48';
   }
 
+  // @ts-ignore
   // eslint-disable-next-line unused-imports/no-unused-vars
   const [open, setOpen] = useState<boolean>(false);
 
