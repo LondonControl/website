@@ -17,6 +17,10 @@ module.exports = {
       maxWidth: {
         site: '90rem',
       },
+      screens: {
+        tablet: '960px',
+        desktop: '1248px',
+      },
     },
   },
   plugins: [

@@ -1,9 +1,9 @@
 // FIXME: Update this configuration file based on your project information
 
 export const AppConfig = {
-  site_name: 'NextJS Projects Boilerplate',
-  title: 'NextJS Projects Boilerplate',
+  site_name: 'London Control',
+  title: 'London Control',
   company: 'Gerenuk',
-  description: 'Starter code for your Nextjs Boilerplate with Tailwind CSS',
+  description: 'London Control is a realistic ATC simulator',
   locale: 'en_GB',
 };
