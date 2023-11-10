@@ -14,7 +14,7 @@ const MainLayout: React.FC<Props> = (props) => {
   const { user } = useAuth({ middleware: 'auth' });
 
   return (
-    <div className="min-h-screen w-full bg-gray-100">
+    <div className="min-h-screen w-full">
       {props.meta}
 
       <Navbar {...user} />
