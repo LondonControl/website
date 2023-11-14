@@ -8,8 +8,10 @@ import PrimaryButton from '@/components/Buttons/PrimaryButton';
 import Input from '@/components/Inputs/Input';
 import InputError from '@/components/Inputs/InputError';
 import Label from '@/components/Inputs/Label';
+import Meta from '@/components/Meta';
 import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
+import { AppConfig } from '@/utils/AppConfig';
 
 const PasswordReset = () => {
   const { query } = useRouter();
@@ -43,6 +45,11 @@ const PasswordReset = () => {
 
   return (
     <GuestLayout>
+      <Meta
+        title={`Reset Password | ${AppConfig.site_name}`}
+        description={AppConfig.description}
+      />
+
       <AuthCard>
         {/* Session Status */}
         <AuthSessionStatus className="mb-4" status={status} />

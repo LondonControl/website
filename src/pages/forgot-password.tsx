@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import type { FormEventHandler } from 'react';
 import React, { useState } from 'react';
 
@@ -8,8 +7,10 @@ import PrimaryButton from '@/components/Buttons/PrimaryButton';
 import Input from '@/components/Inputs/Input';
 import InputError from '@/components/Inputs/InputError';
 import Label from '@/components/Inputs/Label';
+import Meta from '@/components/Meta';
 import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
+import { AppConfig } from '@/utils/AppConfig';
 
 const ForgotPassword = () => {
   const { forgotPassword } = useAuth({
@@ -29,9 +30,11 @@ const ForgotPassword = () => {
 
   return (
     <GuestLayout>
-      <Head>
-        <title>Laravel - Forgot your password</title>
-      </Head>
+      <Meta
+        title={`Forgot Password | ${AppConfig.site_name}`}
+        description={AppConfig.description}
+      />
+
       <AuthCard>
         <div className="mb-4 text-sm text-gray-600">
           Forgot your password? No problem. Just let us know your email address

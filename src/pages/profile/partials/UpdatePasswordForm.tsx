@@ -14,7 +14,7 @@ const UpdatePasswordForm = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
 
   const [errors, setErrors] = useState<any>([]);
-  const [status, setStatus] = useState<string | null>(null);
+  const [status, setStatus] = useState<number | null>(null);
 
   const submitForm: FormEventHandler = async (event) => {
     event.preventDefault();
@@ -30,7 +30,7 @@ const UpdatePasswordForm = () => {
         password,
         password_confirmation: passwordConfirmation,
       })
-      .then((response) => setStatus(response.data.status))
+      .then((response) => setStatus(response.status))
       .catch((error) => {
         if (error.response.status !== 422) throw error;
 
@@ -97,7 +97,7 @@ const UpdatePasswordForm = () => {
         <div className="flex items-center gap-4">
           <PrimaryButton>Save</PrimaryButton>
 
-          {status === 'password-updated' && (
+          {status === 200 && (
             <Transition
               show={true}
               enterFrom="opacity-0"

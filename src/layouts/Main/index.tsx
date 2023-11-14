@@ -2,7 +2,6 @@ import type { ReactNode } from 'react';
 import React from 'react';
 
 import Navbar from '@/components/Navbar';
-import { useAuth } from '@/hooks/useAuth';
 
 interface Props {
   meta: ReactNode;
@@ -11,13 +10,15 @@ interface Props {
 }
 
 const MainLayout: React.FC<Props> = (props) => {
-  const { user } = useAuth({ middleware: 'auth' });
+  // const { user } = useAuth({ middleware: 'guest' });
 
   return (
     <div className="min-h-screen w-full">
       {props.meta}
 
-      <Navbar {...user} />
+      {/* <Navbar user={user} /> */}
+
+      <Navbar />
 
       {props.header && (
         <header className="bg-white shadow">

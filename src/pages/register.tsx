@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import type { FormEventHandler } from 'react';
 import React, { useState } from 'react';
@@ -8,8 +7,10 @@ import PrimaryButton from '@/components/Buttons/PrimaryButton';
 import Input from '@/components/Inputs/Input';
 import InputError from '@/components/Inputs/InputError';
 import Label from '@/components/Inputs/Label';
+import Meta from '@/components/Meta';
 import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
+import { AppConfig } from '@/utils/AppConfig';
 
 const Register = () => {
   const { register } = useAuth({
@@ -38,9 +39,11 @@ const Register = () => {
 
   return (
     <GuestLayout>
-      <Head>
-        <title>Laravel - Register</title>
-      </Head>
+      <Meta
+        title={`Register | ${AppConfig.site_name}`}
+        description={AppConfig.description}
+      />
+
       <AuthCard>
         <form onSubmit={submitForm}>
           {/* Name */}

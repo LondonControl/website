@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import AuthCard from '@/components/Auth/AuthCard';
 import AuthSessionStatus from '@/components/Auth/AuthSessionStatus';
 import PrimaryButton from '@/components/Buttons/PrimaryButton';
+import Meta from '@/components/Meta';
 import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
+import { AppConfig } from '@/utils/AppConfig';
 
 const VerifyEmail = () => {
   const { logout, resendEmailVerification } = useAuth({
@@ -16,6 +18,11 @@ const VerifyEmail = () => {
 
   return (
     <GuestLayout>
+      <Meta
+        title={`Verify | ${AppConfig.site_name}`}
+        description={AppConfig.description}
+      />
+
       <AuthCard>
         <div className="mb-4 text-sm text-gray-600">
           Thanks for signing up! Before getting started, could you verify your

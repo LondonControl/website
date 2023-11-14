@@ -3,13 +3,13 @@ import type { NextPage } from 'next';
 import PrimaryButton from '@/components/Buttons/PrimaryButton';
 import Meta from '@/components/Meta';
 import MainStatsSection from '@/components/Sections/MainStatsSection';
-import GuestLayout from '@/layouts/Guest';
+import MainLayout from '@/layouts/Main';
 
 interface Props {}
 
 const Index: NextPage<Props> = () => {
   return (
-    <GuestLayout
+    <MainLayout
       meta={
         <Meta
           title="Laravel Breeze NextJS Typescript"
@@ -30,7 +30,7 @@ const Index: NextPage<Props> = () => {
       <div className="mt-8 max-w-site">
         <MainStatsSection />
       </div>
-    </GuestLayout>
+    </MainLayout>
   );
 };
 

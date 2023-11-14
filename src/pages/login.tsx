@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FormEventHandler } from 'react';
@@ -11,6 +10,7 @@ import Checkbox from '@/components/Inputs/Checkbox';
 import Input from '@/components/Inputs/Input';
 import InputError from '@/components/Inputs/InputError';
 import Label from '@/components/Inputs/Label';
+import Meta from '@/components/Meta';
 import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
@@ -52,9 +52,11 @@ const Login = () => {
 
   return (
     <GuestLayout>
-      <Head>
-        <title>Login | {AppConfig.site_name}</title>
-      </Head>
+      <Meta
+        title={`Login | ${AppConfig.site_name}`}
+        description={AppConfig.description}
+      />
+
       <AuthCard>
         {/* Session Status */}
         <AuthSessionStatus className="mb-4" status={status} />

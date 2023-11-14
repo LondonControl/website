@@ -28,7 +28,7 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
     mutate,
   } = useSWR<User>(getUserEndpoint(), () =>
     axios
-      .get('/api/user')
+      .get(getUserEndpoint())
       .then((res) => res.data)
       .catch((err) => {
         if (err.response.status !== 409) throw err;
@@ -67,6 +67,7 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
       .then(() => mutate())
       .catch((err) => {
         if (err.response.status !== 422) throw err;
+
         setErrors(err.response.data.errors);
       });
   };

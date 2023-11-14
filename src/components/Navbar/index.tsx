@@ -10,11 +10,17 @@ import ResponsiveNavLink, {
   ResponsiveNavButton,
 } from '@/components/Navbar/ResponsiveNavLink';
 import { useAuth } from '@/hooks/useAuth';
-import type User from '@/interfaces/User';
 
-const Navigation: React.FC<User> = (user) => {
+import PrimaryLinkButton from '../Buttons/PrimaryLinkButton';
+import SecondaryLinkButton from '../Buttons/SecondaryLinkButton';
+
+interface Props {
+  // user?: User;
+}
+
+const Navigation: React.FC<Props> = () => {
   const router = useRouter();
-  const { logout } = useAuth({ middleware: 'auth' });
+  const { logout, user } = useAuth({ middleware: 'guest' });
   const [open, setOpen] = useState<boolean>(false);
 
   return (
@@ -44,34 +50,43 @@ const Navigation: React.FC<User> = (user) => {
           {/* Settings Dropdown */}
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
             <div className="relative ml-3">
-              <Dropdown
-                align="right"
-                width="48"
-                trigger={
-                  <span className="inline-flex rounded-md">
-                    <button className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
-                      {user?.name}
+              {user ? (
+                <Dropdown
+                  align="right"
+                  width="48"
+                  trigger={
+                    <span className="inline-flex rounded-md">
+                      <button className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
+                        {user?.name}
 
-                      <svg
-                        className="-mr-0.5 ml-2 h-4 w-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                  </span>
-                }
-              >
-                {/* Authentication */}
-                {/* TODO: add active state */}
-                <DropdownLink href="/profile">Profile</DropdownLink>
-                <DropdownButton onClick={logout}>Logout</DropdownButton>
-              </Dropdown>
+                        <svg
+                          className="-mr-0.5 ml-2 h-4 w-4"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </button>
+                    </span>
+                  }
+                >
+                  {/* Authentication */}
+                  {/* TODO: add active state */}
+                  <DropdownLink href="/profile">Profile</DropdownLink>
+                  <DropdownButton onClick={logout}>Logout</DropdownButton>
+                </Dropdown>
+              ) : (
+                <div className="space-x-3">
+                  <SecondaryLinkButton href="/login">Login</SecondaryLinkButton>
+                  <PrimaryLinkButton href="/register">
+                    Register
+                  </PrimaryLinkButton>
+                </div>
+              )}
             </div>
           </div>
 

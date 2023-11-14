@@ -15,7 +15,7 @@ const UpdateProfileInformationForm = () => {
   const [name, setName] = useState<any>('');
   const [email, setEmail] = useState<any>('');
   const [errors, setErrors] = useState<any>([]);
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState<number | null>(null);
 
   useEffect(() => {
     if (user !== undefined) {
@@ -34,7 +34,7 @@ const UpdateProfileInformationForm = () => {
 
     axios
       .put('/api/profile', { name, email })
-      .then((response) => setStatus(response.data.status))
+      .then((response) => setStatus(response.status))
       .catch((error) => {
         if (error.response.status !== 422) throw error;
 
@@ -104,7 +104,7 @@ const UpdateProfileInformationForm = () => {
               </button>
             </p>
 
-            {status === 'verification-link-sent' && (
+            {status === 200 && (
               <div className="mt-2 text-sm font-medium text-green-600">
                 A new verification link has been sent to your email address.
               </div>
@@ -115,7 +115,7 @@ const UpdateProfileInformationForm = () => {
         <div className="flex items-center gap-4">
           <PrimaryButton>Save</PrimaryButton>
 
-          {status === 'profile-updated' && (
+          {status === 200 && (
             <Transition
               show={true}
               enterFrom="opacity-0"
