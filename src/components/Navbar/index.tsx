@@ -76,7 +76,10 @@ const Navigation: React.FC<Props> = () => {
                 >
                   {/* Authentication */}
                   {/* TODO: add active state */}
+                  <DropdownLink href="/orders">Orders</DropdownLink>
                   <DropdownLink href="/profile">Profile</DropdownLink>
+
+                  <hr />
                   <DropdownButton onClick={logout}>Logout</DropdownButton>
                 </Dropdown>
               ) : (
@@ -149,6 +152,12 @@ const Navigation: React.FC<Props> = () => {
             </div>
 
             <div className="mt-3 space-y-1">
+              <ResponsiveNavLink
+                href="/orders"
+                active={router.pathname === '/orders/*'}
+              >
+                Orders
+              </ResponsiveNavLink>
               <ResponsiveNavLink
                 href="/profile"
                 active={router.pathname === '/profile'}
