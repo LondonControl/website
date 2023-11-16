@@ -1,9 +1,10 @@
+import type { NextPage } from 'next';
 import Head from 'next/head';
 
 import Meta from '@/components/Meta';
 import MainLayout from '@/layouts/Main';
 
-const Dashboard = () => {
+const Dashboard: NextPage = () => {
   return (
     <MainLayout
       meta={

@@ -1,3 +1,4 @@
+import type { NextPage } from 'next';
 import Link from 'next/link';
 import type { FormEventHandler } from 'react';
 import React, { useState } from 'react';
@@ -12,7 +13,7 @@ import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
 
-const Register = () => {
+const Register: NextPage = () => {
   const { register } = useAuth({
     middleware: 'guest',
     redirectUri: '/dashboard',

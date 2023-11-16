@@ -1,3 +1,4 @@
+import type { NextPage } from 'next';
 import React from 'react';
 
 import Meta from '@/components/Meta';
@@ -7,7 +8,7 @@ import { AppConfig } from '@/utils/AppConfig';
 import UpdatePasswordForm from './partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './partials/UpdateProfileInformationForm';
 
-const Profile = () => {
+const Profile: NextPage = () => {
   return (
     <MainLayout
       header={

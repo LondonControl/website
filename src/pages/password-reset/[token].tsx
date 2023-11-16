@@ -1,3 +1,4 @@
+import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import type { FormEventHandler } from 'react';
 import React, { useEffect, useState } from 'react';
@@ -13,7 +14,7 @@ import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
 
-const PasswordReset = () => {
+const PasswordReset: NextPage = () => {
   const { query } = useRouter();
 
   const { resetPassword } = useAuth({ middleware: 'guest' });

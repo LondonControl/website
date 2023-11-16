@@ -1,3 +1,4 @@
+import type { NextPage } from 'next';
 import type { FormEventHandler } from 'react';
 import React, { useState } from 'react';
 
@@ -12,7 +13,7 @@ import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
 
-const ForgotPassword = () => {
+const ForgotPassword: NextPage = () => {
   const { forgotPassword } = useAuth({
     middleware: 'guest',
     redirectUri: '/dashboard',

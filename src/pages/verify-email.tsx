@@ -1,3 +1,4 @@
+import type { NextPage } from 'next';
 import React, { useState } from 'react';
 
 import AuthCard from '@/components/Auth/AuthCard';
@@ -8,7 +9,7 @@ import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
 
-const VerifyEmail = () => {
+const VerifyEmail: NextPage = () => {
   const { logout, resendEmailVerification } = useAuth({
     middleware: 'auth',
     redirectUri: '/dashboard',

@@ -61,7 +61,7 @@ const Dropdown: React.FC<PropsWithChildren<Props>> = ({
               className={`absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
             >
               <Menu.Items
-                className={`ring-opacity/5 rounded-md ring-1 ring-black focus:outline-none ${contentClasses}`}
+                className={`ring-opacity/5 rounded-md ring-1 ring-gray-300 focus:outline-none ${contentClasses}`}
                 static
               >
                 {children}

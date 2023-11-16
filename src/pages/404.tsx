@@ -1,6 +1,7 @@
+import type { NextPage } from 'next';
 import React from 'react';
 
-const NotFoundPage = () => {
+const NotFoundPage: NextPage = () => {
   return (
     <div className="items-top relative flex min-h-screen justify-center bg-gray-100 sm:items-center sm:pt-0">
       <div className="mx-auto max-w-xl sm:px-6 lg:px-8">

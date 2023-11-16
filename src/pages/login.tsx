@@ -1,3 +1,4 @@
+import type { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FormEventHandler } from 'react';
@@ -15,7 +16,7 @@ import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
 
-const Login = () => {
+const Login: NextPage = () => {
   const { query } = useRouter();
 
   const { login } = useAuth({
