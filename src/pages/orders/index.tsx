@@ -12,12 +12,23 @@ import { fetcher } from '@/lib/axios';
 import { AppConfig } from '@/utils/AppConfig';
 
 const Orders: NextPage = () => {
-  const { data, error, isLoading } = useSWR(
-    '/api/user/orders?includes=items,status',
+  const {
+    data: ordersData,
+    error: ordersError,
+    isLoading: ordersIsLoading,
+  } = useSWR(
+    '/api/user/orders?includes=items,status&sorts=created_at',
     fetcher
   );
 
-  if (error) console.log(error);
+  const {
+    data: productsData,
+    error: productsError,
+    isLoading: productsIsLoading,
+  } = useSWR('/api/products', fetcher);
+
+  if (ordersError) console.log(ordersError);
+  if (productsError) console.log(productsError);
 
   return (
     <MainLayout
@@ -38,13 +49,17 @@ const Orders: NextPage = () => {
           <h2 className="sr-only">Recent orders</h2>
           <div>
             <div className="mx-auto space-y-8 sm:px-4 lg:px-0">
-              {isLoading ? (
+              {ordersIsLoading || productsIsLoading ? (
                 <div className="flex items-center justify-center">
-                  <MoonLoader loading={isLoading} />
+                  <MoonLoader loading={ordersIsLoading || productsIsLoading} />
                 </div>
               ) : (
-                data.data.map((order: Order) => (
-                  <OrderCard order={order} key={order.id} />
+                ordersData.data.map((order: Order) => (
+                  <OrderCard
+                    order={order}
+                    key={order.id}
+                    products={productsData.data ?? null}
+                  />
                 ))
               )}
             </div>

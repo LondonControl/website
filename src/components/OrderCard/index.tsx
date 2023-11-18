@@ -7,14 +7,16 @@ import Moment from 'react-moment';
 
 import type Order from '@/interfaces/Order';
 import type OrderItem from '@/interfaces/OrderItem';
+import type Product from '@/interfaces/Product';
 
 import OrderStatusBadge from './OrderStatusBadge';
 
 interface Props {
   order: Order;
+  products?: Product[];
 }
 
-const OrderCard: React.FC<Props> = ({ order }) => {
+const OrderCard: React.FC<Props> = ({ order, products }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -109,12 +111,18 @@ const OrderCard: React.FC<Props> = ({ order }) => {
             <div className="flex items-center sm:items-start">
               <div className="flex-1 text-sm">
                 <div className="font-medium text-gray-900 sm:flex sm:justify-between">
-                  <h5>{item.product_id}</h5>
+                  <h5>
+                    {products?.find(
+                      (product: Product) => product.id === item.product_id
+                    )?.title ?? null}
+                  </h5>
                   <p className="mt-2 sm:mt-0">£{item.actual_price / 100}</p>
                 </div>
                 <p className="hidden text-gray-500 sm:mt-2 sm:block">
                   {/* {product.description} */}
-                  TEST
+                  {products?.find(
+                    (product: Product) => product.id === item.product_id
+                  )?.description ?? null}
                 </p>
               </div>
             </div>
