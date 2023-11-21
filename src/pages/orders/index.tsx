@@ -17,7 +17,7 @@ const Orders: NextPage = () => {
     error: ordersError,
     isLoading: ordersIsLoading,
   } = useSWR(
-    '/api/user/orders?includes=items,status&sorts=created_at',
+    '/api/user/orders?includes=items,status&sorts=created_at&paginate=none',
     fetcher
   );
 
@@ -48,7 +48,7 @@ const Orders: NextPage = () => {
         <div className="mt-2 md:mt-6">
           <h2 className="sr-only">Recent orders</h2>
           <div>
-            <div className="mx-auto space-y-8 sm:px-4 lg:px-0">
+            <div className="mx-auto space-y-6 sm:px-4 lg:px-0">
               {ordersIsLoading || productsIsLoading ? (
                 <div className="flex items-center justify-center">
                   <MoonLoader loading={ordersIsLoading || productsIsLoading} />

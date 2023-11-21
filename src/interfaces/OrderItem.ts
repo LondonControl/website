@@ -1,3 +1,5 @@
+import type Product from './Product';
+
 export default interface OrderItem {
   id: string;
   order_id: string;
@@ -7,4 +9,5 @@ export default interface OrderItem {
   serial_key_id: string;
   created_at?: string;
   updated_at?: string;
+  product?: Product;
 }

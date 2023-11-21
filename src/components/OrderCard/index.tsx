@@ -38,7 +38,7 @@ const OrderCard: React.FC<Props> = ({ order, products }) => {
         <dl className="grid flex-1 grid-cols-2 gap-x-6 text-sm sm:col-span-3 sm:grid-cols-3 lg:col-span-2">
           <div>
             <dt className="font-medium text-gray-900">Order number</dt>
-            <dd className="mt-1 text-gray-500">{order.id}</dd>
+            <dd className="mt-1 text-gray-500">{order.number}</dd>
           </div>
           <div className="hidden sm:block">
             <dt className="font-medium text-gray-900">Date placed</dt>
@@ -57,7 +57,7 @@ const OrderCard: React.FC<Props> = ({ order, products }) => {
         <Menu as="div" className="relative flex justify-end lg:hidden">
           <div className="flex items-center">
             <Menu.Button className="-m-2 flex items-center p-2 text-gray-400 hover:text-gray-500">
-              <span className="sr-only">Options for order {order.id}</span>
+              <span className="sr-only">Options for order {order.number}</span>
               <EllipsisVerticalIcon className="h-6 w-6" aria-hidden="true" />
             </Menu.Button>
           </div>
@@ -71,7 +71,7 @@ const OrderCard: React.FC<Props> = ({ order, products }) => {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-bottom-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-bottom-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
               <div className="py-1">
                 <Menu.Item>
                   {({ active }) => (
@@ -98,7 +98,7 @@ const OrderCard: React.FC<Props> = ({ order, products }) => {
             className="flex items-center justify-center rounded-md border border-gray-300 bg-white px-2.5 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             <span>View Order</span>
-            <span className="sr-only">{order.id}</span>
+            <span className="sr-only">{order.number}</span>
           </a>
         </div>
       </div>

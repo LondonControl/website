@@ -12,7 +12,7 @@ import { AppConfig } from '@/utils/AppConfig';
 const VerifyEmail: NextPage = () => {
   const { logout, resendEmailVerification } = useAuth({
     middleware: 'auth',
-    redirectUri: '/dashboard',
+    redirectUri: '/',
   });
 
   const [status, setStatus] = useState<string | null>(null);

@@ -16,7 +16,7 @@ import { AppConfig } from '@/utils/AppConfig';
 const Register: NextPage = () => {
   const { register } = useAuth({
     middleware: 'guest',
-    redirectUri: '/dashboard',
+    redirectUri: '/',
   });
 
   const [name, setName] = useState<string>('');

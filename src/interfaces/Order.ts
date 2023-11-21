@@ -4,6 +4,7 @@ import type OrderStatus from './OrderStatus';
 
 export default interface Order {
   id: string;
+  number?: string;
   user_id: string;
   order_status_id: string;
   amount: number;
