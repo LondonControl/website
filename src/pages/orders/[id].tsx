@@ -101,19 +101,21 @@ const IndividualOrder: NextPage<Props> = () => {
 
             {/* Invoice */}
             <div className="-mx-4 border border-gray-200 px-4 py-8 sm:mx-0 sm:rounded-lg sm:px-8 sm:pb-14 lg:col-span-2 lg:row-span-2 lg:row-end-2 xl:px-16 xl:pb-20 xl:pt-16">
-              <h2 className="text-base font-semibold leading-6 text-gray-900">
-                Invoice
+              <h2 className="text-lg font-semibold leading-6 text-gray-900">
+                London Control
               </h2>
-              <dl className="mt-6 grid grid-cols-1 text-sm leading-6 sm:grid-cols-2">
-                <div className="sm:pr-4">
-                  <dt className="inline text-gray-500">Issued on</dt>{' '}
-                  <dd className="inline text-gray-700">
-                    <Moment
-                      date={data.data.created_at}
-                      format="DD MMMM YYYY hh:mm"
-                    />
-                  </dd>
-                </div>
+              <p className="mt-2">Invoice</p>
+              <p className="mt-2 text-right text-sm">
+                No : <span>{data.data.number}</span>
+              </p>
+              <dl className="mt-2 flex justify-end text-sm leading-6">
+                <dt className="inline">Date :</dt>
+                <dd className="ml-2 inline text-gray-700">
+                  <Moment
+                    date={data.data.created_at}
+                    format="DD MMMM YYYY hh:mm"
+                  />
+                </dd>
               </dl>
               <table className="mt-16 w-full whitespace-nowrap text-left text-sm leading-6">
                 <colgroup>

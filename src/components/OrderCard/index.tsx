@@ -20,10 +20,7 @@ const OrderCard: React.FC<Props> = ({ order, products }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <div
-      className="rounded-lg border border-gray-200 bg-white hover:cursor-pointer"
-      onClick={() => setIsOpen(!isOpen)}
-    >
+    <div className="rounded-lg border border-gray-200 bg-white">
       <h3 className="sr-only">
         Order placed on{' '}
         <Moment date={order.created_at} format="DD/MM/YYYY hh:mm" />
@@ -31,9 +28,10 @@ const OrderCard: React.FC<Props> = ({ order, products }) => {
 
       <div
         className={classNames(
-          'flex items-center border-gray-200 p-4 sm:grid sm:grid-cols-4 sm:gap-x-6 sm:p-6',
+          'flex items-center border-gray-200 p-4 sm:grid sm:grid-cols-4 sm:gap-x-6 sm:p-6 hover:cursor-pointer',
           isOpen ? 'border-b' : null
         )}
+        onClick={() => setIsOpen(!isOpen)}
       >
         <dl className="grid flex-1 grid-cols-2 gap-x-6 text-sm sm:col-span-3 sm:grid-cols-3 lg:col-span-2">
           <div>
@@ -110,13 +108,13 @@ const OrderCard: React.FC<Props> = ({ order, products }) => {
           <li key={item.id} className="p-4 sm:p-6">
             <div className="flex items-center sm:items-start">
               <div className="flex-1 text-sm">
-                <div className="font-medium text-gray-900 sm:flex sm:justify-between">
-                  <h5>
+                <div className="flex justify-between font-medium text-gray-900">
+                  <a href={`/products/${item.product_id}`}>
                     {products?.find(
                       (product: Product) => product.id === item.product_id
                     )?.title ?? null}
-                  </h5>
-                  <p className="mt-2 sm:mt-0">£{item.actual_price / 100}</p>
+                  </a>
+                  <p>£{item.actual_price / 100}</p>
                 </div>
                 <p className="hidden text-gray-500 sm:mt-2 sm:block">
                   {/* {product.description} */}
@@ -124,19 +122,6 @@ const OrderCard: React.FC<Props> = ({ order, products }) => {
                     (product: Product) => product.id === item.product_id
                   )?.description ?? null}
                 </p>
-              </div>
-            </div>
-
-            <div className="mt-6 sm:flex sm:justify-end">
-              <div className="mt-6 flex items-center space-x-4 divide-x divide-gray-200 border-t border-gray-200 pt-4 text-sm font-medium sm:ml-4 sm:mt-0 sm:border-none sm:pt-0">
-                <div className="flex flex-1 justify-center">
-                  <a
-                    href={`/products/${item.product_id}`}
-                    className="whitespace-nowrap text-indigo-600 hover:text-indigo-500"
-                  >
-                    View product
-                  </a>
-                </div>
               </div>
             </div>
           </li>
