@@ -9,3 +9,11 @@ export const getUserOrdersEndpoint = () => {
 export const getUserOrderEndpoint = (orderId: string) => {
   return `/api/orders/${orderId}`;
 };
+
+export const getProductsEndpoint = (filters: string) => {
+  return `/api/products${filters}`;
+};
+
+export const getNewsPostsEndpoint = (filters: string) => {
+  return `/api/news-posts${filters}`;
+};

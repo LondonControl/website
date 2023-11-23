@@ -38,11 +38,8 @@ const Navigation: React.FC<Props> = () => {
 
             {/* Navigation Links */}
             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-              <NavLink
-                href="/dashboard"
-                active={router.pathname === '/dashboard'}
-              >
-                Dashboard
+              <NavLink href="/news" active={router.pathname === '/news'}>
+                News
               </NavLink>
             </div>
           </div>
@@ -133,10 +130,10 @@ const Navigation: React.FC<Props> = () => {
         <div className="block sm:hidden">
           <div className="space-y-1 pb-3 pt-2">
             <ResponsiveNavLink
-              href="/dashboard"
-              active={router.pathname === '/dashboard'}
+              href="/news"
+              active={router.pathname === '/news'}
             >
-              Dashboard
+              News
             </ResponsiveNavLink>
           </div>
 
