@@ -26,7 +26,7 @@ const Navigation: React.FC<Props> = () => {
   return (
     <nav className="border-b border-gray-100 bg-white">
       {/* Primary Navigation Menu */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-site px-4 tablet:px-6 laptop:px-8">
         <div className="flex h-16 justify-between">
           <div className="flex">
             {/* Logo */}
@@ -37,7 +37,7 @@ const Navigation: React.FC<Props> = () => {
             </div>
 
             {/* Navigation Links */}
-            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+            <div className="hidden space-x-8 tablet:-my-px tablet:ml-10 tablet:flex">
               <NavLink href="/news" active={router.pathname === '/news'}>
                 News
               </NavLink>
@@ -45,7 +45,7 @@ const Navigation: React.FC<Props> = () => {
           </div>
 
           {/* Settings Dropdown */}
-          <div className="hidden sm:ml-6 sm:flex sm:items-center">
+          <div className="hidden tablet:ml-6 tablet:flex tablet:items-center">
             <div className="relative ml-3">
               {user ? (
                 <Dropdown
@@ -91,7 +91,7 @@ const Navigation: React.FC<Props> = () => {
           </div>
 
           {/* Hamburger */}
-          <div className="-mr-2 flex items-center sm:hidden">
+          <div className="-mr-2 flex items-center tablet:hidden">
             <button
               onClick={() => setOpen((current) => !current)}
               className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
@@ -127,7 +127,7 @@ const Navigation: React.FC<Props> = () => {
 
       {/* Responsive Navigation Menu */}
       {open && (
-        <div className="block sm:hidden">
+        <div className="block tablet:hidden">
           <div className="space-y-1 pb-3 pt-2">
             <ResponsiveNavLink
               href="/news"
@@ -151,7 +151,7 @@ const Navigation: React.FC<Props> = () => {
             <div className="mt-3 space-y-1">
               <ResponsiveNavLink
                 href="/orders"
-                active={router.pathname === '/orders/*'}
+                active={router.pathname === '/orders'}
               >
                 Orders
               </ResponsiveNavLink>

@@ -15,11 +15,12 @@ module.exports = {
     // },
     extend: {
       maxWidth: {
-        site: '90rem',
+        site: '80rem',
       },
       screens: {
-        tablet: '960px',
-        desktop: '1248px',
+        tablet: '640px',
+        laptop: '1024px',
+        desktop: '1280px',
       },
     },
   },

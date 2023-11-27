@@ -39,10 +39,10 @@ const IndividualOrder: NextPage<Props> = () => {
       {isLoading ? (
         <MoonLoader loading={isLoading} />
       ) : (
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <div className="mx-auto mt-2 grid max-w-2xl grid-cols-1 grid-rows-1 items-start gap-8 md:mt-6 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+        <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
+          <div className="mx-auto mt-2 grid max-w-2xl grid-cols-1 grid-rows-1 items-start gap-8 md:mt-6 laptop:mx-0 laptop:max-w-none laptop:grid-cols-3">
             {/* Invoice summary */}
-            <div className="lg:col-start-3 lg:row-end-1">
+            <div className="laptop:col-start-3 laptop:row-end-1">
               <h2 className="sr-only">Summary</h2>
               <div className="rounded-lg border border-gray-200 bg-gray-50">
                 <dl className="flex flex-wrap">
@@ -100,7 +100,7 @@ const IndividualOrder: NextPage<Props> = () => {
             </div>
 
             {/* Invoice */}
-            <div className="-mx-4 border border-gray-200 px-4 py-8 sm:mx-0 sm:rounded-lg sm:px-8 sm:pb-14 lg:col-span-2 lg:row-span-2 lg:row-end-2 xl:px-16 xl:pb-20 xl:pt-16">
+            <div className="-mx-4 border border-gray-200 px-4 py-8 tablet:mx-0 tablet:rounded-lg tablet:px-8 tablet:pb-14 laptop:col-span-2 laptop:row-span-2 laptop:row-end-2 desktop:px-16 desktop:pb-20 desktop:pt-16">
               <h2 className="text-lg font-semibold leading-6 text-gray-900">
                 London Control
               </h2>
@@ -156,13 +156,13 @@ const IndividualOrder: NextPage<Props> = () => {
                   <tr>
                     <th
                       scope="row"
-                      className="pt-4 font-semibold text-gray-900 sm:hidden"
+                      className="pt-4 font-semibold text-gray-900 tablet:hidden"
                     >
                       Total
                     </th>
                     <th
                       scope="row"
-                      className="hidden pt-4 text-right font-semibold text-gray-900 sm:table-cell"
+                      className="hidden pt-4 text-right font-semibold text-gray-900 tablet:table-cell"
                     >
                       Total
                     </th>

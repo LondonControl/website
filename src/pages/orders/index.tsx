@@ -44,11 +44,11 @@ const Orders: NextPage = () => {
         />
       }
     >
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
         <div className="mt-2 md:mt-6">
           <h2 className="sr-only">Recent orders</h2>
           <div>
-            <div className="mx-auto space-y-6 sm:px-4 lg:px-0">
+            <div className="mx-auto space-y-6 tablet:px-4 laptop:px-0">
               {ordersIsLoading || productsIsLoading ? (
                 <div className="flex items-center justify-center">
                   <MoonLoader loading={ordersIsLoading || productsIsLoading} />

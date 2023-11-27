@@ -28,17 +28,17 @@ const OrderCard: React.FC<Props> = ({ order, products }) => {
 
       <div
         className={classNames(
-          'flex items-center border-gray-200 p-4 sm:grid sm:grid-cols-4 sm:gap-x-6 sm:p-6 hover:cursor-pointer',
+          'flex items-center border-gray-200 p-4 tablet:grid tablet:grid-cols-4 tablet:gap-x-6 tablet:p-6 hover:cursor-pointer',
           isOpen ? 'border-b' : null
         )}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <dl className="grid flex-1 grid-cols-2 gap-x-6 text-sm sm:col-span-3 sm:grid-cols-3 lg:col-span-2">
+        <dl className="grid flex-1 grid-cols-2 gap-x-6 text-sm tablet:col-span-3 tablet:grid-cols-3 laptop:col-span-2">
           <div>
             <dt className="font-medium text-gray-900">Order number</dt>
             <dd className="mt-1 text-gray-500">{order.number}</dd>
           </div>
-          <div className="hidden sm:block">
+          <div className="hidden tablet:block">
             <dt className="font-medium text-gray-900">Date placed</dt>
             <dd className="mt-1 text-gray-500">
               <Moment date={order.created_at} format="DD MMMM YYYY hh:mm" />
@@ -52,7 +52,7 @@ const OrderCard: React.FC<Props> = ({ order, products }) => {
           </div>
         </dl>
 
-        <Menu as="div" className="relative flex justify-end lg:hidden">
+        <Menu as="div" className="relative flex justify-end laptop:hidden">
           <div className="flex items-center">
             <Menu.Button className="-m-2 flex items-center p-2 text-gray-400 hover:text-gray-500">
               <span className="sr-only">Options for order {order.number}</span>
@@ -89,7 +89,7 @@ const OrderCard: React.FC<Props> = ({ order, products }) => {
           </Transition>
         </Menu>
 
-        <div className="hidden lg:col-span-2 lg:flex lg:items-center lg:justify-end lg:space-x-4">
+        <div className="hidden laptop:col-span-2 laptop:flex laptop:items-center laptop:justify-end laptop:space-x-4">
           {order.status && <OrderStatusBadge status={order.status} />}
           <a
             href={order.id}
@@ -105,7 +105,7 @@ const OrderCard: React.FC<Props> = ({ order, products }) => {
       <h4 className="sr-only">Items</h4>
       <ul role="list" className="divide-y divide-gray-200" hidden={!isOpen}>
         {order.items?.map((item: OrderItem) => (
-          <li key={item.id} className="p-4 sm:p-6">
+          <li key={item.id} className="p-4 tablet:p-6">
             <div className="flex items-center sm:items-start">
               <div className="flex-1 text-sm">
                 <div className="flex justify-between font-medium text-gray-900">
@@ -116,7 +116,7 @@ const OrderCard: React.FC<Props> = ({ order, products }) => {
                   </a>
                   <p>£{item.actual_price / 100}</p>
                 </div>
-                <p className="hidden text-gray-500 sm:mt-2 sm:block">
+                <p className="hidden text-gray-500 tablet:mt-2 tablet:block">
                   {/* {product.description} */}
                   {products?.find(
                     (product: Product) => product.id === item.product_id

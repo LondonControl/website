@@ -3,9 +3,9 @@ import React from 'react';
 
 const NotFoundPage: NextPage = () => {
   return (
-    <div className="items-top relative flex min-h-screen justify-center bg-gray-100 sm:items-center sm:pt-0">
-      <div className="mx-auto max-w-xl sm:px-6 lg:px-8">
-        <div className="flex items-center pt-8 sm:justify-start sm:pt-0">
+    <div className="items-top relative flex min-h-screen justify-center bg-gray-100 tablet:items-center tablet:pt-0">
+      <div className="mx-auto max-w-xl tablet:px-6 laptop:px-8">
+        <div className="flex items-center pt-8 tablet:justify-start tablet:pt-0">
           <div className="border-r border-gray-400 px-4 text-lg tracking-wider text-gray-500">
             404
           </div>
