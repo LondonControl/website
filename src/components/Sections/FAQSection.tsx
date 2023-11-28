@@ -9,8 +9,8 @@ interface Props {}
 
 const FAQSection: React.FC<Props> = () => {
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-site px-6 py-24 tablet:py-32 laptop:px-8 laptop:py-40">
+    <section className="border bg-white">
+      <div className="mx-auto max-w-site px-6 py-24 tablet:py-32 laptop:px-8">
         <div className="divide-y divide-gray-900/10">
           <h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">
             Frequently asked questions

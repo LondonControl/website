@@ -1,3 +1,5 @@
+import PrimaryLinkButton from '../Buttons/PrimaryLinkButton';
+
 interface Props {}
 
 const HeroSection: React.FC<Props> = () => {
@@ -13,19 +15,21 @@ const HeroSection: React.FC<Props> = () => {
             actual ATC system over England and Wales.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <a
+            <PrimaryLinkButton href="/register">Get started</PrimaryLinkButton>
+            {/* <a
               href="#"
               className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
             >
               Get started
-            </a>
+            </a> */}
             <a href="#" className="text-sm font-semibold leading-6">
               Learn more <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>
         <img
-          src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+          // src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+          src="https://images.unsplash.com/photo-1584084807193-bed442df7a75?q=80&w=2432&h=1442&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="App screenshot"
           width={2432}
           height={1442}

@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import React from 'react';
 
+import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 
 interface Props {
@@ -26,7 +27,7 @@ const MainLayout: React.FC<Props> = (props) => {
 
       <main>{props.children}</main>
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

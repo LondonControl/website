@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 
 import Meta from '@/components/Meta';
+import CTASection from '@/components/Sections/CTASection';
 import FAQSection from '@/components/Sections/FAQSection';
 import FeaturesSection from '@/components/Sections/FeaturesSection';
 import HeroSection from '@/components/Sections/HeroSection';
@@ -37,6 +38,8 @@ const Index: NextPage<Props> = () => {
       <FeaturesSection />
 
       <FAQSection />
+
+      <CTASection />
     </MainLayout>
   );
 };
