@@ -2,12 +2,12 @@ const Features = [
   {
     name: 'High fidelity simulation.',
     description:
-      'Aut illo quae. Ut et harum ea animi natus. Culpa maiores et sed sint et magnam exercitationem quia. Ullam voluptas nihil vitae dicta molestiae et. Aliquid velit porro vero.',
+      'London Control is a high fidelity simulation of current air traffic control operations over England and Wales. All sectors and operational material are the same as those used in real life.',
   },
   {
     name: 'Sophisticated radar.',
     description:
-      'Mollitia delectus a omnis. Quae velit aliquid. Qui nulla maxime adipisci illo id molestiae. Cumque cum ut minus rerum architecto magnam consequatur. Quia quaerat minima.',
+      'The system provides a realistic representation of air traffic, with a radar-based situation display and flight data displays to provide supporting information.',
   },
   {
     name: 'Highly customizable.',
@@ -17,7 +17,7 @@ const Features = [
   {
     name: 'Simulated radio communication.',
     description:
-      'Magnam provident veritatis odit. Vitae eligendi repellat non. Eum fugit impedit veritatis ducimus. Non qui aspernatur laudantium modi. Praesentium rerum error deserunt harum.',
+      'London Control features a voice regocnition function that will regocnise spoken clearances and instructions. The aircraft will comply with commands and respond with realistic readbacks.',
   },
   {
     name: 'Data driven.',

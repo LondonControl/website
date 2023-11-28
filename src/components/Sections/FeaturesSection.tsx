@@ -10,10 +10,6 @@ const FeaturesSection: React.FC<Props> = () => {
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 tablet:text-4xl">
             All-in-one platform
           </h2>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
-            Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam
-            voluptatum cupiditate veritatis in accusamus quisquam.
-          </p>
         </div>
         <dl className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 text-base leading-7 tablet:grid-cols-2 laptop:mx-0 laptop:max-w-none laptop:grid-cols-3">
           {Features.map((feature) => (

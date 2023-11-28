@@ -4,7 +4,7 @@ const CTASection: React.FC<Props> = () => {
   return (
     <section className="bg-white py-16">
       <div className="mx-auto max-w-site px-6 laptop:px-8">
-        <div className="relative overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl tablet:rounded-3xl tablet:px-16 md:pt-24 laptop:flex laptop:gap-x-20 laptop:px-24 laptop:pt-0">
+        <div className="relative overflow-hidden bg-black px-6 pt-16 shadow-2xl tablet:rounded-3xl tablet:px-16 md:pt-24 laptop:flex laptop:gap-x-20 laptop:px-24 laptop:pt-0">
           <div className="mx-auto max-w-md text-center laptop:mx-0 laptop:flex-auto laptop:py-32 laptop:text-left">
             <h2 className="text-3xl font-bold tracking-tight text-white tablet:text-4xl">
               In need of some help?
