@@ -4,7 +4,7 @@ interface Props {}
 
 const HeroSection: React.FC<Props> = () => {
   return (
-    <div className="tablet:py-30 py-24">
+    <section className="tablet:py-30 py-24">
       <div className="mx-auto max-w-site px-6 laptop:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="text-4xl font-bold tracking-tight text-black tablet:text-6xl">
@@ -36,7 +36,7 @@ const HeroSection: React.FC<Props> = () => {
           className="mt-16 rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 tablet:mt-24"
         />
       </div>
-    </div>
+    </section>
   );
 };
 
