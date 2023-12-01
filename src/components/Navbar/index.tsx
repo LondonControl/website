@@ -1,3 +1,4 @@
+import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -48,37 +49,59 @@ const Navigation: React.FC<Props> = () => {
           <div className="hidden tablet:ml-6 tablet:flex tablet:items-center">
             <div className="relative ml-3">
               {user ? (
-                <Dropdown
-                  align="right"
-                  width="48"
-                  trigger={
-                    <span className="inline-flex rounded-md">
-                      <button className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
-                        {user?.name}
-
-                        <svg
-                          className="-mr-0.5 ml-2 h-4 w-4"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                            clipRule="evenodd"
+                <div className="flex items-center">
+                  <Dropdown
+                    align="right"
+                    width="48"
+                    trigger={
+                      <span className="inline-flex rounded-md">
+                        <button className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
+                          <ShoppingCartIcon
+                            className="h-5 w-5"
+                            aria-hidden="true"
                           />
-                        </svg>
-                      </button>
-                    </span>
-                  }
-                >
-                  {/* Authentication */}
-                  {/* TODO: add active state */}
-                  <DropdownLink href="/orders">Orders</DropdownLink>
-                  <DropdownLink href="/profile">Profile</DropdownLink>
+                        </button>
+                      </span>
+                    }
+                  >
+                    <DropdownLink href="/basket">Basket</DropdownLink>
 
-                  <hr />
-                  <DropdownButton onClick={logout}>Logout</DropdownButton>
-                </Dropdown>
+                    <hr />
+                    <DropdownLink href="/basket">Basket</DropdownLink>
+                  </Dropdown>
+
+                  <Dropdown
+                    align="right"
+                    width="48"
+                    trigger={
+                      <span className="inline-flex rounded-md">
+                        <button className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
+                          {user?.name}
+
+                          <svg
+                            className="-mr-0.5 ml-2 h-4 w-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </button>
+                      </span>
+                    }
+                  >
+                    {/* Authentication */}
+                    {/* TODO: add active state */}
+                    <DropdownLink href="/orders">Orders</DropdownLink>
+                    <DropdownLink href="/profile">Profile</DropdownLink>
+
+                    <hr />
+                    <DropdownButton onClick={logout}>Logout</DropdownButton>
+                  </Dropdown>
+                </div>
               ) : (
                 <div className="space-x-3">
                   <SecondaryLinkButton href="/login">Login</SecondaryLinkButton>
