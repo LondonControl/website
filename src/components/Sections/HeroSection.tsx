@@ -4,7 +4,7 @@ interface Props {}
 
 const HeroSection: React.FC<Props> = () => {
   return (
-    <div className="py-24 tablet:py-32">
+    <div className="tablet:py-30 py-24">
       <div className="mx-auto max-w-site px-6 laptop:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="text-4xl font-bold tracking-tight text-black tablet:text-6xl">
@@ -28,8 +28,8 @@ const HeroSection: React.FC<Props> = () => {
           </div>
         </div>
         <img
-          // src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
-          src="https://images.unsplash.com/photo-1584084807193-bed442df7a75?q=80&w=2432&h=1442&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          // src="https://images.unsplash.com/photo-1584084807193-bed442df7a75?q=80&w=2432&h=1442&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="/assets/images/lc_screenshot.png"
           alt="App screenshot"
           width={2432}
           height={1442}
