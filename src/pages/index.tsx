@@ -6,6 +6,7 @@ import FAQSection from '@/components/Sections/FAQSection';
 import FeaturesSection from '@/components/Sections/FeaturesSection';
 import HeroSection from '@/components/Sections/HeroSection';
 import MainStatsSection from '@/components/Sections/MainStatsSection';
+import PricingSection from '@/components/Sections/PricingSection';
 import MainLayout from '@/layouts/Main';
 import { AppConfig } from '@/utils/AppConfig';
 
@@ -38,6 +39,8 @@ const Index: NextPage<Props> = () => {
       <FeaturesSection />
 
       <FAQSection />
+
+      <PricingSection />
 
       <CTASection />
     </MainLayout>
