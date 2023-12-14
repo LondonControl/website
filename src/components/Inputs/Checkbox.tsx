@@ -9,7 +9,7 @@ const Checkbox: React.FC<InputHTMLAttributes<HTMLInputElement>> = ({
     <input
       {...props}
       type="checkbox"
-      className={`rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 ${className}`}
+      className={`rounded border-gray-300 text-gray-900 shadow-sm focus:ring-gray-900 ${className}`}
     />
   );
 };

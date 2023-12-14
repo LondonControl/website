@@ -31,7 +31,7 @@ export default forwardRef(function Input(
     <input
       {...props}
       disabled={disabled}
-      className={`rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 ${className}`}
+      className={`rounded-md border-gray-300 shadow-sm focus:border-gray-900 focus:ring-gray-900 ${className}`}
       ref={localRef}
     />
   );
