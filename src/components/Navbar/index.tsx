@@ -50,6 +50,13 @@ const Navigation: React.FC<Props> = () => {
               News
             </NavLink>
 
+            <NavLink
+              href="https://forum.londoncontrol.com"
+              active={router.pathname === '/forum'}
+            >
+              Forum
+            </NavLink>
+
             <NavLink href="/support" active={router.pathname === '/support'}>
               Support
             </NavLink>
