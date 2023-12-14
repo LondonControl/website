@@ -13,4 +13,7 @@ const axios = Axios.create({
 
 export const csrf = () => axios.get(`${baseURL}/sanctum/csrf-cookie`);
 
+export const fetcher = (url: string) =>
+  axios.get(`${baseURL}${url}`).then((res) => res.data);
+
 export default axios;

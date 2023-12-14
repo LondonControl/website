@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import type { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FormEventHandler } from 'react';
@@ -11,11 +11,12 @@ import Checkbox from '@/components/Inputs/Checkbox';
 import Input from '@/components/Inputs/Input';
 import InputError from '@/components/Inputs/InputError';
 import Label from '@/components/Inputs/Label';
+import Meta from '@/components/Meta';
 import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
 
-const Login = () => {
+const Login: NextPage = () => {
   const { query } = useRouter();
 
   const { login } = useAuth({
@@ -52,9 +53,11 @@ const Login = () => {
 
   return (
     <GuestLayout>
-      <Head>
-        <title>Login | {AppConfig.site_name}</title>
-      </Head>
+      <Meta
+        title={`Login | ${AppConfig.site_name}`}
+        description={AppConfig.description}
+      />
+
       <AuthCard>
         {/* Session Status */}
         <AuthSessionStatus className="mb-4" status={status} />
@@ -110,7 +113,7 @@ const Login = () => {
           <div className="mt-4 flex items-center justify-end">
             <Link
               href="/forgot-password"
-              className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
             >
               Forgot your password?
             </Link>

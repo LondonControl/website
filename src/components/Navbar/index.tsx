@@ -10,17 +10,22 @@ import ResponsiveNavLink, {
   ResponsiveNavButton,
 } from '@/components/Navbar/ResponsiveNavLink';
 import { useAuth } from '@/hooks/useAuth';
-import type User from '@/interfaces/User';
 
-const Navigation: React.FC<User> = (user) => {
+import PrimaryLinkButton from '../Buttons/PrimaryLinkButton';
+
+interface Props {
+  // user?: User;
+}
+
+const Navigation: React.FC<Props> = () => {
   const router = useRouter();
-  const { logout } = useAuth({ middleware: 'auth' });
+  const { logout, user } = useAuth({ middleware: 'guest' });
   const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <nav className="border-b border-gray-100 bg-white">
+    <nav className="bg-white">
       {/* Primary Navigation Menu */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-site px-4 tablet:px-6 laptop:px-8">
         <div className="flex h-16 justify-between">
           <div className="flex">
             {/* Logo */}
@@ -29,54 +34,74 @@ const Navigation: React.FC<User> = (user) => {
                 <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
               </Link>
             </div>
+          </div>
 
-            {/* Navigation Links */}
-            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-              <NavLink
-                href="/dashboard"
-                active={router.pathname === '/dashboard'}
-              >
-                Dashboard
-              </NavLink>
-            </div>
+          {/* Navigation Links */}
+          <div className="hidden space-x-8 tablet:flex tablet:py-3">
+            <NavLink href="/products" active={router.pathname === '/products'}>
+              Products
+            </NavLink>
+
+            <NavLink href="/about" active={router.pathname === '/about'}>
+              About
+            </NavLink>
+
+            <NavLink href="/news" active={router.pathname === '/news'}>
+              News
+            </NavLink>
+
+            <NavLink href="/support" active={router.pathname === '/support'}>
+              Support
+            </NavLink>
           </div>
 
           {/* Settings Dropdown */}
-          <div className="hidden sm:ml-6 sm:flex sm:items-center">
+          <div className="hidden tablet:ml-6 tablet:flex tablet:items-center">
             <div className="relative ml-3">
-              <Dropdown
-                align="right"
-                width="48"
-                trigger={
-                  <span className="inline-flex rounded-md">
-                    <button className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
-                      {user?.name}
+              {user ? (
+                <Dropdown
+                  align="right"
+                  width="48"
+                  trigger={
+                    <span className="inline-flex rounded-md">
+                      <button className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
+                        {user?.name}
 
-                      <svg
-                        className="-mr-0.5 ml-2 h-4 w-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                  </span>
-                }
-              >
-                {/* Authentication */}
-                {/* TODO: add active state */}
-                <DropdownLink href="/profile">Profile</DropdownLink>
-                <DropdownButton onClick={logout}>Logout</DropdownButton>
-              </Dropdown>
+                        <svg
+                          className="-mr-0.5 ml-2 h-4 w-4"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </button>
+                    </span>
+                  }
+                >
+                  {/* Authentication */}
+                  {/* TODO: add active state */}
+                  <DropdownLink href="/orders">Orders</DropdownLink>
+                  <DropdownLink href="/profile">Profile</DropdownLink>
+
+                  <hr />
+                  <DropdownButton onClick={logout}>Logout</DropdownButton>
+                </Dropdown>
+              ) : (
+                <>
+                  <PrimaryLinkButton href="/register">
+                    Register
+                  </PrimaryLinkButton>
+                </>
+              )}
             </div>
           </div>
 
           {/* Hamburger */}
-          <div className="-mr-2 flex items-center sm:hidden">
+          <div className="-mr-2 flex items-center tablet:hidden">
             <button
               onClick={() => setOpen((current) => !current)}
               className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
@@ -112,13 +137,13 @@ const Navigation: React.FC<User> = (user) => {
 
       {/* Responsive Navigation Menu */}
       {open && (
-        <div className="block sm:hidden">
+        <div className="block tablet:hidden">
           <div className="space-y-1 pb-3 pt-2">
             <ResponsiveNavLink
-              href="/dashboard"
-              active={router.pathname === '/dashboard'}
+              href="/news"
+              active={router.pathname === '/news'}
             >
-              Dashboard
+              News
             </ResponsiveNavLink>
           </div>
 
@@ -134,6 +159,12 @@ const Navigation: React.FC<User> = (user) => {
             </div>
 
             <div className="mt-3 space-y-1">
+              <ResponsiveNavLink
+                href="/orders"
+                active={router.pathname === '/orders'}
+              >
+                Orders
+              </ResponsiveNavLink>
               <ResponsiveNavLink
                 href="/profile"
                 active={router.pathname === '/profile'}

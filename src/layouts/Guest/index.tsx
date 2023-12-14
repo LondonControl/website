@@ -1,15 +1,17 @@
-import Head from 'next/head';
-import type { PropsWithChildren } from 'react';
+import type { ReactNode } from 'react';
 import React from 'react';
 
-const GuestLayout: React.FC<PropsWithChildren> = ({ children }) => {
-  return (
-    <div>
-      <Head>
-        <title>Home | London Control</title>
-      </Head>
+interface Props {
+  meta?: ReactNode;
+  children: ReactNode;
+}
 
-      <div className="font-sans text-gray-900 antialiased">{children}</div>
+const GuestLayout: React.FC<Props> = (props) => {
+  return (
+    <div className="min-h-screen w-full">
+      {props.meta}
+
+      <main>{props.children}</main>
     </div>
   );
 };

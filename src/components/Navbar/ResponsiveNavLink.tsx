@@ -31,7 +31,7 @@ export const ResponsiveNavButton: React.FC<
 > = (props) => {
   return (
     <button
-      className="flex w-full items-start border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 transition duration-150 ease-in-out hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 focus:border-gray-300 focus:bg-gray-50 focus:text-gray-800 focus:outline-none"
+      className="flex w-full items-start border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-semibold text-gray-600 transition duration-150 ease-in-out hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 focus:border-gray-300 focus:bg-gray-50 focus:text-gray-800 focus:outline-none"
       {...props}
     />
   );

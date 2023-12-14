@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import type { NextPage } from 'next';
 import Link from 'next/link';
 import type { FormEventHandler } from 'react';
 import React, { useState } from 'react';
@@ -8,13 +8,15 @@ import PrimaryButton from '@/components/Buttons/PrimaryButton';
 import Input from '@/components/Inputs/Input';
 import InputError from '@/components/Inputs/InputError';
 import Label from '@/components/Inputs/Label';
+import Meta from '@/components/Meta';
 import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
+import { AppConfig } from '@/utils/AppConfig';
 
-const Register = () => {
+const Register: NextPage = () => {
   const { register } = useAuth({
     middleware: 'guest',
-    redirectUri: '/dashboard',
+    redirectUri: '/',
   });
 
   const [name, setName] = useState<string>('');
@@ -38,9 +40,11 @@ const Register = () => {
 
   return (
     <GuestLayout>
-      <Head>
-        <title>Laravel - Register</title>
-      </Head>
+      <Meta
+        title={`Register | ${AppConfig.site_name}`}
+        description={AppConfig.description}
+      />
+
       <AuthCard>
         <form onSubmit={submitForm}>
           {/* Name */}
@@ -115,7 +119,7 @@ const Register = () => {
           <div className="mt-4 flex items-center justify-end">
             <Link
               href="/login"
-              className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
             >
               Already registered?
             </Link>

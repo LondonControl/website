@@ -1,3 +1,4 @@
+import type { NextPage } from 'next';
 import React from 'react';
 
 import Meta from '@/components/Meta';
@@ -7,7 +8,7 @@ import { AppConfig } from '@/utils/AppConfig';
 import UpdatePasswordForm from './partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './partials/UpdateProfileInformationForm';
 
-const Profile = () => {
+const Profile: NextPage = () => {
   return (
     <MainLayout
       header={
@@ -23,14 +24,14 @@ const Profile = () => {
       }
     >
       <div className="py-12">
-        <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
-          <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+        <div className="mx-auto max-w-site space-y-6 tablet:px-6 laptop:px-8">
+          <div className="border bg-white p-4 tablet:rounded-lg tablet:p-8">
             <div className="max-w-xl">
               <UpdateProfileInformationForm />
             </div>
           </div>
 
-          <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+          <div className="border bg-white p-4 tablet:rounded-lg tablet:p-8">
             <div className="max-w-xl">
               <UpdatePasswordForm />
             </div>

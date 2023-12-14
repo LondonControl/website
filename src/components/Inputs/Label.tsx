@@ -7,7 +7,7 @@ const Label: React.FC<
   return (
     <label
       {...props}
-      className={`block text-sm font-medium text-gray-700 ${className}`}
+      className={`block text-sm font-semibold text-gray-900 ${className}`}
     >
       {children}
     </label>
