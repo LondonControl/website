@@ -147,10 +147,35 @@ const Navigation: React.FC<Props> = () => {
         <div className="block tablet:hidden">
           <div className="space-y-1 pb-3 pt-2">
             <ResponsiveNavLink
+              href="/products"
+              active={router.pathname === '/products'}
+            >
+              Products
+            </ResponsiveNavLink>
+
+            <ResponsiveNavLink
+              href="/about"
+              active={router.pathname === '/about'}
+            >
+              About
+            </ResponsiveNavLink>
+
+            <ResponsiveNavLink
               href="/news"
               active={router.pathname === '/news'}
             >
               News
+            </ResponsiveNavLink>
+
+            <ResponsiveNavLink href="https://forum.londoncontrol.com">
+              Forum
+            </ResponsiveNavLink>
+
+            <ResponsiveNavLink
+              href="/support"
+              active={router.pathname === '/support'}
+            >
+              Support
             </ResponsiveNavLink>
           </div>
 
