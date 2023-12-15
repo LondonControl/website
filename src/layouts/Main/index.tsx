@@ -17,14 +17,6 @@ const MainLayout: React.FC<Props> = (props) => {
 
       <Navbar />
 
-      {props.header && (
-        <header className="bg-white shadow">
-          <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-            {props.header}
-          </div>
-        </header>
-      )}
-
       <main>{props.children}</main>
 
       <Footer />

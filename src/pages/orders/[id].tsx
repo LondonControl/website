@@ -24,11 +24,6 @@ const IndividualOrder: NextPage<Props> = () => {
 
   return (
     <MainLayout
-      header={
-        <h2 className="text-xl font-semibold leading-tight text-gray-800">
-          Order # {data?.data.number}
-        </h2>
-      }
       meta={
         <Meta
           title={`Orders | ${AppConfig.site_name}`}
@@ -40,7 +35,12 @@ const IndividualOrder: NextPage<Props> = () => {
         <MoonLoader loading={isLoading} />
       ) : (
         <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-          <div className="mx-auto mt-2 grid max-w-2xl grid-cols-1 grid-rows-1 items-start gap-8 md:mt-6 laptop:mx-0 laptop:max-w-none laptop:grid-cols-3">
+          <div className="laptop:mt-6">
+            <h1 className="text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl">
+              Order # {data.data.number}
+            </h1>
+          </div>
+          <div className="mx-auto mt-6 grid max-w-2xl grid-cols-1 grid-rows-1 items-start gap-8 tablet:mt-12 laptop:mx-0 laptop:max-w-none laptop:grid-cols-3">
             {/* Invoice summary */}
             <div className="laptop:col-start-3 laptop:row-end-1">
               <h2 className="sr-only">Summary</h2>
