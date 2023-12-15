@@ -196,30 +196,48 @@ const Navigation: React.FC<Props> = () => {
 
           {/* Responsive Settings Options */}
           <div className="border-t border-gray-200 pb-1 pt-4">
-            <div className="px-4">
-              <div className="text-base font-medium text-gray-800">
-                {user?.name}
-              </div>
-              <div className="text-sm font-medium text-gray-500">
-                {user?.email}
-              </div>
-            </div>
+            {user ? (
+              <>
+                <div className="px-4">
+                  <div className="text-base font-medium text-gray-800">
+                    {user?.name}
+                  </div>
+                  <div className="text-sm font-medium text-gray-500">
+                    {user?.email}
+                  </div>
+                </div>
 
-            <div className="mt-3 space-y-1">
-              <ResponsiveNavLink
-                href="/orders"
-                active={router.pathname === '/orders'}
-              >
-                Orders
-              </ResponsiveNavLink>
-              <ResponsiveNavLink
-                href="/profile"
-                active={router.pathname === '/profile'}
-              >
-                Profile
-              </ResponsiveNavLink>
-              <ResponsiveNavButton onClick={logout}>Logout</ResponsiveNavButton>
-            </div>
+                <div className="mt-3 space-y-1">
+                  <ResponsiveNavLink
+                    href="/orders"
+                    active={router.pathname === '/orders'}
+                  >
+                    Orders
+                  </ResponsiveNavLink>
+                  <ResponsiveNavLink
+                    href="/profile"
+                    active={router.pathname === '/profile'}
+                  >
+                    Profile
+                  </ResponsiveNavLink>
+                  <ResponsiveNavButton onClick={logout}>
+                    Logout
+                  </ResponsiveNavButton>
+                </div>
+              </>
+            ) : (
+              <>
+                <ResponsiveNavLink
+                  href="/register"
+                  active={router.pathname === '/register'}
+                >
+                  Get Started{' '}
+                  <span aria-hidden="true" className="ml-1">
+                    →
+                  </span>
+                </ResponsiveNavLink>
+              </>
+            )}
           </div>
         </div>
       )}
