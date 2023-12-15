@@ -1,3 +1,8 @@
+import {
+  ArrowRightOnRectangleIcon,
+  ClipboardDocumentListIcon,
+  UserCircleIcon,
+} from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -11,8 +16,6 @@ import ResponsiveNavLink, {
 } from '@/components/Navbar/ResponsiveNavLink';
 import { useAuth } from '@/hooks/useAuth';
 
-import PrimaryLinkButton from '../Buttons/PrimaryLinkButton';
-
 interface Props {
   // user?: User;
 }
@@ -25,7 +28,7 @@ const Navigation: React.FC<Props> = () => {
   return (
     <nav className="bg-white">
       {/* Primary Navigation Menu */}
-      <div className="mx-auto max-w-site px-4 tablet:px-6 laptop:px-8">
+      <div className="mx-auto max-w-site px-4 py-3 tablet:px-6 laptop:px-8">
         <div className="flex h-16 justify-between">
           <div className="flex">
             {/* Logo */}
@@ -37,7 +40,7 @@ const Navigation: React.FC<Props> = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className="hidden space-x-8 tablet:flex tablet:py-3">
+          <div className="hidden space-x-8 tablet:flex">
             <NavLink href="/products" active={router.pathname === '/products'}>
               Products
             </NavLink>
@@ -48,6 +51,13 @@ const Navigation: React.FC<Props> = () => {
 
             <NavLink href="/news" active={router.pathname === '/news'}>
               News
+            </NavLink>
+
+            <NavLink
+              href="https://forum.londoncontrol.com"
+              active={router.pathname === '/forum'}
+            >
+              Forum
             </NavLink>
 
             <NavLink href="/support" active={router.pathname === '/support'}>
@@ -64,7 +74,7 @@ const Navigation: React.FC<Props> = () => {
                   width="48"
                   trigger={
                     <span className="inline-flex rounded-md">
-                      <button className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
+                      <button className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-900 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
                         {user?.name}
 
                         <svg
@@ -84,17 +94,29 @@ const Navigation: React.FC<Props> = () => {
                 >
                   {/* Authentication */}
                   {/* TODO: add active state */}
-                  <DropdownLink href="/orders">Orders</DropdownLink>
-                  <DropdownLink href="/profile">Profile</DropdownLink>
+                  <DropdownLink href="/orders">
+                    <ClipboardDocumentListIcon className="mr-3 h-5 w-5" />
+                    Orders
+                  </DropdownLink>
+                  <DropdownLink href="/profile">
+                    <UserCircleIcon className="mr-3 h-5 w-5" />
+                    Profile
+                  </DropdownLink>
 
                   <hr />
-                  <DropdownButton onClick={logout}>Logout</DropdownButton>
+                  <DropdownButton onClick={logout}>
+                    <ArrowRightOnRectangleIcon className="mr-3 h-5 w-5" />
+                    Logout
+                  </DropdownButton>
                 </Dropdown>
               ) : (
                 <>
-                  <PrimaryLinkButton href="/register">
-                    Register
-                  </PrimaryLinkButton>
+                  <Link
+                    href="/register"
+                    className="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-700"
+                  >
+                    Get Started <span aria-hidden="true">→</span>
+                  </Link>
                 </>
               )}
             </div>
@@ -140,10 +162,35 @@ const Navigation: React.FC<Props> = () => {
         <div className="block tablet:hidden">
           <div className="space-y-1 pb-3 pt-2">
             <ResponsiveNavLink
+              href="/products"
+              active={router.pathname === '/products'}
+            >
+              Products
+            </ResponsiveNavLink>
+
+            <ResponsiveNavLink
+              href="/about"
+              active={router.pathname === '/about'}
+            >
+              About
+            </ResponsiveNavLink>
+
+            <ResponsiveNavLink
               href="/news"
               active={router.pathname === '/news'}
             >
               News
+            </ResponsiveNavLink>
+
+            <ResponsiveNavLink href="https://forum.londoncontrol.com">
+              Forum
+            </ResponsiveNavLink>
+
+            <ResponsiveNavLink
+              href="/support"
+              active={router.pathname === '/support'}
+            >
+              Support
             </ResponsiveNavLink>
           </div>
 

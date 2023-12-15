@@ -11,11 +11,6 @@ import UpdateProfileInformationForm from './partials/UpdateProfileInformationFor
 const Profile: NextPage = () => {
   return (
     <MainLayout
-      header={
-        <h2 className="text-xl font-semibold leading-tight text-gray-800">
-          Profile
-        </h2>
-      }
       meta={
         <Meta
           title={`Profile | ${AppConfig.site_name}`}
@@ -23,8 +18,13 @@ const Profile: NextPage = () => {
         />
       }
     >
-      <div className="py-12">
-        <div className="mx-auto max-w-site space-y-6 tablet:px-6 laptop:px-8">
+      <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
+        <div className="laptop:mt-6">
+          <h1 className="text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl">
+            Profile
+          </h1>
+        </div>
+        <div className="mt-6 space-y-6 laptop:mt-12">
           <div className="border bg-white p-4 tablet:rounded-lg tablet:p-8">
             <div className="max-w-xl">
               <UpdateProfileInformationForm />
