@@ -8,6 +8,7 @@ module.exports = {
   theme: {
     fontFamily: {
       jetbrains: ['JetBrains Mono', ...defaultTheme.fontFamily.sans],
+      inter: ['Inter', ...defaultTheme.fontFamily.sans],
     },
     // screens: {
     //   tablet: '960px',
