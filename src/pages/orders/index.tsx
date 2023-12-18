@@ -27,7 +27,9 @@ const Orders: NextPage = () => {
     isLoading: productsIsLoading,
   } = useSWR('/api/products', fetcher);
 
+  // eslint-disable-next-line no-console
   if (ordersError) console.log(ordersError);
+  // eslint-disable-next-line no-console
   if (productsError) console.log(productsError);
 
   return (
@@ -40,31 +42,28 @@ const Orders: NextPage = () => {
       }
     >
       <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-        <div className="laptop:mt-6">
-          <h1 className="text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl">
-            Order history
-          </h1>
-        </div>
-        <div className="mt-6 tablet:mt-12">
-          <h2 className="sr-only">Recent orders</h2>
-          <div>
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl laptop:mt-6">
+          Order History
+        </h1>
+        <h2 className="sr-only">Order History</h2>
+
+        {ordersIsLoading || productsIsLoading ? (
+          <div className="mt-6 flex items-center justify-center laptop:mt-12">
+            <MoonLoader loading={ordersIsLoading || productsIsLoading} />
+          </div>
+        ) : (
+          <div className="mt-6 tablet:mt-12">
             <div className="mx-auto space-y-6">
-              {ordersIsLoading || productsIsLoading ? (
-                <div className="flex items-center justify-center">
-                  <MoonLoader loading={ordersIsLoading || productsIsLoading} />
-                </div>
-              ) : (
-                ordersData.data.map((order: Order) => (
-                  <OrderCard
-                    order={order}
-                    key={order.id}
-                    products={productsData.data ?? null}
-                  />
-                ))
-              )}
+              {ordersData.data.map((order: Order) => (
+                <OrderCard
+                  order={order}
+                  key={order.id}
+                  products={productsData.data ?? null}
+                />
+              ))}
             </div>
           </div>
-        </div>
+        )}
       </div>
     </MainLayout>
   );

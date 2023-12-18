@@ -57,7 +57,15 @@ const Footer: React.FC<Props> = () => {
         </div>
         <div className="mt-8 tablet:order-1 tablet:mt-0">
           <p className="text-center text-xs leading-5 text-gray-500">
-            &copy; 2020 Your Company, Inc. All rights reserved.
+            Made by{' '}
+            <a
+              href="https://geren.uk"
+              target="_blank"
+              className="hover:underline"
+            >
+              Gerenuk
+            </a>
+            .
           </p>
         </div>
       </div>
