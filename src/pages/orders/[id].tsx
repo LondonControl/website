@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { CalendarDaysIcon, CreditCardIcon } from '@heroicons/react/24/outline';
+import { CalendarDaysIcon } from '@heroicons/react/24/outline';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Moment from 'react-moment';
@@ -20,6 +20,7 @@ const IndividualOrder: NextPage<Props> = () => {
 
   const { data, error, isLoading } = useSWR(`/api/user/orders/${id}`, fetcher);
 
+  // eslint-disable-next-line no-console
   if (error) console.log(error);
 
   return (
@@ -31,15 +32,17 @@ const IndividualOrder: NextPage<Props> = () => {
         />
       }
     >
-      {isLoading ? (
-        <MoonLoader loading={isLoading} />
-      ) : (
-        <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-          <div className="laptop:mt-6">
-            <h1 className="text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl">
-              Order # {data.data.number}
-            </h1>
+      <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl laptop:mt-6">
+          Order # {data?.data.number ?? null}
+        </h1>
+        <h2 className="sr-only">Order # {data?.data.number ?? null}</h2>
+
+        {isLoading ? (
+          <div className="mt-6 flex items-center justify-center laptop:mt-12">
+            <MoonLoader loading={isLoading} />
           </div>
+        ) : (
           <div className="mx-auto mt-6 grid max-w-2xl grid-cols-1 grid-rows-1 items-start gap-8 tablet:mt-12 laptop:mx-0 laptop:max-w-none laptop:grid-cols-3">
             {/* Invoice summary */}
             <div className="laptop:col-start-3 laptop:row-end-1">
@@ -75,18 +78,6 @@ const IndividualOrder: NextPage<Props> = () => {
                       />
                     </dd>
                   </div>
-                  <div className="mt-4 flex w-full flex-none gap-x-4 px-6">
-                    <dt className="flex-none">
-                      <span className="sr-only">Status</span>
-                      <CreditCardIcon
-                        className="h-6 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                    </dt>
-                    <dd className="text-sm leading-6 text-gray-500">
-                      Paid with MasterCard
-                    </dd>
-                  </div>
                 </dl>
                 <div className="mt-6 border-t border-gray-900/5 p-6">
                   <a
@@ -98,7 +89,6 @@ const IndividualOrder: NextPage<Props> = () => {
                 </div>
               </div>
             </div>
-
             {/* Invoice */}
             <div className="-mx-4 border border-gray-200 px-4 py-8 tablet:mx-0 tablet:rounded-lg tablet:px-8 tablet:pb-14 laptop:col-span-2 laptop:row-span-2 laptop:row-end-2 desktop:px-16 desktop:pb-20 desktop:pt-16">
               <h2 className="text-lg font-semibold leading-6 text-gray-900">
@@ -174,8 +164,8 @@ const IndividualOrder: NextPage<Props> = () => {
               </table>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </MainLayout>
   );
 };

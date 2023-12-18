@@ -19,6 +19,7 @@ const News: NextPage<Props> = () => {
     fetcher
   );
 
+  // eslint-disable-next-line no-console
   if (error) console.log(error);
 
   return (
@@ -36,12 +37,16 @@ const News: NextPage<Props> = () => {
       }
     >
       <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
+        <h1 className="mt-6 text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl">
+          News
+        </h1>
+
         {isLoading ? (
-          <div className="flex items-center justify-center">
+          <div className="mt-6 flex items-center justify-center laptop:mt-12">
             <MoonLoader loading={isLoading} />
           </div>
         ) : (
-          <div className="relative mt-2 tablet:ml-[calc(2rem+1px)] tablet:pb-12 md:ml-[calc(3.5rem+1px)] laptop:ml-[max(calc(14.5rem+1px),calc(100%-80rem))] laptop:mt-10">
+          <div className="relative mt-6 tablet:ml-[calc(2rem+1px)] tablet:pb-12 md:ml-[calc(3.5rem+1px)] laptop:ml-[max(calc(14.5rem+1px),calc(100%-80rem))] laptop:mt-12">
             <div className="absolute bottom-0 right-full top-3 mr-7 hidden w-px bg-slate-200 tablet:block md:mr-[3.25rem]"></div>
             <div className="space-y-16">
               {data.data.map((post: NewsPost) => (
