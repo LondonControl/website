@@ -1,8 +1,10 @@
 import type { HTMLAttributes } from 'react';
 import React from 'react';
 
+import type ErrorInput from '@/interfaces/ErrorInput';
+
 interface Props extends HTMLAttributes<HTMLParagraphElement> {
-  messages?: string[];
+  messages?: ErrorInput[];
 }
 
 const InputError: React.FC<Props> = ({
@@ -14,13 +16,13 @@ const InputError: React.FC<Props> = ({
     <>
       {messages?.length > 0 && (
         <>
-          {messages.map((message, index) => (
+          {messages.map((error: ErrorInput, index) => (
             <p
               {...props}
               className={`text-sm text-red-600 ${className}`}
               key={index}
             >
-              {message}
+              {error.detail}
             </p>
           ))}
         </>

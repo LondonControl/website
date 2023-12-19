@@ -77,7 +77,7 @@ const Login: NextPage = () => {
               isFocused={true}
             />
 
-            <InputError messages={errors.email} className="mt-2" />
+            <InputError messages={errors} className="mt-2" />
           </div>
 
           {/* Password */}
@@ -94,7 +94,7 @@ const Login: NextPage = () => {
               autoComplete="current-password"
             />
 
-            <InputError messages={errors.password} className="mt-2" />
+            <InputError messages={errors} className="mt-2" />
           </div>
 
           {/* Remember Me */}
