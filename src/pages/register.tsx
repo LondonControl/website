@@ -10,6 +10,7 @@ import InputError from '@/components/Inputs/InputError';
 import Label from '@/components/Inputs/Label';
 import Meta from '@/components/Meta';
 import { useAuth } from '@/hooks/useAuth';
+import type ErrorInput from '@/interfaces/ErrorInput';
 import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
 
@@ -61,7 +62,12 @@ const Register: NextPage = () => {
               autoFocus
             />
 
-            <InputError messages={errors.name} className="mt-2" />
+            <InputError
+              messages={errors?.filter(
+                (error: ErrorInput) => error.source?.pointer === '/name'
+              )}
+              className="mt-2"
+            />
           </div>
 
           {/* Email Address */}
@@ -77,7 +83,12 @@ const Register: NextPage = () => {
               required
             />
 
-            <InputError messages={errors.email} className="mt-2" />
+            <InputError
+              messages={errors?.filter(
+                (error: ErrorInput) => error.source?.pointer === '/email'
+              )}
+              className="mt-2"
+            />
           </div>
 
           {/* Password */}
@@ -94,7 +105,12 @@ const Register: NextPage = () => {
               autoComplete="new-password"
             />
 
-            <InputError messages={errors.password} className="mt-2" />
+            <InputError
+              messages={errors?.filter(
+                (error: ErrorInput) => error.source?.pointer === '/password'
+              )}
+              className="mt-2"
+            />
           </div>
 
           {/* Confirm Password */}
@@ -111,7 +127,9 @@ const Register: NextPage = () => {
             />
 
             <InputError
-              messages={errors.password_confirmation}
+              messages={errors?.filter(
+                (error: ErrorInput) => error.source?.pointer === '/password'
+              )}
               className="mt-2"
             />
           </div>
