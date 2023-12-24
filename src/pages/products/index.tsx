@@ -1,4 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import type { NextPage } from 'next';
+import Markdown from 'react-markdown';
 import MoonLoader from 'react-spinners/MoonLoader';
 import useSWR from 'swr';
 
@@ -59,7 +61,9 @@ const Products: NextPage<Props> = () => {
                       {product.title}
                     </a>
                   </h3>
-                  <p className="text-sm text-gray-500">{product.description}</p>
+                  <Markdown className="truncate text-sm text-gray-500">
+                    {product.description}
+                  </Markdown>
                   <div className="flex flex-1 flex-col justify-end">
                     <p className="text-base font-medium text-gray-900">
                       £{product.price / 100}
