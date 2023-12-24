@@ -1,8 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { Disclosure, Tab } from '@headlessui/react';
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import Markdown from 'react-markdown';
 import { MoonLoader } from 'react-spinners';
 import useSWR from 'swr';
 
@@ -117,9 +119,9 @@ const IndividualProduct: NextPage<Props> = () => {
                 <div className="mt-6">
                   <h3 className="sr-only">Description</h3>
 
-                  <p className="space-y-6 text-base text-gray-700">
+                  <Markdown className="space-y-6 text-base text-gray-700">
                     {data.data.description}
-                  </p>
+                  </Markdown>
                 </div>
 
                 <form className="mt-6">

@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import type { NextPage } from 'next';
+import Markdown from 'react-markdown';
 import Moment from 'react-moment';
 import { MoonLoader } from 'react-spinners';
 import useSWR from 'swr';
@@ -70,7 +71,7 @@ const News: NextPage<Props> = () => {
                       {post.title}
                     </h3>
                     <div className="prose prose-slate prose-a:relative prose-a:z-10 mb-4 mt-2">
-                      <p>{post.body}</p>
+                      <Markdown>{post.body}</Markdown>
                     </div>
                     <dl className="absolute left-0 top-0 laptop:left-auto laptop:right-full laptop:mr-[calc(6.5rem+1px)]">
                       <dt className="sr-only">Date</dt>
