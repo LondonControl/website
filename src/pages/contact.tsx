@@ -37,6 +37,8 @@ const Contact: NextPage<Props> = () => {
   const submitForm: FormEventHandler = async (event) => {
     event.preventDefault();
 
+    if (!agreed) return;
+
     try {
       await sendContactForm({
         firstName,
@@ -45,6 +47,12 @@ const Contact: NextPage<Props> = () => {
         subject,
         message,
       });
+
+      setFirstName('');
+      setSecondName('');
+      setEmail('');
+      setSubject('');
+      setMessage('');
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
@@ -95,7 +103,6 @@ const Contact: NextPage<Props> = () => {
                 className="mt-1 block w-full"
                 onChange={(event) => setSecondName(event.target.value)}
                 required
-                isFocused={true}
               />
 
               {/* <InputError messages={errors.email} className="mt-2" /> */}
@@ -111,7 +118,6 @@ const Contact: NextPage<Props> = () => {
                 className="mt-1 block w-full"
                 onChange={(event) => setEmail(event.target.value)}
                 required
-                isFocused={true}
               />
 
               {/* <InputError messages={errors.email} className="mt-2" /> */}
@@ -127,7 +133,6 @@ const Contact: NextPage<Props> = () => {
                 className="mt-1 block w-full"
                 onChange={(event) => setSubject(event.target.value)}
                 required
-                isFocused={true}
               />
 
               {/* <InputError messages={errors.email} className="mt-2" /> */}
@@ -147,6 +152,7 @@ const Contact: NextPage<Props> = () => {
                   rows={4}
                   className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-900 tablet:text-sm tablet:leading-6"
                   required
+                  value={message}
                   onChange={(event) => setMessage(event.target.value)}
                 />
               </div>
@@ -187,6 +193,7 @@ const Contact: NextPage<Props> = () => {
           <div className="mt-10">
             <button
               type="submit"
+              disabled={!agreed}
               className="block w-full rounded-md bg-gray-900 px-3.5 py-2.5 text-center text-sm font-semibold text-white hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
             >
               Let&apos;s talk
