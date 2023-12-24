@@ -2,6 +2,7 @@
 import { CalendarDaysIcon } from '@heroicons/react/24/outline';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import Markdown from 'react-markdown';
 import Moment from 'react-moment';
 import { MoonLoader } from 'react-spinners';
 import useSWR from 'swr';
@@ -132,9 +133,9 @@ const IndividualOrder: NextPage<Props> = () => {
                         <div className="truncate font-medium text-gray-900">
                           {item.product?.title}
                         </div>
-                        <div className="truncate text-gray-500">
+                        <Markdown className="textgray-500 truncate">
                           {item.product?.description}
-                        </div>
+                        </Markdown>
                       </td>
                       <td className="py-5 pl-8 pr-0 text-right align-top tabular-nums text-gray-700">
                         £{item.actual_price / 100}
