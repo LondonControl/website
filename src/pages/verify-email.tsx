@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 
 import AuthCard from '@/components/Auth/AuthCard';
 import AuthSessionStatus from '@/components/Auth/AuthSessionStatus';
-import PrimaryButton from '@/components/Buttons/PrimaryButton';
 import Meta from '@/components/Meta';
+import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
@@ -40,7 +40,7 @@ const VerifyEmail: NextPage = () => {
         )}
 
         <div className="mt-4 flex items-center justify-between">
-          <PrimaryButton
+          <Button
             onClick={() =>
               resendEmailVerification({
                 setStatus,
@@ -49,15 +49,15 @@ const VerifyEmail: NextPage = () => {
             }
           >
             Resend Verification Email
-          </PrimaryButton>
+          </Button>
 
-          <button
+          <Button
             type="button"
             className="text-sm text-gray-600 underline hover:text-gray-900"
             onClick={logout}
           >
             Logout
-          </button>
+          </Button>
         </div>
       </AuthCard>
     </GuestLayout>

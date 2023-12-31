@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 interface Props {}
@@ -42,16 +43,17 @@ const Footer: React.FC<Props> = () => {
             </a>
           ))}
         </div>
+
         <div className="mt-8 tablet:order-1 tablet:mt-0">
           <p className="text-center text-xs leading-5 text-gray-500">
             Made by{' '}
-            <a
+            <Link
               href="https://geren.uk"
               target="_blank"
               className="hover:underline"
             >
               Gerenuk
-            </a>
+            </Link>
             .
           </p>
         </div>

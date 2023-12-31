@@ -1,12 +1,13 @@
-import { Switch } from '@headlessui/react';
-import classNames from 'classnames';
 import type { NextPage } from 'next';
+import Link from 'next/link';
 import type { FormEventHandler } from 'react';
 import { useState } from 'react';
 
-import Input from '@/components/Inputs/Input';
-import Label from '@/components/Inputs/Label';
 import Meta from '@/components/Meta';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
 import MainLayout from '@/layouts/Main';
 import { AppConfig } from '@/utils/AppConfig';
 
@@ -72,6 +73,7 @@ const Contact: NextPage<Props> = () => {
         <h1 className="text-center text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl laptop:mt-6">
           Get in touch
         </h1>
+
         <form
           onSubmit={submitForm}
           className="mx-auto mt-16 max-w-xl tablet:mt-20"
@@ -87,7 +89,7 @@ const Contact: NextPage<Props> = () => {
                 className="mt-1 block w-full"
                 onChange={(event) => setFirstName(event.target.value)}
                 required
-                isFocused={true}
+                autoFocus
               />
 
               {/* <InputError messages={errors.email} className="mt-2" /> */}
@@ -145,6 +147,7 @@ const Contact: NextPage<Props> = () => {
               >
                 Message
               </label>
+
               <div className="mt-2.5">
                 <textarea
                   name="message"
@@ -158,46 +161,29 @@ const Contact: NextPage<Props> = () => {
               </div>
             </div>
 
-            <Switch.Group as="div" className="flex gap-x-4 sm:col-span-2">
-              <div className="flex h-6 items-center">
-                <Switch
-                  checked={agreed}
-                  onChange={setAgreed}
-                  className={classNames(
-                    agreed ? 'bg-gray-900' : 'bg-gray-200',
-                    'flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900'
-                  )}
-                >
-                  <span className="sr-only">Agree to policies</span>
-                  <span
-                    aria-hidden="true"
-                    className={classNames(
-                      agreed ? 'translate-x-3.5' : 'translate-x-0',
-                      'h-4 w-4 transform rounded-full bg-white shadow-sm ring-1 ring-gray-900/5 transition duration-200 ease-in-out'
-                    )}
-                  />
-                </Switch>
-              </div>
-              <Switch.Label className="text-sm leading-6 text-gray-600">
+            <div className="flex items-center space-x-2 sm:col-span-2">
+              <Switch
+                id="privacyPolicyAgree"
+                checked={agreed}
+                onCheckedChange={setAgreed}
+              />
+              <Label htmlFor="privacyPolicyAgree">
                 By selecting this, you agree to our{' '}
-                <a
-                  href="#"
+                <Link
+                  href="/privacy"
                   className="font-semibold text-gray-900 hover:underline"
                 >
-                  privacy&nbsp;policy
-                </a>
+                  privacy policy
+                </Link>
                 .
-              </Switch.Label>
-            </Switch.Group>
+              </Label>
+            </div>
           </div>
+
           <div className="mt-10">
-            <button
-              type="submit"
-              disabled={!agreed}
-              className="block w-full rounded-md bg-gray-900 px-3.5 py-2.5 text-center text-sm font-semibold text-white hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
-            >
+            <Button type="submit" disabled={!agreed}>
               Let&apos;s talk
-            </button>
+            </Button>
           </div>
         </form>
       </div>

@@ -38,12 +38,14 @@ const OrderCard: React.FC<Props> = ({ order, products }) => {
             <dt className="font-medium text-gray-900">Order number</dt>
             <dd className="mt-1 text-gray-500">{order.number}</dd>
           </div>
+
           <div className="hidden tablet:block">
             <dt className="font-medium text-gray-900">Date placed</dt>
             <dd className="mt-1 text-gray-500">
               <Moment date={order.created_at} format="DD MMMM YYYY hh:mm" />
             </dd>
           </div>
+
           <div>
             <dt className="font-medium text-gray-900">Total amount</dt>
             <dd className="mt-1 font-medium text-gray-900">

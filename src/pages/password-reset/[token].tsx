@@ -5,11 +5,11 @@ import React, { useEffect, useState } from 'react';
 
 import AuthCard from '@/components/Auth/AuthCard';
 import AuthSessionStatus from '@/components/Auth/AuthSessionStatus';
-import PrimaryButton from '@/components/Buttons/PrimaryButton';
-import Input from '@/components/Inputs/Input';
 import InputError from '@/components/Inputs/InputError';
-import Label from '@/components/Inputs/Label';
 import Meta from '@/components/Meta';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
@@ -108,7 +108,7 @@ const PasswordReset: NextPage = () => {
           </div>
 
           <div className="mt-4 flex items-center justify-end">
-            <PrimaryButton>Reset Password</PrimaryButton>
+            <Button type="submit">Reset Password</Button>
           </div>
         </form>
       </AuthCard>

@@ -2,10 +2,10 @@ import { Transition } from '@headlessui/react';
 import type { FormEventHandler } from 'react';
 import React, { useEffect, useState } from 'react';
 
-import PrimaryButton from '@/components/Buttons/PrimaryButton';
-import Input from '@/components/Inputs/Input';
 import InputError from '@/components/Inputs/InputError';
-import Label from '@/components/Inputs/Label';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { useAuth } from '@/hooks/useAuth';
 import axios, { csrf } from '@/lib/axios';
 
@@ -70,6 +70,7 @@ const UpdateProfileInformationForm = () => {
           />
           <InputError messages={errors.email} className="mt-2" />
         </div>
+
         {/* Email Address */}
         <div>
           <Label htmlFor="email">Email</Label>
@@ -113,7 +114,7 @@ const UpdateProfileInformationForm = () => {
         )}
 
         <div className="flex items-center gap-4">
-          <PrimaryButton>Save</PrimaryButton>
+          <Button type="submit">Save</Button>
 
           {status === 200 && (
             <Transition

@@ -1,4 +1,6 @@
-import PrimaryLinkButton from '../Buttons/PrimaryLinkButton';
+import Link from 'next/link';
+
+import { Button } from '@/components/ui/button';
 
 interface Props {}
 
@@ -14,16 +16,19 @@ const HeroSection: React.FC<Props> = () => {
             London Control is an authentic, highly realistic simulation of the
             actual ATC system over England and Wales.
           </p>
-          <div className="mt-10 flex items-center justify-center gap-x-6">
-            <PrimaryLinkButton href="/register">Get started</PrimaryLinkButton>
 
-            <a href="#" className="text-sm font-semibold leading-6">
+          <div className="mt-10 flex items-center justify-center gap-x-6">
+            <Button asChild>
+              <Link href="/register">Get started</Link>
+            </Button>
+
+            <Link href="/about">
               Learn more <span aria-hidden="true">→</span>
-            </a>
+            </Link>
           </div>
         </div>
+
         <img
-          // src="https://images.unsplash.com/photo-1584084807193-bed442df7a75?q=80&w=2432&h=1442&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           src="/assets/images/lc_screenshot.png"
           alt="App screenshot"
           width={2432}

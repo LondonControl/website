@@ -4,11 +4,11 @@ import type { FormEventHandler } from 'react';
 import React, { useState } from 'react';
 
 import AuthCard from '@/components/Auth/AuthCard';
-import PrimaryButton from '@/components/Buttons/PrimaryButton';
-import Input from '@/components/Inputs/Input';
 import InputError from '@/components/Inputs/InputError';
-import Label from '@/components/Inputs/Label';
 import Meta from '@/components/Meta';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { useAuth } from '@/hooks/useAuth';
 import type ErrorInput from '@/interfaces/ErrorInput';
 import GuestLayout from '@/layouts/Guest';
@@ -142,7 +142,9 @@ const Register: NextPage = () => {
               Already registered?
             </Link>
 
-            <PrimaryButton className="ml-4">Register</PrimaryButton>
+            <Button type="submit" className="ml-4">
+              Register
+            </Button>
           </div>
         </form>
       </AuthCard>

@@ -6,12 +6,12 @@ import React, { useEffect, useState } from 'react';
 
 import AuthCard from '@/components/Auth/AuthCard';
 import AuthSessionStatus from '@/components/Auth/AuthSessionStatus';
-import PrimaryButton from '@/components/Buttons/PrimaryButton';
-import Checkbox from '@/components/Inputs/Checkbox';
-import Input from '@/components/Inputs/Input';
 import InputError from '@/components/Inputs/InputError';
-import Label from '@/components/Inputs/Label';
 import Meta from '@/components/Meta';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
@@ -26,7 +26,7 @@ const Login: NextPage = () => {
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [shouldRemember, setShouldRemember] = useState(false);
+  const [shouldRemember, setShouldRemember] = useState<any>(false);
   const [errors, setErrors] = useState<any>([]);
   const [status, setStatus] = useState<string | null>(null);
 
@@ -74,7 +74,7 @@ const Login: NextPage = () => {
               className="mt-1 block w-full"
               onChange={(event) => setEmail(event.target.value)}
               required
-              isFocused={true}
+              autoFocus
             />
 
             <InputError messages={errors} className="mt-2" />
@@ -104,7 +104,7 @@ const Login: NextPage = () => {
                 id="remember_me"
                 name="remember"
                 checked={shouldRemember}
-                onChange={(event) => setShouldRemember(event.target.checked)}
+                onCheckedChange={(checked) => setShouldRemember(checked)}
               />
               <span className="ml-2 text-sm text-gray-600">Remember me</span>
             </label>
@@ -118,7 +118,9 @@ const Login: NextPage = () => {
               Forgot your password?
             </Link>
 
-            <PrimaryButton className="ml-4">Login</PrimaryButton>
+            <Button type="submit" className="ml-4">
+              Login
+            </Button>
           </div>
         </form>
       </AuthCard>
