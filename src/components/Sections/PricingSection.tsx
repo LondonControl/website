@@ -1,7 +1,10 @@
-import { CheckCircleIcon } from '@heroicons/react/24/outline';
+import { Check } from 'lucide-react';
+import Link from 'next/link';
 
 import Pricings from '@/data/Pricings';
 import type Pricing from '@/interfaces/Pricing';
+
+import { Button } from '../ui/button';
 
 interface Props {}
 
@@ -28,31 +31,28 @@ const PricingSection: React.FC<Props> = () => {
                 <h3 className="text-base font-semibold leading-7 text-gray-900">
                   {option.name}
                 </h3>
+
                 <p className="mt-6 flex items-baseline gap-x-1">
                   <span className="text-5xl font-bold tracking-tight text-gray-900">
                     {option.price}
                   </span>
                 </p>
-                <a
-                  href={option.href}
-                  aria-describedby={option.name}
-                  className="mt-10 block rounded-md bg-gray-900 px-3 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
-                >
-                  Select
-                </a>
+
+                <Button className="mt-10 w-full" asChild>
+                  <Link href="/contact">Select</Link>
+                </Button>
+
                 <p className="mt-10 text-sm font-semibold leading-6 text-gray-900">
                   {option.description}
                 </p>
+
                 <ul
                   role="list"
                   className="mt-6 space-y-3 text-sm leading-6 text-gray-600"
                 >
                   {option.features.map((feature) => (
-                    <li key={feature} className="flex gap-x-3">
-                      <CheckCircleIcon
-                        className="h-6 w-5 flex-none text-black"
-                        aria-hidden="true"
-                      />
+                    <li key={feature} className="flex items-center gap-x-3">
+                      <Check className="h-4 w-4 flex-none text-black" />
                       {feature}
                     </li>
                   ))}

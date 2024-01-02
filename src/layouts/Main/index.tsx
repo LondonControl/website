@@ -3,6 +3,7 @@ import React from 'react';
 
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import { Toaster } from '@/components/ui/sonner';
 
 interface Props {
   meta: ReactNode;
@@ -18,6 +19,8 @@ const MainLayout: React.FC<Props> = (props) => {
       <Navbar />
 
       <main>{props.children}</main>
+
+      <Toaster />
 
       <Footer />
     </div>

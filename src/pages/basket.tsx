@@ -5,6 +5,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import type { NextPage } from 'next';
+import Link from 'next/link';
 
 import Meta from '@/components/Meta';
 import MainLayout from '@/layouts/Main';
@@ -92,14 +93,15 @@ const Basket: NextPage<Props> = () => {
                       <div>
                         <div className="flex justify-between">
                           <h3 className="text-sm">
-                            <a
+                            <Link
                               href={product.href}
                               className="font-medium text-gray-700 hover:text-gray-800"
                             >
                               {product.name}
-                            </a>
+                            </Link>
                           </h3>
                         </div>
+
                         <div className="mt-1 flex text-sm">
                           <p className="text-gray-500">{product.color}</p>
                           {product.size ? (
@@ -108,6 +110,7 @@ const Basket: NextPage<Props> = () => {
                             </p>
                           ) : null}
                         </div>
+
                         <p className="mt-1 text-sm font-medium text-gray-900">
                           {product.price}
                         </p>
@@ -120,6 +123,7 @@ const Basket: NextPage<Props> = () => {
                         >
                           Quantity, {product.name}
                         </label>
+
                         <select
                           id={`quantity-${productIdx}`}
                           name={`quantity-${productIdx}`}

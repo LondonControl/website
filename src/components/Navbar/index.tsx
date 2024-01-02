@@ -1,8 +1,5 @@
-import {
-  ArrowRightOnRectangleIcon,
-  ClipboardDocumentListIcon,
-  UserCircleIcon,
-} from '@heroicons/react/24/outline';
+/* eslint-disable import/no-extraneous-dependencies */
+import { ClipboardList, LogOut, UserCog } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -95,17 +92,21 @@ const Navigation: React.FC<Props> = () => {
                   {/* Authentication */}
                   {/* TODO: add active state */}
                   <DropdownLink href="/orders">
-                    <ClipboardDocumentListIcon className="mr-3 h-5 w-5" />
+                    {/* <ClipboardDocumentListIcon className="mr-3 h-5 w-5" /> */}
+                    <ClipboardList className="mr-3 h-4 w-4" />
                     Orders
                   </DropdownLink>
+
                   <DropdownLink href="/profile">
-                    <UserCircleIcon className="mr-3 h-5 w-5" />
+                    {/* <UserCircleIcon className="mr-3 h-5 w-5" /> */}
+                    <UserCog className="mr-3 h-4 w-4" />
                     Profile
                   </DropdownLink>
 
                   <hr />
                   <DropdownButton onClick={logout}>
-                    <ArrowRightOnRectangleIcon className="mr-3 h-5 w-5" />
+                    {/* <ArrowRightOnRectangleIcon className="mr-3 h-5 w-5" /> */}
+                    <LogOut className="mr-3 h-4 w-4" />
                     Logout
                   </DropdownButton>
                 </Dropdown>
@@ -202,6 +203,7 @@ const Navigation: React.FC<Props> = () => {
                   <div className="text-base font-medium text-gray-800">
                     {user?.name}
                   </div>
+
                   <div className="text-sm font-medium text-gray-500">
                     {user?.email}
                   </div>
@@ -214,12 +216,14 @@ const Navigation: React.FC<Props> = () => {
                   >
                     Orders
                   </ResponsiveNavLink>
+
                   <ResponsiveNavLink
                     href="/profile"
                     active={router.pathname === '/profile'}
                   >
                     Profile
                   </ResponsiveNavLink>
+
                   <ResponsiveNavButton onClick={logout}>
                     Logout
                   </ResponsiveNavButton>
