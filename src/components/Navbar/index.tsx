@@ -63,7 +63,7 @@ const Navigation: React.FC<Props> = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className="hidden items-center space-x-6 tablet:flex">
+          <div className="hidden items-center space-x-4 tablet:flex">
             <NavLink href="/products">Products</NavLink>
 
             <NavLink href="/about">About</NavLink>
