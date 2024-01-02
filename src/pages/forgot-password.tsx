@@ -24,7 +24,7 @@ import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
 
 const formSchema = z.object({
-  email: z.string().email(),
+  email: z.string().email().toLowerCase(),
 });
 
 const ForgotPassword: NextPage = () => {
@@ -76,7 +76,7 @@ const ForgotPassword: NextPage = () => {
         <AuthSessionStatus className="mb-4" status={status} />
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
               name="email"
