@@ -25,11 +25,6 @@ const News: NextPage<Props> = () => {
 
   return (
     <MainLayout
-      header={
-        <h2 className="text-xl font-semibold leading-tight text-gray-800">
-          News
-        </h2>
-      }
       meta={
         <Meta
           title={`News | ${AppConfig.site_name}`}

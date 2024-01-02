@@ -55,11 +55,6 @@ const products = [
 const Basket: NextPage<Props> = () => {
   return (
     <MainLayout
-      header={
-        <h2 className="text-xl font-semibold leading-tight text-gray-800">
-          Basket
-        </h2>
-      }
       meta={
         <Meta
           title={`Basket | ${AppConfig.site_name}`}

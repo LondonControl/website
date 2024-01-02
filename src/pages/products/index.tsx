@@ -1,7 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import Markdown from 'react-markdown';
 import MoonLoader from 'react-spinners/MoonLoader';
 import useSWR from 'swr';
 
@@ -36,19 +35,20 @@ const Products: NextPage<Props> = () => {
         <h1 className="text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl laptop:mt-6">
           Products
         </h1>
+        <h2 className="sr-only">Products</h2>
 
         {isLoading ? (
           <div className="mt-6 flex items-center justify-center laptop:mt-12">
             <MoonLoader loading={isLoading} />
           </div>
         ) : (
-          <div className="mt-6 grid grid-cols-1 gap-y-4 tablet:grid-cols-2 tablet:gap-x-6 tablet:gap-y-10 laptop:mt-12 laptop:grid-cols-3 laptop:gap-x-8">
+          <div className="mt-6 grid grid-cols-1 gap-y-4 tablet:grid-cols-2 tablet:gap-x-6 tablet:gap-y-10 laptop:mt-12 laptop:grid-cols-4 laptop:gap-x-8">
             {data.data.map((product: Product) => (
               <div
                 key={product.id}
                 className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white"
               >
-                <div className="aspect-h-4 aspect-w-3 tablet:aspect-none bg-gray-200 group-hover:opacity-75 tablet:h-96">
+                <div className="aspect-h-4 aspect-w-3 tablet:aspect-none bg-gray-200 group-hover:opacity-75 tablet:h-72">
                   <img
                     src="https://images.unsplash.com/photo-1584084807193-bed442df7a75?q=80&w=1824&h=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt={product.title}
@@ -62,10 +62,6 @@ const Products: NextPage<Props> = () => {
                       {product.title}
                     </Link>
                   </h3>
-
-                  <Markdown className="truncate text-sm text-gray-500">
-                    {product.description}
-                  </Markdown>
 
                   <div className="flex flex-1 flex-col justify-end">
                     <p className="text-base font-medium text-gray-900">
