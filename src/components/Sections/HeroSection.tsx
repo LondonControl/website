@@ -17,14 +17,19 @@ const HeroSection: React.FC<Props> = () => {
             actual ATC system over England and Wales.
           </p>
 
-          <div className="mt-10 flex items-center justify-center gap-x-6">
+          <div className="mt-10 flex items-center justify-center gap-x-4">
             <Button asChild>
               <Link href="/register">Get started</Link>
             </Button>
 
-            <Link href="/about">
-              Learn more <span aria-hidden="true">→</span>
-            </Link>
+            <Button variant="link" asChild>
+              <Link href="/about">
+                Learn more{' '}
+                <span aria-hidden="true" className="ml-2">
+                  →
+                </span>
+              </Link>
+            </Button>
           </div>
         </div>
 

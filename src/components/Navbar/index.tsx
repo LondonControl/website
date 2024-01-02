@@ -31,7 +31,6 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -90,11 +89,6 @@ const Navigation: React.FC<Props> = () => {
                     <SheetContent>
                       <SheetHeader>
                         <SheetTitle>Basket</SheetTitle>
-
-                        <SheetDescription>
-                          Make changes to your profile here. Click save when
-                          you&apos;re done.
-                        </SheetDescription>
                       </SheetHeader>
 
                       <div className="grid gap-4 py-4">
@@ -122,7 +116,7 @@ const Navigation: React.FC<Props> = () => {
 
                       <SheetFooter>
                         <SheetClose asChild>
-                          <Button asChild>
+                          <Button asChild className="w-full">
                             <Link href="/checkout">Go to checkout</Link>
                           </Button>
                         </SheetClose>
