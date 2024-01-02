@@ -1,3 +1,7 @@
+import Link from 'next/link';
+
+import { Button } from '../ui/button';
+
 interface Props {}
 
 const CTASection: React.FC<Props> = () => {
@@ -10,35 +14,39 @@ const CTASection: React.FC<Props> = () => {
               In need of some help?
               <br />
               Head over to the{' '}
-              <a
+              <Link
                 href="https://forum.londoncontrol.com"
                 target="_blank"
                 className="underline"
               >
                 forum
-              </a>
+              </Link>
               .
             </h2>
+
             <p className="mt-6 text-lg leading-8 text-gray-300">
               Have a question that needs direct contact? Use the button below to
               get in touch with us!
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6 laptop:justify-start">
-              <a
-                href="https://forum.londoncontrol.com"
-                target="_blank"
-                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              >
-                Get started
-              </a>
-              <a
-                href="#"
-                className="text-sm font-semibold leading-6 text-white"
-              >
-                Contact us <span aria-hidden="true">→</span>
-              </a>
+
+            <div className="mt-10 flex items-center justify-center gap-x-4 laptop:justify-start">
+              <Button variant="secondary" asChild>
+                <Link href="https://forum.londoncontrol.com" target="_blank">
+                  Get started
+                </Link>
+              </Button>
+
+              <Button variant="link" asChild>
+                <Link href="/contact" className="text-white">
+                  Contact us{' '}
+                  <span aria-hidden="true" className="ml-2">
+                    →
+                  </span>
+                </Link>
+              </Button>
             </div>
           </div>
+
           <div className="relative mt-16 h-80 laptop:mt-8">
             <img
               className="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10"

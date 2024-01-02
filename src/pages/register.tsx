@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import type { NextPage } from 'next';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import * as z from 'zod';
 
 import AuthCard from '@/components/Auth/AuthCard';
@@ -28,9 +29,15 @@ const formSchema = z
     password: z.string().min(8),
     passwordConfirmation: z.string(),
   })
-  .refine((values) => {
-    return values.password === values.passwordConfirmation;
-  });
+  .refine(
+    (values) => {
+      return values.password === values.passwordConfirmation;
+    },
+    {
+      message: 'Passwords must match',
+      path: ['passwordConfirmation'],
+    }
+  );
 
 const Register: NextPage = () => {
   const { register } = useAuth({
@@ -63,6 +70,7 @@ const Register: NextPage = () => {
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
+      toast.error('Something went wrong, please try again');
     }
 
     // eslint-disable-next-line no-console
@@ -78,7 +86,7 @@ const Register: NextPage = () => {
 
       <AuthCard>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
               control={form.control}
               name="name"
@@ -119,7 +127,7 @@ const Register: NextPage = () => {
                   <FormLabel>Password</FormLabel>
 
                   <FormControl>
-                    <Input type="password" {...field} />
+                    <Input type="password" placeholder="Password" {...field} />
                   </FormControl>
 
                   <FormMessage />
@@ -135,7 +143,11 @@ const Register: NextPage = () => {
                   <FormLabel>Confirm password</FormLabel>
 
                   <FormControl>
-                    <Input type="password" {...field} />
+                    <Input
+                      type="password"
+                      placeholder="Confirm password"
+                      {...field}
+                    />
                   </FormControl>
 
                   <FormMessage />

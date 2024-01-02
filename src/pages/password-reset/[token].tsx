@@ -1,47 +1,86 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import { zodResolver } from '@hookform/resolvers/zod';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import type { FormEventHandler } from 'react';
 import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
 
 import AuthCard from '@/components/Auth/AuthCard';
 import AuthSessionStatus from '@/components/Auth/AuthSessionStatus';
-import InputError from '@/components/Inputs/InputError';
 import Meta from '@/components/Meta';
 import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
+
+const formSchema = z
+  .object({
+    email: z.string().email().toLowerCase(),
+    password: z.string().min(8),
+    passwordConfirmation: z.string(),
+  })
+  .refine(
+    (values) => {
+      return values.password === values.passwordConfirmation;
+    },
+    {
+      message: 'Passwords must match',
+      path: ['passwordConfirmation'],
+    }
+  );
 
 const PasswordReset: NextPage = () => {
   const { query } = useRouter();
 
   const { resetPassword } = useAuth({ middleware: 'guest' });
 
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
   const [errors, setErrors] = useState<any>([]);
   const [status, setStatus] = useState(null);
 
-  const submitForm: FormEventHandler = (event) => {
-    event.preventDefault();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+    },
+  });
 
-    resetPassword({
-      email,
-      password,
-      password_confirmation: passwordConfirmation,
-      setErrors,
-      setStatus,
-    });
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      await resetPassword({
+        email: values.email,
+        password: values.password,
+        password_confirmation: values.passwordConfirmation,
+        setErrors,
+        setStatus,
+      });
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      toast.error('Something went wrong, please try again');
+    }
+
+    // eslint-disable-next-line no-console
+    if (errors) console.log(errors);
   };
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-shadow
     const email = query && query.email ? (query.email as string) : '';
 
-    setEmail(email);
+    form.setValue('email', email);
   }, [query.email]);
 
   return (
@@ -55,62 +94,63 @@ const PasswordReset: NextPage = () => {
         {/* Session Status */}
         <AuthSessionStatus className="mb-4" status={status} />
 
-        <form onSubmit={submitForm}>
-          {/* Email Address */}
-          <div>
-            <Label htmlFor="email">Email</Label>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
 
-            <Input
-              id="email"
-              type="email"
-              value={email}
-              className="mt-1 block w-full"
-              onChange={(event) => setEmail(event.target.value)}
-              required
-              autoFocus
+                  <FormControl>
+                    <Input type="email" placeholder="Email" {...field} />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
             />
 
-            <InputError messages={errors.email} className="mt-2" />
-          </div>
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
 
-          {/* Password */}
-          <div className="mt-4">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              value={password}
-              className="mt-1 block w-full"
-              onChange={(event) => setPassword(event.target.value)}
-              required
+                  <FormControl>
+                    <Input type="password" placeholder="Password" {...field} />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
             />
 
-            <InputError messages={errors.password} className="mt-2" />
-          </div>
+            <FormField
+              control={form.control}
+              name="passwordConfirmation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Confirm password</FormLabel>
 
-          {/* Confirm Password */}
-          <div className="mt-4">
-            <Label htmlFor="passwordConfirmation">Confirm Password</Label>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      placeholder="Confirm password"
+                      {...field}
+                    />
+                  </FormControl>
 
-            <Input
-              id="passwordConfirmation"
-              type="password"
-              value={passwordConfirmation}
-              className="mt-1 block w-full"
-              onChange={(event) => setPasswordConfirmation(event.target.value)}
-              required
+                  <FormMessage />
+                </FormItem>
+              )}
             />
 
-            <InputError
-              messages={errors.password_confirmation}
-              className="mt-2"
-            />
-          </div>
-
-          <div className="mt-4 flex items-center justify-end">
-            <Button type="submit">Reset Password</Button>
-          </div>
-        </form>
+            <Button type="submit">Reset password</Button>
+          </form>
+        </Form>
       </AuthCard>
     </GuestLayout>
   );

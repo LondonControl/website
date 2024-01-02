@@ -1,16 +1,41 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { ClipboardList, LogOut, UserCog } from 'lucide-react';
+import { Label } from '@radix-ui/react-label';
+import {
+  ChevronDownIcon,
+  ClipboardList,
+  LogOut,
+  ShoppingCart,
+  UserCog,
+} from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import ApplicationLogo from '@/components/ApplicationLogo';
-import Dropdown from '@/components/Inputs/Dropdown';
-import DropdownLink, { DropdownButton } from '@/components/Inputs/DropdownLink';
 import NavLink from '@/components/Navbar/NavLink';
 import ResponsiveNavLink, {
   ResponsiveNavButton,
 } from '@/components/Navbar/ResponsiveNavLink';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import { useAuth } from '@/hooks/useAuth';
 
 interface Props {
@@ -37,79 +62,112 @@ const Navigation: React.FC<Props> = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className="hidden space-x-8 tablet:flex">
-            <NavLink href="/products" active={router.pathname === '/products'}>
-              Products
-            </NavLink>
+          <div className="hidden items-center space-x-4 tablet:flex">
+            <NavLink href="/products">Products</NavLink>
 
-            <NavLink href="/about" active={router.pathname === '/about'}>
-              About
-            </NavLink>
+            <NavLink href="/about">About</NavLink>
 
-            <NavLink href="/news" active={router.pathname === '/news'}>
-              News
-            </NavLink>
+            <NavLink href="/news">News</NavLink>
 
-            <NavLink
-              href="https://forum.londoncontrol.com"
-              active={router.pathname === '/forum'}
-            >
-              Forum
-            </NavLink>
+            <NavLink href="https://forum.londoncontrol.com">Forum</NavLink>
 
-            <NavLink href="/contact" active={router.pathname === '/contact'}>
-              Contact
-            </NavLink>
+            <NavLink href="/contact">Contact</NavLink>
           </div>
 
           {/* Settings Dropdown */}
-          <div className="hidden tablet:ml-6 tablet:flex tablet:items-center">
-            <div className="relative ml-3">
+          <div className="hidden tablet:flex tablet:items-center">
+            <div className="relative flex items-center space-x-2">
               {user ? (
-                <Dropdown
-                  align="right"
-                  width="48"
-                  trigger={
-                    <span className="inline-flex rounded-md">
-                      <button className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-900 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
-                        {user?.name}
+                <>
+                  <Sheet>
+                    <SheetTrigger asChild>
+                      <Button variant="ghost" size="icon">
+                        <ShoppingCart className="h-5 w-5" />
+                      </Button>
+                    </SheetTrigger>
 
-                        <svg
-                          className="-mr-0.5 ml-2 h-4 w-4"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                            clipRule="evenodd"
+                    <SheetContent>
+                      <SheetHeader>
+                        <SheetTitle>Basket</SheetTitle>
+                      </SheetHeader>
+
+                      <div className="grid gap-4 py-4">
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label htmlFor="name" className="text-right">
+                            Name
+                          </Label>
+                          <Input
+                            id="name"
+                            value="Pedro Duarte"
+                            className="col-span-3"
                           />
-                        </svg>
-                      </button>
-                    </span>
-                  }
-                >
-                  {/* Authentication */}
-                  {/* TODO: add active state */}
-                  <DropdownLink href="/orders">
-                    {/* <ClipboardDocumentListIcon className="mr-3 h-5 w-5" /> */}
-                    <ClipboardList className="mr-3 h-4 w-4" />
-                    Orders
-                  </DropdownLink>
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label htmlFor="username" className="text-right">
+                            Username
+                          </Label>
+                          <Input
+                            id="username"
+                            value="@peduarte"
+                            className="col-span-3"
+                          />
+                        </div>
+                      </div>
 
-                  <DropdownLink href="/profile">
-                    {/* <UserCircleIcon className="mr-3 h-5 w-5" /> */}
-                    <UserCog className="mr-3 h-4 w-4" />
-                    Profile
-                  </DropdownLink>
+                      <SheetFooter>
+                        <SheetClose asChild>
+                          <Button asChild className="w-full">
+                            <Link href="/checkout">Go to checkout</Link>
+                          </Button>
+                        </SheetClose>
+                      </SheetFooter>
+                    </SheetContent>
+                  </Sheet>
 
-                  <hr />
-                  <DropdownButton onClick={logout}>
-                    {/* <ArrowRightOnRectangleIcon className="mr-3 h-5 w-5" /> */}
-                    <LogOut className="mr-3 h-4 w-4" />
-                    Logout
-                  </DropdownButton>
-                </Dropdown>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost">
+                        <span>{user?.name}</span>
+                        <ChevronDownIcon className="ml-2 h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+
+                    <DropdownMenuContent className="w-56">
+                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+
+                      <DropdownMenuSeparator />
+
+                      <DropdownMenuGroup>
+                        <DropdownMenuItem asChild>
+                          <Link href="/orders" className="hover:cursor-pointer">
+                            <ClipboardList className="mr-2 h-4 w-4" />
+                            <span>Orders</span>
+                          </Link>
+                        </DropdownMenuItem>
+
+                        <DropdownMenuItem asChild>
+                          <Link
+                            href="/profile"
+                            className="hover:cursor-pointer"
+                          >
+                            <UserCog className="mr-2 h-4 w-4" />
+                            <span>Profile</span>
+                          </Link>
+                        </DropdownMenuItem>
+                      </DropdownMenuGroup>
+
+                      <DropdownMenuSeparator />
+
+                      <DropdownMenuItem
+                        onClick={logout}
+                        className="hover:cursor-pointer"
+                      >
+                        <LogOut className="mr-2 h-4 w-4" />
+                        <span>Logout</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </>
               ) : (
                 <>
                   <Link

@@ -7,7 +7,6 @@ import { Toaster } from '@/components/ui/sonner';
 
 interface Props {
   meta: ReactNode;
-  header?: ReactNode;
   children: ReactNode;
 }
 

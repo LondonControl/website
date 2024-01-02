@@ -1,5 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import type { NextPage } from 'next';
 import React, { useState } from 'react';
+import { toast } from 'sonner';
 
 import AuthCard from '@/components/Auth/AuthCard';
 import AuthSessionStatus from '@/components/Auth/AuthSessionStatus';
@@ -41,12 +43,14 @@ const VerifyEmail: NextPage = () => {
 
         <div className="mt-4 flex items-center justify-between">
           <Button
-            onClick={() =>
+            onClick={() => {
               resendEmailVerification({
                 setStatus,
                 setErrors: () => {},
-              })
-            }
+              });
+
+              toast.success('Verification email sent successfully');
+            }}
           >
             Resend Verification Email
           </Button>

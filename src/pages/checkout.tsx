@@ -1,9 +1,5 @@
-import {
-  CheckIcon,
-  ClockIcon,
-  QuestionMarkCircleIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline';
+/* eslint-disable import/no-extraneous-dependencies */
+import { X } from 'lucide-react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 
@@ -55,19 +51,18 @@ const products = [
 const Basket: NextPage<Props> = () => {
   return (
     <MainLayout
-      header={
-        <h2 className="text-xl font-semibold leading-tight text-gray-800">
-          Basket
-        </h2>
-      }
       meta={
         <Meta
-          title={`Basket | ${AppConfig.site_name}`}
+          title={`Checkout | ${AppConfig.site_name}`}
           description={AppConfig.description}
         />
       }
     >
       <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl laptop:mt-6">
+          Checkout
+        </h1>
+
         <form className="mt-12 laptop:grid laptop:grid-cols-12 laptop:items-start laptop:gap-x-12 desktop:gap-x-16">
           <section aria-labelledby="cart-heading" className="laptop:col-span-7">
             <h2 id="cart-heading" className="sr-only">
@@ -78,7 +73,7 @@ const Basket: NextPage<Props> = () => {
               role="list"
               className="divide-y divide-gray-200 border-y border-gray-200"
             >
-              {products.map((product, productIdx) => (
+              {products.map((product) => (
                 <li key={product.id} className="flex py-6 tablet:py-10">
                   <div className="shrink-0">
                     <img
@@ -102,74 +97,23 @@ const Basket: NextPage<Props> = () => {
                           </h3>
                         </div>
 
-                        <div className="mt-1 flex text-sm">
-                          <p className="text-gray-500">{product.color}</p>
-                          {product.size ? (
-                            <p className="ml-4 border-l border-gray-200 pl-4 text-gray-500">
-                              {product.size}
-                            </p>
-                          ) : null}
-                        </div>
-
                         <p className="mt-1 text-sm font-medium text-gray-900">
                           {product.price}
                         </p>
                       </div>
 
                       <div className="mt-4 tablet:mt-0 tablet:pr-9">
-                        <label
-                          htmlFor={`quantity-${productIdx}`}
-                          className="sr-only"
-                        >
-                          Quantity, {product.name}
-                        </label>
-
-                        <select
-                          id={`quantity-${productIdx}`}
-                          name={`quantity-${productIdx}`}
-                          className="max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                        >
-                          <option value={1}>1</option>
-                          <option value={2}>2</option>
-                          <option value={3}>3</option>
-                          <option value={4}>4</option>
-                          <option value={5}>5</option>
-                          <option value={6}>6</option>
-                          <option value={7}>7</option>
-                          <option value={8}>8</option>
-                        </select>
-
                         <div className="absolute right-0 top-0">
                           <button
                             type="button"
                             className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500"
                           >
                             <span className="sr-only">Remove</span>
-                            <XMarkIcon className="h-5 w-5" aria-hidden="true" />
+                            <X className="h-5 w-5" aria-hidden="true" />
                           </button>
                         </div>
                       </div>
                     </div>
-
-                    <p className="mt-4 flex space-x-2 text-sm text-gray-700">
-                      {product.inStock ? (
-                        <CheckIcon
-                          className="h-5 w-5 shrink-0 text-green-500"
-                          aria-hidden="true"
-                        />
-                      ) : (
-                        <ClockIcon
-                          className="h-5 w-5 shrink-0 text-gray-300"
-                          aria-hidden="true"
-                        />
-                      )}
-
-                      <span>
-                        {product.inStock
-                          ? 'In stock'
-                          : `Ships in ${product.leadTime}`}
-                      </span>
-                    </p>
                   </div>
                 </li>
               ))}
@@ -189,51 +133,12 @@ const Basket: NextPage<Props> = () => {
             </h2>
 
             <dl className="mt-6 space-y-4">
-              <div className="flex items-center justify-between">
-                <dt className="text-sm text-gray-600">Subtotal</dt>
-                <dd className="text-sm font-medium text-gray-900">$99.00</dd>
-              </div>
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="flex items-center text-sm text-gray-600">
-                  <span>Shipping estimate</span>
-                  <a
-                    href="#"
-                    className="ml-2 shrink-0 text-gray-400 hover:text-gray-500"
-                  >
-                    <span className="sr-only">
-                      Learn more about how shipping is calculated
-                    </span>
-                    <QuestionMarkCircleIcon
-                      className="h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  </a>
-                </dt>
-                <dd className="text-sm font-medium text-gray-900">$5.00</dd>
-              </div>
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="flex text-sm text-gray-600">
-                  <span>Tax estimate</span>
-                  <a
-                    href="#"
-                    className="ml-2 shrink-0 text-gray-400 hover:text-gray-500"
-                  >
-                    <span className="sr-only">
-                      Learn more about how tax is calculated
-                    </span>
-                    <QuestionMarkCircleIcon
-                      className="h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  </a>
-                </dt>
-                <dd className="text-sm font-medium text-gray-900">$8.32</dd>
-              </div>
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="text-base font-medium text-gray-900">
                   Order total
                 </dt>
-                <dd className="text-base font-medium text-gray-900">$112.32</dd>
+
+                <dd className="text-base font-medium text-gray-900">£112.32</dd>
               </div>
             </dl>
 
@@ -244,9 +149,6 @@ const Basket: NextPage<Props> = () => {
               >
                 Checkout
               </button>
-              {/* <PrimaryButton type="submit" className="w-full text-center">
-                Checkout
-              </PrimaryButton> */}
             </div>
           </section>
         </form>

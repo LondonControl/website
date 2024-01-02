@@ -1,45 +1,73 @@
-import { Transition } from '@headlessui/react';
-import type { FormEventHandler } from 'react';
+/* eslint-disable import/no-extraneous-dependencies */
+import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
 
-import InputError from '@/components/Inputs/InputError';
 import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { useAuth } from '@/hooks/useAuth';
 import axios, { csrf } from '@/lib/axios';
+
+const formSchema = z.object({
+  name: z.string().min(2),
+  email: z.string().email().toLowerCase(),
+});
 
 const UpdateProfileInformationForm = () => {
   const { user, resendEmailVerification } = useAuth({ middleware: 'auth' });
 
-  const [name, setName] = useState<any>('');
-  const [email, setEmail] = useState<any>('');
   const [errors, setErrors] = useState<any>([]);
-  const [status, setStatus] = useState<number | null>(null);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+    },
+  });
 
   useEffect(() => {
     if (user !== undefined) {
-      setName(user.name);
-      setEmail(user.email);
+      form.setValue('name', user.name ?? '');
+      form.setValue('email', user.email ?? '');
     }
+
+    console.log(user);
   }, [user]);
 
-  const submitForm: FormEventHandler = async (event) => {
-    event.preventDefault();
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      await csrf();
 
-    await csrf();
+      setErrors([]);
 
-    setErrors([]);
-    setStatus(null);
+      axios
+        .put('/api/profile', { name: values.name, email: values.email })
+        .then(() => toast.success('Profile updated successfully'))
+        .catch((error) => {
+          if (error.response.status !== 422) throw error;
 
-    axios
-      .put('/api/profile', { name, email })
-      .then((response) => setStatus(response.status))
-      .catch((error) => {
-        if (error.response.status !== 422) throw error;
+          setErrors(error.response.data.errors);
+          toast.error('Something went wrong, please try again');
+        });
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      toast.error('Something went wrong, please try again');
+    }
 
-        setErrors(error.response.data.errors);
-      });
+    // eslint-disable-next-line no-console
+    if (errors) console.log(errors);
   };
 
   return (
@@ -54,80 +82,64 @@ const UpdateProfileInformationForm = () => {
         </p>
       </header>
 
-      <form onSubmit={submitForm} className="mt-6 space-y-6">
-        {/* Name */}
-        <div>
-          <Label htmlFor="name">Name</Label>
-          <Input
-            id="name"
-            type="text"
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6 space-y-4">
+          <FormField
+            control={form.control}
             name="name"
-            value={name}
-            className="mt-1 block w-full"
-            onChange={(event) => setName(event.target.value)}
-            required
-            autoFocus
-          />
-          <InputError messages={errors.email} className="mt-2" />
-        </div>
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
 
-        {/* Email Address */}
-        <div>
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            name="email"
-            value={email}
-            className="mt-1 block w-full"
-            onChange={(event) => setEmail(event.target.value)}
-            required
-            autoFocus
-          />
+                <FormControl>
+                  <Input placeholder="Name" {...field} />
+                </FormControl>
 
-          <InputError messages={errors.email} className="mt-2" />
-        </div>
-
-        {user?.must_verify_email && user?.email_verified_at === null && (
-          <div>
-            <p className="mt-2 text-sm text-gray-800">
-              Your email address is unverified.
-              <button
-                className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                onClick={() =>
-                  resendEmailVerification({
-                    setStatus,
-                    setErrors: () => {},
-                  })
-                }
-              >
-                Click here to re-send the verification email.
-              </button>
-            </p>
-
-            {status === 200 && (
-              <div className="mt-2 text-sm font-medium text-green-600">
-                A new verification link has been sent to your email address.
-              </div>
+                <FormMessage />
+              </FormItem>
             )}
-          </div>
-        )}
+          />
 
-        <div className="flex items-center gap-4">
-          <Button type="submit">Save</Button>
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
 
-          {status === 200 && (
-            <Transition
-              show={true}
-              enterFrom="opacity-0"
-              leaveTo="opacity-0"
-              className="transition ease-in-out"
-            >
-              <p className="text-sm text-gray-600">Saved.</p>
-            </Transition>
+                <FormControl>
+                  <Input type="email" placeholder="Email" {...field} />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {user?.email_verified_at === null && (
+            <div>
+              <p className="mt-2 text-sm text-gray-800">
+                Your email address is unverified.
+                <button
+                  className="ml-2 rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  onClick={() => {
+                    resendEmailVerification({
+                      setStatus: () => {},
+                      setErrors,
+                    });
+
+                    toast.success('Verification email sent successfully');
+                  }}
+                >
+                  Click here to re-send the verification email.
+                </button>
+              </p>
+            </div>
           )}
-        </div>
-      </form>
+
+          <Button type="submit">Save</Button>
+        </form>
+      </Form>
     </section>
   );
 };
