@@ -108,7 +108,7 @@ const Contact: NextPage<Props> = () => {
               control={form.control}
               name="firstName"
               render={({ field }) => (
-                <FormItem className="col-span-2">
+                <FormItem>
                   <FormLabel>First name</FormLabel>
 
                   <FormControl>
