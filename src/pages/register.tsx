@@ -1,18 +1,36 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import { zodResolver } from '@hookform/resolvers/zod';
 import type { NextPage } from 'next';
-import Link from 'next/link';
-import type { FormEventHandler } from 'react';
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
 import AuthCard from '@/components/Auth/AuthCard';
-import InputError from '@/components/Inputs/InputError';
 import Meta from '@/components/Meta';
 import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { useAuth } from '@/hooks/useAuth';
-import type ErrorInput from '@/interfaces/ErrorInput';
 import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
+
+const formSchema = z
+  .object({
+    name: z.string().min(2),
+    email: z.string().email().toLowerCase(),
+    password: z.string().min(8),
+    passwordConfirmation: z.string(),
+  })
+  .refine((values) => {
+    return values.password === values.passwordConfirmation;
+  });
 
 const Register: NextPage = () => {
   const { register } = useAuth({
@@ -20,23 +38,35 @@ const Register: NextPage = () => {
     redirectUri: '/',
   });
 
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
   const [errors, setErrors] = useState<any>([]);
 
-  const submitForm: FormEventHandler = (event) => {
-    event.preventDefault();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+    },
+  });
 
-    register({
-      name,
-      email,
-      password,
-      password_confirmation: passwordConfirmation,
-      setErrors,
-      setStatus: () => {},
-    });
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      await register({
+        name: values.name,
+        email: values.email,
+        password: values.password,
+        password_confirmation: values.passwordConfirmation,
+        setErrors,
+        setStatus: () => {},
+      });
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+
+    // eslint-disable-next-line no-console
+    if (errors) console.log(errors);
   };
 
   return (
@@ -47,106 +77,75 @@ const Register: NextPage = () => {
       />
 
       <AuthCard>
-        <form onSubmit={submitForm}>
-          {/* Name */}
-          <div>
-            <Label htmlFor="name">Name</Label>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
 
-            <Input
-              id="name"
-              type="text"
-              value={name}
-              className="mt-1 block w-full"
-              onChange={(event) => setName(event.target.value)}
-              required
-              autoFocus
-            />
+                  <FormControl>
+                    <Input placeholder="Name" {...field} />
+                  </FormControl>
 
-            <InputError
-              messages={errors?.filter(
-                (error: ErrorInput) => error.source?.pointer === '/name'
+                  <FormMessage />
+                </FormItem>
               )}
-              className="mt-2"
-            />
-          </div>
-
-          {/* Email Address */}
-          <div className="mt-4">
-            <Label htmlFor="email">Email</Label>
-
-            <Input
-              id="email"
-              type="email"
-              value={email}
-              className="mt-1 block w-full"
-              onChange={(event) => setEmail(event.target.value)}
-              required
             />
 
-            <InputError
-              messages={errors?.filter(
-                (error: ErrorInput) => error.source?.pointer === '/email'
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+
+                  <FormControl>
+                    <Input type="email" placeholder="Email" {...field} />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
               )}
-              className="mt-2"
-            />
-          </div>
-
-          {/* Password */}
-          <div className="mt-4">
-            <Label htmlFor="password">Password</Label>
-
-            <Input
-              id="password"
-              type="password"
-              value={password}
-              className="mt-1 block w-full"
-              onChange={(event) => setPassword(event.target.value)}
-              required
-              autoComplete="new-password"
             />
 
-            <InputError
-              messages={errors?.filter(
-                (error: ErrorInput) => error.source?.pointer === '/password'
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+
+                  <FormControl>
+                    <Input type="password" {...field} />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
               )}
-              className="mt-2"
-            />
-          </div>
-
-          {/* Confirm Password */}
-          <div className="mt-4">
-            <Label htmlFor="passwordConfirmation">Confirm Password</Label>
-
-            <Input
-              id="passwordConfirmation"
-              type="password"
-              value={passwordConfirmation}
-              className="mt-1 block w-full"
-              onChange={(event) => setPasswordConfirmation(event.target.value)}
-              required
             />
 
-            <InputError
-              messages={errors?.filter(
-                (error: ErrorInput) => error.source?.pointer === '/password'
+            <FormField
+              control={form.control}
+              name="passwordConfirmation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Confirm password</FormLabel>
+
+                  <FormControl>
+                    <Input type="password" {...field} />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
               )}
-              className="mt-2"
             />
-          </div>
 
-          <div className="mt-4 flex items-center justify-end">
-            <Link
-              href="/login"
-              className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
-            >
-              Already registered?
-            </Link>
-
-            <Button type="submit" className="ml-4">
-              Register
-            </Button>
-          </div>
-        </form>
+            <Button type="submit">Register</Button>
+          </form>
+        </Form>
       </AuthCard>
     </GuestLayout>
   );

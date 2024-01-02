@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
 import React from 'react';
 
+import { Toaster } from '@/components/ui/sonner';
+
 interface Props {
   meta?: ReactNode;
   children: ReactNode;
@@ -12,6 +14,8 @@ const GuestLayout: React.FC<Props> = (props) => {
       {props.meta}
 
       <main>{props.children}</main>
+
+      <Toaster />
     </div>
   );
 };

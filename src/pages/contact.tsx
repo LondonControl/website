@@ -1,24 +1,40 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import { zodResolver } from '@hookform/resolvers/zod';
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import type { FormEventHandler } from 'react';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
 
 import Meta from '@/components/Meta';
 import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
 import MainLayout from '@/layouts/Main';
 import { AppConfig } from '@/utils/AppConfig';
 
 interface Props {}
 
+const formSchema = z.object({
+  firstName: z.string().min(2).max(50),
+  secondName: z.string().min(2).max(50),
+  email: z.string().email(),
+  subject: z.string().min(2).max(250),
+  message: z.string().min(2),
+});
+
 const Contact: NextPage<Props> = () => {
-  const [firstName, setFirstName] = useState<string>('');
-  const [secondName, setSecondName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [subject, setSubject] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
   const [agreed, setAgreed] = useState<boolean>(false);
 
   const sendContactForm = async (data: any) =>
@@ -35,25 +51,33 @@ const Contact: NextPage<Props> = () => {
       return res.json();
     });
 
-  const submitForm: FormEventHandler = async (event) => {
-    event.preventDefault();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      firstName: '',
+      secondName: '',
+      email: '',
+      subject: '',
+      message: '',
+    },
+  });
 
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (!agreed) return;
 
     try {
+      setAgreed(false);
+
       await sendContactForm({
-        firstName,
-        secondName,
-        email,
-        subject,
-        message,
+        firstName: values.firstName,
+        secondName: values.secondName,
+        email: values.email,
+        subject: values.subject,
+        message: values.message,
       });
 
-      setFirstName('');
-      setSecondName('');
-      setEmail('');
-      setSubject('');
-      setMessage('');
+      form.reset();
+      toast.success('Message has been sent');
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
@@ -74,92 +98,90 @@ const Contact: NextPage<Props> = () => {
           Get in touch
         </h1>
 
-        <form
-          onSubmit={submitForm}
-          className="mx-auto mt-16 max-w-xl tablet:mt-20"
-        >
-          <div className="grid grid-cols-1 gap-x-8 gap-y-6 tablet:grid-cols-2">
-            <div>
-              <Label htmlFor="email">First name</Label>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="mx-auto mt-16 max-w-xl space-y-8 tablet:mt-20"
+          >
+            <FormField
+              control={form.control}
+              name="firstName"
+              render={({ field }) => (
+                <FormItem className="col-span-2">
+                  <FormLabel>First name</FormLabel>
 
-              <Input
-                id="first-name"
-                type="text"
-                value={firstName}
-                className="mt-1 block w-full"
-                onChange={(event) => setFirstName(event.target.value)}
-                required
-                autoFocus
-              />
+                  <FormControl>
+                    <Input placeholder="First name" {...field} />
+                  </FormControl>
 
-              {/* <InputError messages={errors.email} className="mt-2" /> */}
-            </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-            <div>
-              <Label htmlFor="second-name">Second name</Label>
+            <FormField
+              control={form.control}
+              name="secondName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Second name</FormLabel>
 
-              <Input
-                id="second-name"
-                type="text"
-                value={secondName}
-                className="mt-1 block w-full"
-                onChange={(event) => setSecondName(event.target.value)}
-                required
-              />
+                  <FormControl>
+                    <Input placeholder="Second name" {...field} />
+                  </FormControl>
 
-              {/* <InputError messages={errors.email} className="mt-2" /> */}
-            </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-            <div className="tablet:col-span-2">
-              <Label htmlFor="email">Email</Label>
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
 
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                className="mt-1 block w-full"
-                onChange={(event) => setEmail(event.target.value)}
-                required
-              />
+                  <FormControl>
+                    <Input type="email" placeholder="Email" {...field} />
+                  </FormControl>
 
-              {/* <InputError messages={errors.email} className="mt-2" /> */}
-            </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-            <div className="tablet:col-span-2">
-              <Label htmlFor="subject">Subject</Label>
+            <FormField
+              control={form.control}
+              name="subject"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Subject</FormLabel>
 
-              <Input
-                id="subject"
-                type="text"
-                value={subject}
-                className="mt-1 block w-full"
-                onChange={(event) => setSubject(event.target.value)}
-                required
-              />
+                  <FormControl>
+                    <Input placeholder="Subject" {...field} />
+                  </FormControl>
 
-              {/* <InputError messages={errors.email} className="mt-2" /> */}
-            </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-            <div className="tablet:col-span-2">
-              <label
-                htmlFor="message"
-                className="block text-sm font-semibold leading-6 text-gray-900"
-              >
-                Message
-              </label>
+            <FormField
+              control={form.control}
+              name="message"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Message</FormLabel>
 
-              <div className="mt-2.5">
-                <textarea
-                  name="message"
-                  id="message"
-                  rows={4}
-                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-900 tablet:text-sm tablet:leading-6"
-                  required
-                  value={message}
-                  onChange={(event) => setMessage(event.target.value)}
-                />
-              </div>
-            </div>
+                  <FormControl>
+                    <Textarea placeholder="Message" {...field} />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             <div className="flex items-center space-x-2 sm:col-span-2">
               <Switch
@@ -178,14 +200,12 @@ const Contact: NextPage<Props> = () => {
                 .
               </Label>
             </div>
-          </div>
 
-          <div className="mt-10">
             <Button type="submit" disabled={!agreed}>
-              Let&apos;s talk
+              Submit
             </Button>
-          </div>
-        </form>
+          </form>
+        </Form>
       </div>
     </MainLayout>
   );

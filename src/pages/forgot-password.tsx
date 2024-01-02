@@ -1,17 +1,31 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import { zodResolver } from '@hookform/resolvers/zod';
 import type { NextPage } from 'next';
-import type { FormEventHandler } from 'react';
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
 
 import AuthCard from '@/components/Auth/AuthCard';
 import AuthSessionStatus from '@/components/Auth/AuthSessionStatus';
-import InputError from '@/components/Inputs/InputError';
 import Meta from '@/components/Meta';
 import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { useAuth } from '@/hooks/useAuth';
 import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
+
+const formSchema = z.object({
+  email: z.string().email(),
+});
 
 const ForgotPassword: NextPage = () => {
   const { forgotPassword } = useAuth({
@@ -19,14 +33,29 @@ const ForgotPassword: NextPage = () => {
     redirectUri: '/dashboard',
   });
 
-  const [email, setEmail] = useState<string>('');
   const [errors, setErrors] = useState<any>([]);
   const [status, setStatus] = useState(null);
 
-  const submitForm: FormEventHandler = (event) => {
-    event.preventDefault();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: '',
+    },
+  });
 
-    forgotPassword({ email, setErrors, setStatus });
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      await forgotPassword({ email: values.email, setErrors, setStatus });
+
+      form.reset();
+      toast.success('Password reset has been sent');
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+
+    // eslint-disable-next-line no-console
+    if (errors) console.log(errors);
   };
 
   return (
@@ -46,28 +75,27 @@ const ForgotPassword: NextPage = () => {
         {/* Session Status */}
         <AuthSessionStatus className="mb-4" status={status} />
 
-        <form onSubmit={submitForm}>
-          {/* Email Address */}
-          <div>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormField
+              control={form.control}
               name="email"
-              value={email}
-              className="mt-1 block w-full"
-              onChange={(event) => setEmail(event.target.value)}
-              required
-              autoFocus
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+
+                  <FormControl>
+                    <Input type="email" placeholder="Email" {...field} />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
             />
 
-            <InputError messages={errors.email} className="mt-2" />
-          </div>
-
-          <div className="mt-4 flex items-center justify-end">
-            <Button type="submit">Email Password Reset Link</Button>
-          </div>
-        </form>
+            <Button type="submit">Submit</Button>
+          </form>
+        </Form>
       </AuthCard>
     </GuestLayout>
   );
