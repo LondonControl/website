@@ -64,28 +64,15 @@ const Navigation: React.FC<Props> = () => {
 
           {/* Navigation Links */}
           <div className="hidden items-center space-x-6 tablet:flex">
-            <NavLink href="/products" active={router.pathname === '/products'}>
-              Products
-            </NavLink>
+            <NavLink href="/products">Products</NavLink>
 
-            <NavLink href="/about" active={router.pathname === '/about'}>
-              About
-            </NavLink>
+            <NavLink href="/about">About</NavLink>
 
-            <NavLink href="/news" active={router.pathname === '/news'}>
-              News
-            </NavLink>
+            <NavLink href="/news">News</NavLink>
 
-            <NavLink
-              href="https://forum.londoncontrol.com"
-              active={router.pathname === '/forum'}
-            >
-              Forum
-            </NavLink>
+            <NavLink href="https://forum.londoncontrol.com">Forum</NavLink>
 
-            <NavLink href="/contact" active={router.pathname === '/contact'}>
-              Contact
-            </NavLink>
+            <NavLink href="/contact">Contact</NavLink>
           </div>
 
           {/* Settings Dropdown */}
