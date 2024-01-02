@@ -105,7 +105,7 @@ const Login: NextPage = () => {
                   <FormLabel>Email</FormLabel>
 
                   <FormControl>
-                    <Input type="email" {...field} />
+                    <Input type="email" placeholder="Email" {...field} />
                   </FormControl>
 
                   <FormMessage />
@@ -121,7 +121,7 @@ const Login: NextPage = () => {
                   <FormLabel>Password</FormLabel>
 
                   <FormControl>
-                    <Input type="password" {...field} />
+                    <Input type="password" placeholder="Password" {...field} />
                   </FormControl>
 
                   <FormMessage />

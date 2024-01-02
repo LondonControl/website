@@ -104,7 +104,7 @@ const PasswordReset: NextPage = () => {
                   <FormLabel>Email</FormLabel>
 
                   <FormControl>
-                    <Input type="email" {...field} />
+                    <Input type="email" placeholder="Email" {...field} />
                   </FormControl>
 
                   <FormMessage />
@@ -120,7 +120,7 @@ const PasswordReset: NextPage = () => {
                   <FormLabel>Password</FormLabel>
 
                   <FormControl>
-                    <Input type="password" {...field} />
+                    <Input type="password" placeholder="Password" {...field} />
                   </FormControl>
 
                   <FormMessage />
@@ -136,7 +136,11 @@ const PasswordReset: NextPage = () => {
                   <FormLabel>Confirm password</FormLabel>
 
                   <FormControl>
-                    <Input type="password" {...field} />
+                    <Input
+                      type="password"
+                      placeholder="Confirm password"
+                      {...field}
+                    />
                   </FormControl>
 
                   <FormMessage />

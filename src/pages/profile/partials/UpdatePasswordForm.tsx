@@ -96,7 +96,11 @@ const UpdatePasswordForm = () => {
                 <FormLabel>Current password</FormLabel>
 
                 <FormControl>
-                  <Input type="password" {...field} />
+                  <Input
+                    type="password"
+                    placeholder="Current password"
+                    {...field}
+                  />
                 </FormControl>
 
                 <FormMessage />
@@ -112,7 +116,7 @@ const UpdatePasswordForm = () => {
                 <FormLabel>Password</FormLabel>
 
                 <FormControl>
-                  <Input type="password" {...field} />
+                  <Input type="password" placeholder="Password" {...field} />
                 </FormControl>
 
                 <FormMessage />
@@ -128,7 +132,11 @@ const UpdatePasswordForm = () => {
                 <FormLabel>Confirm password</FormLabel>
 
                 <FormControl>
-                  <Input type="password" {...field} />
+                  <Input
+                    type="password"
+                    placeholder="Confirm password"
+                    {...field}
+                  />
                 </FormControl>
 
                 <FormMessage />

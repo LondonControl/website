@@ -92,7 +92,7 @@ const UpdateProfileInformationForm = () => {
                 <FormLabel>Name</FormLabel>
 
                 <FormControl>
-                  <Input {...field} />
+                  <Input placeholder="Name" {...field} />
                 </FormControl>
 
                 <FormMessage />
@@ -108,7 +108,7 @@ const UpdateProfileInformationForm = () => {
                 <FormLabel>Email</FormLabel>
 
                 <FormControl>
-                  <Input {...field} />
+                  <Input type="email" placeholder="Email" {...field} />
                 </FormControl>
 
                 <FormMessage />

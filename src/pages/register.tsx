@@ -127,7 +127,7 @@ const Register: NextPage = () => {
                   <FormLabel>Password</FormLabel>
 
                   <FormControl>
-                    <Input type="password" {...field} />
+                    <Input type="password" placeholder="Password" {...field} />
                   </FormControl>
 
                   <FormMessage />
@@ -143,7 +143,11 @@ const Register: NextPage = () => {
                   <FormLabel>Confirm password</FormLabel>
 
                   <FormControl>
-                    <Input type="password" {...field} />
+                    <Input
+                      type="password"
+                      placeholder="Confirm password"
+                      {...field}
+                    />
                   </FormControl>
 
                   <FormMessage />
