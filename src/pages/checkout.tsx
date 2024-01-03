@@ -1,10 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { X } from 'lucide-react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
+import { toast } from 'sonner';
 
 import Meta from '@/components/Meta';
 import MainLayout from '@/layouts/Main';
+import axios from '@/lib/axios';
 import { AppConfig } from '@/utils/AppConfig';
 
 interface Props {}
@@ -49,6 +52,38 @@ const products = [
 ];
 
 const Basket: NextPage<Props> = () => {
+  const createPaypalOrder = async (items: string[]) => {
+    try {
+      const itemIds = items.map((item) => ({ id: item }));
+
+      const response = await axios.post('/api/order/create', {
+        order_items: itemIds,
+      });
+
+      return response.data.data.id;
+    } catch (err) {
+      toast.error('An error occurred');
+      return null;
+    }
+  };
+
+  const capturePaypalOrder = async (paymentId: any) => {
+    try {
+      const response = await axios.post('/api/order/capture', {
+        transaction_id: paymentId,
+      });
+
+      if (response.status === 200) {
+        toast.success('Purchase successfull');
+      }
+
+      return response;
+    } catch (err) {
+      toast.error('An error occurred');
+      return null;
+    }
+  };
+
   return (
     <MainLayout
       meta={
@@ -142,13 +177,33 @@ const Basket: NextPage<Props> = () => {
               </div>
             </dl>
 
-            <div className="mt-6">
-              <button
-                type="submit"
-                className="w-full rounded-md border border-transparent bg-gray-800 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+            <div className="mt-8">
+              <PayPalScriptProvider
+                options={{
+                  clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ?? '',
+                  currency: 'GBP',
+                  intent: 'capture',
+                }}
               >
-                Checkout
-              </button>
+                <PayPalButtons
+                  style={{
+                    color: 'gold',
+                    shape: 'rect',
+                    label: 'pay',
+                    height: 50,
+                  }}
+                  createOrder={async () => {
+                    const orderId = await createPaypalOrder([
+                      '9ac9b9e0-75ea-48c5-b7a9-90918ba16e42',
+                    ]);
+
+                    return orderId;
+                  }}
+                  onApprove={async (data) => {
+                    await capturePaypalOrder(data.orderID);
+                  }}
+                />
+              </PayPalScriptProvider>
             </div>
           </section>
         </form>
