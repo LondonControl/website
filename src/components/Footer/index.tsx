@@ -46,7 +46,7 @@ const Footer: React.FC<Props> = () => {
 
         <div className="mt-8 tablet:order-1 tablet:mt-0">
           <p className="text-center text-xs leading-5 text-gray-500">
-            Made by{' '}
+            Website by{' '}
             <Link
               href="https://geren.uk"
               target="_blank"

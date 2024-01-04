@@ -34,7 +34,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/hooks/useAuth';
+import type CartItem from '@/interfaces/CartItem';
 
 interface Props {
   // user?: User;
@@ -44,6 +46,7 @@ const Navigation: React.FC<Props> = () => {
   const router = useRouter();
   const { logout, user } = useAuth({ middleware: 'guest' });
   const [open, setOpen] = useState<boolean>(false);
+  const { cartItems, cartTotal, removeFromCart } = useCart();
 
   return (
     <nav className="bg-white">
@@ -62,8 +65,6 @@ const Navigation: React.FC<Props> = () => {
           {/* Navigation Links */}
           <div className="hidden items-center space-x-4 tablet:flex">
             <NavLink href="/products">Products</NavLink>
-
-            <NavLink href="/about">About</NavLink>
 
             <NavLink href="/news">News</NavLink>
 
@@ -89,32 +90,50 @@ const Navigation: React.FC<Props> = () => {
                         <SheetTitle>Basket</SheetTitle>
                       </SheetHeader>
 
-                      {/* <div className="grid gap-4 py-4">
-                        <div className="grid grid-cols-4 items-center gap-4">
-                          <Label htmlFor="name" className="text-right">
-                            Name
-                          </Label>
-                          <Input
-                            id="name"
-                            value="Pedro Duarte"
-                            className="col-span-3"
-                          />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                          <Label htmlFor="username" className="text-right">
-                            Username
-                          </Label>
-                          <Input
-                            id="username"
-                            value="@peduarte"
-                            className="col-span-3"
-                          />
-                        </div>
-                      </div> */}
+                      <ul>
+                        {cartItems.map((item: CartItem) => (
+                          <li
+                            key={item.product.id}
+                            className="flex space-x-6 py-6"
+                          >
+                            <img
+                              src="https://images.unsplash.com/photo-1584084807193-bed442df7a75?q=80&w=1824&h=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                              alt="temp"
+                              className="h-24 w-24 flex-none rounded-md bg-gray-200 object-cover object-center"
+                            />
+
+                            <div className="flex flex-col justify-between space-y-4">
+                              <div className="space-y-1 text-sm font-medium">
+                                <h3 className="text-gray-900">
+                                  {item.product.title}
+                                </h3>
+
+                                <p className="text-gray-900">
+                                  £{item.product.price / 100}
+                                </p>
+                              </div>
+
+                              <Button
+                                type="button"
+                                variant="link"
+                                className="-ml-9"
+                                onClick={() => removeFromCart(item.product.id)}
+                              >
+                                Remove
+                              </Button>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <p className="mt-6 flex items-center justify-between border-t border-gray-200 pt-6 text-sm font-medium text-gray-900">
+                        <span className="text-base">Total</span>
+                        <span className="text-base">£{cartTotal / 100}</span>
+                      </p>
 
                       <SheetFooter>
                         <SheetClose asChild>
-                          <Button asChild className="w-full">
+                          <Button asChild className="mt-6 w-full">
                             <Link href="/checkout">Go to checkout</Link>
                           </Button>
                         </SheetClose>
@@ -226,13 +245,6 @@ const Navigation: React.FC<Props> = () => {
             </ResponsiveNavLink>
 
             <ResponsiveNavLink
-              href="/about"
-              active={router.pathname === '/about'}
-            >
-              About
-            </ResponsiveNavLink>
-
-            <ResponsiveNavLink
               href="/news"
               active={router.pathname === '/news'}
             >
@@ -248,6 +260,13 @@ const Navigation: React.FC<Props> = () => {
               active={router.pathname === '/contact'}
             >
               Contact
+            </ResponsiveNavLink>
+
+            <ResponsiveNavLink
+              href="/checkout"
+              active={router.pathname === '/checkout'}
+            >
+              Checkout
             </ResponsiveNavLink>
           </div>
 

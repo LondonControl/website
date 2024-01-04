@@ -5,6 +5,8 @@ import MoonLoader from 'react-spinners/MoonLoader';
 import useSWR from 'swr';
 
 import Meta from '@/components/Meta';
+import { Button } from '@/components/ui/button';
+import { useCart } from '@/context/CartContext';
 import type Product from '@/interfaces/Product';
 import MainLayout from '@/layouts/Main';
 import { fetcher } from '@/lib/axios';
@@ -18,6 +20,7 @@ const Products: NextPage<Props> = () => {
     getProductsEndpoint('?paginate=none&is_available=1'),
     fetcher
   );
+  const { addToCart } = useCart();
 
   // eslint-disable-next-line no-console
   if (error) console.log(error);
@@ -68,6 +71,15 @@ const Products: NextPage<Props> = () => {
                       £{product.price / 100}
                     </p>
                   </div>
+
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    className="w-full"
+                    onClick={() => addToCart(product)}
+                  >
+                    Add to basket
+                  </Button>
                 </div>
               </div>
             ))}

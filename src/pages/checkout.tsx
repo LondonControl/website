@@ -6,52 +6,18 @@ import Link from 'next/link';
 import { toast } from 'sonner';
 
 import Meta from '@/components/Meta';
+import { Button } from '@/components/ui/button';
+import { useCart } from '@/context/CartContext';
+import type CartItem from '@/interfaces/CartItem';
 import MainLayout from '@/layouts/Main';
 import axios from '@/lib/axios';
 import { AppConfig } from '@/utils/AppConfig';
 
 interface Props {}
 
-const products = [
-  {
-    id: 1,
-    name: 'Basic Tee',
-    href: '#',
-    price: '$32.00',
-    color: 'Sienna',
-    inStock: true,
-    size: 'Large',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in sienna.",
-  },
-  {
-    id: 2,
-    name: 'Basic Tee',
-    href: '#',
-    price: '$32.00',
-    color: 'Black',
-    inStock: false,
-    leadTime: '3–4 weeks',
-    size: 'Large',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-02.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-  },
-  {
-    id: 3,
-    name: 'Nomad Tumbler',
-    href: '#',
-    price: '$35.00',
-    color: 'White',
-    inStock: true,
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-03.jpg',
-    imageAlt: 'Insulated bottle with white base and black snap lid.',
-  },
-];
-
 const Basket: NextPage<Props> = () => {
+  const { cartItems, cartTotal, removeFromCart } = useCart();
+
   const createPaypalOrder = async (items: string[]) => {
     try {
       const itemIds = items.map((item) => ({ id: item }));
@@ -108,12 +74,12 @@ const Basket: NextPage<Props> = () => {
               role="list"
               className="divide-y divide-gray-200 border-y border-gray-200"
             >
-              {products.map((product) => (
-                <li key={product.id} className="flex py-6 tablet:py-10">
+              {cartItems.map((item: CartItem) => (
+                <li key={item.product.id} className="flex py-6 tablet:py-10">
                   <div className="shrink-0">
                     <img
-                      src={product.imageSrc}
-                      alt={product.imageAlt}
+                      src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-01.jpg"
+                      alt="temp"
                       className="h-24 w-24 rounded-md object-cover object-center tablet:h-48 tablet:w-48"
                     />
                   </div>
@@ -124,28 +90,29 @@ const Basket: NextPage<Props> = () => {
                         <div className="flex justify-between">
                           <h3 className="text-sm">
                             <Link
-                              href={product.href}
+                              href={`/products/${item.product.id}`}
                               className="font-medium text-gray-700 hover:text-gray-800"
                             >
-                              {product.name}
+                              {item.product.title}
                             </Link>
                           </h3>
                         </div>
 
                         <p className="mt-1 text-sm font-medium text-gray-900">
-                          {product.price}
+                          £{item.product.price / 100}
                         </p>
                       </div>
 
                       <div className="mt-4 tablet:mt-0 tablet:pr-9">
                         <div className="absolute right-0 top-0">
-                          <button
+                          <Button
                             type="button"
-                            className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500"
+                            variant="ghost"
+                            onClick={() => removeFromCart(item.product.id)}
                           >
                             <span className="sr-only">Remove</span>
                             <X className="h-5 w-5" aria-hidden="true" />
-                          </button>
+                          </Button>
                         </div>
                       </div>
                     </div>
@@ -173,7 +140,9 @@ const Basket: NextPage<Props> = () => {
                   Order total
                 </dt>
 
-                <dd className="text-base font-medium text-gray-900">£112.32</dd>
+                <dd className="text-base font-medium text-gray-900">
+                  £{cartTotal / 100}
+                </dd>
               </div>
             </dl>
 
@@ -193,9 +162,10 @@ const Basket: NextPage<Props> = () => {
                     height: 50,
                   }}
                   createOrder={async () => {
-                    const orderId = await createPaypalOrder([
-                      '9ac9b9e0-75ea-48c5-b7a9-90918ba16e42',
-                    ]);
+                    const itemIds = cartItems.map(
+                      (item: CartItem) => item.product.id
+                    );
+                    const orderId = await createPaypalOrder(itemIds);
 
                     return orderId;
                   }}
