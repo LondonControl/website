@@ -25,7 +25,7 @@ const Orders: NextPage = () => {
     data: productsData,
     error: productsError,
     isLoading: productsIsLoading,
-  } = useSWR('/api/products', fetcher);
+  } = useSWR('/api/products?paginate=none&sorts=-created_at', fetcher);
 
   // eslint-disable-next-line no-console
   if (ordersError) console.log(ordersError);
