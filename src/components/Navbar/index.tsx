@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { Label } from '@radix-ui/react-label';
 import {
   ChevronDownIcon,
   ClipboardList,
@@ -26,7 +25,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
 import {
   Sheet,
   SheetClose,
@@ -91,7 +89,7 @@ const Navigation: React.FC<Props> = () => {
                         <SheetTitle>Basket</SheetTitle>
                       </SheetHeader>
 
-                      <div className="grid gap-4 py-4">
+                      {/* <div className="grid gap-4 py-4">
                         <div className="grid grid-cols-4 items-center gap-4">
                           <Label htmlFor="name" className="text-right">
                             Name
@@ -112,7 +110,7 @@ const Navigation: React.FC<Props> = () => {
                             className="col-span-3"
                           />
                         </div>
-                      </div>
+                      </div> */}
 
                       <SheetFooter>
                         <SheetClose asChild>
