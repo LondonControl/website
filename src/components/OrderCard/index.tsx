@@ -70,6 +70,7 @@ const OrderCard: React.FC<Props> = ({ order, products }) => {
                       (product: Product) => product.id === item.product_id
                     )?.title ?? null}
                   </a>
+
                   <p>£{item.actual_price / 100}</p>
                 </div>
               </div>

@@ -7,6 +7,9 @@ import { MoonLoader } from 'react-spinners';
 import useSWR from 'swr';
 
 import Meta from '@/components/Meta';
+import { Button } from '@/components/ui/button';
+import { useCart } from '@/context/CartContext';
+import type Product from '@/interfaces/Product';
 import MainLayout from '@/layouts/Main';
 import { fetcher } from '@/lib/axios';
 import { AppConfig } from '@/utils/AppConfig';
@@ -62,6 +65,7 @@ const product = {
 const IndividualProduct: NextPage<Props> = () => {
   const router = useRouter();
   const { id } = router.query;
+  const { addToCart } = useCart();
 
   const { data, error, isLoading } = useSWR(`/api/products/${id}`, fetcher);
 
@@ -124,12 +128,13 @@ const IndividualProduct: NextPage<Props> = () => {
 
                 <form className="mt-6">
                   <div className="mt-10 flex">
-                    <button
-                      type="submit"
-                      className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-gray-900 px-8 py-3 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:ring-offset-gray-50 tablet:w-full"
+                    <Button
+                      type="button"
+                      className="w-full"
+                      onClick={() => addToCart(data.data as Product)}
                     >
-                      Add to bag
-                    </button>
+                      Add to basket
+                    </Button>
                   </div>
                 </form>
               </div>

@@ -48,10 +48,11 @@ const ForgotPassword: NextPage = () => {
       await forgotPassword({ email: values.email, setErrors, setStatus });
 
       form.reset();
-      toast.success('Password reset has been sent');
+      toast.success('Password reset email sent successfully');
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
+      toast.error('Something went wrong, please try again');
     }
 
     // eslint-disable-next-line no-console
