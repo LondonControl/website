@@ -17,10 +17,7 @@ const PricingSection: React.FC<Props> = () => {
             Choose the right option for&nbsp;you
           </h2>
         </div>
-        {/* <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 sm:text-center">
-          Distinctio et nulla eum soluta et neque labore quibusdam. Saepe et
-          quasi iusto modi velit ut non voluptas in. Explicabo id ut laborum.
-        </p> */}
+
         <div className="mt-20 flow-root">
           <div className="isolate -mt-16 grid max-w-sm grid-cols-1 gap-y-16 divide-y divide-gray-100 tablet:mx-auto laptop:-mx-8 laptop:mt-0 laptop:max-w-none laptop:grid-cols-3 laptop:divide-x laptop:divide-y-0 desktop:-mx-4">
             {Pricings.map((option: Pricing) => (
@@ -38,8 +35,16 @@ const PricingSection: React.FC<Props> = () => {
                   </span>
                 </p>
 
-                <Button className="mt-10 w-full" asChild>
-                  <Link href="/contact">Select</Link>
+                <Button
+                  className="mt-10 w-full"
+                  asChild={option.isAvailable}
+                  disabled={!option.isAvailable}
+                >
+                  {option.isAvailable ? (
+                    <Link href="/products">Select</Link>
+                  ) : (
+                    <span>Coming Soon</span>
+                  )}
                 </Button>
 
                 <p className="mt-10 text-sm font-semibold leading-6 text-gray-900">

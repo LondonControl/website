@@ -3,6 +3,7 @@ import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { X } from 'lucide-react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { toast } from 'sonner';
 
 import Meta from '@/components/Meta';
@@ -16,7 +17,8 @@ import { AppConfig } from '@/utils/AppConfig';
 interface Props {}
 
 const Basket: NextPage<Props> = () => {
-  const { cartItems, cartTotal, removeFromCart } = useCart();
+  const { cartItems, cartTotal, removeFromCart, clearCart } = useCart();
+  const router = useRouter();
 
   const createPaypalOrder = async (items: string[]) => {
     try {
@@ -171,6 +173,9 @@ const Basket: NextPage<Props> = () => {
                   }}
                   onApprove={async (data) => {
                     await capturePaypalOrder(data.orderID);
+
+                    clearCart();
+                    router.push('/orders');
                   }}
                 />
               </PayPalScriptProvider>

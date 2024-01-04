@@ -78,7 +78,6 @@ const Login: NextPage = () => {
 
     // eslint-disable-next-line no-console
     if (errors) console.log(errors);
-    toast.error('Something went wrong, please try again');
   };
 
   return (

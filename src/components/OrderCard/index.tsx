@@ -40,7 +40,7 @@ const OrderCard: React.FC<Props> = ({ order, products }) => {
           <div className="hidden tablet:block">
             <dt className="font-medium text-gray-900">Date placed</dt>
             <dd className="mt-1 text-gray-500">
-              <Moment date={order.created_at} format="DD MMMM YYYY hh:mm" />
+              <Moment date={order.created_at} format="DD MMMM YYYY HH:mm" />
             </dd>
           </div>
 
