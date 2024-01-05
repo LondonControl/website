@@ -41,8 +41,6 @@ const UpdateProfileInformationForm = () => {
       form.setValue('name', user.name ?? '');
       form.setValue('email', user.email ?? '');
     }
-
-    console.log(user);
   }, [user]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

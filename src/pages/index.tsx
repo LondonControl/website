@@ -2,8 +2,6 @@ import type { NextPage } from 'next';
 
 import Meta from '@/components/Meta';
 import CTASection from '@/components/Sections/CTASection';
-import FAQSection from '@/components/Sections/FAQSection';
-import FeaturesSection from '@/components/Sections/FeaturesSection';
 import HeroSection from '@/components/Sections/HeroSection';
 import MainStatsSection from '@/components/Sections/MainStatsSection';
 import PricingSection from '@/components/Sections/PricingSection';
@@ -26,9 +24,9 @@ const Index: NextPage<Props> = () => {
 
       <MainStatsSection />
 
-      <FeaturesSection />
+      {/* <FeaturesSection /> */}
 
-      <FAQSection />
+      {/* <FAQSection /> */}
 
       <PricingSection />
 

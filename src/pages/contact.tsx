@@ -125,10 +125,10 @@ const Contact: NextPage<Props> = () => {
               name="secondName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Second name</FormLabel>
+                  <FormLabel>Last name</FormLabel>
 
                   <FormControl>
-                    <Input placeholder="Second name" {...field} />
+                    <Input placeholder="Last name" {...field} />
                   </FormControl>
 
                   <FormMessage />

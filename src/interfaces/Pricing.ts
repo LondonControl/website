@@ -4,4 +4,5 @@ export default interface Pricing {
   href: string;
   price: string;
   features: string[];
+  isAvailable: boolean;
 }

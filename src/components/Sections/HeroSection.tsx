@@ -10,11 +10,13 @@ const HeroSection: React.FC<Props> = () => {
       <div className="mx-auto max-w-site px-6 laptop:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 tablet:text-6xl">
-            A most sophisticated ATC simulator
+            LONDON CONTROL The most sophisticated air traffic control simulator
+            of its kind
           </h1>
+
           <p className="mt-6 text-lg leading-8 text-gray-700">
-            London Control is an authentic, highly realistic simulation of the
-            actual ATC system over England and Wales.
+            London Control is an authentic and highly realistic simulation of
+            ATC covering London, Scottish and Terminal Control airspace.
           </p>
 
           <div className="mt-10 flex items-center justify-center gap-x-4">

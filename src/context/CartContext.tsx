@@ -7,6 +7,7 @@ interface CartContextValue {
   cartItems: CartItem[];
   addToCart: (product: Product) => void;
   removeFromCart: (productId: string) => void;
+  clearCart: () => void;
   cartTotal: number;
   cartCount: number;
 }
@@ -15,6 +16,7 @@ const CartContext = createContext<CartContextValue>({
   cartItems: [],
   addToCart: () => {},
   removeFromCart: () => {},
+  clearCart: () => {},
   cartTotal: 0,
   cartCount: 0,
 });
@@ -54,6 +56,10 @@ export const CartProvider = ({ children }: Props) => {
     0
   );
 
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   const cartCount = cartItems.length;
 
   return (
@@ -62,6 +68,7 @@ export const CartProvider = ({ children }: Props) => {
         cartItems,
         addToCart,
         removeFromCart,
+        clearCart,
         cartTotal,
         cartCount,
       }}
