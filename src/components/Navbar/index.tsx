@@ -90,11 +90,11 @@ const Navigation: React.FC<Props> = () => {
                         <SheetTitle>Basket</SheetTitle>
                       </SheetHeader>
 
-                      <ul>
+                      <ul className="mt-4">
                         {cartItems.map((item: CartItem) => (
                           <li
                             key={item.product.id}
-                            className="flex space-x-6 py-6"
+                            className="flex space-x-6 py-2"
                           >
                             <img
                               src="https://images.unsplash.com/photo-1584084807193-bed442df7a75?q=80&w=1824&h=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
