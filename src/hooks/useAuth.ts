@@ -117,13 +117,16 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
   };
 
   const logout = async () => {
-    // await csrf();
+    await csrf();
 
     if (!error) {
-      await axios.post('/logout').then(() => mutate());
+      await axios.post('/logout').then((res) => {
+        console.log(res);
+        // mutate();
+      });
     }
 
-    window.location.pathname = '/login';
+    // window.location.pathname = '/login';
   };
 
   useEffect(() => {
