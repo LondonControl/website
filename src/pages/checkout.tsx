@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import Meta from '@/components/Meta';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/hooks/useAuth';
 import type CartItem from '@/interfaces/CartItem';
 import MainLayout from '@/layouts/Main';
 import axios, { csrf } from '@/lib/axios';
@@ -17,6 +18,7 @@ import { AppConfig } from '@/utils/AppConfig';
 interface Props {}
 
 const Basket: NextPage<Props> = () => {
+  const { user } = useAuth({ middleware: 'auth' });
   const { cartItems, cartTotal, removeFromCart, clearCart } = useCart();
   const router = useRouter();
 
@@ -26,6 +28,7 @@ const Basket: NextPage<Props> = () => {
 
       await csrf();
       const response = await axios.post('/api/order/create', {
+        user_id: user?.id,
         order_items: itemIds,
       });
 
