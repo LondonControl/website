@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import * as z from 'zod';
 
 import AuthCard from '@/components/Auth/AuthCard';
+import InputError from '@/components/Inputs/InputError';
 import Meta from '@/components/Meta';
 import { Button } from '@/components/ui/button';
 import {
@@ -20,6 +21,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/hooks/useAuth';
+import type ErrorInput from '@/interfaces/ErrorInput';
 import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
 
@@ -59,23 +61,18 @@ const Register: NextPage = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      await register({
-        name: values.name,
-        email: values.email,
-        password: values.password,
-        password_confirmation: values.passwordConfirmation,
-        setErrors,
-        setStatus: () => {},
-      });
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
+    await register({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+      password_confirmation: values.passwordConfirmation,
+      setErrors,
+      setStatus: () => {},
+    });
+
+    if (errors.length > 0) {
       toast.error('Something went wrong, please try again');
     }
-
-    // eslint-disable-next-line no-console
-    if (errors) console.log(errors);
   };
 
   return (
@@ -100,6 +97,13 @@ const Register: NextPage = () => {
                   </FormControl>
 
                   <FormMessage />
+
+                  <InputError
+                    messages={errors?.filter(
+                      (error: ErrorInput) => error.source?.pointer === '/name'
+                    )}
+                    className="mt-2"
+                  />
                 </FormItem>
               )}
             />
@@ -116,6 +120,13 @@ const Register: NextPage = () => {
                   </FormControl>
 
                   <FormMessage />
+
+                  <InputError
+                    messages={errors?.filter(
+                      (error: ErrorInput) => error.source?.pointer === '/email'
+                    )}
+                    className="mt-2"
+                  />
                 </FormItem>
               )}
             />
@@ -132,6 +143,14 @@ const Register: NextPage = () => {
                   </FormControl>
 
                   <FormMessage />
+
+                  <InputError
+                    messages={errors?.filter(
+                      (error: ErrorInput) =>
+                        error.source?.pointer === '/password'
+                    )}
+                    className="mt-2"
+                  />
                 </FormItem>
               )}
             />
@@ -152,6 +171,14 @@ const Register: NextPage = () => {
                   </FormControl>
 
                   <FormMessage />
+
+                  <InputError
+                    messages={errors?.filter(
+                      (error: ErrorInput) =>
+                        error.source?.pointer === '/password_confirmation'
+                    )}
+                    className="mt-2"
+                  />
                 </FormItem>
               )}
             />

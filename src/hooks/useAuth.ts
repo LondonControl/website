@@ -45,7 +45,12 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
     setErrors([]);
 
     axios
-      .post('/register', props)
+      .post('/register', {
+        name: props.name,
+        email: props.email,
+        password: props.password,
+        password_confirmation: props.password_confirmation,
+      })
       .then(() => mutate())
       .catch((err) => {
         if (err.response.status !== 422) throw err;
@@ -63,7 +68,11 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
     setStatus(null);
 
     axios
-      .post('/login', props)
+      .post('/login', {
+        email: props.email,
+        password: props.password,
+        remember: props.remember,
+      })
       .then(() => mutate())
       .catch((err) => {
         if (err.response.status !== 422) throw err;
@@ -117,21 +126,18 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
   };
 
   const logout = async () => {
-    if (!error) {
-      await axios.post('/logout').then(() => mutate());
-    }
+    await axios.post('/logout').then(() => mutate());
 
     window.location.pathname = '/login';
   };
 
   useEffect(() => {
     if (middleware === 'guest' && redirectUri && user) router.push(redirectUri);
+    if (middleware === 'auth' && !user && error) logout();
 
     if (window.location.pathname === '/verify-email' && user?.email_verified_at)
       // This is to stop ts complaining.
-      router.push(redirectUri ?? '');
-
-    if (middleware === 'auth' && error) logout();
+      router.push(redirectUri ?? '/');
   }, [user, error]);
 
   return {

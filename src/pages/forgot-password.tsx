@@ -8,6 +8,7 @@ import * as z from 'zod';
 
 import AuthCard from '@/components/Auth/AuthCard';
 import AuthSessionStatus from '@/components/Auth/AuthSessionStatus';
+import InputError from '@/components/Inputs/InputError';
 import Meta from '@/components/Meta';
 import { Button } from '@/components/ui/button';
 import {
@@ -20,6 +21,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/hooks/useAuth';
+import type ErrorInput from '@/interfaces/ErrorInput';
 import GuestLayout from '@/layouts/Guest';
 import { AppConfig } from '@/utils/AppConfig';
 
@@ -44,19 +46,17 @@ const ForgotPassword: NextPage = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      await forgotPassword({ email: values.email, setErrors, setStatus });
+    setErrors([]);
+    await forgotPassword({ email: values.email, setErrors, setStatus });
 
-      form.reset();
-      toast.success('Password reset email sent successfully');
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
+    if (errors.length > 0) {
       toast.error('Something went wrong, please try again');
+
+      return;
     }
 
-    // eslint-disable-next-line no-console
-    if (errors) console.log(errors);
+    form.reset();
+    toast.success('Password reset email sent successfully');
   };
 
   return (
@@ -90,6 +90,13 @@ const ForgotPassword: NextPage = () => {
                   </FormControl>
 
                   <FormMessage />
+
+                  <InputError
+                    messages={errors?.filter(
+                      (error: ErrorInput) => error.source?.pointer === '/email'
+                    )}
+                    className="mt-2"
+                  />
                 </FormItem>
               )}
             />
