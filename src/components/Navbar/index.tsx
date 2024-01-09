@@ -1,10 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import {
-  ChevronDownIcon,
   ClipboardList,
   LogOut,
   ShoppingCart,
   UserCog,
+  UserIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -145,8 +145,9 @@ const Navigation: React.FC<Props> = () => {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost">
-                        <span>{user?.name}</span>
-                        <ChevronDownIcon className="ml-2 h-4 w-4" />
+                        <UserIcon className="h-5 w-5" />
+                        {/* <span>{user?.name}</span>
+                        <ChevronDownIcon className="ml-2 h-4 w-4" /> */}
                       </Button>
                     </DropdownMenuTrigger>
 
