@@ -10,8 +10,8 @@ const HeroSection: React.FC<Props> = () => {
       <div className="mx-auto max-w-site px-6 laptop:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 tablet:text-6xl">
-            LONDON CONTROL The most sophisticated air traffic control simulator
-            of its kind
+            <span className="block">LONDON CONTROL</span>
+            The most sophisticated air traffic control simulator of its kind
           </h1>
 
           <p className="mt-6 text-lg leading-8 text-gray-700">
