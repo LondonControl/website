@@ -4,6 +4,7 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Markdown from 'react-markdown';
 import { MoonLoader } from 'react-spinners';
+import { toast } from 'sonner';
 import useSWR from 'swr';
 
 import Meta from '@/components/Meta';
@@ -16,52 +17,6 @@ import { AppConfig } from '@/utils/AppConfig';
 
 interface Props {}
 
-const product = {
-  name: 'Zip Tote Basket',
-  price: '$140',
-  rating: 4,
-  images: [
-    {
-      id: 1,
-      name: 'Angled view',
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg',
-      alt: 'Angled front view with bag zipped and handles upright.',
-    },
-    // More images...
-  ],
-  colors: [
-    {
-      name: 'Washed Black',
-      bgColor: 'bg-gray-700',
-      selectedColor: 'ring-gray-700',
-    },
-    { name: 'White', bgColor: 'bg-white', selectedColor: 'ring-gray-400' },
-    {
-      name: 'Washed Gray',
-      bgColor: 'bg-gray-500',
-      selectedColor: 'ring-gray-500',
-    },
-  ],
-  description: `
-    <p>The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.</p>
-  `,
-  details: [
-    {
-      name: 'Features',
-      items: [
-        'Multiple strap configurations',
-        'Spacious interior with top zip',
-        'Leather handle and tabs',
-        'Interior dividers',
-        'Stainless strap loops',
-        'Double stitched construction',
-        'Water-resistant',
-      ],
-    },
-    // More sections...
-  ],
-};
-
 const IndividualProduct: NextPage<Props> = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -70,7 +25,9 @@ const IndividualProduct: NextPage<Props> = () => {
   const { data, error, isLoading } = useSWR(`/api/products/${id}`, fetcher);
 
   // eslint-disable-next-line no-console
-  if (error) console.log(error);
+  if (error) {
+    toast.error('Something went wrong, please try again');
+  }
 
   return (
     <MainLayout
@@ -93,15 +50,13 @@ const IndividualProduct: NextPage<Props> = () => {
               {/* Image gallery */}
               <Tab.Group as="div" className="flex flex-col-reverse">
                 <Tab.Panels className="aspect-h-1 aspect-w-1 w-full">
-                  {product.images.map((image) => (
-                    <Tab.Panel key={image.id}>
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        className="h-full w-full object-cover object-center tablet:rounded-lg"
-                      />
-                    </Tab.Panel>
-                  ))}
+                  <Tab.Panel key={data.data.id}>
+                    <img
+                      src="https://placehold.co/500x500?text=LC"
+                      alt={data.data.title}
+                      className="h-full w-full object-cover object-center tablet:rounded-lg"
+                    />
+                  </Tab.Panel>
                 </Tab.Panels>
               </Tab.Group>
 

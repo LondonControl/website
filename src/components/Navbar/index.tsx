@@ -97,8 +97,9 @@ const Navigation: React.FC<Props> = () => {
                             className="flex space-x-6 py-2"
                           >
                             <img
-                              src="https://images.unsplash.com/photo-1584084807193-bed442df7a75?q=80&w=1824&h=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                              alt="temp"
+                              // src="https://images.unsplash.com/photo-1584084807193-bed442df7a75?q=80&w=1824&h=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                              src="https://placehold.co/50x50?text=LC"
+                              alt={item.product.title}
                               className="h-24 w-24 flex-none rounded-md bg-gray-200 object-cover object-center"
                             />
 
@@ -116,7 +117,7 @@ const Navigation: React.FC<Props> = () => {
                               <Button
                                 type="button"
                                 variant="link"
-                                className="-ml-9"
+                                className="-ml-4"
                                 onClick={() => removeFromCart(item.product.id)}
                               >
                                 Remove

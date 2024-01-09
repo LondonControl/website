@@ -53,7 +53,8 @@ const Products: NextPage<Props> = () => {
               >
                 <div className="aspect-h-4 aspect-w-3 tablet:aspect-none bg-gray-200 group-hover:opacity-75 tablet:h-72">
                   <img
-                    src="https://images.unsplash.com/photo-1584084807193-bed442df7a75?q=80&w=1824&h=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    // src="https://images.unsplash.com/photo-1584084807193-bed442df7a75?q=80&w=1824&h=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    src="https://placehold.co/300x300?text=LC"
                     alt={product.title}
                     className="h-full w-full object-cover object-center tablet:h-full tablet:w-full"
                   />
