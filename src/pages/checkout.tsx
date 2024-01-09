@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/CartContext';
 import type CartItem from '@/interfaces/CartItem';
 import MainLayout from '@/layouts/Main';
-import axios from '@/lib/axios';
+import axios, { csrf } from '@/lib/axios';
 import { AppConfig } from '@/utils/AppConfig';
 
 interface Props {}
@@ -24,6 +24,7 @@ const Basket: NextPage<Props> = () => {
     try {
       const itemIds = items.map((item) => ({ id: item }));
 
+      await csrf();
       const response = await axios.post('/api/order/create', {
         order_items: itemIds,
       });
@@ -37,6 +38,7 @@ const Basket: NextPage<Props> = () => {
 
   const capturePaypalOrder = async (paymentId: any) => {
     try {
+      await csrf();
       const response = await axios.post('/api/order/capture', {
         transaction_id: paymentId,
       });
@@ -80,8 +82,8 @@ const Basket: NextPage<Props> = () => {
                 <li key={item.product.id} className="flex py-6 tablet:py-10">
                   <div className="shrink-0">
                     <img
-                      src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-01.jpg"
-                      alt="temp"
+                      src="https://placehold.co/200x200?text=LC"
+                      alt={item.product.title}
                       className="h-24 w-24 rounded-md object-cover object-center tablet:h-48 tablet:w-48"
                     />
                   </div>
