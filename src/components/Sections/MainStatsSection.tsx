@@ -10,7 +10,7 @@ const MainStatsSection: React.FC<Props> = () => {
               Area Control Sectors
             </dt>
             <dd className="order-first text-3xl font-semibold tracking-tight text-white tablet:text-5xl">
-              31
+              38
             </dd>
           </div>
 
@@ -25,19 +25,17 @@ const MainStatsSection: React.FC<Props> = () => {
 
           <div className="mx-auto flex max-w-xs flex-col gap-y-4">
             <dt className="text-base leading-7 text-gray-400">
-              Scottish Control Sectors
+              Airport and Approach Control Sectors
             </dt>
             <dd className="order-first text-3xl font-semibold tracking-tight text-white tablet:text-5xl">
-              7
+              18
             </dd>
           </div>
 
           <div className="mx-auto flex max-w-xs flex-col gap-y-4">
-            <dt className="text-base leading-7 text-gray-400">
-              Airport and Approach Control Sectors Over 11,000 flight plans
-            </dt>
+            <dt className="text-base leading-7 text-gray-400">Flight plans</dt>
             <dd className="order-first text-3xl font-semibold tracking-tight text-white tablet:text-5xl">
-              18
+              11,000+
             </dd>
           </div>
         </dl>
