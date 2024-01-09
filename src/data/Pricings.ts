@@ -6,7 +6,11 @@ const Pricings: Pricing[] = [
     href: '/products/base-installer',
     price: '£39.95',
     description: 'Everything necessary to get started plus up-to-date data.',
-    features: ['London Control simulation', '2023 update'],
+    features: [
+      'London Control software',
+      '2023 update',
+      'Updates until 31st December 2024',
+    ],
     isAvailable: true,
   },
   {
@@ -22,7 +26,7 @@ const Pricings: Pricing[] = [
     href: '#',
     price: '£24.95',
     description: 'The latest data patch for London Control.',
-    features: ['1709 update'],
+    features: ['XXXX update'],
     isAvailable: false,
   },
 ];

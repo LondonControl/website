@@ -71,8 +71,6 @@ const Login: NextPage = () => {
         setStatus,
       });
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
       toast.error('Something went wrong, please try again');
     }
 
@@ -150,14 +148,11 @@ const Login: NextPage = () => {
             />
 
             <div className="flex items-center justify-end">
-              <Link
-                href="/forgot-password"
-                className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
-              >
-                Forgot your password?
-              </Link>
+              <Button variant="link" asChild>
+                <Link href="/forgot-password">Forgot your password?</Link>
+              </Button>
 
-              <Button type="submit" className="ml-4">
+              <Button type="submit" className="ml-2">
                 Login
               </Button>
             </div>

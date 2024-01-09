@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { NextPage } from 'next';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -155,7 +156,15 @@ const Register: NextPage = () => {
               )}
             />
 
-            <Button type="submit">Register</Button>
+            <div className="flex items-center justify-end">
+              <Button variant="link" asChild>
+                <Link href="/login">Have an account?</Link>
+              </Button>
+
+              <Button type="submit" className="ml-2">
+                Register
+              </Button>
+            </div>
           </form>
         </Form>
       </AuthCard>
