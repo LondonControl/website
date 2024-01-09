@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import React from 'react';
 
+import CookieConsent from '@/components/CookieConsent';
 import { Toaster } from '@/components/ui/sonner';
 
 interface Props {
@@ -14,6 +15,8 @@ const GuestLayout: React.FC<Props> = (props) => {
       {props.meta}
 
       <main>{props.children}</main>
+
+      <CookieConsent />
 
       <Toaster />
     </div>
