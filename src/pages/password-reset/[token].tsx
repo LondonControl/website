@@ -58,22 +58,17 @@ const PasswordReset: NextPage = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      await resetPassword({
-        email: values.email,
-        password: values.password,
-        password_confirmation: values.passwordConfirmation,
-        setErrors,
-        setStatus,
-      });
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
+    await resetPassword({
+      email: values.email,
+      password: values.password,
+      password_confirmation: values.passwordConfirmation,
+      setErrors,
+      setStatus,
+    });
+
+    if (errors.length > 0) {
       toast.error('Something went wrong, please try again');
     }
-
-    // eslint-disable-next-line no-console
-    if (errors) console.log(errors);
   };
 
   useEffect(() => {

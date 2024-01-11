@@ -46,34 +46,28 @@ const UpdatePasswordForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      await csrf();
+    setErrors([]);
 
-      setErrors([]);
+    await csrf();
 
-      axios
-        .put('/api/password', {
-          current_password: values.currentPassword,
-          password: values.password,
-          password_confirmation: values.passwordConfirmation,
-        })
-        .then(() => {
-          toast.success('Password updated successfully');
-        })
-        .catch((error) => {
-          if (error.response.status !== 422) throw error;
+    axios
+      .put('/api/password', {
+        current_password: values.currentPassword,
+        password: values.password,
+        password_confirmation: values.passwordConfirmation,
+      })
+      .then(() => {
+        toast.success('Password updated successfully');
+      })
+      .catch((error) => {
+        if (error.response.status !== 422) throw error;
 
-          setErrors(error.response.data.errors);
-          toast.error('Something went wrong, please try again');
-        });
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
+        setErrors(error.response.data.errors);
+      });
+
+    if (errors.length > 0) {
       toast.error('Something went wrong, please try again');
     }
-
-    // eslint-disable-next-line no-console
-    if (errors) console.log(errors);
   };
 
   return (

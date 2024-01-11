@@ -2,9 +2,11 @@
 import {
   ClipboardList,
   LogOut,
+  MenuIcon,
   ShoppingCart,
   UserCog,
   UserIcon,
+  XIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -38,9 +40,7 @@ import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/hooks/useAuth';
 import type CartItem from '@/interfaces/CartItem';
 
-interface Props {
-  // user?: User;
-}
+interface Props {}
 
 const Navigation: React.FC<Props> = () => {
   const router = useRouter();
@@ -80,8 +80,11 @@ const Navigation: React.FC<Props> = () => {
                 <>
                   <Sheet>
                     <SheetTrigger asChild>
-                      <Button variant="ghost" size="icon">
+                      <Button variant="ghost" className="space-x-2">
                         <ShoppingCart className="h-5 w-5" />
+                        {cartItems.length > 0 && (
+                          <span>{cartItems.length}</span>
+                        )}
                       </Button>
                     </SheetTrigger>
 
@@ -146,8 +149,6 @@ const Navigation: React.FC<Props> = () => {
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost">
                         <UserIcon className="h-5 w-5" />
-                        {/* <span>{user?.name}</span>
-                        <ChevronDownIcon className="ml-2 h-4 w-4" /> */}
                       </Button>
                     </DropdownMenuTrigger>
 
@@ -202,35 +203,17 @@ const Navigation: React.FC<Props> = () => {
 
           {/* Hamburger */}
           <div className="-mr-2 flex items-center tablet:hidden">
-            <button
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => setOpen((current) => !current)}
-              className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
             >
-              <svg
-                className="h-6 w-6"
-                stroke="currentColor"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                {open ? (
-                  <path
-                    className="inline-flex"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    className="inline-flex"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
-            </button>
+              {open ? (
+                <XIcon className="h-6 w-6" />
+              ) : (
+                <MenuIcon className="h-6 w-6" />
+              )}
+            </Button>
           </div>
         </div>
       </div>
@@ -264,12 +247,17 @@ const Navigation: React.FC<Props> = () => {
               Contact
             </ResponsiveNavLink>
 
-            <ResponsiveNavLink
-              href="/checkout"
-              active={router.pathname === '/checkout'}
-            >
-              Checkout
-            </ResponsiveNavLink>
+            {user && (
+              <ResponsiveNavLink
+                href="/checkout"
+                active={router.pathname === '/checkout'}
+              >
+                Checkout
+                {cartItems.length > 0 && (
+                  <span className="ml-2">{cartItems.length}</span>
+                )}
+              </ResponsiveNavLink>
+            )}
           </div>
 
           {/* Responsive Settings Options */}

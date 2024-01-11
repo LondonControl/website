@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import React from 'react';
 
+import CookieConsent from '@/components/CookieConsent';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import { Toaster } from '@/components/ui/sonner';
@@ -20,6 +21,8 @@ const MainLayout: React.FC<Props> = (props) => {
       <main>{props.children}</main>
 
       <Toaster />
+
+      <CookieConsent />
 
       <Footer />
     </div>
