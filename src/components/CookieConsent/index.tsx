@@ -31,9 +31,6 @@ const CookieConsent: React.FC<Props> = () => {
           <Link href="/privacy" className="font-bold hover:underline">
             cookie policy
           </Link>
-          {/* <a href="#" className="font-semibold text-indigo-600">
-            cookie policy
-          </a> */}
           .
         </p>
 
