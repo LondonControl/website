@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import Meta from '@/components/Meta';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/hooks/useAuth';
 import type Product from '@/interfaces/Product';
 import MainLayout from '@/layouts/Main';
 import { fetcher } from '@/lib/axios';
@@ -16,11 +17,12 @@ import { getProductsEndpoint } from '@/utils/Endpoints';
 interface Props {}
 
 const Products: NextPage<Props> = () => {
+  const { user } = useAuth({ middleware: 'guest' });
   const { data, error, isLoading } = useSWR(
     getProductsEndpoint('?paginate=none&is_available=1'),
     fetcher
   );
-  const { addToCart } = useCart();
+  const { addToCart, removeFromCart, cartContainsItem } = useCart();
 
   // eslint-disable-next-line no-console
   if (error) console.log(error);
@@ -46,25 +48,24 @@ const Products: NextPage<Props> = () => {
           </div>
         ) : (
           <div className="mt-6 grid grid-cols-1 gap-y-4 tablet:grid-cols-2 tablet:gap-x-6 tablet:gap-y-10 laptop:mt-12 laptop:grid-cols-4 laptop:gap-x-8">
-            {data.data.map((product: Product) => (
+            {data?.data.map((product: Product) => (
               <div
                 key={product.id}
                 className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white"
               >
-                <div className="aspect-h-4 aspect-w-3 tablet:aspect-none bg-gray-200 group-hover:opacity-75 tablet:h-72">
-                  <img
-                    // src="https://images.unsplash.com/photo-1584084807193-bed442df7a75?q=80&w=1824&h=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    src="https://placehold.co/300x300?text=LC"
-                    alt={product.title}
-                    className="h-full w-full object-cover object-center tablet:h-full tablet:w-full"
-                  />
-                </div>
+                <Link href={`/products/${product.id}`}>
+                  <div className="aspect-h-4 aspect-w-3 tablet:aspect-none bg-gray-200 group-hover:opacity-75 tablet:h-72">
+                    <img
+                      src="https://placehold.co/300x300?text=LC"
+                      alt={product.title}
+                      className="h-full w-full object-cover object-center tablet:h-full tablet:w-full"
+                    />
+                  </div>
+                </Link>
 
                 <div className="flex flex-1 flex-col space-y-2 p-4">
                   <h3 className="text-sm font-medium text-gray-900">
-                    <Link href={`/products/${product.id}`}>
-                      {product.title}
-                    </Link>
+                    {product.title}
                   </h3>
 
                   <div className="flex flex-1 flex-col justify-end">
@@ -73,14 +74,29 @@ const Products: NextPage<Props> = () => {
                     </p>
                   </div>
 
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    className="w-full"
-                    onClick={() => addToCart(product)}
-                  >
-                    Add to basket
-                  </Button>
+                  {user && (
+                    <>
+                      {cartContainsItem(product.id) ? (
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          className="w-full"
+                          onClick={() => removeFromCart(product.id)}
+                        >
+                          Remove from basket
+                        </Button>
+                      ) : (
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          className="w-full"
+                          onClick={() => addToCart(product)}
+                        >
+                          Add to basket
+                        </Button>
+                      )}
+                    </>
+                  )}
                 </div>
               </div>
             ))}

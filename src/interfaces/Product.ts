@@ -8,4 +8,5 @@ export default interface Product {
   is_available: boolean;
   created_at?: string;
   updated_at?: string;
+  key?: string; // No better place to put this yet.
 }

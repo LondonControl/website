@@ -11,7 +11,7 @@ const Privacy: NextPage<Props> = () => {
     <MainLayout
       meta={
         <Meta
-          title={`${AppConfig.site_name}`}
+          title={`Privacy | ${AppConfig.site_name}`}
           description={AppConfig.description}
         />
       }

@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import {
   ClipboardList,
+  Download,
   LogOut,
   MenuIcon,
   ShoppingCart,
@@ -100,7 +101,6 @@ const Navigation: React.FC<Props> = () => {
                             className="flex space-x-6 py-2"
                           >
                             <img
-                              // src="https://images.unsplash.com/photo-1584084807193-bed442df7a75?q=80&w=1824&h=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                               src="https://placehold.co/50x50?text=LC"
                               alt={item.product.title}
                               className="h-24 w-24 flex-none rounded-md bg-gray-200 object-cover object-center"
@@ -162,6 +162,16 @@ const Navigation: React.FC<Props> = () => {
                           <Link href="/orders" className="hover:cursor-pointer">
                             <ClipboardList className="mr-2 h-4 w-4" />
                             <span>Orders</span>
+                          </Link>
+                        </DropdownMenuItem>
+
+                        <DropdownMenuItem asChild>
+                          <Link
+                            href="/downloads"
+                            className="hover:cursor-pointer"
+                          >
+                            <Download className="mr-2 h-4 w-4" />
+                            <span>Downloads</span>
                           </Link>
                         </DropdownMenuItem>
 
@@ -280,6 +290,13 @@ const Navigation: React.FC<Props> = () => {
                     active={router.pathname === '/orders'}
                   >
                     Orders
+                  </ResponsiveNavLink>
+
+                  <ResponsiveNavLink
+                    href="/downloads"
+                    active={router.pathname === '/downloads'}
+                  >
+                    Downloads
                   </ResponsiveNavLink>
 
                   <ResponsiveNavLink

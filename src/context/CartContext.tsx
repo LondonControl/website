@@ -5,6 +5,7 @@ import type Product from '@/interfaces/Product';
 
 interface CartContextValue {
   cartItems: CartItem[];
+  cartContainsItem: (productId: string) => boolean;
   addToCart: (product: Product) => void;
   removeFromCart: (productId: string) => void;
   clearCart: () => void;
@@ -14,6 +15,7 @@ interface CartContextValue {
 
 const CartContext = createContext<CartContextValue>({
   cartItems: [],
+  cartContainsItem: () => false,
   addToCart: () => {},
   removeFromCart: () => {},
   clearCart: () => {},
@@ -32,12 +34,16 @@ interface Props {
 export const CartProvider = ({ children }: Props) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  const addToCart = (product: Product) => {
+  const cartContainsItem = (productId: string) => {
     const existingCartItemIndex = cartItems.findIndex(
-      (item) => item.product.id === product.id
+      (item) => item.product.id === productId
     );
 
-    if (existingCartItemIndex !== -1) {
+    return existingCartItemIndex !== -1;
+  };
+
+  const addToCart = (product: Product) => {
+    if (cartContainsItem(product.id)) {
       return;
     }
 
@@ -48,6 +54,7 @@ export const CartProvider = ({ children }: Props) => {
     const updatedCartItems = cartItems.filter(
       (item) => item.product.id !== productId
     );
+
     setCartItems(updatedCartItems);
   };
 
@@ -66,6 +73,7 @@ export const CartProvider = ({ children }: Props) => {
     <CartContext.Provider
       value={{
         cartItems,
+        cartContainsItem,
         addToCart,
         removeFromCart,
         clearCart,
