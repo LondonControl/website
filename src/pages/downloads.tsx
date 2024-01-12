@@ -6,13 +6,17 @@ import useSWR from 'swr';
 
 import DownloadCard from '@/components/DownloadCard';
 import Meta from '@/components/Meta';
+import { useAuth } from '@/hooks/useAuth';
 import type Product from '@/interfaces/Product';
 import MainLayout from '@/layouts/Main';
 import { fetcher } from '@/lib/axios';
 import { AppConfig } from '@/utils/AppConfig';
 
 const Downloads: NextPage = () => {
+  const { user } = useAuth({ middleware: 'auth' });
   const { data, error, isLoading } = useSWR('/api/user/products', fetcher);
+
+  if (!user) return null;
 
   // eslint-disable-next-line no-console
   if (error) console.log(error);

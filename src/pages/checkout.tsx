@@ -4,7 +4,6 @@ import { X } from 'lucide-react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { toast } from 'sonner';
 
 import Meta from '@/components/Meta';
@@ -23,12 +22,7 @@ const Basket: NextPage<Props> = () => {
   const { cartItems, cartTotal, removeFromCart, clearCart } = useCart();
   const router = useRouter();
 
-  // If user isnt logged in -> send to login.
-  useEffect(() => {
-    if (!user) {
-      router.push('/login');
-    }
-  }, []);
+  if (!user) return null;
 
   const createPaypalOrder = async (items: string[]) => {
     try {
