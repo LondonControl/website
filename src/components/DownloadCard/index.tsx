@@ -13,24 +13,20 @@ const DownloadCard: React.FC<Props> = ({ product }) => {
   const handleDownloadFile = async (event: any, productId: String) => {
     event.preventDefault();
 
-    try {
-      axios
-        .get(`/api/products/${productId}/download`)
-        .then((res) => {
-          window.open(res.data.data, '_blank');
-        })
-        .catch((err) => {
-          console.log(err);
-          toast.error('Something went wrong');
-        });
-    } catch (error) {
-      console.log(error);
-    }
+    await axios
+      .get(`/api/products/${productId}/download`)
+      .then((res) => {
+        window.open(res.data.data, '_blank');
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error('Something went wrong');
+      });
   };
 
   return (
     <div className="rounded-lg border border-gray-200 bg-white">
-      <div className="flex items-center border-gray-200 p-4 tablet:grid tablet:grid-cols-4 tablet:gap-x-6 tablet:p-6">
+      <div className="flex items-center border-gray-200 p-4 tablet:grid tablet:grid-cols-5 tablet:gap-x-6 tablet:p-6">
         <dl className="grid flex-1 grid-cols-2 gap-x-6 text-sm tablet:col-span-3 tablet:grid-cols-3 laptop:col-span-3">
           <div>
             <dt className="font-medium text-gray-900">Product</dt>
@@ -50,12 +46,14 @@ const DownloadCard: React.FC<Props> = ({ product }) => {
           </div>
         </dl>
 
-        <Button
-          variant="secondary"
-          onClick={(event) => handleDownloadFile(event, product.id)}
-        >
-          Download
-        </Button>
+        <div className="hidden laptop:col-span-2 laptop:flex laptop:items-center laptop:justify-end laptop:space-x-4">
+          <Button
+            variant="secondary"
+            onClick={(event) => handleDownloadFile(event, product.id)}
+          >
+            Download
+          </Button>
+        </div>
       </div>
     </div>
   );

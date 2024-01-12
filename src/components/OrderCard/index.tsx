@@ -2,12 +2,9 @@
 import classNames from 'classnames';
 import { useState } from 'react';
 import Moment from 'react-moment';
-import { toast } from 'sonner';
 
-import { Button } from '@/components/ui/button';
 import type Order from '@/interfaces/Order';
 import type OrderItem from '@/interfaces/OrderItem';
-import axios from '@/lib/axios';
 
 import OrderStatusBadge from './OrderStatusBadge';
 
@@ -17,24 +14,6 @@ interface Props {
 
 const OrderCard: React.FC<Props> = ({ order }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const handleDownloadFile = async (event: any, productId: String) => {
-    event.preventDefault();
-
-    try {
-      axios
-        .get(`/api/products/${productId}/download`)
-        .then((res) => {
-          window.open(res.data.data, '_blank');
-        })
-        .catch((err) => {
-          console.log(err);
-          toast.error('Something went wrong');
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <div className="rounded-lg border border-gray-200 bg-white">
@@ -89,20 +68,6 @@ const OrderCard: React.FC<Props> = ({ order }) => {
                   </a>
 
                   <p>£{item.actual_price / 100}</p>
-                </div>
-
-                <div className="flex justify-between">
-                  {/* <p>{item.product}</p> */}
-
-                  <Button
-                    type="button"
-                    variant="link"
-                    onClick={(event) =>
-                      handleDownloadFile(event, item.product?.id ?? '')
-                    }
-                  >
-                    Download
-                  </Button>
                 </div>
               </div>
             </div>
