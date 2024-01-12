@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import React from 'react';
 
 import Meta from '@/components/Meta';
+import { useAuth } from '@/hooks/useAuth';
 import MainLayout from '@/layouts/Main';
 import { AppConfig } from '@/utils/AppConfig';
 
@@ -9,6 +10,10 @@ import UpdatePasswordForm from './partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './partials/UpdateProfileInformationForm';
 
 const Profile: NextPage = () => {
+  const { user } = useAuth({ middleware: 'auth' });
+
+  if (!user) return null;
+
   return (
     <MainLayout
       meta={

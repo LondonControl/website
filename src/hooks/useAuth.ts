@@ -133,7 +133,8 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
 
   useEffect(() => {
     if (middleware === 'guest' && redirectUri && user) router.push(redirectUri);
-    if (middleware === 'auth' && !user && error) logout();
+    if (middleware === 'auth' && !user) router.push('/login');
+    if (middleware === 'auth' && error) logout();
 
     if (window.location.pathname === '/verify-email' && user?.email_verified_at)
       // This is to stop ts complaining.
