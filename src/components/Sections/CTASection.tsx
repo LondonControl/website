@@ -50,9 +50,9 @@ const CTASection: React.FC<Props> = () => {
           <div className="relative mt-16 h-80 laptop:mt-8">
             <img
               className="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10"
-              // src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
-              src="https://images.unsplash.com/photo-1584084807193-bed442df7a75?q=80&w=1824&h=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="App screenshot"
+              // src="https://images.unsplash.com/photo-1584084807193-bed442df7a75?q=80&w=1824&h=1080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="/assets/images/lc_forum.png"
+              alt="Forum screenshot"
               width={1824}
               height={1080}
             />
