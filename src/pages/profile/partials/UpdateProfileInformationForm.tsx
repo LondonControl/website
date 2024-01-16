@@ -24,7 +24,9 @@ const formSchema = z.object({
 });
 
 const UpdateProfileInformationForm = () => {
-  const { user, resendEmailVerification } = useAuth({ middleware: 'auth' });
+  const { user, resendEmailVerification } = useAuth({
+    middleware: 'auth',
+  });
 
   const [errors, setErrors] = useState<any>([]);
 
@@ -129,7 +131,9 @@ const UpdateProfileInformationForm = () => {
             </div>
           )}
 
-          <Button type="submit">Save</Button>
+          <div className="flex justify-end">
+            <Button type="submit">Save</Button>
+          </div>
         </form>
       </Form>
     </section>

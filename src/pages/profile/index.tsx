@@ -6,6 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 import MainLayout from '@/layouts/Main';
 import { AppConfig } from '@/utils/AppConfig';
 
+import DeleteAccountForm from './partials/DeleteAccountForm';
 import UpdatePasswordForm from './partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './partials/UpdateProfileInformationForm';
 
@@ -38,6 +39,12 @@ const Profile: NextPage = () => {
           <div className="border bg-white p-4 tablet:rounded-lg tablet:p-8">
             <div className="max-w-xl">
               <UpdatePasswordForm />
+            </div>
+          </div>
+
+          <div className="border bg-white p-4 tablet:rounded-lg tablet:p-8">
+            <div className="max-w-xl">
+              <DeleteAccountForm />
             </div>
           </div>
         </div>
