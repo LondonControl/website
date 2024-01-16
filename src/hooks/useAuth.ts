@@ -131,8 +131,29 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
     window.location.pathname = '/login';
   };
 
+  const deleteAccount = async (args: ApiRequest) => {
+    const { setErrors } = args;
+    await csrf();
+
+    setErrors([]);
+
+    axios
+      .delete('/api/user')
+      .then(() => {
+        mutate();
+
+        window.location.pathname = '/';
+      })
+      .catch((err) => {
+        if (err.response.status !== 422) throw err;
+
+        setErrors(err.response.data.errors);
+      });
+  };
+
   useEffect(() => {
     if (middleware === 'guest' && redirectUri && user) router.push(redirectUri);
+    // if (middleware === 'auth' && redirectUri && user) router.push(redirectUri);
     if (middleware === 'auth' && !user) router.push('/login');
     if (middleware === 'auth' && error) logout();
 
@@ -149,5 +170,6 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
     resetPassword,
     resendEmailVerification,
     logout,
+    deleteAccount,
   };
 };

@@ -138,7 +138,9 @@ const UpdatePasswordForm = () => {
             )}
           />
 
-          <Button type="submit">Save</Button>
+          <div className="flex justify-end">
+            <Button type="submit">Save</Button>
+          </div>
         </form>
       </Form>
     </section>
