@@ -24,7 +24,7 @@ const Pricings: Pricing[] = [
     price: '£24.95',
     description: 'The latest data package for London Control.',
     features: ['2023 update'],
-    isAvailable: false,
+    isAvailable: true,
   },
 ];
 
