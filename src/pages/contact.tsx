@@ -202,9 +202,11 @@ const Contact: NextPage<Props> = () => {
               </Label>
             </div>
 
-            <Button type="submit" disabled={!agreed}>
-              Submit
-            </Button>
+            <div className="flex justify-end">
+              <Button type="submit" disabled={!agreed}>
+                Submit
+              </Button>
+            </div>
           </form>
         </Form>
       </div>
