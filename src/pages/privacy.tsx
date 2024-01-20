@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import type { NextPage } from 'next';
 import { useState } from 'react';
+import useDimensions from 'react-cool-dimensions';
 import { Document, Page, pdfjs } from 'react-pdf';
 
 import Meta from '@/components/Meta';
@@ -17,11 +18,13 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 interface Props {}
 
 const Privacy: NextPage<Props> = () => {
-  const [pageNumber, setPageNumber] = useState(1);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const { observe, width } = useDimensions();
 
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  function onItemClick({ pageNumber }: { pageNumber: any }) {
-    setPageNumber(pageNumber);
+  function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
+    setTotalPages(numPages);
+    setPageNumber(1);
   }
 
   return (
@@ -38,12 +41,44 @@ const Privacy: NextPage<Props> = () => {
           Privacy
         </h1>
 
-        <div className="mx-auto mt-6 laptop:mt-12">
+        <div ref={observe} className="mx-auto mt-6 laptop:mt-12">
           <Document
             file="/assets/pdfs/lc_privacy_policy.pdf"
-            onItemClick={onItemClick}
+            onLoadSuccess={onDocumentLoadSuccess}
+            className="group relative"
           >
-            <Page pageNumber={pageNumber || 1} />
+            <Page
+              pageNumber={pageNumber || 1}
+              width={width}
+              renderTextLayer={false}
+              renderAnnotationLayer={false}
+            />
+
+            <div className="absolute bottom-[5%] left-[50%] translate-x-[-50%] rounded-md bg-white text-white opacity-0 shadow-sm group-hover:cursor-pointer group-hover:bg-[#191b1c] group-hover:opacity-100">
+              <button
+                disabled={pageNumber <= 1}
+                onClick={() => setPageNumber(pageNumber - 1)}
+                type="button"
+                aria-label="Previous page"
+                className="bg-opacity/5 h-11 w-11 border-r-0 hover:rounded-l-sm hover:bg-[#333333]"
+              >
+                ‹
+              </button>
+
+              <span className="px-3 py-2">
+                {pageNumber} of {totalPages}
+              </span>
+
+              <button
+                disabled={pageNumber >= totalPages}
+                onClick={() => setPageNumber(pageNumber + 1)}
+                type="button"
+                aria-label="Next page"
+                className="bg-opacity/5 h-11 w-11 border-l-0 hover:rounded-r-sm hover:bg-[#333333]"
+              >
+                ›
+              </button>
+            </div>
           </Document>
         </div>
       </div>
@@ -52,3 +87,45 @@ const Privacy: NextPage<Props> = () => {
 };
 
 export default Privacy;
+
+// .page-controls {
+//   position: absolute;
+//   bottom: 5%;
+//   left: 50%;
+//   background: white;
+//   opacity: 0;
+//   transform: translateX(-50%);
+//   transition: opacity ease-in-out 0.2s;
+//   .shadow();
+//   .rounded-corners();
+
+//   button {
+//     width: 44px;
+//     height: 44px;
+//     background: white;
+//     border: 0;
+//     font: inherit;
+//     font-size: .8em;
+//     .rounded-corners();
+
+//     &:enabled {
+//       &:hover {
+//         cursor: pointer;
+//       }
+
+//       &:hover, &:focus {
+//         background-color: #e6e6e6;
+//       }
+//     }
+
+//     &:first-child {
+//       border-top-right-radius: 0;
+//       border-bottom-right-radius: 0;
+//     }
+
+//     &:last-child {
+//       border-top-left-radius: 0;
+//       border-bottom-left-radius: 0;
+//     }
+//   }
+// }
