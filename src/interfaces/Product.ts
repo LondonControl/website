@@ -6,6 +6,7 @@ export default interface Product {
   url?: string;
   price: number;
   is_available: boolean;
+  current_airac: string;
   created_at?: string;
   updated_at?: string;
   key?: string; // No better place to put this yet.

@@ -14,6 +14,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import { useAuth } from '@/hooks/useAuth';
 
 const DeleteAccountForm = () => {
@@ -44,6 +45,8 @@ const DeleteAccountForm = () => {
           be undone.
         </p>
       </header>
+
+      <Separator className="mt-6" />
 
       <div className="mt-6 flex justify-end">
         <AlertDialog>

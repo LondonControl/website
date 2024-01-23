@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import React from 'react';
 
+import Banner from '@/components/Banner';
 import CookieConsent from '@/components/CookieConsent';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
@@ -15,6 +16,8 @@ const MainLayout: React.FC<Props> = (props) => {
   return (
     <div className="min-h-screen w-full">
       {props.meta}
+
+      <Banner />
 
       <Navbar />
 

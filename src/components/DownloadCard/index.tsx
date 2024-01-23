@@ -1,4 +1,3 @@
-import Moment from 'react-moment';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
@@ -19,6 +18,7 @@ const DownloadCard: React.FC<Props> = ({ product }) => {
         window.open(res.data.data, '_blank');
       })
       .catch((err) => {
+        // eslint-disable-next-line no-console
         console.log(err);
         toast.error('Something went wrong');
       });
@@ -34,10 +34,8 @@ const DownloadCard: React.FC<Props> = ({ product }) => {
           </div>
 
           <div className="hidden tablet:block">
-            <dt className="font-medium text-gray-900">File date</dt>
-            <dd className="mt-1 text-gray-500">
-              <Moment date={product.updated_at} format="D/MM/YYYY" />
-            </dd>
+            <dt className="font-medium text-gray-900">AIRAC</dt>
+            <dd className="mt-1 text-gray-500">{product.current_airac}</dd>
           </div>
 
           <div>
