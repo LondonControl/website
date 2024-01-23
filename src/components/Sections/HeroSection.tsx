@@ -25,7 +25,7 @@ const HeroSection: React.FC<Props> = () => {
             </Button>
 
             <Button variant="link" asChild>
-              <Link href="/about">
+              <Link href="/learn-more">
                 Learn more{' '}
                 <span aria-hidden="true" className="ml-2">
                   →
