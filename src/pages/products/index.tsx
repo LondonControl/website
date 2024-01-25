@@ -68,6 +68,12 @@ const Products: NextPage<Props> = () => {
                     {product.title}
                   </h3>
 
+                  {/* <div className="flex flex-1 flex-col justify-end">
+                    <p className="text-sm font-medium text-gray-900">
+                      AIRAC: {product.current_airac}
+                    </p>
+                  </div> */}
+
                   <div className="flex flex-1 flex-col justify-end">
                     <p className="text-base font-medium text-gray-900">
                       £{product.price / 100}

@@ -41,27 +41,29 @@ const VerifyEmail: NextPage = () => {
           />
         )}
 
-        <div className="mt-4 flex items-center justify-between">
-          <Button
-            onClick={() => {
-              resendEmailVerification({
-                setStatus,
-                setErrors: () => {},
-              });
+        <div className="mt-4 flex items-center justify-end">
+          <div className="justify-between">
+            <Button
+              onClick={() => {
+                resendEmailVerification({
+                  setStatus,
+                  setErrors: () => {},
+                });
 
-              toast.success('Verification email sent successfully');
-            }}
-          >
-            Resend Verification Email
-          </Button>
+                toast.success('Verification email sent successfully');
+              }}
+            >
+              Resend Verification Email
+            </Button>
 
-          <Button
-            type="button"
-            className="text-sm text-gray-600 underline hover:text-gray-900"
-            onClick={logout}
-          >
-            Logout
-          </Button>
+            <Button
+              type="button"
+              className="text-sm text-gray-600 underline hover:text-gray-900"
+              onClick={logout}
+            >
+              Logout
+            </Button>
+          </div>
         </div>
       </AuthCard>
     </GuestLayout>

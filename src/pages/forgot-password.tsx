@@ -101,7 +101,9 @@ const ForgotPassword: NextPage = () => {
               )}
             />
 
-            <Button type="submit">Submit</Button>
+            <div className="flex justify-end">
+              <Button type="submit">Submit</Button>
+            </div>
           </form>
         </Form>
       </AuthCard>
