@@ -8,7 +8,7 @@ module.exports = withBundleAnalyzer({
     dirs: ['.'],
   },
   images: {
-    domains: [],
+    domains: ['placehold.co'],
   },
   poweredByHeader: false,
   trailingSlash: true,
