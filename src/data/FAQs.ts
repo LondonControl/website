@@ -1,21 +1,30 @@
 const FAQs = [
   {
-    question:
-      'Does London Control allow me to co-ordinate traffic with other sectors and units?',
-    answer:
-      "Yes, the system includes a very sophisticated co-ordination function. Each flight must be co-ordinated into and out of the sector being controlled. Many of these co-ordinations are automatic, as 'standing agreements' are used to reduce the workload of contorllers.",
+    question: 'How often will the data be updated?',
+    answer: 'We will release data patches following the AIRAC cycle.',
   },
   {
     question:
-      'How does London Control enable one person to carry out both the planning and tactical controller roles at the same time?',
+      'I already own London Control, do I get the data package for free?',
     answer:
-      'Althought the system is highly realistic in the way it supports the different controller roles, some simplifications have been included so that one person can do the entire job of controlling one sector. The advanced tools help with this consdierably. It is also possible to set the system into a mode where coordination is no longer required, so the planning task is reduced to almost nothing.',
+      'Due to the amount of work that has gone into providing the data package, we are unable to provide it for free.',
   },
   {
     question:
       'The system seems to run very slowly, what can I do to improve performance?',
     answer:
       'There are a number of options that can be set-up in the User Preferences to reduce the processing requirement of the system. These include: switching off MTCA and STCA, setting the Scan Segments to a low number, switching off vector lines and halos, not using radio communication.',
+  },
+  {
+    question: 'When launching I receive error "OLE ERROR 80045078"',
+    answer:
+      'This usually indicates an error with the speech recognition software, this can be fixed by ensuring you have speech and the English language pack installed or you can disable speech altogether by appending -v to the executable launch options.',
+  },
+  {
+    question:
+      'Does London Control have help that I can access when the program is running?',
+    answer:
+      'Context sensitive help is available through menu options or the <F1> and <F2> keyboard keys.',
   },
 ];
 
