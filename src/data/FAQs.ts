@@ -10,6 +10,11 @@ const FAQs = [
       'Due to the amount of work that has gone into providing the data package, we are unable to provide it for free.',
   },
   {
+    question: 'After purchasing, where can I download the files from?',
+    answer:
+      'In the top right hand corner you will see a USER icon, after clicking on this a dropdown will appear. Inside this dropdown you will see a link which reads DOWNLOADS, this will take you to the downloads page where you can download all of your purchases.',
+  },
+  {
     question:
       'The system seems to run very slowly, what can I do to improve performance?',
     answer:
