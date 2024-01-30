@@ -14,7 +14,7 @@ const navigation = [
   },
   {
     name: 'YouTube',
-    href: '#',
+    href: 'https://www.youtube.com/channel/UCq8JZ1mzkRG5aSblL8Y_qag',
     icon: (props: any) => (
       <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
         <path
@@ -40,7 +40,7 @@ const Footer: React.FC<Props> = () => {
               className="text-gray-400 hover:text-gray-500"
             >
               <span className="sr-only">{item.name}</span>
-              <item.icon className="h-6 w-6" aria-hidden="true" />
+              <item.icon className="size-6" aria-hidden="true" />
             </Link>
           ))}
         </div>

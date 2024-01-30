@@ -10,11 +10,11 @@ describe('Index page', () => {
     it('should have h1 tag', () => {
       render(<Index />);
 
-      const heading = screen.getByRole('heading', {
-        name: /Boilerplate code/,
-      });
+      const heading = screen.getByRole('heading');
 
-      expect(heading).toBeInTheDocument();
+      expect(heading).toMatch(
+        'LONDON CONTROLThe most sophisticated air traffic control simulator of its kind',
+      );
     });
   });
 });
