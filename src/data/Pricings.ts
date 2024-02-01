@@ -15,7 +15,7 @@ const Pricings: Pricing[] = [
   },
   {
     name: 'AIRAC Data Package',
-    price: '£34.95',
+    price: '£36.95',
     description: 'The latest data package for London Control.',
     features: [
       '2023 update',
