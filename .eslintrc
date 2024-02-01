@@ -3,16 +3,16 @@
   "extends": [
     "airbnb-base",
     "next/core-web-vitals", // Needed to avoid warning in next.js build: 'The Next.js plugin was not detected in your ESLint configuration'
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
   ],
   "rules": {
     "prettier/prettier": [
       "warn",
       {
         "singleQuote": true,
-        "endOfLine": "auto"
-      }
-    ]
+        "endOfLine": "auto",
+      },
+    ],
   },
   "overrides": [
     // Configuration for TypeScript files
@@ -22,24 +22,24 @@
         "@typescript-eslint",
         "unused-imports",
         "tailwindcss",
-        "simple-import-sort"
+        "simple-import-sort",
       ],
       "extends": [
         "plugin:tailwindcss/recommended",
         "airbnb-typescript",
         "next/core-web-vitals",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
       ],
       "parserOptions": {
-        "project": "./tsconfig.json"
+        "project": "./tsconfig.json",
       },
       "rules": {
         "prettier/prettier": [
           "warn",
           {
             "singleQuote": true,
-            "endOfLine": "auto"
-          }
+            "endOfLine": "auto",
+          },
         ],
         "react/destructuring-assignment": "off", // Vscode doesn't support automatically destructuring, it's a pain to add a new variable
         "react/require-default-props": "off", // Allow non-defined react props as undefined
@@ -52,7 +52,7 @@
           "error",
           "ForInStatement",
           "LabeledStatement",
-          "WithStatement"
+          "WithStatement",
         ], // Overrides Airbnb configuration and enable no-restricted-syntax
         "import/prefer-default-export": "off", // Named export is easier to refactor automatically
         "tailwindcss/no-custom-classname": "off",
@@ -62,9 +62,9 @@
         "unused-imports/no-unused-imports": "error",
         "unused-imports/no-unused-vars": [
           "error",
-          { "argsIgnorePattern": "^_" }
-        ]
-      }
+          { "argsIgnorePattern": "^_" },
+        ],
+      },
     },
     // Configuration for testing
     {
@@ -74,8 +74,8 @@
         "plugin:jest/recommended",
         "plugin:jest-formatting/recommended",
         "plugin:testing-library/react",
-        "plugin:jest-dom/recommended"
-      ]
+        "plugin:jest-dom/recommended",
+      ],
     },
     // Configuration for e2e testing (Cypress)
     {
@@ -83,21 +83,8 @@
       "plugins": ["cypress"],
       "extends": ["plugin:cypress/recommended"],
       "parserOptions": {
-        "project": "./cypress/tsconfig.json"
-      }
+        "project": "./cypress/tsconfig.json",
+      },
     },
-    // Configuration for Storybook
-    {
-      "files": ["*.stories.*"],
-      "extends": ["plugin:storybook/recommended"],
-      "rules": {
-        "import/no-extraneous-dependencies": [
-          "error",
-          {
-            "devDependencies": true
-          }
-        ]
-      }
-    }
-  ]
+  ],
 }
