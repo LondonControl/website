@@ -16,6 +16,12 @@ const FAQs = [
   },
   {
     question:
+      "I have created an account on the website but I can't access the forum?",
+    answer:
+      'The website and the forum currently use separate accounts to work. There are plans to fully integrate them together but in the meantime they will remain separate, because of this you will need to make an account on each of them separately.',
+  },
+  {
+    question:
       'The system seems to run very slowly, what can I do to improve performance?',
     answer:
       'There are a number of options that can be set-up in the User Preferences to reduce the processing requirement of the system. These include: switching off MTCA and STCA, setting the Scan Segments to a low number, switching off vector lines and halos, not using radio communication.',
