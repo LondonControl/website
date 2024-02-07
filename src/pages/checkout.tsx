@@ -4,10 +4,12 @@ import { X } from 'lucide-react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { toast } from 'sonner';
 
 import Meta from '@/components/Meta';
 import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/hooks/useAuth';
 import type CartItem from '@/interfaces/CartItem';
@@ -20,6 +22,7 @@ interface Props {}
 const Basket: NextPage<Props> = () => {
   const { user } = useAuth({ middleware: 'auth' });
   const { cartItems, cartTotal, removeFromCart, clearCart } = useCart();
+  const [shouldShowPaypal, setShouldShowPaypal] = useState<boolean>(false);
   const router = useRouter();
 
   if (!user) return null;
@@ -89,7 +92,7 @@ const Basket: NextPage<Props> = () => {
                     <img
                       src="https://placehold.co/200x200?text=LC"
                       alt={item.product.title}
-                      className="h-24 w-24 rounded-md object-cover object-center tablet:h-48 tablet:w-48"
+                      className="size-24 rounded-md object-cover object-center tablet:size-48"
                     />
                   </div>
 
@@ -120,7 +123,7 @@ const Basket: NextPage<Props> = () => {
                             onClick={() => removeFromCart(item.product.id)}
                           >
                             <span className="sr-only">Remove</span>
-                            <X className="h-5 w-5" aria-hidden="true" />
+                            <X className="size-5" aria-hidden="true" />
                           </Button>
                         </div>
                       </div>
@@ -156,6 +159,29 @@ const Basket: NextPage<Props> = () => {
             </dl>
 
             <div className="mt-8">
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="privacyPolicyAgree"
+                  checked={shouldShowPaypal}
+                  onCheckedChange={setShouldShowPaypal}
+                />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  By selecting this and purchasing you agree to our{' '}
+                  <Link
+                    href="/terms"
+                    className="font-semibold text-gray-900 hover:underline"
+                  >
+                    terms and conditions
+                  </Link>
+                  .
+                </label>
+              </div>
+            </div>
+
+            <div className="mt-8" hidden={!shouldShowPaypal}>
               <PayPalScriptProvider
                 options={{
                   clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ?? '',
@@ -172,7 +198,7 @@ const Basket: NextPage<Props> = () => {
                   }}
                   createOrder={async () => {
                     const itemIds = cartItems.map(
-                      (item: CartItem) => item.product.id
+                      (item: CartItem) => item.product.id,
                     );
                     const orderId = await createPaypalOrder(itemIds);
 
