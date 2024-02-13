@@ -19,7 +19,7 @@ interface Props {}
 const Products: NextPage<Props> = () => {
   const { user } = useAuth({ middleware: 'guest' });
   const { data, error, isLoading } = useSWR(
-    getProductsEndpoint('?paginate=none&is_available=1&includes=images'),
+    getProductsEndpoint('?paginate=none&is_available=1'),
     fetcher,
   );
   const { addToCart, removeFromCart, cartContainsItem } = useCart();

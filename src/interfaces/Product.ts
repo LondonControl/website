@@ -8,8 +8,8 @@ export default interface Product {
   price: number;
   is_available: boolean;
   current_airac: string;
-  type: ProductType;
-  images: any[];
+  type?: ProductType;
+  images?: any[];
   created_at: string;
   updated_at: string;
 }
