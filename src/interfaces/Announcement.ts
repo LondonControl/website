@@ -1,10 +1,8 @@
-export default interface Discount {
+export default interface Announcement {
   id: string;
   title: string;
-  description?: string;
-  code: string;
-  amount: number;
-  is_percentage: boolean;
+  text: string;
+  url?: string;
   starts_at: string;
   expires_at?: string;
   created_at: string;

@@ -9,7 +9,7 @@ interface Props {}
 const Banner: React.FC<Props> = () => {
   const { data, error, isLoading } = useSWR(
     getAnnouncementsEndpoint('?paginate=none&is_visible=1'),
-    fetcher
+    fetcher,
   );
 
   if (isLoading) return null;
@@ -27,7 +27,7 @@ const Banner: React.FC<Props> = () => {
 
           <svg
             viewBox="0 0 2 2"
-            className="mx-2 inline h-0.5 w-0.5 fill-current"
+            className="mx-2 inline size-0.5 fill-current"
             aria-hidden="true"
           >
             <circle cx={1} cy={1} r={1} />

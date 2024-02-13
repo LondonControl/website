@@ -1,13 +1,15 @@
+import type ProductType from './ProductType';
+
 export default interface Product {
   id: string;
   title: string;
   description?: string;
-  product_type_id: string;
-  url?: string;
+  url: string;
   price: number;
   is_available: boolean;
   current_airac: string;
-  created_at?: string;
-  updated_at?: string;
-  key?: string; // No better place to put this yet.
+  type: ProductType;
+  images: any[];
+  created_at: string;
+  updated_at: string;
 }

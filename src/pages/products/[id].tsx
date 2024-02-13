@@ -54,7 +54,7 @@ const IndividualProduct: NextPage<Props> = () => {
                     <img
                       src="https://placehold.co/500x500?text=LC"
                       alt={data.data.title}
-                      className="h-full w-full object-cover object-center tablet:rounded-lg"
+                      className="size-full object-cover object-center tablet:rounded-lg"
                     />
                   </Tab.Panel>
                 </Tab.Panels>

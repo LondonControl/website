@@ -19,8 +19,8 @@ interface Props {}
 const Products: NextPage<Props> = () => {
   const { user } = useAuth({ middleware: 'guest' });
   const { data, error, isLoading } = useSWR(
-    getProductsEndpoint('?paginate=none&is_available=1'),
-    fetcher
+    getProductsEndpoint('?paginate=none&is_available=1&includes=images'),
+    fetcher,
   );
   const { addToCart, removeFromCart, cartContainsItem } = useCart();
 
@@ -58,7 +58,7 @@ const Products: NextPage<Props> = () => {
                     <img
                       src="https://placehold.co/300x300?text=LC"
                       alt={product.title}
-                      className="h-full w-full object-cover object-center tablet:h-full tablet:w-full"
+                      className="size-full object-cover object-center tablet:size-full"
                     />
                   </div>
                 </Link>
