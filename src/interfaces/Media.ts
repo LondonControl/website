@@ -1,6 +1,6 @@
 export default interface Media {
   uuid: string;
-  mame: string;
+  name: string;
   file_name: string;
   preview_url?: string;
   original_url: string;

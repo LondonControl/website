@@ -54,7 +54,7 @@ const Products: NextPage<Props> = () => {
                 className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white"
               >
                 <Link href={`/products/${product.id}`}>
-                  <div className="aspect-h-4 aspect-w-3 tablet:aspect-none bg-gray-200 group-hover:opacity-75 tablet:h-72">
+                  <div className="aspect-h-4 aspect-w-3 bg-gray-200 tablet:aspect-none group-hover:opacity-75 tablet:h-72">
                     <img
                       src="https://placehold.co/300x300?text=LC"
                       alt={product.title}

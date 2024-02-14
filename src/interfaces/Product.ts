@@ -1,3 +1,4 @@
+import type Media from './Media';
 import type ProductType from './ProductType';
 
 export default interface Product {
@@ -9,7 +10,7 @@ export default interface Product {
   is_available: boolean;
   current_airac: string;
   type?: ProductType;
-  images?: any[];
+  images?: Media[];
   created_at: string;
   updated_at: string;
 }
