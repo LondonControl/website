@@ -20,7 +20,7 @@ const Products: NextPage<Props> = () => {
   const { user } = useAuth({ middleware: 'guest' });
   const { data, error, isLoading } = useSWR(
     getProductsEndpoint('?paginate=none&is_available=1'),
-    fetcher
+    fetcher,
   );
   const { addToCart, removeFromCart, cartContainsItem } = useCart();
 
@@ -54,11 +54,11 @@ const Products: NextPage<Props> = () => {
                 className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white"
               >
                 <Link href={`/products/${product.id}`}>
-                  <div className="aspect-h-4 aspect-w-3 tablet:aspect-none bg-gray-200 group-hover:opacity-75 tablet:h-72">
+                  <div className="aspect-h-4 aspect-w-3 bg-gray-200 tablet:aspect-none group-hover:opacity-75 tablet:h-72">
                     <img
                       src="https://placehold.co/300x300?text=LC"
                       alt={product.title}
-                      className="h-full w-full object-cover object-center tablet:h-full tablet:w-full"
+                      className="size-full object-cover object-center tablet:size-full"
                     />
                   </div>
                 </Link>
