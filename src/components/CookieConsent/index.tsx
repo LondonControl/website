@@ -16,7 +16,8 @@ const CookieConsent: React.FC<Props> = () => {
 
   const acceptCookie = () => {
     setHideConsent(true);
-    setCookie('localConsent', true, {});
+    // Rougly a month - need to change so its more persistent.
+    setCookie('localConsent', true, { maxAge: 60 * 60 * 24 * 30 });
   };
 
   if (hideConsent) return null;
