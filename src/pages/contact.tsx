@@ -197,8 +197,9 @@ const Contact: NextPage<Props> = () => {
                   className="font-semibold text-gray-900 hover:underline"
                 >
                   privacy policy
-                </Link>
-                .
+                </Link>{' '}
+                and have read the{' '}
+                <span className="font-semibold text-gray-900">FAQs</span>.
               </Label>
             </div>
 
