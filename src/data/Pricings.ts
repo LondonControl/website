@@ -25,10 +25,10 @@ const Pricings: Pricing[] = [
     isAvailable: true,
   },
   {
-    name: 'Standalone 2023 Data',
+    name: 'Standalone AIRAC Data',
     price: '£24.95',
-    description: 'The 2023 data package for London Control.',
-    features: ['2023 update'],
+    description: 'The latest AIRAC data for London Control.',
+    features: ['2023 update', 'Latest AIRAC data'],
     isAvailable: true,
   },
 ];

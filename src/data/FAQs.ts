@@ -10,6 +10,11 @@ const FAQs = [
       'Due to the amount of work that has gone into providing the data package, we are unable to provide it for free.',
   },
   {
+    question: 'I am having trouble installing, how do I do it?',
+    answer:
+      'After following the download procedure, you will see a .RAR file. You simply need to extract this file (using a program such as WINRAR) to access the required files. If you have purchased just the data, follow the instructions included to update the simulator. If you have also purchased the simulator you first need to run the .EXE which is located in the extracted .RAR file and then continue with the process to update the data.',
+  },
+  {
     question: 'After purchasing, where can I download the files from?',
     answer:
       'In the top right hand corner you will see a USER icon, after clicking on this a dropdown will appear. Inside this dropdown you will see a link which reads DOWNLOADS, this will take you to the downloads page where you can download all of your purchases.',
@@ -36,6 +41,11 @@ const FAQs = [
       'Does London Control have help that I can access when the program is running?',
     answer:
       'Context sensitive help is available through menu options or the <F1> and <F2> keyboard keys.',
+  },
+  {
+    question: 'Will London Control ever be available for MAC?',
+    answer:
+      'This is something that may be looked into in the future but for now it will remain Windows only. In the meantime the simulator does run without issue using various emulators that are available for MAC users.',
   },
 ];
 
