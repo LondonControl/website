@@ -80,6 +80,16 @@ const LearnMore: React.FC<Props> = () => {
             </p>
 
             <p>
+              We are a team of three who each has full-time vocational
+              commitments aside from London Control. Whilst we strive to answer
+              emails and forum posts when they are received, there may sometimes
+              be a delay if we are engaged with other things. We respond to all
+              correspondence (where we consider it is required) and appreciate
+              your patience if occasionally there is a delay between receipt and
+              reply.
+            </p>
+
+            <p>
               Thank you for continuing to support London Control, and thanks to
               Dale McLoughlin for enabling us to continue the excellent work he
               started over twenty years ago.

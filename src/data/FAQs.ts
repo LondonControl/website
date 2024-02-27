@@ -27,6 +27,12 @@ const FAQs = [
   },
   {
     question:
+      'What are the minimum system requirements I need to install and run London Control?',
+    answer:
+      '500MHz or faster processor speed.  Microsoft Windows 98, ME, 2000 or XP.  64MB of RAM.  100MB of free hard disk space.  800x600 pixel display, with at least 16 bit colour.',
+  },
+  {
+    question:
       'The system seems to run very slowly, what can I do to improve performance?',
     answer:
       'There are a number of options that can be set-up in the User Preferences to reduce the processing requirement of the system. These include: switching off MTCA and STCA, setting the Scan Segments to a low number, switching off vector lines and halos, not using radio communication.',
