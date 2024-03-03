@@ -67,6 +67,8 @@ const Navigation: React.FC<Props> = () => {
           <div className="hidden items-center space-x-4 tablet:flex">
             <NavLink href="/products">Products</NavLink>
 
+            <NavLink href="/documents">Documents</NavLink>
+
             <NavLink href="/news">News</NavLink>
 
             <NavLink href="https://forum.londoncontrol.com">Forum</NavLink>
@@ -82,7 +84,7 @@ const Navigation: React.FC<Props> = () => {
                   <Sheet>
                     <SheetTrigger asChild>
                       <Button variant="ghost" className="space-x-2">
-                        <ShoppingCart className="h-5 w-5" />
+                        <ShoppingCart className="size-5" />
                         {cartItems.length > 0 && (
                           <span>{cartItems.length}</span>
                         )}
@@ -103,7 +105,7 @@ const Navigation: React.FC<Props> = () => {
                             <img
                               src="https://placehold.co/50x50?text=LC"
                               alt={item.product.title}
-                              className="h-24 w-24 flex-none rounded-md bg-gray-200 object-cover object-center"
+                              className="size-24 flex-none rounded-md bg-gray-200 object-cover object-center"
                             />
 
                             <div className="flex flex-col justify-between space-y-4">
@@ -148,7 +150,7 @@ const Navigation: React.FC<Props> = () => {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost">
-                        <UserIcon className="h-5 w-5" />
+                        <UserIcon className="size-5" />
                       </Button>
                     </DropdownMenuTrigger>
 
@@ -160,7 +162,7 @@ const Navigation: React.FC<Props> = () => {
                       <DropdownMenuGroup>
                         <DropdownMenuItem asChild>
                           <Link href="/orders" className="hover:cursor-pointer">
-                            <ClipboardList className="mr-2 h-4 w-4" />
+                            <ClipboardList className="mr-2 size-4" />
                             <span>Orders</span>
                           </Link>
                         </DropdownMenuItem>
@@ -170,7 +172,7 @@ const Navigation: React.FC<Props> = () => {
                             href="/downloads"
                             className="hover:cursor-pointer"
                           >
-                            <Download className="mr-2 h-4 w-4" />
+                            <Download className="mr-2 size-4" />
                             <span>Downloads</span>
                           </Link>
                         </DropdownMenuItem>
@@ -180,7 +182,7 @@ const Navigation: React.FC<Props> = () => {
                             href="/profile"
                             className="hover:cursor-pointer"
                           >
-                            <UserCog className="mr-2 h-4 w-4" />
+                            <UserCog className="mr-2 size-4" />
                             <span>Profile</span>
                           </Link>
                         </DropdownMenuItem>
@@ -192,7 +194,7 @@ const Navigation: React.FC<Props> = () => {
                         onClick={logout}
                         className="hover:cursor-pointer"
                       >
-                        <LogOut className="mr-2 h-4 w-4" />
+                        <LogOut className="mr-2 size-4" />
                         <span>Logout</span>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -219,9 +221,9 @@ const Navigation: React.FC<Props> = () => {
               onClick={() => setOpen((current) => !current)}
             >
               {open ? (
-                <XIcon className="h-6 w-6" />
+                <XIcon className="size-6" />
               ) : (
-                <MenuIcon className="h-6 w-6" />
+                <MenuIcon className="size-6" />
               )}
             </Button>
           </div>
@@ -237,6 +239,13 @@ const Navigation: React.FC<Props> = () => {
               active={router.pathname === '/products'}
             >
               Products
+            </ResponsiveNavLink>
+
+            <ResponsiveNavLink
+              href="/documents"
+              active={router.pathname === '/documents'}
+            >
+              Documents
             </ResponsiveNavLink>
 
             <ResponsiveNavLink

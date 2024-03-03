@@ -21,3 +21,7 @@ export const getNewsPostsEndpoint = (filters: string) => {
 export const getAnnouncementsEndpoint = (filters: string) => {
   return `/api/announcements${filters}`;
 };
+
+export const getDocumentsEndpoint = (filters: string) => {
+  return `/api/documents${filters}`;
+};

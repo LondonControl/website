@@ -24,7 +24,7 @@ const formSchema = z.object({
 });
 
 const UpdateProfileInformationForm = () => {
-  const { user, resendEmailVerification } = useAuth({
+  const { user } = useAuth({
     middleware: 'auth',
   });
 
@@ -110,7 +110,7 @@ const UpdateProfileInformationForm = () => {
             )}
           />
 
-          {user?.email_verified_at === null && (
+          {/* {user?.email_verified_at === null && (
             <div>
               <p className="mt-2 text-sm text-gray-800">
                 Your email address is unverified.
@@ -129,7 +129,7 @@ const UpdateProfileInformationForm = () => {
                 </button>
               </p>
             </div>
-          )}
+          )} */}
 
           <div className="flex justify-end">
             <Button type="submit">Save</Button>
