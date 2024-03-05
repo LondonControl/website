@@ -35,7 +35,7 @@ const MainStatsSection: React.FC<Props> = () => {
           <div className="mx-auto flex max-w-xs flex-col gap-y-4">
             <dt className="text-base leading-7 text-gray-400">Flight plans</dt>
             <dd className="order-first text-3xl font-semibold tracking-tight text-white tablet:text-5xl">
-              11,000+
+              14,000+
             </dd>
           </div>
         </dl>
