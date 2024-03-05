@@ -21,7 +21,8 @@ interface Props {}
 
 const Basket: NextPage<Props> = () => {
   const { user } = useAuth({ middleware: 'auth' });
-  const { cartItems, cartTotal, removeFromCart, clearCart } = useCart();
+  const { cartItems, cartTotal, cartDiscountTotal, removeFromCart, clearCart } =
+    useCart();
   const [shouldShowPaypal, setShouldShowPaypal] = useState<boolean>(false);
   const router = useRouter();
 
@@ -148,12 +149,26 @@ const Basket: NextPage<Props> = () => {
 
             <dl className="mt-6 space-y-4">
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+                <dt className="text-sm text-gray-700">Subtotal</dt>
+
+                <dd className="text-sm text-gray-700">£{cartTotal / 100}</dd>
+              </div>
+
+              <div className="flex items-center justify-between border-gray-200">
+                <dt className="text-sm text-gray-700">Discount</dt>
+
+                <dd className="text-sm text-gray-700">
+                  £{cartDiscountTotal / 100}
+                </dd>
+              </div>
+
+              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="text-base font-medium text-gray-900">
                   Order total
                 </dt>
 
                 <dd className="text-base font-medium text-gray-900">
-                  £{cartTotal / 100}
+                  £{(cartTotal - cartDiscountTotal) / 100}
                 </dd>
               </div>
             </dl>

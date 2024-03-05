@@ -1,6 +1,8 @@
 import { createContext, useContext, useState } from 'react';
 
+import type CartDiscount from '@/interfaces/CartDiscount';
 import type CartItem from '@/interfaces/CartItem';
+import type Discount from '@/interfaces/Discount';
 import type Product from '@/interfaces/Product';
 
 interface CartContextValue {
@@ -9,6 +11,11 @@ interface CartContextValue {
   addToCart: (product: Product) => void;
   removeFromCart: (productId: string) => void;
   clearCart: () => void;
+  cartDiscount: CartDiscount | null;
+  cartContainsDiscount: (discountId: string) => boolean;
+  applyDiscount: (discount: Discount) => void;
+  removeDiscount: (discountId: string) => void;
+  cartDiscountTotal: number;
   cartTotal: number;
   cartCount: number;
 }
@@ -19,6 +26,11 @@ const CartContext = createContext<CartContextValue>({
   addToCart: () => {},
   removeFromCart: () => {},
   clearCart: () => {},
+  cartDiscount: null,
+  cartContainsDiscount: () => false,
+  applyDiscount: () => {},
+  removeDiscount: () => {},
+  cartDiscountTotal: 0,
   cartTotal: 0,
   cartCount: 0,
 });
@@ -33,10 +45,11 @@ interface Props {
 
 export const CartProvider = ({ children }: Props) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartDiscount, setCartDiscount] = useState<CartDiscount | null>(null);
 
   const cartContainsItem = (productId: string) => {
     const existingCartItemIndex = cartItems.findIndex(
-      (item) => item.product.id === productId
+      (item) => item.product.id === productId,
     );
 
     return existingCartItemIndex !== -1;
@@ -52,7 +65,7 @@ export const CartProvider = ({ children }: Props) => {
 
   const removeFromCart = (productId: string) => {
     const updatedCartItems = cartItems.filter(
-      (item) => item.product.id !== productId
+      (item) => item.product.id !== productId,
     );
 
     setCartItems(updatedCartItems);
@@ -60,12 +73,35 @@ export const CartProvider = ({ children }: Props) => {
 
   const cartTotal = cartItems.reduce(
     (total, item) => total + item.product.price,
-    0
+    0,
   );
 
   const clearCart = () => {
     setCartItems([]);
   };
+
+  const cartContainsDiscount = (discountId: string) => {
+    return discountId === cartDiscount?.discount.id;
+  };
+
+  const applyDiscount = (discount: Discount) => {
+    if (cartContainsDiscount(discount.id)) {
+      return;
+    }
+
+    setCartDiscount({ discount });
+  };
+
+  const removeDiscount = (discountId: string) => {
+    if (!cartContainsDiscount(discountId)) {
+      return;
+    }
+
+    setCartDiscount(null);
+  };
+
+  // Get cart total, get the discount, - the amount or %.
+  const cartDiscountTotal = 0;
 
   const cartCount = cartItems.length;
 
@@ -77,6 +113,11 @@ export const CartProvider = ({ children }: Props) => {
         addToCart,
         removeFromCart,
         clearCart,
+        cartDiscount,
+        cartContainsDiscount,
+        applyDiscount,
+        removeDiscount,
+        cartDiscountTotal,
         cartTotal,
         cartCount,
       }}
