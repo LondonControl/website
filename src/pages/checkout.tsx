@@ -1,14 +1,26 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import { zodResolver } from '@hookform/resolvers/zod';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { X } from 'lucide-react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import * as z from 'zod';
 
 import Meta from '@/components/Meta';
 import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/hooks/useAuth';
@@ -19,12 +31,33 @@ import { AppConfig } from '@/utils/AppConfig';
 
 interface Props {}
 
+const formSchema = z.object({
+  code: z.string(),
+});
+
 const Basket: NextPage<Props> = () => {
   const { user } = useAuth({ middleware: 'auth' });
-  const { cartItems, cartTotal, cartDiscountTotal, removeFromCart, clearCart } =
-    useCart();
+  const {
+    cartItems,
+    cartTotal,
+    cartSubtotal,
+    cartDiscount,
+    cartContainsDiscount,
+    cartDiscountTotal,
+    removeFromCart,
+    clearCart,
+    applyDiscount,
+    removeDiscount,
+  } = useCart();
   const [shouldShowPaypal, setShouldShowPaypal] = useState<boolean>(false);
   const router = useRouter();
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      code: '',
+    },
+  });
 
   if (!user) return null;
 
@@ -63,6 +96,37 @@ const Basket: NextPage<Props> = () => {
     }
   };
 
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const response = await axios.get(
+        `/api/discounts/verify?code=${values.code}`,
+      );
+
+      if (cartContainsDiscount(response.data.data.id)) {
+        form.reset();
+        toast.error('Discount code already applied');
+        return;
+      }
+
+      applyDiscount(response.data.data);
+
+      form.reset();
+      toast.success('Discount applied successfully');
+    } catch (error: any) {
+      if (error.response.status === 404) {
+        toast.error('Discount code invalid');
+        return;
+      }
+
+      if (error.response.status === 401) {
+        toast.error('Discount code has been used already');
+        return;
+      }
+
+      toast.error('Something went wrong, please try again');
+    }
+  };
+
   return (
     <MainLayout
       meta={
@@ -77,7 +141,7 @@ const Basket: NextPage<Props> = () => {
           Checkout
         </h1>
 
-        <form className="mt-12 laptop:grid laptop:grid-cols-12 laptop:items-start laptop:gap-x-12 desktop:gap-x-16">
+        <div className="mt-12 laptop:grid laptop:grid-cols-12 laptop:items-start laptop:gap-x-12 desktop:gap-x-16">
           <section aria-labelledby="cart-heading" className="laptop:col-span-7">
             <h2 id="cart-heading" className="sr-only">
               Items in your basket
@@ -149,16 +213,63 @@ const Basket: NextPage<Props> = () => {
 
             <dl className="mt-6 space-y-4">
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="text-sm text-gray-700">Subtotal</dt>
+                <Form {...form}>
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="flex w-full items-end space-x-2"
+                  >
+                    <FormField
+                      control={form.control}
+                      name="code"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Discount Code</FormLabel>
 
-                <dd className="text-sm text-gray-700">£{cartTotal / 100}</dd>
+                          <FormControl>
+                            <Input placeholder="Discount Code" {...field} />
+                          </FormControl>
+
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <Button type="submit">Apply</Button>
+                  </form>
+                </Form>
               </div>
 
-              <div className="flex items-center justify-between border-gray-200">
+              {cartDiscount && (
+                <span className="inline-flex items-center gap-x-0.5 rounded-md bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
+                  {cartDiscount.discount.code}
+                  <button
+                    onClick={() => removeDiscount(cartDiscount.discount.id)}
+                    type="button"
+                    className="group relative -mr-1 size-3.5 rounded-sm hover:bg-green-600/20"
+                  >
+                    <span className="sr-only">Remove</span>
+                    <svg
+                      viewBox="0 0 14 14"
+                      className="size-3.5 stroke-green-800/50 group-hover:stroke-green-800/75"
+                    >
+                      <path d="M4 4l6 6m0-6l-6 6" />
+                    </svg>
+                    <span className="absolute -inset-1" />
+                  </button>
+                </span>
+              )}
+
+              <div className="flex items-center justify-between border-gray-200 pt-2">
+                <dt className="text-sm text-gray-700">Subtotal</dt>
+
+                <dd className="text-sm text-gray-700">£{cartSubtotal / 100}</dd>
+              </div>
+
+              <div className="flex items-center justify-between">
                 <dt className="text-sm text-gray-700">Discount</dt>
 
                 <dd className="text-sm text-gray-700">
-                  £{cartDiscountTotal / 100}
+                  -£{(cartDiscountTotal / 100).toFixed(2)}
                 </dd>
               </div>
 
@@ -168,7 +279,7 @@ const Basket: NextPage<Props> = () => {
                 </dt>
 
                 <dd className="text-base font-medium text-gray-900">
-                  £{(cartTotal - cartDiscountTotal) / 100}
+                  £{(cartTotal / 100).toFixed(2)}
                 </dd>
               </div>
             </dl>
@@ -229,7 +340,7 @@ const Basket: NextPage<Props> = () => {
               </PayPalScriptProvider>
             </div>
           </section>
-        </form>
+        </div>
       </div>
     </MainLayout>
   );

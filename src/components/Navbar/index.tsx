@@ -47,7 +47,7 @@ const Navigation: React.FC<Props> = () => {
   const router = useRouter();
   const { logout, user } = useAuth({ middleware: 'guest' });
   const [open, setOpen] = useState<boolean>(false);
-  const { cartItems, cartTotal, removeFromCart } = useCart();
+  const { cartItems, cartSubtotal, removeFromCart } = useCart();
 
   return (
     <nav className="bg-white">
@@ -134,7 +134,7 @@ const Navigation: React.FC<Props> = () => {
 
                       <p className="mt-6 flex items-center justify-between border-t border-gray-200 pt-6 text-sm font-medium text-gray-900">
                         <span className="text-base">Total</span>
-                        <span className="text-base">£{cartTotal / 100}</span>
+                        <span className="text-base">£{cartSubtotal / 100}</span>
                       </p>
 
                       <SheetFooter>
