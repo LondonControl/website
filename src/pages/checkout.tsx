@@ -61,13 +61,14 @@ const Basket: NextPage<Props> = () => {
 
   if (!user) return null;
 
-  const createPaypalOrder = async (items: string[]) => {
+  const createPaypalOrder = async (items: string[], discountId: any) => {
     try {
       const itemIds = items.map((item) => ({ id: item }));
 
       await csrf();
       const response = await axios.post('/api/order/create', {
         user_id: user?.id,
+        discount_id: discountId ?? null,
         order_items: itemIds,
       });
 
@@ -88,6 +89,9 @@ const Basket: NextPage<Props> = () => {
       if (response.status === 200) {
         toast.success('Purchase successfull');
       }
+
+      form.reset();
+      removeDiscount(cartDiscount?.discount.id ?? '');
 
       return response;
     } catch (err) {
@@ -240,17 +244,17 @@ const Basket: NextPage<Props> = () => {
               </div>
 
               {cartDiscount && (
-                <span className="inline-flex items-center gap-x-0.5 rounded-md bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
+                <span className="inline-flex items-center gap-x-1 rounded-md bg-input px-2 py-1 text-xs font-medium text-gray-800">
                   {cartDiscount.discount.code}
                   <button
                     onClick={() => removeDiscount(cartDiscount.discount.id)}
                     type="button"
-                    className="group relative -mr-1 size-3.5 rounded-sm hover:bg-green-600/20"
+                    className="group relative -mr-1 size-3.5 rounded-sm hover:bg-gray-600/20"
                   >
                     <span className="sr-only">Remove</span>
                     <svg
                       viewBox="0 0 14 14"
-                      className="size-3.5 stroke-green-800/50 group-hover:stroke-green-800/75"
+                      className="size-3.5 stroke-gray-800/75 group-hover:stroke-gray-800"
                     >
                       <path d="M4 4l6 6m0-6l-6 6" />
                     </svg>
@@ -316,6 +320,7 @@ const Basket: NextPage<Props> = () => {
                 }}
               >
                 <PayPalButtons
+                  forceReRender={[cartItems, cartDiscount]}
                   style={{
                     color: 'gold',
                     shape: 'rect',
@@ -323,10 +328,14 @@ const Basket: NextPage<Props> = () => {
                     height: 50,
                   }}
                   createOrder={async () => {
-                    const itemIds = cartItems.map(
+                    const itemIds = await cartItems.map(
                       (item: CartItem) => item.product.id,
                     );
-                    const orderId = await createPaypalOrder(itemIds);
+
+                    const orderId = await createPaypalOrder(
+                      itemIds,
+                      cartDiscount?.discount.id,
+                    );
 
                     return orderId;
                   }}
