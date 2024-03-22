@@ -100,6 +100,31 @@ const Basket: NextPage<Props> = () => {
     }
   };
 
+  const createDemoOrder = async (items: string[], discountId: any) => {
+    try {
+      const itemIds = items.map((item) => ({ id: item }));
+
+      await csrf();
+      const response = await axios.post('/api/order-demo/create', {
+        user_id: user?.id,
+        discount_id: discountId ?? null,
+        order_items: itemIds,
+      });
+
+      if (response.status === 200) {
+        toast.success('Purchase successfull');
+      }
+
+      form.reset();
+      removeDiscount(cartDiscount?.discount.id ?? '');
+
+      return response;
+    } catch (err) {
+      toast.error('An error occurred');
+      return null;
+    }
+  };
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const response = await axios.get(
@@ -220,7 +245,7 @@ const Basket: NextPage<Props> = () => {
                 <Form {...form}>
                   <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="flex w-full items-end space-x-2"
+                    className="flex items-end space-x-2"
                   >
                     <FormField
                       control={form.control}
@@ -312,41 +337,59 @@ const Basket: NextPage<Props> = () => {
             </div>
 
             <div className="mt-8" hidden={!shouldShowPaypal}>
-              <PayPalScriptProvider
-                options={{
-                  clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ?? '',
-                  currency: 'GBP',
-                  intent: 'capture',
-                }}
-              >
-                <PayPalButtons
-                  forceReRender={[cartItems, cartDiscount]}
-                  style={{
-                    color: 'gold',
-                    shape: 'rect',
-                    label: 'pay',
-                    height: 50,
-                  }}
-                  createOrder={async () => {
+              {cartTotal === 0 ? (
+                <Button
+                  className="w-full"
+                  onClick={async () => {
                     const itemIds = await cartItems.map(
                       (item: CartItem) => item.product.id,
                     );
 
-                    const orderId = await createPaypalOrder(
-                      itemIds,
-                      cartDiscount?.discount.id,
-                    );
-
-                    return orderId;
-                  }}
-                  onApprove={async (data) => {
-                    await capturePaypalOrder(data.orderID);
+                    await createDemoOrder(itemIds, cartDiscount?.discount.id);
 
                     clearCart();
                     router.push('/orders');
                   }}
-                />
-              </PayPalScriptProvider>
+                >
+                  Order now
+                </Button>
+              ) : (
+                <PayPalScriptProvider
+                  options={{
+                    clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ?? '',
+                    currency: 'GBP',
+                    intent: 'capture',
+                  }}
+                >
+                  <PayPalButtons
+                    forceReRender={[cartItems, cartDiscount]}
+                    style={{
+                      color: 'gold',
+                      shape: 'rect',
+                      label: 'pay',
+                      height: 50,
+                    }}
+                    createOrder={async () => {
+                      const itemIds = await cartItems.map(
+                        (item: CartItem) => item.product.id,
+                      );
+
+                      const orderId = await createPaypalOrder(
+                        itemIds,
+                        cartDiscount?.discount.id,
+                      );
+
+                      return orderId;
+                    }}
+                    onApprove={async (data) => {
+                      await capturePaypalOrder(data.orderID);
+
+                      clearCart();
+                      router.push('/orders');
+                    }}
+                  />
+                </PayPalScriptProvider>
+              )}
             </div>
           </section>
         </div>
