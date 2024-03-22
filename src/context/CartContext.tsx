@@ -16,6 +16,7 @@ interface CartContextValue {
   applyDiscount: (discount: Discount) => void;
   removeDiscount: (discountId: string) => void;
   cartDiscountTotal: number;
+  cartSubtotal: number;
   cartTotal: number;
   cartCount: number;
 }
@@ -31,6 +32,7 @@ const CartContext = createContext<CartContextValue>({
   applyDiscount: () => {},
   removeDiscount: () => {},
   cartDiscountTotal: 0,
+  cartSubtotal: 0,
   cartTotal: 0,
   cartCount: 0,
 });
@@ -71,7 +73,7 @@ export const CartProvider = ({ children }: Props) => {
     setCartItems(updatedCartItems);
   };
 
-  const cartTotal = cartItems.reduce(
+  const cartSubtotal = cartItems.reduce(
     (total, item) => total + item.product.price,
     0,
   );
@@ -101,7 +103,16 @@ export const CartProvider = ({ children }: Props) => {
   };
 
   // Get cart total, get the discount, - the amount or %.
-  const cartDiscountTotal = 0;
+  let cartDiscountTotal = 0;
+  if (cartDiscount) {
+    if (cartDiscount.discount.is_percentage) {
+      cartDiscountTotal = (cartSubtotal * cartDiscount.discount.amount) / 10000;
+    } else {
+      cartDiscountTotal = cartSubtotal - cartDiscount.discount.amount;
+    }
+  }
+
+  const cartTotal = cartSubtotal - cartDiscountTotal;
 
   const cartCount = cartItems.length;
 
@@ -118,6 +129,7 @@ export const CartProvider = ({ children }: Props) => {
         applyDiscount,
         removeDiscount,
         cartDiscountTotal,
+        cartSubtotal,
         cartTotal,
         cartCount,
       }}
