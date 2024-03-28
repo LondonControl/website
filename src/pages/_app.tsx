@@ -1,5 +1,7 @@
 import '../styles/global.css';
 
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { AppProps } from 'next/app';
 import React from 'react';
 
@@ -11,6 +13,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <CartProvider>
       <Component {...pageProps} />
+      <SpeedInsights />
     </CartProvider>
   );
 };
