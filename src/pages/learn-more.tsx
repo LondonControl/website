@@ -25,7 +25,7 @@ const LearnMore: React.FC<Props> = () => {
         <div className="mt-6 tablet:mt-12">
           <div className="mx-auto space-y-6">
             <h2>
-              London Control, fully updated to 1 st January 2024, is now
+              London Control, fully updated to the latest AIRAC, is now
               available!
             </h2>
 
