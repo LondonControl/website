@@ -57,7 +57,7 @@ const PricingSection: React.FC<Props> = () => {
                 >
                   {option.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-x-3">
-                      <Check className="h-4 w-4 flex-none text-black" />
+                      <Check className="size-4 flex-none text-black" />
                       {feature}
                     </li>
                   ))}

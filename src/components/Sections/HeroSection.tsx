@@ -36,7 +36,7 @@ const HeroSection: React.FC<Props> = () => {
         </div>
 
         <img
-          src="/assets/images/lc_screenshot.png"
+          src="/assets/images/lc_landing.png"
           alt="App screenshot"
           width={2432}
           height={1442}
