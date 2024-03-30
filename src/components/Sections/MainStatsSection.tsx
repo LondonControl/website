@@ -2,7 +2,7 @@ interface Props {}
 
 const MainStatsSection: React.FC<Props> = () => {
   return (
-    <section className="bg-gray-900 py-24 tablet:py-32">
+    <section className="bg-primary py-24 tablet:py-32">
       <div className="mx-auto max-w-site px-6 laptop:px-8">
         <dl className="grid grid-cols-1 gap-x-8 gap-y-16 text-center laptop:grid-cols-4">
           <div className="mx-auto flex max-w-xs flex-col gap-y-4">

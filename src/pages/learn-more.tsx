@@ -45,7 +45,7 @@ const LearnMore: React.FC<Props> = () => {
               <li>Call radii and menu layouts repositioned</li>
               <li>
                 Flight plans added, bringing the total available traffic to in
-                excess of 11,000
+                excess of 14,000
               </li>
               <li>SRD and RAD compliance checked</li>
               <li>
