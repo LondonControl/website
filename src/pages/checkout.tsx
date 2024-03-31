@@ -184,14 +184,19 @@ const Basket: NextPage<Props> = () => {
                 <li key={item.product.id} className="flex py-6 tablet:py-10">
                   <div className="shrink-0">
                     <img
-                      src="https://placehold.co/200x200?text=LC"
+                      src={
+                        Object.keys(item.product.images || []).length === 0
+                          ? `https://placehold.co/200x200?text=LC`
+                          : Object.values(item.product.images || [])[0]
+                              ?.original_url
+                      }
                       alt={item.product.title}
                       className="size-24 rounded-md object-cover object-center tablet:size-48"
                     />
                   </div>
 
                   <div className="ml-4 flex flex-1 flex-col justify-between tablet:ml-6">
-                    <div className="relative pr-9 tablet:grid tablet:grid-cols-2 tablet:gap-x-6 tablet:pr-0">
+                    <div className="relative pr-9">
                       <div>
                         <div className="flex justify-between">
                           <h3 className="text-sm">
@@ -204,8 +209,12 @@ const Basket: NextPage<Props> = () => {
                           </h3>
                         </div>
 
-                        <p className="mt-1 text-sm font-medium text-gray-900">
+                        <p className="mt-1 text-sm font-semibold text-gray-900">
                           £{item.product.price / 100}
+                        </p>
+
+                        <p className="mt-2 hidden text-sm tablet:block">
+                          {item.product.description}
                         </p>
                       </div>
 

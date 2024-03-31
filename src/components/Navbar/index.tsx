@@ -103,7 +103,13 @@ const Navigation: React.FC<Props> = () => {
                             className="flex space-x-6 py-2"
                           >
                             <img
-                              src="https://placehold.co/50x50?text=LC"
+                              src={
+                                Object.keys(item.product.images || [])
+                                  .length === 0
+                                  ? `https://placehold.co/50x50?text=LC`
+                                  : Object.values(item.product.images || [])[0]
+                                      ?.preview_url
+                              }
                               alt={item.product.title}
                               className="size-24 flex-none rounded-md bg-gray-200 object-cover object-center"
                             />
