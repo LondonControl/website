@@ -42,6 +42,12 @@ const Profile: NextPage = () => {
             </div>
           </div>
 
+          {/* <div className="border bg-white p-4 tablet:rounded-lg tablet:p-8">
+            <div className="max-w-xl">
+              <UpdateSettingsForm />
+            </div>
+          </div> */}
+
           <div className="border bg-white p-4 tablet:rounded-lg tablet:p-8">
             <div className="max-w-xl">
               <DeleteAccountForm />

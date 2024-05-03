@@ -75,7 +75,7 @@ const Login: NextPage = () => {
     });
 
     if (errors.length > 0) {
-      toast.error('Something went wrong, please try again');
+      toast.error('Something went wrong, please try again!');
     }
   };
 
@@ -107,7 +107,7 @@ const Login: NextPage = () => {
 
                   <InputError
                     messages={errors?.filter(
-                      (error: ErrorInput) => error.source?.pointer === '/email'
+                      (error: ErrorInput) => error.source?.pointer === '/email',
                     )}
                     className="mt-2"
                   />
@@ -130,7 +130,7 @@ const Login: NextPage = () => {
 
                   <InputError
                     messages={errors?.filter(
-                      (error: ErrorInput) => error.source?.pointer === '/email'
+                      (error: ErrorInput) => error.source?.pointer === '/email',
                     )}
                     className="mt-2"
                   />
