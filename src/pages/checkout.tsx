@@ -133,26 +133,26 @@ const Basket: NextPage<Props> = () => {
 
       if (cartContainsDiscount(response.data.data.id)) {
         form.reset();
-        toast.error('Discount code already applied');
+        toast.error('The discount code has already been applied!');
         return;
       }
 
       applyDiscount(response.data.data);
 
       form.reset();
-      toast.success('Discount applied successfully');
+      toast.success('The discount has been applied successfully!');
     } catch (error: any) {
       if (error.response.status === 404) {
-        toast.error('Discount code invalid');
+        toast.error(error.response.data.errors[0].detail);
         return;
       }
 
-      if (error.response.status === 401) {
-        toast.error('Discount code has been used already');
+      if (error.response.status === 422) {
+        toast.error(error.response.data.errors[0].detail);
         return;
       }
 
-      toast.error('Something went wrong, please try again');
+      toast.error('Something went wrong, please try again!');
     }
   };
 

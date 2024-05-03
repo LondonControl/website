@@ -30,7 +30,7 @@ const formSchema = z
     {
       message: 'Passwords must match',
       path: ['passwordConfirmation'],
-    }
+    },
   );
 
 const UpdatePasswordForm = () => {
@@ -57,7 +57,7 @@ const UpdatePasswordForm = () => {
         password_confirmation: values.passwordConfirmation,
       })
       .then(() => {
-        toast.success('Password updated successfully');
+        toast.success('Password updated successfully!');
       })
       .catch((error) => {
         if (error.response.status !== 422) throw error;
@@ -66,7 +66,7 @@ const UpdatePasswordForm = () => {
       });
 
     if (errors.length > 0) {
-      toast.error('Something went wrong, please try again');
+      toast.error('Something went wrong, please try again!');
     }
   };
 

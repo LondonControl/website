@@ -50,13 +50,13 @@ const ForgotPassword: NextPage = () => {
     await forgotPassword({ email: values.email, setErrors, setStatus });
 
     if (errors.length > 0) {
-      toast.error('Something went wrong, please try again');
+      toast.error('Something went wrong, please try again!');
 
       return;
     }
 
     form.reset();
-    toast.success('Password reset email sent successfully');
+    toast.success('Password reset email sent successfully!');
   };
 
   return (
@@ -93,7 +93,7 @@ const ForgotPassword: NextPage = () => {
 
                   <InputError
                     messages={errors?.filter(
-                      (error: ErrorInput) => error.source?.pointer === '/email'
+                      (error: ErrorInput) => error.source?.pointer === '/email',
                     )}
                     className="mt-2"
                   />

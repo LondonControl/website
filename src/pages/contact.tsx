@@ -77,11 +77,11 @@ const Contact: NextPage<Props> = () => {
       });
 
       form.reset();
-      toast.success('Message sent successfully');
+      toast.success('Message sent successfully!');
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
-      toast.error('Something went wrong, please try again');
+      toast.error('Something went wrong, please try again!');
     }
   };
 

@@ -39,7 +39,7 @@ const formSchema = z
     {
       message: 'Passwords must match',
       path: ['passwordConfirmation'],
-    }
+    },
   );
 
 const Register: NextPage = () => {
@@ -71,7 +71,7 @@ const Register: NextPage = () => {
     });
 
     if (errors.length > 0) {
-      toast.error('Something went wrong, please try again');
+      toast.error('Something went wrong, please try again!');
     }
   };
 
@@ -100,7 +100,7 @@ const Register: NextPage = () => {
 
                   <InputError
                     messages={errors?.filter(
-                      (error: ErrorInput) => error.source?.pointer === '/name'
+                      (error: ErrorInput) => error.source?.pointer === '/name',
                     )}
                     className="mt-2"
                   />
@@ -123,7 +123,7 @@ const Register: NextPage = () => {
 
                   <InputError
                     messages={errors?.filter(
-                      (error: ErrorInput) => error.source?.pointer === '/email'
+                      (error: ErrorInput) => error.source?.pointer === '/email',
                     )}
                     className="mt-2"
                   />
@@ -147,7 +147,7 @@ const Register: NextPage = () => {
                   <InputError
                     messages={errors?.filter(
                       (error: ErrorInput) =>
-                        error.source?.pointer === '/password'
+                        error.source?.pointer === '/password',
                     )}
                     className="mt-2"
                   />
@@ -175,7 +175,7 @@ const Register: NextPage = () => {
                   <InputError
                     messages={errors?.filter(
                       (error: ErrorInput) =>
-                        error.source?.pointer === '/password_confirmation'
+                        error.source?.pointer === '/password_confirmation',
                     )}
                     className="mt-2"
                   />

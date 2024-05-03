@@ -52,7 +52,7 @@ const UpdateProfileInformationForm = () => {
 
     axios
       .put('/api/profile', { name: values.name, email: values.email })
-      .then(() => toast.success('Profile updated successfully'))
+      .then(() => toast.success('Profile updated successfully!'))
       .catch((error) => {
         if (error.response.status !== 422) throw error;
 
@@ -60,7 +60,7 @@ const UpdateProfileInformationForm = () => {
       });
 
     if (errors.length > 0) {
-      toast.error('Something went wrong, please try again');
+      toast.error('Something went wrong, please try again!');
     }
   };
 
@@ -72,7 +72,7 @@ const UpdateProfileInformationForm = () => {
         </h2>
 
         <p className="mt-1 text-sm text-gray-600">
-          Update your account&apos;s profile information and email address
+          Update your account&apos;s profile information and email address.
         </p>
       </header>
 
