@@ -81,6 +81,8 @@ const Basket: NextPage<Props> = () => {
 
   const capturePaypalOrder = async (paymentId: any) => {
     try {
+      if (paymentId == null) throw new Error('Payment id is null');
+
       await csrf();
       const response = await axios.post('/api/order/capture', {
         transaction_id: paymentId,
@@ -391,6 +393,9 @@ const Basket: NextPage<Props> = () => {
                       return orderId;
                     }}
                     onApprove={async (data) => {
+                      console.log(data);
+                      if (data.orderID == null) return;
+
                       await capturePaypalOrder(data.orderID);
 
                       clearCart();
