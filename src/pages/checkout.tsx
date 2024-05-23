@@ -393,7 +393,6 @@ const Basket: NextPage<Props> = () => {
                       return orderId;
                     }}
                     onApprove={async (data) => {
-                      console.log(data);
                       if (data.orderID == null) return;
 
                       await capturePaypalOrder(data.orderID);
