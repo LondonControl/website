@@ -5,6 +5,7 @@ const CONTACT_MESSAGE_FIELDS: ContactMessage = {
   firstName: 'First Name',
   secondName: 'Second Name',
   email: 'Email',
+  addons: 'Addons',
   subject: 'Subject',
   message: 'Message',
 };
@@ -41,6 +42,7 @@ const handler = async (req: any, res: any) => {
       !data.firstName ||
       !data.secondName ||
       !data.email ||
+      !data.addons ||
       !data.subject ||
       !data.message
     ) {
@@ -56,9 +58,6 @@ const handler = async (req: any, res: any) => {
 
       return res.status(200).json({ success: true });
     } catch (err: any) {
-      // eslint-disable-next-line no-console
-      console.log(err);
-
       return res.status(400).json({ message: err.message });
     }
   }
