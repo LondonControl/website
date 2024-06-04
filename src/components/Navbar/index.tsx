@@ -128,7 +128,7 @@ const Navigation: React.FC<Props> = () => {
                               <Button
                                 type="button"
                                 variant="link"
-                                className="-ml-4"
+                                className="-ml-4 justify-start"
                                 onClick={() => removeFromCart(item.product.id)}
                               >
                                 Remove
