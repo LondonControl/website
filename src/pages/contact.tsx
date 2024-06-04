@@ -19,6 +19,13 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import MainLayout from '@/layouts/Main';
@@ -30,6 +37,9 @@ const formSchema = z.object({
   firstName: z.string().min(2).max(50),
   secondName: z.string().min(2).max(50),
   email: z.string().email(),
+  addons: z.string().refine((value) => ['no', 'yes'].includes(value), {
+    message: "Please select either 'No' or 'Yes'",
+  }),
   subject: z.string().min(2).max(250),
   message: z.string().min(2),
 });
@@ -57,6 +67,7 @@ const Contact: NextPage<Props> = () => {
       firstName: '',
       secondName: '',
       email: '',
+      addons: '',
       subject: '',
       message: '',
     },
@@ -72,6 +83,7 @@ const Contact: NextPage<Props> = () => {
         firstName: values.firstName,
         secondName: values.secondName,
         email: values.email,
+        addons: values.addons,
         subject: values.subject,
         message: values.message,
       });
@@ -79,8 +91,6 @@ const Contact: NextPage<Props> = () => {
       form.reset();
       toast.success('Message sent successfully!');
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
       toast.error('Something went wrong, please try again!');
     }
   };
@@ -146,6 +156,33 @@ const Contact: NextPage<Props> = () => {
                   <FormControl>
                     <Input type="email" placeholder="Email" {...field} />
                   </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="addons"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Using 3rd Party Addons?</FormLabel>
+
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="-" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="no">No</SelectItem>
+                      <SelectItem value="yes">Yes</SelectItem>
+                    </SelectContent>
+                  </Select>
 
                   <FormMessage />
                 </FormItem>
