@@ -2,27 +2,18 @@
 import type { NextPage } from 'next';
 import Markdown from 'react-markdown';
 import Moment from 'react-moment';
-import { MoonLoader } from 'react-spinners';
-import useSWR from 'swr';
 
 import Meta from '@/components/Meta';
 import type NewsPost from '@/interfaces/NewsPost';
 import MainLayout from '@/layouts/Main';
-import { fetcher } from '@/lib/axios';
 import { AppConfig } from '@/utils/AppConfig';
 import { getNewsPostsEndpoint } from '@/utils/Endpoints';
 
-interface Props {}
+interface Props {
+  posts: NewsPost[];
+}
 
-const News: NextPage<Props> = () => {
-  const { data, error, isLoading } = useSWR(
-    getNewsPostsEndpoint('?paginate=none&sorts=-published_at&is_visible=1'),
-    fetcher
-  );
-
-  // eslint-disable-next-line no-console
-  if (error) console.log(error);
-
+const News: NextPage<Props> = ({ posts }) => {
   return (
     <MainLayout
       meta={
@@ -37,22 +28,22 @@ const News: NextPage<Props> = () => {
           News
         </h1>
 
-        {isLoading ? (
+        {posts.length === 0 ? (
           <div className="mt-6 flex items-center justify-center laptop:mt-12">
-            <MoonLoader loading={isLoading} />
+            {/* No posts returned */}
           </div>
         ) : (
           <div className="relative mt-6 tablet:ml-[calc(2rem+1px)] tablet:pb-12 md:ml-[calc(3.5rem+1px)] laptop:ml-[max(calc(14.5rem+1px),calc(100%-80rem))] laptop:mt-12">
             <div className="absolute bottom-0 right-full top-3 mr-7 hidden w-px bg-slate-200 tablet:block md:mr-[3.25rem]"></div>
 
             <div className="space-y-16">
-              {data.data.map((post: NewsPost) => (
+              {posts.map((post: NewsPost) => (
                 <article key={post.id} className="group relative">
                   <div className="absolute -inset-x-4 -inset-y-2.5 md:-inset-x-6 md:-inset-y-4"></div>
 
                   <svg
                     viewBox="0 0 9 9"
-                    className="absolute right-full top-2 mr-6 hidden h-[calc(0.5rem+1px)] w-[calc(0.5rem+1px)] overflow-visible text-slate-200 tablet:block md:mr-12"
+                    className="absolute right-full top-2 mr-6 hidden size-[calc(0.5rem+1px)] overflow-visible text-slate-200 tablet:block md:mr-12"
                   >
                     <circle
                       cx="4.5"
@@ -92,5 +83,20 @@ const News: NextPage<Props> = () => {
     </MainLayout>
   );
 };
+
+export async function getStaticProps() {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_BACKEND_URL +
+      getNewsPostsEndpoint('?paginate=none&sorts=-published_at&is_visible=1'),
+  );
+  const { data: posts } = await res.json();
+
+  return {
+    props: {
+      posts,
+    },
+    revalidate: 10,
+  };
+}
 
 export default News;
