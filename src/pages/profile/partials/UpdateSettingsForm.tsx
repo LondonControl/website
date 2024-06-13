@@ -121,7 +121,9 @@ const UpdateSettingsForm = () => {
           />
 
           <div className="flex justify-end">
-            <Button type="submit">Save</Button>
+            <Button type="submit" disabled>
+              Save
+            </Button>
           </div>
         </form>
       </Form>
