@@ -142,16 +142,22 @@ const Login: NextPage = () => {
               control={form.control}
               name="shouldRemember"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
+                <FormItem>
+                  <div className="flex">
+                    <div className="flex w-full flex-row items-start space-x-3 space-y-0">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
 
-                  <div className="space-y-1 leading-none">
-                    <FormLabel>Remember me</FormLabel>
+                      <FormLabel>Remember me</FormLabel>
+                    </div>
+
+                    <Button variant="link" asChild className="h-4 p-0">
+                      <Link href="/forgot-password">Forgot your password?</Link>
+                    </Button>
                   </div>
 
                   <FormMessage />
@@ -159,17 +165,20 @@ const Login: NextPage = () => {
               )}
             />
 
-            <div className="flex items-center justify-end">
-              <Button variant="link" asChild>
-                <Link href="/forgot-password">Forgot your password?</Link>
-              </Button>
-
-              <Button type="submit" className="ml-2">
-                Login
-              </Button>
-            </div>
+            {/* <div className="flex items-center justify-end"> */}
+            <Button type="submit" className="w-full">
+              Login
+            </Button>
+            {/* </div> */}
           </form>
         </Form>
+
+        <p className="mt-4 text-sm">
+          Don&apos;t have an account?{' '}
+          <Button variant="link" asChild className="ml-2 h-4 p-0">
+            <Link href="/register">Register</Link>
+          </Button>
+        </p>
       </AuthCard>
     </GuestLayout>
   );

@@ -9,6 +9,7 @@ import { AppConfig } from '@/utils/AppConfig';
 import DeleteAccountForm from './partials/DeleteAccountForm';
 import UpdatePasswordForm from './partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './partials/UpdateProfileInformationForm';
+import UpdateSettingsForm from './partials/UpdateSettingsForm';
 
 const Profile: NextPage = () => {
   const { user } = useAuth({ middleware: 'auth' });
@@ -29,6 +30,8 @@ const Profile: NextPage = () => {
           Profile
         </h1>
 
+        <aside className="hidden laptop:mt-12 laptop:block">YTEST</aside>
+
         <div className="mt-6 space-y-6 laptop:mt-12">
           <div className="border bg-white p-4 tablet:rounded-lg tablet:p-8">
             <div className="max-w-xl">
@@ -42,11 +45,11 @@ const Profile: NextPage = () => {
             </div>
           </div>
 
-          {/* <div className="border bg-white p-4 tablet:rounded-lg tablet:p-8">
+          <div className="border bg-white p-4 tablet:rounded-lg tablet:p-8">
             <div className="max-w-xl">
               <UpdateSettingsForm />
             </div>
-          </div> */}
+          </div>
 
           <div className="border bg-white p-4 tablet:rounded-lg tablet:p-8">
             <div className="max-w-xl">
