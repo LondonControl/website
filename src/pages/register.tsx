@@ -183,15 +183,16 @@ const Register: NextPage = () => {
               )}
             />
 
-            <div className="flex items-center justify-end">
-              <Button variant="link" asChild>
-                <Link href="/login">Have an account?</Link>
-              </Button>
+            <Button type="submit" className="w-full">
+              Register
+            </Button>
 
-              <Button type="submit" className="ml-2">
-                Register
+            <p className="mt-4 text-sm">
+              Have an account?{' '}
+              <Button variant="link" asChild className="ml-2 h-4 p-0">
+                <Link href="/login">Login</Link>
               </Button>
-            </div>
+            </p>
           </form>
         </Form>
       </AuthCard>
