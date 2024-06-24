@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -18,6 +18,7 @@ import { useAuth } from '@/hooks/useAuth';
 import axios, { csrf } from '@/lib/axios';
 
 const formSchema = z.object({
+  communication_emails: z.boolean().default(false).optional(),
   marketing_emails: z.boolean().default(true).optional(),
   security_emails: z.boolean().default(true),
 });
@@ -32,13 +33,22 @@ const UpdateSettingsForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      communication_emails: false,
       marketing_emails: true,
       security_emails: true,
     },
   });
 
-  // TODO: replace this with useEffect.
-  if (!user) return null;
+  useEffect(() => {
+    if (user !== undefined) {
+      form.setValue(
+        'communication_emails',
+        user.settings?.emails?.communication,
+      );
+      form.setValue('marketing_emails', user.settings?.emails?.marketing);
+      form.setValue('security_emails', user.settings?.emails?.security);
+    }
+  }, [user]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setErrors([]);
@@ -47,8 +57,11 @@ const UpdateSettingsForm = () => {
 
     axios
       .put('/api/settings', {
-        marketing_emails: values.marketing_emails,
-        security_emails: values.security_emails,
+        emails: {
+          communication: values.communication_emails,
+          marketing: values.marketing_emails,
+          security: true, // values.security_emails,
+        },
       })
       .then(() => toast.success('Profile updated successfully!'))
       .catch((error) => {
@@ -78,6 +91,29 @@ const UpdateSettingsForm = () => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6 space-y-4">
           <FormField
             control={form.control}
+            name="communication_emails"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
+                  <FormLabel className="text-base">
+                    Communication emails
+                  </FormLabel>
+                  <FormDescription>
+                    Receive emails about your account activity.
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
             name="marketing_emails"
             render={({ field }) => (
               <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
@@ -105,7 +141,7 @@ const UpdateSettingsForm = () => {
                 <div className="space-y-0.5">
                   <FormLabel className="text-base">Security emails</FormLabel>
                   <FormDescription>
-                    Receive emails about your account security.
+                    Receive emails about your account activity and security.
                   </FormDescription>
                 </div>
                 <FormControl>

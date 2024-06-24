@@ -29,12 +29,12 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
   } = useSWR<User>(getUserEndpoint(), () =>
     axios
       .get(getUserEndpoint())
-      .then((res) => res.data)
+      .then((res) => res.data.data)
       .catch((err) => {
         if (err.response.status !== 409) throw err;
 
         router.push('/verify-email');
-      })
+      }),
   );
 
   const register = async (args: ApiRequest) => {
@@ -108,7 +108,7 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
     axios
       .post('/reset-password', { token: router.query.token, ...props })
       .then((response) =>
-        router.push(`/login?reset=${btoa(response.data.status)}`)
+        router.push(`/login?reset=${btoa(response.data.status)}`),
       )
       .catch((err) => {
         if (err.response.status !== 422) throw err;
