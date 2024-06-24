@@ -6,4 +6,5 @@ export default interface User {
   must_verify_email?: boolean;
   created_at: string;
   updated_at: string;
+  settings?: any;
 }
