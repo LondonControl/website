@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import classNames from 'classnames';
+import Link from 'next/link';
 import { useState } from 'react';
 import Moment from 'react-moment';
 
@@ -25,7 +26,7 @@ const OrderCard: React.FC<Props> = ({ order }) => {
       <div
         className={classNames(
           'flex items-center border-gray-200 p-4 tablet:grid tablet:grid-cols-4 tablet:gap-x-6 tablet:p-6 hover:cursor-pointer',
-          isOpen ? 'border-b' : null
+          isOpen ? 'border-b' : null,
         )}
         onClick={() => setIsOpen(!isOpen)}
       >
@@ -63,9 +64,19 @@ const OrderCard: React.FC<Props> = ({ order }) => {
             <div className="flex items-center sm:items-start">
               <div className="flex-1 text-sm">
                 <div className="flex justify-between font-medium text-gray-900">
-                  <a href={`/products/${item.product?.id}`}>
-                    {item.product?.title}
-                  </a>
+                  <div className="flex space-x-4">
+                    <a href={`/products/${item.product?.id}`}>
+                      {item.product?.title}
+                    </a>
+                    <span className="block text-gray-500">|</span>
+
+                    <Link
+                      href="/downloads"
+                      className="hidden hover:cursor-pointer hover:underline sm:block"
+                    >
+                      Download
+                    </Link>
+                  </div>
 
                   <p>£{item.actual_price / 100}</p>
                 </div>
