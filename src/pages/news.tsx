@@ -51,7 +51,7 @@ const News: NextPage<Props> = ({ posts }) => {
                       r="4.5"
                       stroke="currentColor"
                       className="fill-white"
-                      stroke-width="2"
+                      strokeWidth="2"
                     ></circle>
                   </svg>
 
