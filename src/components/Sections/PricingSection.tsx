@@ -13,7 +13,7 @@ const PricingSection: React.FC<Props> = () => {
     <section className="bg-white py-24 tablet:py-32">
       <div className="mx-auto max-w-7xl px-6 laptop:px-8">
         <div className="mx-auto max-w-4xl tablet:text-center">
-          <h2 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 tablet:text-5xl">
+          <h2 className="mt-2 text-4xl font-bold tracking-tight text-primary tablet:text-5xl">
             Choose the right option for&nbsp;you
           </h2>
         </div>
@@ -25,12 +25,12 @@ const PricingSection: React.FC<Props> = () => {
                 key={option.name}
                 className="pt-16 laptop:px-8 laptop:pt-0 desktop:px-14"
               >
-                <h3 className="text-base font-semibold leading-7 text-gray-900">
+                <h3 className="text-base font-semibold leading-7 text-primary">
                   {option.name}
                 </h3>
 
                 <p className="mt-6 flex items-baseline gap-x-1">
-                  <span className="text-5xl font-bold tracking-tight text-gray-900">
+                  <span className="text-5xl font-bold tracking-tight text-primary">
                     {option.price}
                   </span>
                 </p>
@@ -47,7 +47,7 @@ const PricingSection: React.FC<Props> = () => {
                   )}
                 </Button>
 
-                <p className="mt-10 text-sm font-semibold leading-6 text-gray-900">
+                <p className="mt-10 text-sm font-semibold leading-6 text-primary">
                   {option.description}
                 </p>
 
@@ -57,7 +57,7 @@ const PricingSection: React.FC<Props> = () => {
                 >
                   {option.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-x-3">
-                      <Check className="size-4 flex-none text-black" />
+                      <Check className="size-4 flex-none text-primary" />
                       {feature}
                     </li>
                   ))}

@@ -37,7 +37,7 @@ const Products: NextPage<Props> = () => {
       }
     >
       <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-        <h1 className="text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl laptop:mt-6">
+        <h1 className="text-2xl font-bold tracking-tight text-primary tablet:text-3xl laptop:mt-6">
           Products
         </h1>
         <h2 className="sr-only">Products</h2>
@@ -68,12 +68,12 @@ const Products: NextPage<Props> = () => {
                 </Link>
 
                 <div className="flex flex-1 flex-col space-y-2 p-4">
-                  <h3 className="text-sm font-medium text-gray-900">
+                  <h3 className="text-sm font-medium text-primary">
                     {product.title}
                   </h3>
 
                   <div className="flex flex-1 flex-col justify-end">
-                    <p className="text-base font-medium text-gray-900">
+                    <p className="text-base font-medium text-primary">
                       £{product.price / 100}
                     </p>
                   </div>

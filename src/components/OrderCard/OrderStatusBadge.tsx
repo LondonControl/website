@@ -44,7 +44,7 @@ const OrderStatusBadge: React.FC<Props> = ({ status }) => {
     <span
       className={classNames(
         'inline-flex items-center rounded-md px-2.5 py-2 text-sm font-medium ring-1 ring-inset',
-        getClassNames(status.code)
+        getClassNames(status.code),
       )}
     >
       {status.name}

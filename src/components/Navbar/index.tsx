@@ -58,7 +58,7 @@ const Navigation: React.FC<Props> = () => {
             {/* Logo */}
             <div className="flex shrink-0 items-center">
               <Link href="/">
-                <ApplicationLogo className="block h-6 w-auto fill-current text-gray-800" />
+                <ApplicationLogo className="block h-6 w-auto" />
               </Link>
             </div>
           </div>
@@ -116,11 +116,11 @@ const Navigation: React.FC<Props> = () => {
 
                             <div className="flex flex-col justify-between space-y-4">
                               <div className="space-y-1 text-sm font-medium">
-                                <h3 className="text-gray-900">
+                                <h3 className="text-primary">
                                   {item.product.title}
                                 </h3>
 
-                                <p className="text-gray-900">
+                                <p className="text-primary">
                                   £{item.product.price / 100}
                                 </p>
                               </div>
@@ -138,7 +138,7 @@ const Navigation: React.FC<Props> = () => {
                         ))}
                       </ul>
 
-                      <p className="mt-6 flex items-center justify-between border-t border-gray-200 pt-6 text-sm font-medium text-gray-900">
+                      <p className="mt-6 flex items-center justify-between border-t border-gray-200 pt-6 text-sm font-medium text-primary">
                         <span className="text-base">Total</span>
                         <span className="text-base">£{cartSubtotal / 100}</span>
                       </p>
@@ -208,12 +208,17 @@ const Navigation: React.FC<Props> = () => {
                 </>
               ) : (
                 <>
-                  <Link
-                    href="/register"
-                    className="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-700"
-                  >
-                    Get Started <span aria-hidden="true">→</span>
-                  </Link>
+                  <Button variant="outline" asChild>
+                    <Link
+                      href="/register"
+                      className="text-sm font-semibold leading-6"
+                    >
+                      Get Started{' '}
+                      <span aria-hidden="true" className="ml-2">
+                        →
+                      </span>
+                    </Link>
+                  </Button>
                 </>
               )}
             </div>

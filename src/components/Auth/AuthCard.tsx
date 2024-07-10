@@ -9,7 +9,7 @@ const AuthCard: React.FC<PropsWithChildren> = ({ children }) => {
     <div className="flex min-h-screen flex-col items-center pt-6 tablet:justify-center tablet:pt-0">
       <div>
         <Link href="/">
-          <ApplicationLogo className="h-10 w-auto fill-current text-gray-500" />
+          <ApplicationLogo className="h-10 w-auto" />
         </Link>
       </div>
 
