@@ -21,9 +21,9 @@ const ActiveSessionsForm = () => {
   return (
     <section>
       <header>
-        <h2 className="text-lg font-medium text-gray-900">Browser Sessions</h2>
+        <h2 className="text-lg font-medium text-primary">Browser Sessions</h2>
 
-        <p className="mt-1 text-sm text-gray-600">
+        <p className="mt-1 text-sm text-muted-foreground">
           Manage and logout your active sessions on other browsers and devices.
         </p>
       </header>

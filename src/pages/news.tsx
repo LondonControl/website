@@ -24,7 +24,7 @@ const News: NextPage<Props> = ({ posts }) => {
       }
     >
       <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-        <h1 className="mt-6 text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl">
+        <h1 className="mt-6 text-2xl font-bold tracking-tight text-primary tablet:text-3xl">
           News
         </h1>
 
@@ -56,7 +56,7 @@ const News: NextPage<Props> = ({ posts }) => {
                   </svg>
 
                   <div className="relative">
-                    <h3 className="pt-8 text-base font-semibold tracking-tight text-slate-900 laptop:pt-0">
+                    <h3 className="pt-8 text-base font-semibold tracking-tight text-primary laptop:pt-0">
                       {post.title}
                     </h3>
 

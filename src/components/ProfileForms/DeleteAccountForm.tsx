@@ -37,9 +37,9 @@ const DeleteAccountForm = () => {
   return (
     <section>
       <header>
-        <h2 className="text-lg font-medium text-gray-900">Delete Account</h2>
+        <h2 className="text-lg font-medium text-primary">Delete Account</h2>
 
-        <p className="mt-1 text-sm text-gray-600">
+        <p className="mt-1 text-sm text-muted-foreground">
           Use the button below to delete your user account and all identifiable
           information, <strong>warning</strong> this is destructive and cannot
           be undone.

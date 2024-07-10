@@ -78,11 +78,9 @@ const UpdateSettingsForm = () => {
   return (
     <section>
       <header>
-        <h2 className="text-lg font-medium text-gray-900">
-          Settings & Privacy
-        </h2>
+        <h2 className="text-lg font-medium text-primary">Settings & Privacy</h2>
 
-        <p className="mt-1 text-sm text-gray-600">
+        <p className="mt-1 text-sm text-muted-foreground">
           Update your account&apos;s settings and privacy information.
         </p>
       </header>
