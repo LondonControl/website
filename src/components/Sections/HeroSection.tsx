@@ -9,7 +9,7 @@ const HeroSection: React.FC<Props> = () => {
     <section className="tablet:py-30 py-24">
       <div className="mx-auto max-w-site px-6 laptop:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 tablet:text-6xl">
+          <h1 className="text-4xl font-bold tracking-tight text-primary tablet:text-6xl">
             <span className="block">LONDON CONTROL</span>
             The most sophisticated air traffic control simulator of its kind
           </h1>

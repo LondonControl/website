@@ -26,8 +26,6 @@ const IndividualProduct: NextPage<Props> = () => {
 
   const { data, error, isLoading } = useSWR(`/api/products/${id}`, fetcher);
 
-  // console.log(Object.fromEntries(data.images));
-
   if (!isLoading) {
     data.data.images = Object.values(data.data.images);
   }
@@ -77,7 +75,7 @@ const IndividualProduct: NextPage<Props> = () => {
                         <Tab
                           key={image.uuid}
                           // eslint-disable-next-line tailwindcss/migration-from-tailwind-2
-                          className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
+                          className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-primary hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
                         >
                           {({ selected }) => (
                             <>
@@ -121,13 +119,13 @@ const IndividualProduct: NextPage<Props> = () => {
 
               {/* Product info */}
               <div className="mt-10 px-4 tablet:mt-16 tablet:px-0 laptop:mt-0">
-                <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+                <h1 className="text-3xl font-bold tracking-tight text-primary">
                   {data.data.title}
                 </h1>
 
                 <div className="mt-3">
                   <h2 className="sr-only">Product information</h2>
-                  <p className="text-3xl tracking-tight text-gray-900">
+                  <p className="text-3xl tracking-tight text-primary">
                     £{data.data.price / 100}
                   </p>
                 </div>

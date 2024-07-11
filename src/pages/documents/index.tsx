@@ -31,9 +31,7 @@ const Documents: NextPage<Props> = () => {
       .then((res) => {
         window.open(res.data.data, '_blank');
       })
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log(err);
+      .catch(() => {
         toast.error('Something went wrong');
       });
   };
@@ -48,7 +46,7 @@ const Documents: NextPage<Props> = () => {
       }
     >
       <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-        <h1 className="text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl laptop:mt-6">
+        <h1 className="text-2xl font-bold tracking-tight text-primary tablet:text-3xl laptop:mt-6">
           Documents
         </h1>
         <h2 className="sr-only">Documents</h2>
@@ -58,36 +56,28 @@ const Documents: NextPage<Props> = () => {
             <MoonLoader loading={isLoading} />
           </div>
         ) : (
-          <div className="mt-6 grid grid-cols-1 gap-y-4 tablet:grid-cols-2 tablet:gap-x-6 tablet:gap-y-10 laptop:mt-12 laptop:grid-cols-4 laptop:gap-x-8">
+          <div className="mt-6 grid grid-cols-1 gap-y-4 tablet:grid-cols-2 tablet:gap-x-6 tablet:gap-y-10 laptop:mt-12 laptop:grid-cols-3 laptop:gap-x-8 desktop:grid-cols-4">
             {data?.data.map((document: Document) => (
               <div
                 key={document.id}
-                className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white"
+                className="flex flex-col rounded-md border border-gray-200 bg-card p-4 text-card-foreground"
               >
-                {/* <Link href={`/documents/${document.id}`}>
-                  <div className="aspect-h-4 aspect-w-3 bg-gray-200 tablet:aspect-none group-hover:opacity-75 tablet:h-72">
-                    <img
-                      src="https://placehold.co/300x300?text=LC"
-                      alt={document.title}
-                      className="size-full object-cover object-center tablet:size-full"
-                    />
-                  </div>
-                </Link> */}
-
-                <div className="flex flex-1 flex-col space-y-2 p-4">
-                  <h3 className="text-sm font-medium text-gray-900">
+                <div className="grow">
+                  <h3 className="text-base font-medium text-primary">
                     {document.title}
                   </h3>
 
-                  <div className="flex flex-1 flex-col justify-end">
-                    <p className="text-sm font-medium text-gray-900">
-                      {document.description}
-                    </p>
-                  </div>
+                  <hr className="mt-2 border-gray-100" />
 
+                  <p className="mt-4 text-sm text-primary">
+                    {document.description}
+                  </p>
+                </div>
+
+                <div className="mt-4 content-end">
                   <Button
                     type="button"
-                    variant="ghost"
+                    variant="outline"
                     className="w-full"
                     onClick={(event) =>
                       handleDownloadFile(event, document?.id || '')

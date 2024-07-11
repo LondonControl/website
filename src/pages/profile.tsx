@@ -2,14 +2,13 @@ import type { NextPage } from 'next';
 import React from 'react';
 
 import Meta from '@/components/Meta';
+import DeleteAccountForm from '@/components/ProfileForms/DeleteAccountForm';
+import UpdatePasswordForm from '@/components/ProfileForms/UpdatePasswordForm';
+import UpdateProfileInformationForm from '@/components/ProfileForms/UpdateProfileInformationForm';
+import UpdateSettingsForm from '@/components/ProfileForms/UpdateSettingsForm';
 import { useAuth } from '@/hooks/useAuth';
 import MainLayout from '@/layouts/Main';
 import { AppConfig } from '@/utils/AppConfig';
-
-import DeleteAccountForm from './partials/DeleteAccountForm';
-import UpdatePasswordForm from './partials/UpdatePasswordForm';
-import UpdateProfileInformationForm from './partials/UpdateProfileInformationForm';
-import UpdateSettingsForm from './partials/UpdateSettingsForm';
 
 const Profile: NextPage = () => {
   const { user } = useAuth({ middleware: 'auth' });
@@ -26,7 +25,7 @@ const Profile: NextPage = () => {
       }
     >
       <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-        <h1 className="text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl laptop:mt-6">
+        <h1 className="text-2xl font-bold tracking-tight text-primary tablet:text-3xl laptop:mt-6">
           Profile
         </h1>
 

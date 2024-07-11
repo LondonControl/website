@@ -53,18 +53,16 @@ const Navigation: React.FC<Props> = () => {
     <nav className="bg-white">
       {/* Primary Navigation Menu */}
       <div className="mx-auto max-w-site px-4 py-3 tablet:px-6 laptop:px-8">
-        <div className="flex h-16 justify-between">
-          <div className="flex">
-            {/* Logo */}
-            <div className="flex shrink-0 items-center">
-              <Link href="/">
-                <ApplicationLogo className="block h-6 w-auto fill-current text-gray-800" />
-              </Link>
-            </div>
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo */}
+          <div className="-mt-3">
+            <Link href="/">
+              <ApplicationLogo className="block h-6 w-auto" />
+            </Link>
           </div>
 
           {/* Navigation Links */}
-          <div className="hidden items-center space-x-4 tablet:flex">
+          <div className="hidden items-center space-x-4 laptop:flex">
             <NavLink href="/products">Products</NavLink>
 
             <NavLink href="/documents">Documents</NavLink>
@@ -77,7 +75,9 @@ const Navigation: React.FC<Props> = () => {
           </div>
 
           {/* Settings Dropdown */}
-          <div className="hidden tablet:flex tablet:items-center laptop:pl-12">
+          <div
+            className={`hidden laptop:flex ${user ? 'laptop:pl-[86px]' : 'laptop:pl-16'}`}
+          >
             <div className="relative flex items-center space-x-2">
               {user ? (
                 <>
@@ -116,11 +116,11 @@ const Navigation: React.FC<Props> = () => {
 
                             <div className="flex flex-col justify-between space-y-4">
                               <div className="space-y-1 text-sm font-medium">
-                                <h3 className="text-gray-900">
+                                <h3 className="text-primary">
                                   {item.product.title}
                                 </h3>
 
-                                <p className="text-gray-900">
+                                <p className="text-primary">
                                   £{item.product.price / 100}
                                 </p>
                               </div>
@@ -138,7 +138,7 @@ const Navigation: React.FC<Props> = () => {
                         ))}
                       </ul>
 
-                      <p className="mt-6 flex items-center justify-between border-t border-gray-200 pt-6 text-sm font-medium text-gray-900">
+                      <p className="mt-6 flex items-center justify-between border-t border-gray-200 pt-6 text-sm font-medium text-primary">
                         <span className="text-base">Total</span>
                         <span className="text-base">£{cartSubtotal / 100}</span>
                       </p>
@@ -208,19 +208,24 @@ const Navigation: React.FC<Props> = () => {
                 </>
               ) : (
                 <>
-                  <Link
-                    href="/register"
-                    className="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-700"
-                  >
-                    Get Started <span aria-hidden="true">→</span>
-                  </Link>
+                  <Button variant="outline" asChild>
+                    <Link
+                      href="/register"
+                      className="text-sm font-semibold leading-6"
+                    >
+                      Get Started{' '}
+                      <span aria-hidden="true" className="ml-2">
+                        →
+                      </span>
+                    </Link>
+                  </Button>
                 </>
               )}
             </div>
           </div>
 
           {/* Hamburger */}
-          <div className="-mr-2 flex items-center tablet:hidden">
+          <div className="-mr-2 flex items-center laptop:hidden">
             <Button
               variant="ghost"
               size="icon"
@@ -238,7 +243,7 @@ const Navigation: React.FC<Props> = () => {
 
       {/* Responsive Navigation Menu */}
       {open && (
-        <div className="block tablet:hidden">
+        <div className="block laptop:hidden">
           <div className="space-y-1 pb-3 pt-2">
             <ResponsiveNavLink
               href="/products"

@@ -17,7 +17,7 @@ const OrderCard: React.FC<Props> = ({ order }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <div className="rounded-lg border border-gray-200 bg-white">
+    <div className="rounded-md border border-gray-200 bg-card text-card-foreground">
       <h3 className="sr-only">
         Order placed on{' '}
         <Moment date={order.created_at} format="DD/MM/YYYY hh:mm" />
@@ -25,35 +25,35 @@ const OrderCard: React.FC<Props> = ({ order }) => {
 
       <div
         className={classNames(
-          'flex items-center border-gray-200 p-4 tablet:grid tablet:grid-cols-4 tablet:gap-x-6 tablet:p-6 hover:cursor-pointer',
+          'flex items-center border-gray-200 p-4 tablet:p-6 hover:cursor-pointer',
           isOpen ? 'border-b' : null,
         )}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <dl className="grid flex-1 grid-cols-2 gap-x-6 text-sm tablet:col-span-3 tablet:grid-cols-3 laptop:col-span-2">
+        <dl className="grid flex-1 grid-cols-3 gap-x-6 text-sm laptop:grid-cols-4">
           <div>
-            <dt className="font-medium text-gray-900">Order number</dt>
-            <dd className="mt-1 text-gray-500">{order.number}</dd>
+            <dt className="font-medium">Order number</dt>
+            <dd className="mt-1 text-muted-foreground">{order.number}</dd>
           </div>
 
-          <div className="hidden tablet:block">
-            <dt className="font-medium text-gray-900">Date placed</dt>
-            <dd className="mt-1 text-gray-500">
+          <div className="order-last col-span-full mt-4 laptop:order-none laptop:col-span-1 laptop:mt-0">
+            <dt className="font-medium">Date placed</dt>
+            <dd className="mt-1 text-muted-foreground">
               <Moment date={order.created_at} format="DD MMMM YYYY HH:mm" />
             </dd>
           </div>
 
           <div>
-            <dt className="font-medium text-gray-900">Total amount</dt>
-            <dd className="mt-1 font-medium text-gray-900">
+            <dt className="font-medium">Total amount</dt>
+            <dd className="mt-1 text-muted-foreground">
               £{order.amount / 100}
             </dd>
           </div>
-        </dl>
 
-        <div className="laptop:col-span-2 laptop:flex laptop:items-center laptop:justify-end laptop:space-x-4">
-          {order.status && <OrderStatusBadge status={order.status} />}
-        </div>
+          <div className="justify-self-end">
+            {order.status && <OrderStatusBadge status={order.status} />}
+          </div>
+        </dl>
       </div>
 
       {/* Products */}
@@ -61,24 +61,28 @@ const OrderCard: React.FC<Props> = ({ order }) => {
       <ul role="list" className="divide-y divide-gray-200" hidden={!isOpen}>
         {order.items?.map((item: OrderItem) => (
           <li key={item.id} className="p-4 tablet:p-6">
-            <div className="flex items-center sm:items-start">
+            <div className="flex items-center">
               <div className="flex-1 text-sm">
-                <div className="flex justify-between font-medium text-gray-900">
+                <div className="flex justify-between font-medium text-primary">
                   <div className="flex space-x-4">
-                    <a href={`/products/${item.product?.id}`}>
+                    <Link
+                      href={`/products/${item.product?.id}`}
+                      className="hover:underline"
+                    >
                       {item.product?.title}
-                    </a>
+                    </Link>
+
                     <span className="block text-gray-500">|</span>
 
-                    <Link
-                      href="/downloads"
-                      className="hidden hover:cursor-pointer hover:underline sm:block"
-                    >
-                      Download
-                    </Link>
+                    <p>£{item.actual_price / 100}</p>
                   </div>
 
-                  <p>£{item.actual_price / 100}</p>
+                  <Link
+                    href="/downloads"
+                    className="hidden hover:underline laptop:block"
+                  >
+                    Download
+                  </Link>
                 </div>
               </div>
             </div>
