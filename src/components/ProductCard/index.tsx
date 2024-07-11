@@ -23,7 +23,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
           <img
             src={
               Object.keys(product.images || []).length === 0
-                ? `https://hub.londoncontrol.com/storage/8b47084288dde67b494c9c826566039a/01HT84185CT9B8WNS9JSA180EF.png`
+                ? `https://placehold.co/300x300?text=LC`
                 : Object.values(product.images || [])[0]?.original_url
             }
             alt={product.title}
