@@ -56,7 +56,7 @@ const Documents: NextPage<Props> = () => {
             <MoonLoader loading={isLoading} />
           </div>
         ) : (
-          <div className="mt-6 grid grid-cols-1 gap-y-4 tablet:grid-cols-2 tablet:gap-x-6 tablet:gap-y-10 laptop:mt-12 laptop:grid-cols-4 laptop:gap-x-8">
+          <div className="mt-6 grid grid-cols-1 gap-y-4 tablet:grid-cols-2 tablet:gap-x-6 tablet:gap-y-10 laptop:mt-12 laptop:grid-cols-3 laptop:gap-x-8 desktop:grid-cols-4">
             {data?.data.map((document: Document) => (
               <div
                 key={document.id}

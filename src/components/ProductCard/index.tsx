@@ -16,14 +16,14 @@ const ProductCard: React.FC<Props> = ({ product }) => {
   return (
     <div
       key={product.id}
-      className="group relative flex flex-col overflow-hidden rounded-md border border-gray-200 bg-card"
+      className="group relative flex flex-col overflow-hidden rounded-md border border-gray-200 bg-card text-card-foreground"
     >
       <Link href={`/products/${product.id}`}>
-        <div className="aspect-h-4 aspect-w-3 bg-gray-200 tablet:aspect-none group-hover:opacity-75 tablet:h-48">
+        <div className="bg-gray-200 tablet:aspect-none group-hover:opacity-75 tablet:h-48">
           <img
             src={
               Object.keys(product.images || []).length === 0
-                ? `https://placehold.co/300x300?text=LC`
+                ? `https://hub.londoncontrol.com/storage/8b47084288dde67b494c9c826566039a/01HT84185CT9B8WNS9JSA180EF.png`
                 : Object.values(product.images || [])[0]?.original_url
             }
             alt={product.title}
@@ -32,21 +32,19 @@ const ProductCard: React.FC<Props> = ({ product }) => {
         </div>
       </Link>
 
-      <div className="flex flex-1 flex-col space-y-2 p-4">
-        <h3 className="text-sm font-medium text-primary">{product.title}</h3>
+      <div className="p-4">
+        <h3 className="text-base font-medium text-primary">{product.title}</h3>
 
-        <div className="flex flex-1 flex-col justify-end">
-          <p className="text-base font-semibold text-primary">
-            £{product.price / 100}
-          </p>
-        </div>
+        <p className="mt-2 text-lg font-semibold text-primary">
+          £{product.price / 100}
+        </p>
 
         {user && (
-          <>
+          <div className="mt-4">
             {cartContainsItem(product.id) ? (
               <Button
                 type="button"
-                variant="ghost"
+                variant="outline"
                 className="w-full"
                 onClick={() => removeFromCart(product.id)}
               >
@@ -55,14 +53,14 @@ const ProductCard: React.FC<Props> = ({ product }) => {
             ) : (
               <Button
                 type="button"
-                variant="ghost"
+                variant="outline"
                 className="w-full"
                 onClick={() => addToCart(product)}
               >
                 Add to basket
               </Button>
             )}
-          </>
+          </div>
         )}
       </div>
     </div>
