@@ -32,15 +32,19 @@ const ProductCard: React.FC<Props> = ({ product }) => {
         </div>
       </Link>
 
-      <div className="p-4">
-        <h3 className="text-base font-medium text-primary">{product.title}</h3>
+      <div className="flex grow flex-col p-4">
+        <div className="grow">
+          <h3 className="text-base font-medium text-primary">
+            {product.title}
+          </h3>
 
-        <p className="mt-2 text-lg font-semibold text-primary">
-          £{product.price / 100}
-        </p>
+          <p className="mt-2 text-lg font-semibold text-primary">
+            £{product.price / 100}
+          </p>
+        </div>
 
         {user && (
-          <div className="mt-4">
+          <div className="mt-4 content-end">
             {cartContainsItem(product.id) ? (
               <Button
                 type="button"
