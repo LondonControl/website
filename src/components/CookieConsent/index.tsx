@@ -16,7 +16,7 @@ const CookieConsent: React.FC<Props> = () => {
 
   const acceptCookie = () => {
     setHideConsent(true);
-    // Rougly a month - need to change so its more persistent.
+    // Roughly a month - need to change so its more persistent.
     setCookie('localConsent', true, { maxAge: 60 * 60 * 24 * 30 });
   };
 
@@ -24,8 +24,8 @@ const CookieConsent: React.FC<Props> = () => {
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 px-6 pb-6">
-      <div className="pointer-events-auto mx-auto max-w-xl rounded-xl bg-white p-6 shadow-lg ring-1 ring-gray-900/10">
-        <p className="text-sm leading-6 text-gray-900">
+      <div className="pointer-events-auto mx-auto max-w-xl rounded-md bg-white p-6 shadow-lg ring-1 ring-primary/10">
+        <p className="text-sm leading-6 text-primary">
           We use cookies to enhance your browsing experience, serve personalised
           ads or content, and analyse our traffic. By clicking accept all and
           using this site you agree to our{' '}

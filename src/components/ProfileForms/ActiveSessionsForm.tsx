@@ -1,7 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { useState } from 'react';
-import { toast } from 'sonner';
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,41 +13,31 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { useAuth } from '@/hooks/useAuth';
 
-const DeleteAccountForm = () => {
-  const { user, deleteAccount } = useAuth({ middleware: 'auth' });
-  const [errors, setErrors] = useState<any>([]);
+const ActiveSessionsForm = () => {
+  const { user } = useAuth({ middleware: 'auth' });
 
   if (!user) return null;
-
-  const handleAccountDelete = async (event: any) => {
-    event.preventDefault();
-    setErrors([]);
-
-    await deleteAccount({ setStatus: () => {}, setErrors });
-
-    if (errors.length > 0) {
-      toast.error('Something went wrong, please try again');
-    }
-  };
 
   return (
     <section>
       <header>
-        <h2 className="text-lg font-medium text-gray-900">Delete Account</h2>
+        <h2 className="text-lg font-medium text-primary">Browser Sessions</h2>
 
-        <p className="mt-1 text-sm text-gray-600">
-          Use the button below to delete your user account and all identifiable
-          information, <strong>warning</strong> this is destructive and cannot
-          be undone.
+        <p className="mt-1 text-sm text-muted-foreground">
+          Manage and logout your active sessions on other browsers and devices.
         </p>
       </header>
+
+      <div className="mt-6">
+        <div>test</div>
+      </div>
 
       <Separator className="mt-6" />
 
       <div className="mt-6 flex justify-end">
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="destructive">Delete Account</Button>
+            <Button>Logout Other Sessions</Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
@@ -63,11 +49,7 @@ const DeleteAccountForm = () => {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction
-                onClick={(event) => handleAccountDelete(event)}
-              >
-                Delete Account
-              </AlertDialogAction>
+              <AlertDialogAction>Delete Account</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
@@ -76,4 +58,4 @@ const DeleteAccountForm = () => {
   );
 };
 
-export default DeleteAccountForm;
+export default ActiveSessionsForm;

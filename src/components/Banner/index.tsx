@@ -7,21 +7,16 @@ import { getAnnouncementsEndpoint } from '@/utils/Endpoints';
 interface Props {}
 
 const Banner: React.FC<Props> = () => {
-  const { data, error, isLoading } = useSWR(
+  const { data, isLoading } = useSWR(
     getAnnouncementsEndpoint('?paginate=none&is_visible=1'),
     fetcher,
   );
 
-  if (isLoading) return null;
-
-  if (data.data.length === 0 && !isLoading) return null;
-
-  // eslint-disable-next-line no-console
-  if (error) console.log(error);
+  if (!data || (data.data.length === 0 && !isLoading)) return null;
 
   return (
     <div className="flex items-center justify-center gap-x-6 bg-yellow-300 px-6 py-2.5 tablet:px-3.5">
-      <p className="text-sm leading-6 text-gray-900">
+      <p className="text-sm leading-6 text-primary">
         <Link href={data.data[0].url ?? '#'}>
           <strong className="font-semibold">{data.data[0].title}</strong>
 

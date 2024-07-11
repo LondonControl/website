@@ -37,7 +37,7 @@ const Terms: NextPage<Props> = () => {
       }
     >
       <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-        <h1 className="mt-6 text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl">
+        <h1 className="mt-6 text-2xl font-bold tracking-tight text-primary tablet:text-3xl">
           Terms and Conditions
         </h1>
 

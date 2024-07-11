@@ -168,7 +168,7 @@ const Basket: NextPage<Props> = () => {
       }
     >
       <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-        <h1 className="text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl laptop:mt-6">
+        <h1 className="text-2xl font-bold tracking-tight text-primary tablet:text-3xl laptop:mt-6">
           Checkout
         </h1>
 
@@ -211,7 +211,7 @@ const Basket: NextPage<Props> = () => {
                           </h3>
                         </div>
 
-                        <p className="mt-1 text-sm font-semibold text-gray-900">
+                        <p className="mt-1 text-sm font-semibold text-primary">
                           £{item.product.price / 100}
                         </p>
 
@@ -246,7 +246,7 @@ const Basket: NextPage<Props> = () => {
           >
             <h2
               id="summary-heading"
-              className="text-lg font-medium text-gray-900"
+              className="text-lg font-medium text-primary"
             >
               Order summary
             </h2>
@@ -314,11 +314,11 @@ const Basket: NextPage<Props> = () => {
               </div>
 
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="text-base font-medium text-gray-900">
+                <dt className="text-base font-medium text-primary">
                   Order total
                 </dt>
 
-                <dd className="text-base font-medium text-gray-900">
+                <dd className="text-base font-medium text-primary">
                   £{(cartTotal / 100).toFixed(2)}
                 </dd>
               </div>
@@ -338,7 +338,7 @@ const Basket: NextPage<Props> = () => {
                   By selecting this and purchasing you agree to our{' '}
                   <Link
                     href="/terms"
-                    className="font-semibold text-gray-900 hover:underline"
+                    className="font-semibold text-primary hover:underline"
                   >
                     terms and conditions
                   </Link>

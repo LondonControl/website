@@ -105,7 +105,7 @@ const Contact: NextPage<Props> = () => {
       }
     >
       <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-        <h1 className="text-center text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl laptop:mt-6">
+        <h1 className="text-center text-2xl font-bold tracking-tight text-primary tablet:text-3xl laptop:mt-6">
           Get in touch
         </h1>
 
@@ -231,12 +231,12 @@ const Contact: NextPage<Props> = () => {
                 By selecting this, you agree to our{' '}
                 <Link
                   href="/privacy"
-                  className="font-semibold text-gray-900 hover:underline"
+                  className="font-semibold text-primary hover:underline"
                 >
                   privacy policy
                 </Link>{' '}
                 and have read the{' '}
-                <span className="font-semibold text-gray-900">FAQs</span>.
+                <span className="font-semibold text-primary">FAQs</span>.
               </Label>
             </div>
 

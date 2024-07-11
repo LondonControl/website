@@ -14,7 +14,7 @@ import { AppConfig } from '@/utils/AppConfig';
 const Orders: NextPage = () => {
   const { data, error, isLoading } = useSWR(
     '/api/user/orders?includes=items,status&sorts=created_at&paginate=none',
-    fetcher
+    fetcher,
   );
 
   // eslint-disable-next-line no-console
@@ -30,7 +30,7 @@ const Orders: NextPage = () => {
       }
     >
       <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-        <h1 className="text-2xl font-bold tracking-tight text-gray-900 tablet:text-3xl laptop:mt-6">
+        <h1 className="text-2xl font-bold tracking-tight text-primary tablet:text-3xl laptop:mt-6">
           Order History
         </h1>
         <h2 className="sr-only">Order History</h2>
