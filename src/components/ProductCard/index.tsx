@@ -16,7 +16,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
   return (
     <div
       key={product.id}
-      className="group relative flex flex-col overflow-hidden rounded-md border border-gray-200 bg-white"
+      className="group relative flex flex-col overflow-hidden rounded-md border border-gray-200 bg-card"
     >
       <Link href={`/products/${product.id}`}>
         <div className="aspect-h-4 aspect-w-3 bg-gray-200 tablet:aspect-none group-hover:opacity-75 tablet:h-48">

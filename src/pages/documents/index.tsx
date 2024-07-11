@@ -60,22 +60,24 @@ const Documents: NextPage<Props> = () => {
             {data?.data.map((document: Document) => (
               <div
                 key={document.id}
-                className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white"
+                className="flex flex-col rounded-md border border-gray-200 bg-card p-4 text-card-foreground"
               >
-                <div className="flex flex-1 flex-col space-y-2 p-4">
-                  <h3 className="text-sm font-semibold text-primary">
+                <div className="grow">
+                  <h3 className="text-base font-medium text-primary">
                     {document.title}
                   </h3>
 
-                  <div className="flex flex-1 flex-col justify-end">
-                    <p className="text-sm font-medium text-primary">
-                      {document.description}
-                    </p>
-                  </div>
+                  <hr className="mt-2 border-gray-100" />
 
+                  <p className="mt-4 text-sm text-primary">
+                    {document.description}
+                  </p>
+                </div>
+
+                <div className="mt-4 content-end">
                   <Button
                     type="button"
-                    variant="ghost"
+                    variant="outline"
                     className="w-full"
                     onClick={(event) =>
                       handleDownloadFile(event, document?.id || '')
