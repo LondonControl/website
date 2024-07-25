@@ -10,7 +10,7 @@ interface Props {}
 
 const PricingSection: React.FC<Props> = () => {
   return (
-    <section className="bg-white py-24 tablet:py-32">
+    <section className="bg-white py-24 tablet:py-32" id="pricing">
       <div className="mx-auto max-w-site px-6 laptop:px-8">
         <div className="mx-auto max-w-4xl tablet:text-center">
           <h2 className="mt-2 text-4xl font-bold tracking-tight text-primary tablet:text-5xl">
