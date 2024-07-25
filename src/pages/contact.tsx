@@ -114,80 +114,96 @@ const Contact: NextPage<Props> = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="mx-auto mt-16 max-w-xl space-y-6 tablet:mt-20"
           >
-            <FormField
-              control={form.control}
-              name="firstName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>First name</FormLabel>
+            <div className="space-y-6 tablet:flex tablet:space-x-6 tablet:space-y-0">
+              <div className="tablet:flex-1">
+                <FormField
+                  control={form.control}
+                  name="firstName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>First name</FormLabel>
 
-                  <FormControl>
-                    <Input placeholder="First name" {...field} />
-                  </FormControl>
+                      <FormControl>
+                        <Input placeholder="First name" {...field} />
+                      </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
-            <FormField
-              control={form.control}
-              name="secondName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Last name</FormLabel>
+              <div className="tablet:flex-1">
+                <FormField
+                  control={form.control}
+                  name="secondName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Last name</FormLabel>
 
-                  <FormControl>
-                    <Input placeholder="Last name" {...field} />
-                  </FormControl>
+                      <FormControl>
+                        <Input
+                          placeholder="Last name"
+                          {...field}
+                          className="flex-1"
+                        />
+                      </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
 
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
+            <div className="space-y-6 tablet:flex tablet:space-x-6 tablet:space-y-0">
+              <div className="tablet:flex-[2_2_0%]">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
 
-                  <FormControl>
-                    <Input type="email" placeholder="Email" {...field} />
-                  </FormControl>
+                      <FormControl>
+                        <Input type="email" placeholder="Email" {...field} />
+                      </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
-            <FormField
-              control={form.control}
-              name="addons"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Using 3rd Party Addons?</FormLabel>
+              <div className="tablet:flex-[1_1_0%]">
+                <FormField
+                  control={form.control}
+                  name="addons"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Using 3rd Party Addons?</FormLabel>
 
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="-" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="no">No</SelectItem>
-                      <SelectItem value="yes">Yes</SelectItem>
-                    </SelectContent>
-                  </Select>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="-" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="no">No</SelectItem>
+                          <SelectItem value="yes">Yes</SelectItem>
+                        </SelectContent>
+                      </Select>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
 
             <FormField
               control={form.control}
@@ -231,12 +247,18 @@ const Contact: NextPage<Props> = () => {
                 By selecting this, you agree to our{' '}
                 <Link
                   href="/privacy"
-                  className="font-semibold text-primary hover:underline"
+                  className="font-bold text-primary hover:underline"
                 >
                   privacy policy
                 </Link>{' '}
                 and have read the{' '}
-                <span className="font-semibold text-primary">FAQs</span>.
+                <Link
+                  href="/#faqs"
+                  className="font-bold text-primary hover:underline"
+                >
+                  FAQs
+                </Link>
+                .
               </Label>
             </div>
 
