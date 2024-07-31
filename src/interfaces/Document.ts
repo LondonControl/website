@@ -7,6 +7,4 @@ export default interface Document {
   url: string;
   is_available: boolean;
   type?: DocumentType;
-  created_at: string;
-  updated_at: string;
 }

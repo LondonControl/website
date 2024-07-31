@@ -11,6 +11,4 @@ export default interface Product {
   current_airac: string;
   type?: ProductType;
   images?: Media[];
-  created_at: string;
-  updated_at: string;
 }
