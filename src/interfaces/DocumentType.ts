@@ -3,6 +3,4 @@ export default interface DocumentType {
   name: string;
   code: string;
   description?: string;
-  created_at: string;
-  updated_at: string;
 }

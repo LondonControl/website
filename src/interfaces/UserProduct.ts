@@ -7,6 +7,4 @@ export default interface UserProduct {
   user?: User;
   product?: Product;
   serial_key?: SerialKey;
-  created_at: string;
-  updated_at: string;
 }
