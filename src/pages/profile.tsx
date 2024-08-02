@@ -30,35 +30,35 @@ const Profile: NextPage = () => {
           Profile
         </h1>
 
-        <div className="flex flex-row">
-          <aside className="hidden laptop:mt-12 laptop:block laptop:w-1/5">
-            <nav className="flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1">
+        <div className="mt-6 flex flex-col space-y-6 laptop:mt-0 laptop:flex-row laptop:space-x-12 laptop:space-y-12">
+          <aside className="laptop:mt-12 laptop:block laptop:w-1/5">
+            <nav className="flex space-x-2 laptop:flex-col laptop:space-x-0 laptop:space-y-1">
               <a
                 onClick={() => setSelectNav('profile')}
-                className={`inline-flex h-9 items-center justify-start whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 ${selectedNav === 'profile' ? 'bg-muted hover:bg-muted' : 'hover:bg-transparent hover:underline'}`}
+                className={`inline-flex h-9 items-center justify-start whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors hover:cursor-pointer hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 ${selectedNav === 'profile' ? 'bg-muted hover:bg-muted' : 'hover:bg-transparent hover:underline'}`}
               >
                 Profile
               </a>
 
               <a
                 onClick={() => setSelectNav('account')}
-                className={`inline-flex h-9 items-center justify-start whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 ${selectedNav === 'account' ? 'bg-muted hover:bg-muted' : 'hover:bg-transparent hover:underline'}`}
+                className={`inline-flex h-9 items-center justify-start whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors hover:cursor-pointer hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 ${selectedNav === 'account' ? 'bg-muted hover:bg-muted' : 'hover:bg-transparent hover:underline'}`}
               >
                 Account
               </a>
 
               <a
                 onClick={() => setSelectNav('notifications')}
-                className={`inline-flex h-9 items-center justify-start whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 ${selectedNav === 'notifications' ? 'bg-muted hover:bg-muted' : 'hover:bg-transparent hover:underline'}`}
+                className={`inline-flex h-9 items-center justify-start whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors hover:cursor-pointer hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 ${selectedNav === 'notifications' ? 'bg-muted hover:bg-muted' : 'hover:bg-transparent hover:underline'}`}
               >
                 Notifications
               </a>
             </nav>
           </aside>
 
-          <div className="mt-6 flex-1 space-y-6 laptop:ml-8 laptop:mt-12">
+          <div className="flex-1 space-y-6 laptop:ml-8">
             {selectedNav === 'profile' && (
-              <div className="border bg-white p-4 tablet:rounded-lg tablet:p-8">
+              <div className="rounded-md border bg-white p-4 tablet:p-8">
                 <div className="max-w-2xl">
                   <UpdateProfileInformationForm />
                 </div>
@@ -67,13 +67,13 @@ const Profile: NextPage = () => {
 
             {selectedNav === 'account' && (
               <>
-                <div className="border bg-white p-4 tablet:rounded-lg tablet:p-8">
+                <div className="rounded-md border bg-white p-4 tablet:p-8">
                   <div className="max-w-2xl">
                     <UpdatePasswordForm />
                   </div>
                 </div>
 
-                <div className="border bg-white p-4 tablet:rounded-lg tablet:p-8">
+                <div className="rounded-md border bg-white p-4 tablet:p-8">
                   <div className="max-w-2xl">
                     <DeleteAccountForm />
                   </div>
@@ -82,7 +82,7 @@ const Profile: NextPage = () => {
             )}
 
             {selectedNav === 'notifications' && (
-              <div className="border bg-white p-4 tablet:rounded-lg tablet:p-8">
+              <div className="rounded-md border bg-white p-4 tablet:p-8">
                 <div className="max-w-2xl">
                   <UpdateSettingsForm />
                 </div>
