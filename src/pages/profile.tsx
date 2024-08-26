@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import Meta from '@/components/Meta';
 import DeleteAccountForm from '@/components/ProfileForms/DeleteAccountForm';
+import RequestDataForm from '@/components/ProfileForms/RequestDataForm';
 import UpdatePasswordForm from '@/components/ProfileForms/UpdatePasswordForm';
 import UpdateProfileInformationForm from '@/components/ProfileForms/UpdateProfileInformationForm';
 import UpdateSettingsForm from '@/components/ProfileForms/UpdateSettingsForm';
@@ -70,6 +71,12 @@ const Profile: NextPage = () => {
                 <div className="rounded-md border bg-white p-4 tablet:p-8">
                   <div className="max-w-2xl">
                     <UpdatePasswordForm />
+                  </div>
+                </div>
+
+                <div className="rounded-md border bg-white p-4 tablet:p-8">
+                  <div className="max-w-2xl">
+                    <RequestDataForm />
                   </div>
                 </div>
 
