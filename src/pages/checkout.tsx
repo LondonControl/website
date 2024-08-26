@@ -252,7 +252,7 @@ const Basket: NextPage<Props> = () => {
             </h2>
 
             <dl className="mt-6 space-y-4">
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+              <div className="border-t border-gray-200 pt-4">
                 <Form {...form}>
                   <form
                     onSubmit={form.handleSubmit(onSubmit)}

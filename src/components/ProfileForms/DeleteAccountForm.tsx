@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 
+import Alert from '@/components/Alert';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -41,10 +42,15 @@ const DeleteAccountForm = () => {
 
         <p className="mt-1 text-sm text-muted-foreground">
           Use the button below to delete your user account and all identifiable
-          information, <strong>warning</strong> this is destructive and cannot
-          be undone.
+          information.
         </p>
       </header>
+
+      <div className="mt-6">
+        <Alert type="caution">
+          <strong>Warning</strong> this is destructive and cannot be undone.
+        </Alert>
+      </div>
 
       <Separator className="mt-6" />
 
