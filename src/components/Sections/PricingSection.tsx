@@ -43,7 +43,7 @@ const PricingSection: React.FC<Props> = () => {
                   {option.isAvailable ? (
                     <Link href="/products">Select</Link>
                   ) : (
-                    <span>Coming Soon</span>
+                    <span>Unavailable</span>
                   )}
                 </Button>
 

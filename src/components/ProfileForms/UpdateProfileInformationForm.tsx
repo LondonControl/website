@@ -122,7 +122,15 @@ const UpdateProfileInformationForm = () => {
                       setErrors,
                     });
 
-                    toast.success('Verification email sent successfully');
+                    if (errors.length > 0) {
+                      return toast.error(
+                        'Something went wrong, please try again!',
+                      );
+                    }
+
+                    return toast.success(
+                      'Verification email sent successfully',
+                    );
                   }}
                 >
                   Click here to re-send the verification email.
