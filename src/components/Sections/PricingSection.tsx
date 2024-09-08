@@ -19,7 +19,7 @@ const PricingSection: React.FC<Props> = () => {
         </div>
 
         <div className="mt-20 flow-root">
-          <div className="isolate -mt-16 grid max-w-sm grid-cols-1 gap-y-16 divide-y divide-gray-100 tablet:mx-auto laptop:-mx-8 laptop:mt-0 laptop:max-w-none laptop:grid-cols-3 laptop:divide-x laptop:divide-y-0 desktop:-mx-4">
+          <div className="isolate -mt-16 grid max-w-sm grid-cols-1 gap-y-16 divide-y divide-gray-100 tablet:mx-auto laptop:-mx-8 laptop:mt-0 laptop:max-w-none laptop:grid-cols-2 laptop:divide-x laptop:divide-y-0 desktop:-mx-4">
             {Pricings.map((option: Pricing) => (
               <div
                 key={option.name}
