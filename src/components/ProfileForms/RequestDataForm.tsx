@@ -6,7 +6,7 @@ import Alert from '@/components/Alert';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { useAuth } from '@/hooks/useAuth';
-import axios, { csrf } from '@/lib/axios';
+import axios from '@/lib/axios';
 
 const RequestDataForm = () => {
   const { user } = useAuth({
@@ -19,7 +19,7 @@ const RequestDataForm = () => {
   const handleRequestData = async (event: any) => {
     event.preventDefault();
 
-    await csrf();
+    // await csrf();
 
     await axios
       .get(`/api/user/data/download`)
