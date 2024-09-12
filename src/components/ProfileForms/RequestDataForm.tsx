@@ -57,7 +57,7 @@ const RequestDataForm = () => {
       <div className="mt-6 flex justify-end">
         <Button
           type="button"
-          disabled
+          disabled={buttonLoading}
           onClick={(event) => {
             setButtonLoading(true);
             handleRequestData(event);
