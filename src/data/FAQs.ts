@@ -1,7 +1,8 @@
 const FAQs = [
   {
     question: 'How often will the data be updated?',
-    answer: 'We will release data patches following the AIRAC cycle.',
+    answer:
+      'We will release data patches every three months or sooner if AIRAC content necessitates an earlier release.',
   },
   {
     question:
@@ -23,7 +24,7 @@ const FAQs = [
     question:
       "I have created an account on the website but I can't access the forum?",
     answer:
-      'The website and the forum currently use separate accounts to work. There are plans to fully integrate them together but in the meantime they will remain separate, because of this you will need to make an account on each of them separately.',
+      'The website and forum operate independently, therefore you need to create an account for each of them.',
   },
   {
     question:
@@ -36,6 +37,11 @@ const FAQs = [
       'The system seems to run very slowly, what can I do to improve performance?',
     answer:
       'There are a number of options that can be set-up in the User Preferences to reduce the processing requirement of the system. These include: switching off MTCA and STCA, setting the Scan Segments to a low number, switching off vector lines and halos, not using radio communication.',
+  },
+  {
+    question: 'When launching I receive error "OLE ERROR 80045077"',
+    answer:
+      'This usually indicates an error with the speech recognition software, this can be fixed by ensuring you have speech and the English language pack installed or you can disable speech altogether by appending -v to the executable launch options.',
   },
   {
     question: 'When launching I receive error "OLE ERROR 80045078"',
