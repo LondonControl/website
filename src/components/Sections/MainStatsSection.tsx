@@ -28,14 +28,14 @@ const MainStatsSection: React.FC<Props> = () => {
               Airport and Approach Control Sectors
             </dt>
             <dd className="order-first text-3xl font-semibold tracking-tight text-white tablet:text-5xl">
-              18
+              21
             </dd>
           </div>
 
           <div className="mx-auto flex max-w-xs flex-col gap-y-4">
             <dt className="text-base leading-7 text-gray-400">Flight plans</dt>
             <dd className="order-first text-3xl font-semibold tracking-tight text-white tablet:text-5xl">
-              18,000+
+              19,600+
             </dd>
           </div>
         </dl>
