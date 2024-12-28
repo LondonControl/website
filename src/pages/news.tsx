@@ -20,6 +20,7 @@ const News: NextPage<Props> = ({ posts }) => {
         <Meta
           title={`News | ${AppConfig.site_name}`}
           description={AppConfig.description}
+          canonical={`${AppConfig.site_url}/news`}
         />
       }
     >

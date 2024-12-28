@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import React, { useState } from 'react';
 
 import Meta from '@/components/Meta';
+import ActiveSessionsForm from '@/components/ProfileForms/ActiveSessionsForm';
 import DeleteAccountForm from '@/components/ProfileForms/DeleteAccountForm';
 import RequestDataForm from '@/components/ProfileForms/RequestDataForm';
 import UpdatePasswordForm from '@/components/ProfileForms/UpdatePasswordForm';
@@ -23,6 +24,7 @@ const Profile: NextPage = () => {
         <Meta
           title={`Profile | ${AppConfig.site_name}`}
           description={AppConfig.description}
+          canonical={`${AppConfig.site_url}/profile`}
         />
       }
     >
@@ -60,7 +62,7 @@ const Profile: NextPage = () => {
           <div className="flex-1 space-y-6 laptop:ml-8">
             {selectedNav === 'profile' && (
               <div className="rounded-md border bg-white p-4 tablet:p-8">
-                <div className="max-w-2xl">
+                <div>
                   <UpdateProfileInformationForm />
                 </div>
               </div>
@@ -69,19 +71,25 @@ const Profile: NextPage = () => {
             {selectedNav === 'account' && (
               <>
                 <div className="rounded-md border bg-white p-4 tablet:p-8">
-                  <div className="max-w-2xl">
+                  <div>
                     <UpdatePasswordForm />
                   </div>
                 </div>
 
                 <div className="rounded-md border bg-white p-4 tablet:p-8">
-                  <div className="max-w-2xl">
+                  <div>
+                    <ActiveSessionsForm />
+                  </div>
+                </div>
+
+                <div className="rounded-md border bg-white p-4 tablet:p-8">
+                  <div>
                     <RequestDataForm />
                   </div>
                 </div>
 
                 <div className="rounded-md border bg-white p-4 tablet:p-8">
-                  <div className="max-w-2xl">
+                  <div>
                     <DeleteAccountForm />
                   </div>
                 </div>
@@ -90,7 +98,7 @@ const Profile: NextPage = () => {
 
             {selectedNav === 'notifications' && (
               <div className="rounded-md border bg-white p-4 tablet:p-8">
-                <div className="max-w-2xl">
+                <div>
                   <UpdateSettingsForm />
                 </div>
               </div>

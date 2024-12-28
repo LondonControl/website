@@ -33,6 +33,7 @@ const Terms: NextPage<Props> = () => {
         <Meta
           title={`Terms and Conditions | ${AppConfig.site_name}`}
           description={AppConfig.description}
+          canonical={`${AppConfig.site_url}/terms`}
         />
       }
     >

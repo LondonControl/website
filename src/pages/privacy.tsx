@@ -33,6 +33,7 @@ const Privacy: NextPage<Props> = () => {
         <Meta
           title={`Privacy | ${AppConfig.site_name}`}
           description={AppConfig.description}
+          canonical={`${AppConfig.site_url}/privacy`}
         />
       }
     >

@@ -22,8 +22,9 @@ const VerifyEmail: NextPage = () => {
   return (
     <GuestLayout>
       <Meta
-        title={`Verify | ${AppConfig.site_name}`}
+        title={`Verify Email | ${AppConfig.site_name}`}
         description={AppConfig.description}
+        canonical={`${AppConfig.site_url}/verify-email`}
       />
 
       <AuthCard>

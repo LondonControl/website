@@ -166,6 +166,7 @@ const Basket: NextPage<Props> = () => {
         <Meta
           title={`Checkout | ${AppConfig.site_name}`}
           description={AppConfig.description}
+          canonical={`${AppConfig.site_url}/checkout`}
         />
       }
     >
@@ -354,7 +355,8 @@ const Basket: NextPage<Props> = () => {
                 <Button
                   className="w-full"
                   disabled={shouldDisableDemoOrder}
-                  onClick={async () => {
+                  onClick={async (event) => {
+                    event.preventDefault();
                     setShouldDisbleDemoOrder(true);
 
                     const itemIds = await cartItems.map(

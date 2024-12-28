@@ -101,6 +101,7 @@ const Contact: NextPage<Props> = () => {
         <Meta
           title={`Contact | ${AppConfig.site_name}`}
           description={AppConfig.description}
+          canonical={`${AppConfig.site_url}/contact`}
         />
       }
     >
