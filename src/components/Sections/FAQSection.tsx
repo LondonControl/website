@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
+import Markdown from 'react-markdown';
 
 import {
   Accordion,
@@ -27,7 +28,7 @@ const FAQSection: React.FC<Props> = () => {
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-base">
-                  {faq.answer}
+                  <Markdown>{faq.answer}</Markdown>
                 </AccordionContent>
               </AccordionItem>
             ))}

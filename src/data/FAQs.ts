@@ -59,6 +59,12 @@ const FAQs = [
     answer:
       'This is something that may be looked into in the future but for now it will remain Windows only. In the meantime the simulator does run without issue using various emulators that are available for MAC users.',
   },
+  {
+    question:
+      'PayPal is not available in my country. Is there another way for me to make a purchase?',
+    answer:
+      'Yes, email **hq@londoncontrol.com** explaining this and we can process an order manually for you.',
+  },
 ];
 
 export default FAQs;
