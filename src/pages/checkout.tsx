@@ -50,6 +50,8 @@ const Basket: NextPage<Props> = () => {
     removeDiscount,
   } = useCart();
   const [shouldShowPaypal, setShouldShowPaypal] = useState<boolean>(false);
+  const [shouldDisableDemoOrder, setShouldDisbleDemoOrder] =
+    useState<boolean>(false);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -351,12 +353,22 @@ const Basket: NextPage<Props> = () => {
               {cartTotal === 0 ? (
                 <Button
                   className="w-full"
+                  disabled={shouldDisableDemoOrder}
                   onClick={async () => {
+                    setShouldDisbleDemoOrder(true);
+
                     const itemIds = await cartItems.map(
                       (item: CartItem) => item.product.id,
                     );
 
-                    await createDemoOrder(itemIds, cartDiscount?.discount.id);
+                    const success = await createDemoOrder(
+                      itemIds,
+                      cartDiscount?.discount.id,
+                    );
+
+                    setShouldDisbleDemoOrder(false);
+
+                    if (success == null) return;
 
                     clearCart();
                     router.push('/orders');
