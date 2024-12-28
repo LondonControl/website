@@ -42,6 +42,7 @@ const Documents: NextPage<Props> = () => {
         <Meta
           title={`Documents | ${AppConfig.site_name}`}
           description={AppConfig.description}
+          canonical={`${AppConfig.site_url}/documents`}
         />
       }
     >

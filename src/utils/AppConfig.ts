@@ -6,4 +6,5 @@ export const AppConfig = {
   company: 'Gerenuk',
   description: 'London Control is a realistic ATC simulator',
   locale: 'en_GB',
+  site_url: 'https://londoncontrol.com',
 };

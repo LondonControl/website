@@ -80,6 +80,7 @@ const Register: NextPage = () => {
       <Meta
         title={`Register | ${AppConfig.site_name}`}
         description={AppConfig.description}
+        canonical={`${AppConfig.site_url}/register`}
       />
 
       <AuthCard>

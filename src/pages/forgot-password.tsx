@@ -64,6 +64,7 @@ const ForgotPassword: NextPage = () => {
       <Meta
         title={`Forgot Password | ${AppConfig.site_name}`}
         description={AppConfig.description}
+        canonical={`${AppConfig.site_url}/forgot-password`}
       />
 
       <AuthCard>

@@ -27,6 +27,7 @@ const Downloads: NextPage = () => {
         <Meta
           title={`Downloads | ${AppConfig.site_name}`}
           description={AppConfig.description}
+          canonical={`${AppConfig.site_url}/downloads`}
         />
       }
     >

@@ -84,6 +84,7 @@ const Login: NextPage = () => {
       <Meta
         title={`Login | ${AppConfig.site_name}`}
         description={AppConfig.description}
+        canonical={`${AppConfig.site_url}/login`}
       />
 
       <AuthCard>

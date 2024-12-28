@@ -166,6 +166,7 @@ const Basket: NextPage<Props> = () => {
         <Meta
           title={`Checkout | ${AppConfig.site_name}`}
           description={AppConfig.description}
+          canonical={`${AppConfig.site_url}/checkout`}
         />
       }
     >

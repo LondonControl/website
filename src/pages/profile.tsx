@@ -24,6 +24,7 @@ const Profile: NextPage = () => {
         <Meta
           title={`Profile | ${AppConfig.site_name}`}
           description={AppConfig.description}
+          canonical={`${AppConfig.site_url}/profile`}
         />
       }
     >

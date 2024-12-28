@@ -28,6 +28,7 @@ const Products: NextPage<Props> = () => {
         <Meta
           title={`Products | ${AppConfig.site_name}`}
           description={AppConfig.description}
+          canonical={`${AppConfig.site_url}/products`}
         />
       }
     >

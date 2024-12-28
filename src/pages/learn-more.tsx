@@ -13,6 +13,7 @@ const LearnMore: React.FC<Props> = () => {
         <Meta
           title={`Learn More | ${AppConfig.site_name}`}
           description={AppConfig.description}
+          canonical={`${AppConfig.site_url}/learn-more`}
         />
       }
     >
