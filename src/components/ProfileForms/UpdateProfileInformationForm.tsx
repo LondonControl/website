@@ -65,7 +65,7 @@ const UpdateProfileInformationForm = () => {
   };
 
   return (
-    <section>
+    <section id="update-profile">
       <header>
         <h2 className="text-lg font-medium text-primary">
           Profile Information

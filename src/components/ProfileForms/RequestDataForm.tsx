@@ -34,17 +34,15 @@ const RequestDataForm = () => {
   };
 
   return (
-    <>
-      <section>
-        <header>
-          <h2 className="text-lg font-medium text-primary">Download Data</h2>
+    <section id="request-data">
+      <header>
+        <h2 className="text-lg font-medium text-primary">Download Data</h2>
 
-          <p className="mt-1 text-sm text-muted-foreground">
-            Use the button below to download all identifiable information
-            (website only).
-          </p>
-        </header>
-      </section>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Use the button below to download all identifiable information (website
+          only).
+        </p>
+      </header>
 
       <div className="mt-6">
         <Alert type="info">
@@ -67,7 +65,7 @@ const RequestDataForm = () => {
           Request Download
         </Button>
       </div>
-    </>
+    </section>
   );
 };
 

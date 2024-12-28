@@ -354,7 +354,8 @@ const Basket: NextPage<Props> = () => {
                 <Button
                   className="w-full"
                   disabled={shouldDisableDemoOrder}
-                  onClick={async () => {
+                  onClick={async (event) => {
+                    event.preventDefault();
                     setShouldDisbleDemoOrder(true);
 
                     const itemIds = await cartItems.map(

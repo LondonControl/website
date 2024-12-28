@@ -71,7 +71,7 @@ const UpdatePasswordForm = () => {
   };
 
   return (
-    <section>
+    <section id="update-password">
       <header>
         <h2 className="text-lg font-medium text-primary">Update Password</h2>
 

@@ -76,7 +76,7 @@ const UpdateSettingsForm = () => {
   };
 
   return (
-    <section>
+    <section id="update-settings">
       <header>
         <h2 className="text-lg font-medium text-primary">Notifications</h2>
 

@@ -36,7 +36,7 @@ const DeleteAccountForm = () => {
   };
 
   return (
-    <section>
+    <section id="delete-account">
       <header>
         <h2 className="text-lg font-medium text-primary">Delete Account</h2>
 
