@@ -39,7 +39,7 @@ const IndividualProduct: NextPage<Props> = () => {
     <MainLayout
       meta={
         <Meta
-          title={`Product | ${AppConfig.site_name}`}
+          title={`${isLoading ? 'Product' : data.data.title} | ${AppConfig.site_name}`}
           description={AppConfig.description}
         />
       }
