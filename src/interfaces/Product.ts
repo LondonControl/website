@@ -8,6 +8,7 @@ export default interface Product {
   url: string;
   price: number;
   is_available: boolean;
+  needs_activating: boolean;
   current_airac: string;
   type?: ProductType;
   images?: Media[];
