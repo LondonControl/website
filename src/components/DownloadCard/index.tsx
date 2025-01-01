@@ -46,7 +46,7 @@ const DownloadCard: React.FC<Props> = ({ product, serialKey }) => {
           <div className="col-span-full mt-4 laptop:col-span-2 laptop:mt-0">
             <dt className="font-medium">Serial key</dt>
             <dd className="mt-1 font-medium text-muted-foreground">
-              {serialKey?.key ?? 'N/A'}
+              {product?.price !== 0 ? serialKey?.key : 'N/A'}
             </dd>
           </div>
 
