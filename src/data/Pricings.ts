@@ -3,7 +3,7 @@ import type Pricing from '@/interfaces/Pricing';
 const Pricings: Pricing[] = [
   {
     name: 'Base Installer and AIRAC Data Package',
-    price: '£39.95',
+    price: '£43.95',
     description: 'Everything necessary to get started plus up-to-date data.',
     features: [
       'London Control software',
@@ -15,7 +15,7 @@ const Pricings: Pricing[] = [
   },
   {
     name: 'AIRAC Data Package',
-    price: '£36.95',
+    price: '£40.65',
     description: 'The latest data package for London Control.',
     features: [
       'Latest update',
@@ -24,13 +24,6 @@ const Pricings: Pricing[] = [
     ],
     isAvailable: true,
   },
-  // {
-  //   name: 'Standalone AIRAC Data',
-  //   price: '£24.95',
-  //   description: 'The latest AIRAC data for London Control.',
-  //   features: ['2023 update', 'Latest AIRAC data'],
-  //   isAvailable: false,
-  // },
 ];
 
 export default Pricings;
