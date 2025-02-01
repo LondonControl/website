@@ -36,6 +36,12 @@ const ActiveSessionsForm = () => {
     await axios
       .delete(`/api/sessions/${sessionId}`)
       .then(() => {
+        const index = data.data.findIndex(
+          (item: BrowserSession) => item.id === sessionId,
+        );
+
+        if (index !== -1) data.data.splice(index, 1);
+
         toast.success('Session logged out successfully!');
       })
       .catch(() => {
