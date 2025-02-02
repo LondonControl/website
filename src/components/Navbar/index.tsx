@@ -57,6 +57,8 @@ const Navigation: React.FC<Props> = () => {
 
             <NavLink href="/documents">Documents</NavLink>
 
+            <NavLink href="/utilities">Utilities</NavLink>
+
             <NavLink href="/news">News</NavLink>
 
             <NavLink href="https://forum.londoncontrol.com">Forum</NavLink>
