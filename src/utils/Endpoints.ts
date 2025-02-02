@@ -25,3 +25,7 @@ export const getAnnouncementsEndpoint = (filters: string) => {
 export const getDocumentsEndpoint = (filters: string) => {
   return `/api/documents${filters}`;
 };
+
+export const getUtilitiesEndpoint = (filters: string) => {
+  return `/api/utilities${filters}`;
+};
