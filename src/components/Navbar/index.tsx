@@ -135,7 +135,7 @@ const Navigation: React.FC<Props> = () => {
                       href="/register"
                       className="text-sm font-semibold leading-6"
                     >
-                      Get Started{' '}
+                      Register{' '}
                       <span aria-hidden="true" className="ml-2">
                         →
                       </span>

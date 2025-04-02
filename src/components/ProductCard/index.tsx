@@ -11,7 +11,7 @@ interface Props {
 
 const ProductCard: React.FC<Props> = ({ product }) => {
   const { user } = useAuth({ middleware: 'guest' });
-  const { addToCart, removeFromCart, cartContainsItem } = useCart();
+  const { setIsOpen, addToCart, removeFromCart, cartContainsItem } = useCart();
 
   return (
     <div
@@ -50,7 +50,10 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                 type="button"
                 variant="outline"
                 className="w-full"
-                onClick={() => removeFromCart(product.id)}
+                onClick={() => {
+                  removeFromCart(product.id);
+                  setIsOpen(true);
+                }}
               >
                 Remove from basket
               </Button>
@@ -59,7 +62,10 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                 type="button"
                 variant="outline"
                 className="w-full"
-                onClick={() => addToCart(product)}
+                onClick={() => {
+                  addToCart(product);
+                  setIsOpen(true);
+                }}
               >
                 Add to basket
               </Button>

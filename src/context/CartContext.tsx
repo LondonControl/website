@@ -6,6 +6,8 @@ import type Discount from '@/interfaces/Discount';
 import type Product from '@/interfaces/Product';
 
 interface CartContextValue {
+  isOpen: boolean;
+  setIsOpen: any;
   cartItems: CartItem[];
   cartContainsItem: (productId: string) => boolean;
   addToCart: (product: Product) => void;
@@ -22,6 +24,8 @@ interface CartContextValue {
 }
 
 const CartContext = createContext<CartContextValue>({
+  isOpen: false,
+  setIsOpen: () => false,
   cartItems: [],
   cartContainsItem: () => false,
   addToCart: () => {},
@@ -46,6 +50,7 @@ interface Props {
 }
 
 export const CartProvider = ({ children }: Props) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [cartDiscount, setCartDiscount] = useState<CartDiscount | null>(null);
 
@@ -119,6 +124,8 @@ export const CartProvider = ({ children }: Props) => {
   return (
     <CartContext.Provider
       value={{
+        isOpen,
+        setIsOpen,
         cartItems,
         cartContainsItem,
         addToCart,
