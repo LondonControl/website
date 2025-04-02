@@ -17,12 +17,17 @@ import type CartItem from '@/interfaces/CartItem';
 interface Props {}
 
 const ShoppingBasketDrawer: React.FC<Props> = () => {
-  const { cartItems, cartSubtotal, removeFromCart } = useCart();
+  const { isOpen, setIsOpen, cartItems, cartSubtotal, removeFromCart } =
+    useCart();
 
   return (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="ghost" className="space-x-2">
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <SheetTrigger>
+        <Button
+          variant="ghost"
+          className="space-x-2"
+          onClick={() => setIsOpen(true)}
+        >
           <ShoppingCart className="size-5" />
           {cartItems.length > 0 && <span>{cartItems.length}</span>}
         </Button>
