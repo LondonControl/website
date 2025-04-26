@@ -37,6 +37,7 @@
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-toast": "^1.1.5",
     "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tanstack/react-table": "^8.21.3",
     "@vercel/speed-insights": "^1.0.10",
     "axios": "^1.6.7",
     "class-variance-authority": "^0.7.0",
