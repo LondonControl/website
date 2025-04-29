@@ -16,7 +16,7 @@ interface Props {}
 
 const Utilities: NextPage<Props> = () => {
   const { data, error, isLoading } = useSWR(
-    getUtilitiesEndpoint('?paginate=none&is_available=1'),
+    getUtilitiesEndpoint('?paginate=none'),
     fetcher,
   );
 

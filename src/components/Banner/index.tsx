@@ -7,10 +7,7 @@ import { getAnnouncementsEndpoint } from '@/utils/Endpoints';
 interface Props {}
 
 const Banner: React.FC<Props> = () => {
-  const { data, isLoading } = useSWR(
-    getAnnouncementsEndpoint('?paginate=none&is_visible=1'),
-    fetcher,
-  );
+  const { data, isLoading } = useSWR(getAnnouncementsEndpoint(), fetcher);
 
   if (!data || (data.data.length === 0 && !isLoading)) return null;
 
