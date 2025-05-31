@@ -40,7 +40,7 @@ const HeroSection: React.FC<Props> = () => {
           alt="App screenshot"
           width={2432}
           height={1442}
-          className="mt-16 rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 tablet:mt-24"
+          className="mt-16 rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 transition-all duration-300 hover:scale-[1.01] tablet:mt-24"
         />
       </div>
     </section>

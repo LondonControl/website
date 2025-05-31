@@ -22,7 +22,7 @@ interface Props {}
 const IndividualProduct: NextPage<Props> = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { addToCart } = useCart();
+  const { setIsOpen, addToCart, removeFromCart, cartContainsItem } = useCart();
 
   const { data, error, isLoading } = useSWR(`/api/products/${id}`, fetcher);
 
@@ -140,13 +140,30 @@ const IndividualProduct: NextPage<Props> = () => {
 
                 <form className="mt-6">
                   <div className="mt-10 flex">
-                    <Button
-                      type="button"
-                      className="w-full"
-                      onClick={() => addToCart(data.data as Product)}
-                    >
-                      Add to basket
-                    </Button>
+                    {cartContainsItem(data.data.id) ? (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        className="w-full"
+                        onClick={() => {
+                          removeFromCart(data.data.id);
+                          setIsOpen(true);
+                        }}
+                      >
+                        Remove from basket
+                      </Button>
+                    ) : (
+                      <Button
+                        type="button"
+                        className="w-full"
+                        onClick={() => {
+                          addToCart(data.data as Product);
+                          setIsOpen(true);
+                        }}
+                      >
+                        Add to basket
+                      </Button>
+                    )}
                   </div>
                 </form>
               </div>
