@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 import * as z from 'zod';
 
 import AuthCard from '@/components/Auth/AuthCard';
@@ -74,9 +73,9 @@ const Login: NextPage = () => {
       setStatus,
     });
 
-    if (errors.length > 0) {
-      toast.error('Something went wrong, please try again!');
-    }
+    // if (errors.length > 0) {
+    //   toast.error('Something went wrong, please try again!');
+    // }
   };
 
   return (
