@@ -18,7 +18,6 @@ import Moment from 'react-moment';
 
 import OrderStatusBadge from '@/components/OrderCard/OrderStatusBadge';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import {
   Table,
@@ -32,30 +31,8 @@ import type Order from '@/interfaces/Order';
 
 export const OrdersColumns: ColumnDef<Order>[] = [
   {
-    id: 'select',
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && 'indeterminate')
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-  },
-  {
     accessorKey: 'number',
     header: 'Order Number',
-    enableSorting: true,
   },
   {
     accessorKey: 'created_at',
@@ -72,16 +49,34 @@ export const OrdersColumns: ColumnDef<Order>[] = [
     },
     cell: ({ row }) => {
       return (
-        <Moment date={row.getValue('created_at')} format="DD MMMM YYYY HH:mm" />
+        <Moment
+          className="px-4"
+          date={row.getValue('created_at')}
+          format="DD MMMM YYYY HH:mm"
+        />
       );
     },
     enableSorting: true,
   },
   {
     accessorKey: 'amount',
-    header: 'Total Amount',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Total Amount
+          <ArrowUpDown className="ml-1 size-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
-      return `£${(row.getValue('amount') as number) / 100}`;
+      return (
+        <span className="px-4">
+          £{(row.getValue('amount') as number) / 100}
+        </span>
+      );
     },
     enableSorting: true,
   },
@@ -185,26 +180,6 @@ export function OrdersTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
-      </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
-        </div>
       </div>
     </>
   );
