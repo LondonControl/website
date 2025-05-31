@@ -76,7 +76,7 @@ export const DownloadsColumns: ColumnDef<UserProduct>[] = [
   },
   {
     id: 'serial_key',
-    accessorKey: 'serial_key',
+    accessorKey: 'serial_key.key',
     header: 'Serial Key',
     cell: ({ row }) => {
       const serialKey = row.getValue('serial_key');
