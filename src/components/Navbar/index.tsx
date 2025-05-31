@@ -59,8 +59,6 @@ const Navigation: React.FC<Props> = () => {
 
             <NavLink href="/utilities">Utilities</NavLink>
 
-            <NavLink href="/news">News</NavLink>
-
             <NavLink href="https://forum.londoncontrol.com">Forum</NavLink>
 
             <NavLink href="/contact">Contact</NavLink>
@@ -179,13 +177,6 @@ const Navigation: React.FC<Props> = () => {
               active={router.pathname === '/documents'}
             >
               Documents
-            </ResponsiveNavLink>
-
-            <ResponsiveNavLink
-              href="/news"
-              active={router.pathname === '/news'}
-            >
-              News
             </ResponsiveNavLink>
 
             <ResponsiveNavLink href="https://forum.londoncontrol.com">

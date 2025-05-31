@@ -2,7 +2,6 @@ import type {
   ColumnDef,
   ColumnFiltersState,
   SortingState,
-  VisibilityState,
 } from '@tanstack/react-table';
 import {
   flexRender,
@@ -14,15 +13,9 @@ import {
 } from '@tanstack/react-table';
 import { ArrowUpDown } from 'lucide-react';
 import React from 'react';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import {
   Table,
@@ -33,37 +26,35 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import type UserProduct from '@/interfaces/UserProduct';
+import axios from '@/lib/axios';
+
+const handleDownloadFile = async (event: any, productId: String) => {
+  event.preventDefault();
+
+  await axios
+    .get(`/api/products/${productId}/download`)
+    .then((res) => {
+      window.open(res.data.data, '_blank');
+    })
+    .catch(() => {
+      toast.error('Something went wrong');
+    });
+};
 
 export const DownloadsColumns: ColumnDef<UserProduct>[] = [
   {
-    id: 'select',
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && 'indeterminate')
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
+    id: 'product_id',
+    accessorKey: 'product.id',
+    header: 'Product Id',
   },
   {
+    id: 'title',
     accessorKey: 'product.title',
     header: 'Product',
     enableSorting: false,
-    enableHiding: true,
   },
   {
+    id: 'current_airac',
     accessorKey: 'product.current_airac',
     header: ({ column }) => {
       return (
@@ -76,20 +67,42 @@ export const DownloadsColumns: ColumnDef<UserProduct>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      return (
+        <span className="block px-4">{row.getValue('current_airac')}</span>
+      );
+    },
     enableSorting: true,
-    enableHiding: true,
   },
   {
-    accessorKey: 'serial_key.key',
+    id: 'serial_key',
+    accessorKey: 'serial_key',
     header: 'Serial Key',
+    cell: ({ row }) => {
+      const serialKey = row.getValue('serial_key');
+
+      return <span>{String(serialKey == null ? 'N/A' : serialKey)}</span>;
+    },
     enableSorting: false,
-    enableHiding: true,
   },
   {
     id: 'download',
-    header: 'Download',
+    header: () => <span className="block px-4">Download</span>,
+    cell: ({ row }) => {
+      const productId = row.getValue('product_id');
+
+      return (
+        <Button
+          variant="link"
+          onClick={(event) =>
+            handleDownloadFile(event, String(productId) || '')
+          }
+        >
+          Download
+        </Button>
+      );
+    },
     enableSorting: false,
-    enableHiding: true,
   },
 ];
 
@@ -106,8 +119,6 @@ export function DownloadsTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
   );
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
 
   const table = useReactTable({
     data,
@@ -118,11 +129,14 @@ export function DownloadsTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
+    initialState: {
+      columnVisibility: {
+        product_id: false,
+      },
+    },
     state: {
       sorting,
       columnFilters,
-      columnVisibility,
     },
   });
 
@@ -131,40 +145,12 @@ export function DownloadsTable<TData, TValue>({
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter product..."
-          value={
-            (table.getColumn('product.title')?.getFilterValue() as string) ?? ''
-          }
+          value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}
           onChange={(event) =>
-            table.getColumn('product.title')?.setFilterValue(event.target.value)
+            table.getColumn('title')?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -215,30 +201,6 @@ export function DownloadsTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
-      </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{' '}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
-        <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
-        </div>
       </div>
     </>
   );
