@@ -88,7 +88,7 @@ const News: NextPage<Props> = ({ posts }) => {
 export async function getStaticProps() {
   const res = await fetch(
     process.env.NEXT_PUBLIC_BACKEND_URL +
-      getNewsPostsEndpoint('?paginate=none&sorts=-published_at&is_visible=1'),
+      getNewsPostsEndpoint('?paginate=none&sorts=-published_at'),
   );
   const { data: posts } = await res.json();
 

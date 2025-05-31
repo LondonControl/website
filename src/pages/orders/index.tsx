@@ -5,8 +5,7 @@ import { MoonLoader } from 'react-spinners';
 import useSWR from 'swr';
 
 import Meta from '@/components/Meta';
-import OrderCard from '@/components/OrderCard';
-import type Order from '@/interfaces/Order';
+import { OrdersColumns, OrdersTable } from '@/components/Tables/OrdersTable';
 import MainLayout from '@/layouts/Main';
 import { fetcher } from '@/lib/axios';
 import { AppConfig } from '@/utils/AppConfig';
@@ -42,10 +41,11 @@ const Orders: NextPage = () => {
           </div>
         ) : (
           <div className="mt-6 tablet:mt-12">
-            <div className="mx-auto space-y-6">
-              {data.data.map((order: Order) => (
+            <div className="mx-auto">
+              {/* {data.data.map((order: Order) => (
                 <OrderCard order={order} key={order.id} />
-              ))}
+              ))} */}
+              <OrdersTable columns={OrdersColumns} data={data.data} />
             </div>
           </div>
         )}

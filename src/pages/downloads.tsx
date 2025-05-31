@@ -4,10 +4,12 @@ import React from 'react';
 import { MoonLoader } from 'react-spinners';
 import useSWR from 'swr';
 
-import DownloadCard from '@/components/DownloadCard';
 import Meta from '@/components/Meta';
+import {
+  DownloadsColumns,
+  DownloadsTable,
+} from '@/components/Tables/DownloadsTable';
 import { useAuth } from '@/hooks/useAuth';
-import type UserProduct from '@/interfaces/UserProduct';
 import MainLayout from '@/layouts/Main';
 import { fetcher } from '@/lib/axios';
 import { AppConfig } from '@/utils/AppConfig';
@@ -43,14 +45,15 @@ const Downloads: NextPage = () => {
           </div>
         ) : (
           <div className="mt-6 tablet:mt-12">
-            <div className="mx-auto space-y-6">
-              {data?.data.map((userProduct: UserProduct) => (
+            <div className="mx-auto">
+              {/* {data?.data.map((userProduct: UserProduct) => (
                 <DownloadCard
                   key={userProduct.id}
                   product={userProduct.product}
                   serialKey={userProduct.serial_key}
                 />
-              ))}
+              ))} */}
+              <DownloadsTable columns={DownloadsColumns} data={data?.data} />
             </div>
           </div>
         )}

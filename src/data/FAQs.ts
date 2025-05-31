@@ -63,7 +63,7 @@ const FAQs = [
     question:
       'PayPal is not available in my country. Is there another way for me to make a purchase?',
     answer:
-      'Yes, email **hq@londoncontrol.com** explaining this and we can process an order manually for you.',
+      'Yes, email **hq@londoncontrol.com** explaining this and we can process an order manually for you. As this is a manual process please allow some time for us to facilitate this.',
   },
 ];
 

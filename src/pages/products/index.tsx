@@ -15,7 +15,7 @@ interface Props {}
 
 const Products: NextPage<Props> = () => {
   const { data, error, isLoading } = useSWR(
-    getProductsEndpoint('?paginate=none&is_available=1'),
+    getProductsEndpoint('?paginate=none&sorts=-price'),
     fetcher,
   );
 
