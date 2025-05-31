@@ -45,7 +45,7 @@ const Downloads: NextPage = () => {
           </div>
         ) : (
           <div className="mt-6 tablet:mt-12">
-            <div className="mx-auto space-y-6">
+            <div className="mx-auto">
               {/* {data?.data.map((userProduct: UserProduct) => (
                 <DownloadCard
                   key={userProduct.id}

@@ -41,7 +41,7 @@ const Orders: NextPage = () => {
           </div>
         ) : (
           <div className="mt-6 tablet:mt-12">
-            <div className="mx-auto space-y-6">
+            <div className="mx-auto">
               {/* {data.data.map((order: Order) => (
                 <OrderCard order={order} key={order.id} />
               ))} */}
