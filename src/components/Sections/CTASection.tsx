@@ -49,7 +49,7 @@ const CTASection: React.FC<Props> = () => {
 
           <div className="relative mt-16 h-80 laptop:mt-8">
             <img
-              className="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10"
+              className="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10 transition-all duration-300 hover:scale-[1.01]"
               src="/assets/images/lc_forum.png"
               alt="Forum screenshot"
               width={1824}
