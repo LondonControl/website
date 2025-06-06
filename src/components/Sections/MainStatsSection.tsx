@@ -1,3 +1,5 @@
+import CountUp from 'react-countup';
+
 interface Props {}
 
 const MainStatsSection: React.FC<Props> = () => {
@@ -10,7 +12,7 @@ const MainStatsSection: React.FC<Props> = () => {
               Area Control Sectors
             </dt>
             <dd className="order-first text-3xl font-semibold tracking-tight text-white tablet:text-5xl">
-              38
+              <CountUp end={38} enableScrollSpy />
             </dd>
           </div>
 
@@ -19,7 +21,7 @@ const MainStatsSection: React.FC<Props> = () => {
               Terminal Control Sectors
             </dt>
             <dd className="order-first text-3xl font-semibold tracking-tight text-white tablet:text-5xl">
-              16
+              <CountUp end={16} enableScrollSpy />
             </dd>
           </div>
 
@@ -28,14 +30,14 @@ const MainStatsSection: React.FC<Props> = () => {
               Airport and Approach Control Sectors
             </dt>
             <dd className="order-first text-3xl font-semibold tracking-tight text-white tablet:text-5xl">
-              25
+              <CountUp end={25} enableScrollSpy />
             </dd>
           </div>
 
           <div className="mx-auto flex max-w-xs flex-col gap-y-4">
             <dt className="text-base leading-7 text-gray-400">Flight plans</dt>
             <dd className="order-first text-3xl font-semibold tracking-tight text-white tablet:text-5xl">
-              21,000+
+              <CountUp end={21000} suffix="+" enableScrollSpy />
             </dd>
           </div>
         </dl>
