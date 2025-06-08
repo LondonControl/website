@@ -12,9 +12,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import dayjs from 'dayjs';
 import { ArrowUpDown } from 'lucide-react';
 import React from 'react';
-import Moment from 'react-moment';
 
 import OrderStatusBadge from '@/components/OrderCard/OrderStatusBadge';
 import { Button } from '@/components/ui/button';
@@ -49,11 +50,14 @@ export const OrdersColumns: ColumnDef<Order>[] = [
     },
     cell: ({ row }) => {
       return (
-        <Moment
+        <time
           className="px-4"
-          date={row.getValue('created_at')}
-          format="DD MMMM YYYY HH:mm"
-        />
+          dateTime={dayjs(row.getValue('created_at')).format(
+            'DD MMMM YYYY HH:mm',
+          )}
+        >
+          {dayjs(row.getValue('created_at')).format('DD MMMM YYYY HH:mm')}
+        </time>
       );
     },
     enableSorting: true,

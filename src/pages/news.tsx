@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import dayjs from 'dayjs';
 import type { NextPage } from 'next';
 import Markdown from 'react-markdown';
-import Moment from 'react-moment';
 
 import Meta from '@/components/Meta';
 import type NewsPost from '@/interfaces/NewsPost';
@@ -68,10 +68,13 @@ const News: NextPage<Props> = ({ posts }) => {
                     <dl className="absolute left-0 top-0 laptop:left-auto laptop:right-full laptop:mr-[calc(6.5rem+1px)]">
                       <dt className="sr-only">Date</dt>
                       <dd className="whitespace-nowrap text-sm leading-6">
-                        <Moment
-                          date={post.published_at}
-                          format="DD MMMM YYYY"
-                        />
+                        <time
+                          dateTime={dayjs(post.published_at).format(
+                            'DD MMMM YYYY',
+                          )}
+                        >
+                          {dayjs(post.published_at).format('DD MMMM YYYY')}
+                        </time>
                       </dd>
                     </dl>
                   </div>

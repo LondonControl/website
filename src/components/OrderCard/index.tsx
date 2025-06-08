@@ -1,8 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import classNames from 'classnames';
+import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useState } from 'react';
-import Moment from 'react-moment';
 
 import type Order from '@/interfaces/Order';
 import type OrderItem from '@/interfaces/OrderItem';
@@ -20,7 +20,9 @@ const OrderCard: React.FC<Props> = ({ order }) => {
     <div className="rounded-md border border-gray-200 bg-card text-card-foreground">
       <h3 className="sr-only">
         Order placed on{' '}
-        <Moment date={order.created_at} format="DD/MM/YYYY hh:mm" />
+        <time dateTime={dayjs(order.created_at).format('DD/MM/YYYY hh:mm')}>
+          {dayjs(order.created_at).format('DD/MM/YYYY hh:mm')}
+        </time>
       </h3>
 
       <div
@@ -39,7 +41,8 @@ const OrderCard: React.FC<Props> = ({ order }) => {
           <div className="order-last col-span-full mt-4 laptop:order-none laptop:col-span-1 laptop:mt-0">
             <dt className="font-medium">Date placed</dt>
             <dd className="mt-1 text-muted-foreground">
-              <Moment date={order.created_at} format="DD MMMM YYYY HH:mm" />
+              <time>{dayjs(order.created_at).format('DD/MM/YYYY hh:mm')}</time>
+              {/* <Moment date={order.created_at} format="DD MMMM YYYY HH:mm" /> */}
             </dd>
           </div>
 
