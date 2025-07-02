@@ -9,6 +9,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import FAQs from '@/data/FAQs';
+import type FAQ from '@/interfaces/FAQ';
 
 interface Props {}
 
@@ -22,7 +23,7 @@ const FAQSection: React.FC<Props> = () => {
           </h2>
 
           <Accordion type="single" collapsible className="mt-10 w-full">
-            {FAQs.map((faq) => (
+            {FAQs.map((faq: FAQ) => (
               <AccordionItem key={faq.question} value={faq.question}>
                 <AccordionTrigger className="text-base font-semibold">
                   {faq.question}
