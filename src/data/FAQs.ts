@@ -1,4 +1,6 @@
-const FAQs = [
+import type FAQ from '@/interfaces/FAQ';
+
+const FAQs: FAQ[] = [
   {
     question: 'How often will the data be updated?',
     answer:
@@ -55,15 +57,35 @@ const FAQs = [
       'Context sensitive help is available through menu options or the <F1> and <F2> keyboard keys.',
   },
   {
-    question: 'Will London Control ever be available for MAC?',
+    question: 'Is London Control available for MAC?',
     answer:
-      'This is something that may be looked into in the future but for now it will remain Windows only. In the meantime the simulator does run without issue using various emulators that are available for MAC users.',
+      'Not at this time, however there are various mechanisms available for MAC users to run Windows.',
   },
   {
     question:
       'PayPal is not available in my country. Is there another way for me to make a purchase?',
     answer:
       'Yes, email **hq@londoncontrol.com** explaining this and we can process an order manually for you. As this is a manual process please allow some time for us to facilitate this.',
+  },
+  {
+    question: 'Is London Control available as multiplayer?',
+    answer:
+      'London Control was never designed for simultaneous multiple users; it is a standalone simulator and there are no plans at this time to change that.',
+  },
+  {
+    question: 'Will a Discord server be available?',
+    answer:
+      'When we asked the user base this question there was less than 2 per cent interest, so we decided it would not be worthwhile. There are no plans to introduce a Discord server or similar at the moment.',
+  },
+  {
+    question: 'Is speech recognition being upgraded?',
+    answer:
+      'As of June 2025, we are working on enhancing the speech recognition system to make it more responsive. It has been problematic since the first days of London Control over 20 years ago, but we hope to have an upgrade by AIRAC 2509.',
+  },
+  {
+    question: 'Can class G aircraft be controlled?',
+    answer:
+      "Not specifically, however there are 25 airport/CTZ and approach sectors that can be controlled, to which you can create your own flight plans for 'low and slow' traffic to integrate with other traffic.",
   },
 ];
 
