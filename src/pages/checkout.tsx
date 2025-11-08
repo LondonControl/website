@@ -404,6 +404,7 @@ const Basket: NextPage<Props> = () => {
                     clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ?? '',
                     currency: 'GBP',
                     intent: 'capture',
+                    disableFunding: 'card',
                   }}
                 >
                   <PayPalButtons
@@ -411,7 +412,7 @@ const Basket: NextPage<Props> = () => {
                     style={{
                       color: 'gold',
                       shape: 'rect',
-                      label: 'pay',
+                      label: 'buynow',
                       height: 50,
                     }}
                     createOrder={async () => {
