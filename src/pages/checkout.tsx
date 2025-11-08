@@ -50,6 +50,7 @@ const Basket: NextPage<Props> = () => {
     removeDiscount,
   } = useCart();
   const [shouldShowPaypal, setShouldShowPaypal] = useState<boolean>(false);
+  const [shouldShowPaypal2, setShouldShowPaypal2] = useState<boolean>(false);
   const [shouldDisableDemoOrder, setShouldDisbleDemoOrder] =
     useState<boolean>(false);
   const router = useRouter();
@@ -327,7 +328,7 @@ const Basket: NextPage<Props> = () => {
               </div>
             </dl>
 
-            <div className="mt-8">
+            <div className="mt-8 space-y-4">
               <div className="flex items-center space-x-2">
                 <Switch
                   id="privacyPolicyAgree"
@@ -348,9 +349,28 @@ const Basket: NextPage<Props> = () => {
                   .
                 </label>
               </div>
+
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="purchaseAgree"
+                  checked={shouldShowPaypal2}
+                  onCheckedChange={setShouldShowPaypal2}
+                />
+                <label
+                  htmlFor="agreement"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  By clicking here and placing this order, you acknowledge there
+                  is <strong>no right of cancellation or refund</strong> once
+                  the software download has started.
+                </label>
+              </div>
             </div>
 
-            <div className="mt-8" hidden={!shouldShowPaypal}>
+            <div
+              className="mt-8"
+              hidden={!shouldShowPaypal || !shouldShowPaypal2}
+            >
               {cartTotal === 0 ? (
                 <Button
                   className="w-full"
