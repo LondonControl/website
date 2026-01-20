@@ -8,7 +8,7 @@ const Pricings: Pricing[] = [
     features: [
       'London Control software',
       'Latest update',
-      'Updates until 31st December 2025',
+      'Updates until 31st December 2026',
       'Updated quarterly or sooner if required',
     ],
     isAvailable: true,
@@ -19,7 +19,7 @@ const Pricings: Pricing[] = [
     description: 'The latest data package for London Control.',
     features: [
       'Latest update',
-      'Updates until 31st December 2025',
+      'Updates until 31st December 2026',
       'Updated quarterly or sooner if required',
     ],
     isAvailable: true,
