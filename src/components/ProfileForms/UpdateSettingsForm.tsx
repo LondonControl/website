@@ -24,10 +24,7 @@ const formSchema = z.object({
 });
 
 const UpdateSettingsForm = () => {
-  const { user } = useAuth({
-    middleware: 'auth',
-  });
-
+  const { user } = useAuth({ middleware: 'auth' });
   const [errors, setErrors] = useState<any>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -52,114 +49,103 @@ const UpdateSettingsForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setErrors([]);
-
     await csrf();
-
     axios
       .put('/api/settings', {
         emails: {
           communication: values.communication_emails,
           marketing: values.marketing_emails,
-          security: true, // values.security_emails,
+          security: true,
         },
       })
-      .then(() => toast.success('Profile updated successfully!'))
+      .then(() => toast.success('Settings updated successfully!'))
       .catch((error) => {
         if (error.response.status !== 422) throw error;
-
         setErrors(error.response.data.errors);
       });
-
-    if (errors.length > 0) {
+    if (errors.length > 0)
       toast.error('Something went wrong, please try again!');
-    }
   };
 
   return (
-    <section id="update-settings">
-      <header>
-        <h2 className="text-lg font-medium text-primary">Notifications</h2>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+        <FormField
+          control={form.control}
+          name="communication_emails"
+          render={({ field }) => (
+            <FormItem className="flex items-center justify-between rounded-lg border border-border p-5">
+              <div className="space-y-1">
+                <FormLabel className="text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
+                  Communication emails
+                </FormLabel>
+                <FormDescription className="text-sm text-foreground/70">
+                  Receive emails about your account activity.
+                </FormDescription>
+              </div>
+              <FormControl>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
 
-        <p className="mt-1 text-sm text-muted-foreground">
-          Update your account&apos;s notifications information.
-        </p>
-      </header>
+        <FormField
+          control={form.control}
+          name="marketing_emails"
+          render={({ field }) => (
+            <FormItem className="flex items-center justify-between rounded-lg border border-border p-5">
+              <div className="space-y-1">
+                <FormLabel className="text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
+                  Marketing emails
+                </FormLabel>
+                <FormDescription className="text-sm text-foreground/70">
+                  Receive emails about new products, features, and more.
+                </FormDescription>
+              </div>
+              <FormControl>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
 
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6 space-y-4">
-          <FormField
-            control={form.control}
-            name="communication_emails"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                <div className="space-y-0.5">
-                  <FormLabel className="text-base">
-                    Communication emails
-                  </FormLabel>
-                  <FormDescription>
-                    Receive emails about your account activity.
-                  </FormDescription>
-                </div>
-                <FormControl>
-                  <Switch
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
+        <FormField
+          control={form.control}
+          name="security_emails"
+          render={({ field }) => (
+            <FormItem className="flex items-center justify-between rounded-lg border border-border p-5">
+              <div className="space-y-1">
+                <FormLabel className="text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
+                  Security emails
+                </FormLabel>
+                <FormDescription className="text-sm text-foreground/70">
+                  Receive emails about your account activity and security.
+                </FormDescription>
+              </div>
+              <FormControl>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  disabled
+                  aria-readonly
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
 
-          <FormField
-            control={form.control}
-            name="marketing_emails"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                <div className="space-y-0.5">
-                  <FormLabel className="text-base">Marketing emails</FormLabel>
-                  <FormDescription>
-                    Receive emails about new products, features, and more.
-                  </FormDescription>
-                </div>
-                <FormControl>
-                  <Switch
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="security_emails"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                <div className="space-y-0.5">
-                  <FormLabel className="text-base">Security emails</FormLabel>
-                  <FormDescription>
-                    Receive emails about your account activity and security.
-                  </FormDescription>
-                </div>
-                <FormControl>
-                  <Switch
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    disabled
-                    aria-readonly
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-
-          <div className="flex justify-end">
-            <Button type="submit">Save</Button>
-          </div>
-        </form>
-      </Form>
-    </section>
+        <div className="flex justify-end pt-2">
+          <Button type="submit">Save changes</Button>
+        </div>
+      </form>
+    </Form>
   );
 };
 

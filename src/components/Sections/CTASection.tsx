@@ -1,60 +1,83 @@
 import Link from 'next/link';
 
-import { Button } from '../ui/button';
-
 interface Props {}
 
 const CTASection: React.FC<Props> = () => {
   return (
-    <section className="bg-white py-16">
+    <section className="bg-background py-16">
       <div className="mx-auto max-w-site px-6 laptop:px-8">
-        <div className="relative overflow-hidden bg-primary px-6 pt-16 shadow-2xl tablet:rounded-md tablet:px-16 md:pt-24 laptop:flex laptop:gap-x-20 laptop:px-24 laptop:pt-0">
-          <div className="mx-auto max-w-md text-center laptop:mx-0 laptop:flex-auto laptop:py-32 laptop:text-left">
-            <h2 className="text-3xl font-bold tracking-tight text-white tablet:text-4xl">
-              In need of some help?
-              <br />
-              Head over to the{' '}
+        <div className="relative overflow-hidden rounded-xl bg-primary shadow-2xl">
+          {/* Header */}
+          <div className="px-6 pt-16 text-center tablet:px-16 laptop:px-24 laptop:pt-20">
+            <span className="text-xs font-medium uppercase tracking-[0.25em] text-primary-foreground/50">
+              Support
+            </span>
+            <h2 className="mt-4 text-3xl font-black tracking-tight text-primary-foreground tablet:text-4xl">
+              We&apos;re here to help.
+            </h2>
+            <p className="mx-auto mt-3 max-w-lg text-base text-primary-foreground/60">
+              Whether you need a quick answer from the community or direct
+              support from our team — we&apos;ve got you covered.
+            </p>
+          </div>
+
+          {/* Two cards */}
+          <div className="mt-10 grid gap-4 px-6 tablet:px-16 laptop:grid-cols-2 laptop:px-24">
+            {/* Forum card */}
+            <div className="flex flex-col rounded-lg border border-white/10 bg-white/5 p-8">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="text-sm font-semibold text-primary-foreground">
+                  Community Forum
+                </span>
+              </div>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-primary-foreground/60">
+                Browse guides, troubleshoot issues, and get answers from
+                hundreds of fellow controllers.
+              </p>
               <Link
                 href="https://forum.londoncontrol.com"
                 target="_blank"
-                className="underline"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-70"
               >
-                forum
+                Visit forum <span aria-hidden="true">→</span>
               </Link>
-              .
-            </h2>
+            </div>
 
-            <p className="mt-4 text-lg leading-8 text-gray-300">
-              Have a question that needs direct contact? Use the button below to
-              get in touch with us!
-            </p>
-
-            <div className="mt-10 flex items-center justify-center gap-x-4 laptop:justify-start">
-              <Button variant="secondary" asChild>
-                <Link href="https://forum.londoncontrol.com" target="_blank">
-                  Get started
-                </Link>
-              </Button>
-
-              <Button variant="link" asChild>
-                <Link href="/contact" className="text-white">
-                  Contact us{' '}
-                  <span aria-hidden="true" className="ml-2">
-                    →
-                  </span>
-                </Link>
-              </Button>
+            {/* Contact card */}
+            <div className="flex flex-col rounded-lg border border-white/10 bg-white/5 p-8">
+              <span className="text-sm font-semibold text-primary-foreground">
+                Direct Support
+              </span>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-primary-foreground/60">
+                Need a personal response? Our team is available to answer
+                queries, handle licensing questions, and resolve technical
+                issues.
+              </p>
+              <Link
+                href="/contact"
+                className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-70"
+              >
+                Contact us <span aria-hidden="true">→</span>
+              </Link>
             </div>
           </div>
 
-          <div className="relative mt-16 h-80 laptop:mt-8">
-            <img
-              className="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10 transition-all duration-300 hover:scale-[1.01]"
-              src="/assets/images/lc_forum.png"
-              alt="Forum screenshot"
-              width={1824}
-              height={1080}
-            />
+          {/* Forum screenshot — full-width at bottom with subtle perspective tilt */}
+          <div className="relative mt-12 px-6 tablet:px-16 laptop:px-24">
+            <div className="overflow-hidden rounded-t-xl">
+              <img
+                className="w-full bg-white/5 ring-1 ring-white/10"
+                src="/assets/images/lc_forum.png"
+                alt="Forum screenshot"
+                width={1824}
+                height={1080}
+                style={{
+                  transform: 'perspective(1200px) rotateX(4deg)',
+                  transformOrigin: 'bottom center',
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>

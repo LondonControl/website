@@ -11,12 +11,6 @@ const CONTACT_MESSAGE_FIELDS: ContactMessage = {
 };
 
 const generateEmailContent = (data: any) => {
-  // const stringData = Object.entries(data).reduce(
-  //   (str, [key, val]) =>
-  //     (str += `${CONTACT_MESSAGE_FIELDS[key]}: \n${val} \n \n`),
-  //   ''
-  // );
-
   const stringData = Object.entries(data)
     .map(([key, val]) => `${CONTACT_MESSAGE_FIELDS[key]}: \n${val} \n \n`)
     .join('');

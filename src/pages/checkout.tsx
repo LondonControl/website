@@ -92,7 +92,7 @@ const Basket: NextPage<Props> = () => {
       });
 
       if (response.status === 200) {
-        toast.success('Purchase successfull');
+        toast.success('Purchase successful');
       }
 
       form.reset();
@@ -100,7 +100,7 @@ const Basket: NextPage<Props> = () => {
 
       return response;
     } catch (err) {
-      toast.error('An error occurred');
+      toast.error('Something went wrong, please try again!');
       return null;
     }
   };
@@ -117,7 +117,7 @@ const Basket: NextPage<Props> = () => {
       });
 
       if (response.status === 200) {
-        toast.success('Purchase successfull');
+        toast.success('Purchase successful');
       }
 
       form.reset();
@@ -125,7 +125,7 @@ const Basket: NextPage<Props> = () => {
 
       return response;
     } catch (err) {
-      toast.error('An error occurred');
+      toast.error('Something went wrong, please try again!');
       return null;
     }
   };
@@ -171,10 +171,15 @@ const Basket: NextPage<Props> = () => {
         />
       }
     >
-      <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-        <h1 className="text-2xl font-bold tracking-tight text-primary tablet:text-3xl laptop:mt-6">
-          Checkout
-        </h1>
+      <div className="mx-auto max-w-site px-4 py-12 tablet:px-6 laptop:px-8">
+        <div className="border-b border-border pb-8">
+          <span className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
+            Store
+          </span>
+          <h1 className="mt-2 text-3xl font-black tracking-tight text-foreground tablet:text-4xl">
+            Checkout
+          </h1>
+        </div>
 
         <div className="mt-12 laptop:grid laptop:grid-cols-12 laptop:items-start laptop:gap-x-12 desktop:gap-x-16">
           <section aria-labelledby="cart-heading" className="laptop:col-span-7">
@@ -184,7 +189,7 @@ const Basket: NextPage<Props> = () => {
 
             <ul
               role="list"
-              className="divide-y divide-gray-200 border-y border-gray-200"
+              className="divide-y divide-border border-y border-border"
             >
               {cartItems.map((item: CartItem) => (
                 <li key={item.product.id} className="flex py-6 tablet:py-10">
@@ -208,14 +213,14 @@ const Basket: NextPage<Props> = () => {
                           <h3 className="text-sm">
                             <Link
                               href={`/products/${item.product.id}`}
-                              className="font-medium text-gray-700 hover:text-gray-800"
+                              className="font-medium text-muted-foreground hover:text-foreground"
                             >
                               {item.product.title}
                             </Link>
                           </h3>
                         </div>
 
-                        <p className="mt-1 text-sm font-semibold text-primary">
+                        <p className="mt-1 text-sm font-semibold text-foreground">
                           £{item.product.price / 100}
                         </p>
 
@@ -246,17 +251,17 @@ const Basket: NextPage<Props> = () => {
           {/* Order summary */}
           <section
             aria-labelledby="summary-heading"
-            className="mt-16 rounded-lg bg-gray-50 px-4 py-6 tablet:p-6 laptop:col-span-5 laptop:mt-0 laptop:p-8"
+            className="mt-16 rounded-xl border border-border bg-card px-4 py-6 tablet:p-6 laptop:sticky laptop:top-24 laptop:col-span-5 laptop:mt-0 laptop:p-8"
           >
             <h2
               id="summary-heading"
-              className="text-lg font-medium text-primary"
+              className="text-lg font-medium text-foreground"
             >
               Order summary
             </h2>
 
             <dl className="mt-6 space-y-4">
-              <div className="border-t border-gray-200 pt-4">
+              <div className="border-t border-border pt-4">
                 <Form {...form}>
                   <form
                     onSubmit={form.handleSubmit(onSubmit)}
@@ -278,23 +283,28 @@ const Basket: NextPage<Props> = () => {
                       )}
                     />
 
-                    <Button type="submit">Apply</Button>
+                    <Button
+                      type="submit"
+                      disabled={form.formState.isSubmitting}
+                    >
+                      {form.formState.isSubmitting ? 'Applying…' : 'Apply'}
+                    </Button>
                   </form>
                 </Form>
               </div>
 
               {cartDiscount && (
-                <span className="inline-flex items-center gap-x-1 rounded-md bg-input px-2 py-1 text-xs font-medium text-gray-800">
+                <span className="inline-flex items-center gap-x-1 rounded-md bg-input px-2 py-1 text-xs font-medium text-foreground">
                   {cartDiscount.discount.code}
                   <button
                     onClick={() => removeDiscount(cartDiscount.discount.id)}
                     type="button"
-                    className="group relative -mr-1 size-3.5 rounded-sm hover:bg-gray-600/20"
+                    className="group relative -mr-1 size-3.5 cursor-pointer rounded-sm hover:bg-foreground/10"
                   >
                     <span className="sr-only">Remove</span>
                     <svg
                       viewBox="0 0 14 14"
-                      className="size-3.5 stroke-gray-800/75 group-hover:stroke-gray-800"
+                      className="size-3.5 stroke-foreground/60 group-hover:stroke-foreground"
                     >
                       <path d="M4 4l6 6m0-6l-6 6" />
                     </svg>
@@ -303,26 +313,28 @@ const Basket: NextPage<Props> = () => {
                 </span>
               )}
 
-              <div className="flex items-center justify-between border-gray-200 pt-2">
-                <dt className="text-sm text-gray-700">Subtotal</dt>
+              <div className="flex items-center justify-between border-border pt-2">
+                <dt className="text-sm text-muted-foreground">Subtotal</dt>
 
-                <dd className="text-sm text-gray-700">£{cartSubtotal / 100}</dd>
+                <dd className="text-sm text-muted-foreground">
+                  £{cartSubtotal / 100}
+                </dd>
               </div>
 
               <div className="flex items-center justify-between">
-                <dt className="text-sm text-gray-700">Discount</dt>
+                <dt className="text-sm text-muted-foreground">Discount</dt>
 
-                <dd className="text-sm text-gray-700">
+                <dd className="text-sm text-muted-foreground">
                   -£{(cartDiscountTotal / 100).toFixed(2)}
                 </dd>
               </div>
 
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="text-base font-medium text-primary">
+              <div className="flex items-center justify-between border-t border-border pt-4">
+                <dt className="text-base font-medium text-foreground">
                   Order total
                 </dt>
 
-                <dd className="text-base font-medium text-primary">
+                <dd className="text-base font-medium text-foreground">
                   £{(cartTotal / 100).toFixed(2)}
                 </dd>
               </div>
@@ -336,13 +348,13 @@ const Basket: NextPage<Props> = () => {
                   onCheckedChange={setShouldShowPaypal}
                 />
                 <label
-                  htmlFor="terms"
+                  htmlFor="privacyPolicyAgree"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
                   By selecting this and purchasing you agree to our{' '}
                   <Link
                     href="/terms"
-                    className="font-semibold text-primary hover:underline"
+                    className="font-bold text-foreground hover:underline"
                   >
                     terms and conditions
                   </Link>
@@ -357,12 +369,15 @@ const Basket: NextPage<Props> = () => {
                   onCheckedChange={setShouldShowPaypal2}
                 />
                 <label
-                  htmlFor="agreement"
+                  htmlFor="purchaseAgree"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
                   By clicking here and placing this order, you acknowledge there
-                  is <strong>no right of cancellation or refund</strong> once
-                  the software download has started.
+                  is{' '}
+                  <strong className="underline">
+                    no right of cancellation or refund
+                  </strong>{' '}
+                  once the software download has started.
                 </label>
               </div>
             </div>

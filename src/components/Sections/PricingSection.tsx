@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import Link from 'next/link';
 
@@ -8,64 +10,140 @@ import { Button } from '../ui/button';
 
 interface Props {}
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: 'easeOut' as const },
+  },
+};
+
 const PricingSection: React.FC<Props> = () => {
   return (
-    <section className="bg-white py-24 tablet:py-32" id="pricing">
+    <section className="bg-background py-24 tablet:py-32" id="pricing">
       <div className="mx-auto max-w-site px-6 laptop:px-8">
-        <div className="mx-auto max-w-4xl tablet:text-center">
-          <h2 className="mt-2 text-4xl font-bold tracking-tight text-primary tablet:text-5xl">
-            Choose the right option for&nbsp;you
+        <motion.div
+          className="m-auto max-w-2xl text-center"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5, ease: 'easeOut' as const }}
+        >
+          <span className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
+            Pricing
+          </span>
+          <h2 className="mt-4 text-4xl font-black tracking-tight text-foreground tablet:text-5xl">
+            Choose from the following options
           </h2>
-        </div>
+          <p className="mt-4 text-base text-muted-foreground">
+            Get up and running with London Control — everything you need in one
+            package.
+          </p>
+        </motion.div>
 
-        <div className="mt-20 flow-root">
-          <div className="isolate -mt-16 grid max-w-sm grid-cols-1 gap-y-16 divide-y divide-gray-100 tablet:mx-auto laptop:-mx-8 laptop:mt-0 laptop:max-w-none laptop:grid-cols-2 laptop:divide-x laptop:divide-y-0 desktop:-mx-4">
-            {Pricings.map((option: Pricing) => (
-              <div
+        <motion.div
+          className="mx-auto mt-16 grid grid-cols-1 gap-4 laptop:grid-cols-2"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={{
+            hidden: {},
+            show: { transition: { staggerChildren: 0.12 } },
+          }}
+        >
+          {Pricings.map((option: Pricing, index: number) => {
+            const isFeatured = index === 0;
+            return (
+              <motion.div
                 key={option.name}
-                className="pt-16 laptop:px-8 laptop:pt-0 desktop:px-14"
+                variants={cardVariants}
+                className="relative pt-4"
               >
-                <h3 className="text-base font-semibold leading-7 text-primary">
-                  {option.name}
-                </h3>
-
-                <p className="mt-6 flex items-baseline gap-x-1">
-                  <span className="text-5xl font-bold tracking-tight text-primary">
-                    {option.price}
-                  </span>
-                </p>
-
-                <Button
-                  className="mt-10 w-full"
-                  asChild={option.isAvailable}
-                  disabled={!option.isAvailable}
+                <div
+                  className={`relative flex h-full flex-col rounded-2xl p-8 ${
+                    isFeatured
+                      ? 'bg-primary text-primary-foreground'
+                      : 'border border-border bg-card'
+                  }`}
                 >
-                  {option.isAvailable ? (
-                    <Link href="/products">Select</Link>
-                  ) : (
-                    <span>Unavailable</span>
+                  {isFeatured && (
+                    <span className="absolute left-8 top-0 inline-flex -translate-y-1/2 rounded-full border border-border bg-background px-3 py-1 text-xs font-semibold uppercase tracking-wider text-foreground shadow-sm">
+                      Most popular
+                    </span>
                   )}
-                </Button>
+                  <h3
+                    className={`text-xs font-medium uppercase tracking-widest ${
+                      isFeatured
+                        ? 'text-primary-foreground/60'
+                        : 'text-muted-foreground'
+                    }`}
+                  >
+                    {option.name}
+                  </h3>
 
-                <p className="mt-10 text-sm font-semibold leading-6 text-primary">
-                  {option.description}
-                </p>
+                  <p className="mt-4 font-jetbrains text-5xl font-bold tracking-tight">
+                    {option.price}
+                  </p>
 
-                <ul
-                  role="list"
-                  className="mt-6 space-y-3 text-sm leading-6 text-gray-600"
-                >
-                  {option.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-x-3">
-                      <Check className="size-4 flex-none text-primary" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
+                  <p
+                    className={`mt-3 text-sm leading-relaxed ${
+                      isFeatured
+                        ? 'text-primary-foreground/70'
+                        : 'text-muted-foreground'
+                    }`}
+                  >
+                    {option.description}
+                  </p>
+
+                  <div
+                    className={`my-6 h-px w-full ${
+                      isFeatured ? 'bg-primary-foreground/10' : 'bg-border'
+                    }`}
+                  />
+
+                  <ul className="space-y-3 text-sm">
+                    {option.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-3">
+                        <Check
+                          className={`mt-0.5 size-4 flex-none ${
+                            isFeatured
+                              ? 'text-primary-foreground'
+                              : 'text-foreground'
+                          }`}
+                        />
+                        <span
+                          className={
+                            isFeatured
+                              ? 'text-primary-foreground/80'
+                              : 'text-muted-foreground'
+                          }
+                        >
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-auto pt-8">
+                    <Button
+                      className="w-full"
+                      asChild={option.isAvailable}
+                      disabled={!option.isAvailable}
+                      variant={isFeatured ? 'secondary' : 'default'}
+                    >
+                      {option.isAvailable ? (
+                        <Link href="/products">Select package</Link>
+                      ) : (
+                        <span>Unavailable</span>
+                      )}
+                    </Button>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );

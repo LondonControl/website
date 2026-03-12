@@ -1,9 +1,11 @@
-/* eslint-disable import/no-extraneous-dependencies */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import dayjs from 'dayjs';
+import { motion } from 'framer-motion';
 import type { NextPage } from 'next';
 import Markdown from 'react-markdown';
 
 import Meta from '@/components/Meta';
+import PageHeader from '@/components/PageHeader';
 import type NewsPost from '@/interfaces/NewsPost';
 import MainLayout from '@/layouts/Main';
 import { AppConfig } from '@/utils/AppConfig';
@@ -12,6 +14,15 @@ import { getNewsPostsEndpoint } from '@/utils/Endpoints';
 interface Props {
   posts: NewsPost[];
 }
+
+const rowVariants = {
+  hidden: { opacity: 0, y: 12 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: 'easeOut' as const },
+  },
+};
 
 const News: NextPage<Props> = ({ posts }) => {
   return (
@@ -24,64 +35,73 @@ const News: NextPage<Props> = ({ posts }) => {
         />
       }
     >
-      <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-        <h1 className="mt-6 text-2xl font-bold tracking-tight text-primary tablet:text-3xl">
-          News
-        </h1>
+      <div className="mx-auto max-w-site px-4 py-12 tablet:px-6 laptop:px-8">
+        <PageHeader eyebrow="Updates" title="News" />
 
         {posts.length === 0 ? (
-          <div className="mt-6 flex items-center justify-center laptop:mt-12">
-            {/* No posts returned */}
+          <div className="mt-16 flex flex-col items-center justify-center gap-2 py-16 text-center">
+            <p className="text-sm font-medium text-foreground">No posts yet</p>
+            <p className="text-sm text-muted-foreground">
+              Check back soon for updates.
+            </p>
           </div>
         ) : (
-          <div className="relative mt-6 tablet:ml-[calc(2rem+1px)] tablet:pb-12 md:ml-[calc(3.5rem+1px)] laptop:ml-[max(calc(14.5rem+1px),calc(100%-80rem))] laptop:mt-12">
-            <div className="absolute bottom-0 right-full top-3 mr-7 hidden w-px bg-slate-200 tablet:block md:mr-[3.25rem]"></div>
+          <motion.div
+            className="relative mt-12"
+            initial="hidden"
+            animate="show"
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: 0.1 } },
+            }}
+          >
+            {/* Vertical timeline line — sits in the centre of the 2rem left gutter */}
+            <div className="absolute inset-y-0 left-[0.9375rem] w-px bg-border" />
 
-            <div className="space-y-16">
-              {posts.map((post: NewsPost) => (
-                <article key={post.id} className="group relative">
-                  <div className="absolute -inset-x-4 -inset-y-2.5 md:-inset-x-6 md:-inset-y-4"></div>
+            <div className="divide-y divide-border">
+              {posts.map((post: NewsPost, index: number) => (
+                <motion.article
+                  key={post.id}
+                  variants={rowVariants}
+                  className="flex gap-8 py-8"
+                >
+                  {/* Timeline gutter — dot lives here, centred on the line */}
+                  <div className="relative w-[1.875rem] shrink-0">
+                    <div
+                      className="absolute left-1/2 top-[0.4375rem] size-2 -translate-x-1/2 rounded-full bg-foreground"
+                      style={{ boxShadow: '0 0 0 3px hsl(var(--background))' }}
+                    />
+                  </div>
 
-                  <svg
-                    viewBox="0 0 9 9"
-                    className="absolute right-full top-2 mr-6 hidden size-[calc(0.5rem+1px)] overflow-visible text-slate-200 tablet:block md:mr-12"
-                  >
-                    <circle
-                      cx="4.5"
-                      cy="4.5"
-                      r="4.5"
-                      stroke="currentColor"
-                      className="fill-white"
-                      strokeWidth="2"
-                    ></circle>
-                  </svg>
-
-                  <div className="relative">
-                    <h3 className="pt-8 text-base font-semibold tracking-tight text-primary laptop:pt-0">
-                      {post.title}
-                    </h3>
-
-                    <div className="prose prose-slate prose-a:relative prose-a:z-10 mb-4 mt-2">
-                      <Markdown>{post.body}</Markdown>
+                  {/* Content */}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1">
+                      <div className="flex flex-wrap items-baseline gap-2">
+                        <h3 className="text-base font-black tracking-tight text-foreground">
+                          {post.title}
+                        </h3>
+                        {index === 0 && (
+                          <span className="inline-flex items-center rounded-full border border-border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                            Latest
+                          </span>
+                        )}
+                      </div>
+                      <time
+                        dateTime={dayjs(post.published_at).format('YYYY-MM-DD')}
+                        className="font-jetbrains text-xs text-muted-foreground"
+                      >
+                        {dayjs(post.published_at).format('DD MMM YYYY')}
+                      </time>
                     </div>
 
-                    <dl className="absolute left-0 top-0 laptop:left-auto laptop:right-full laptop:mr-[calc(6.5rem+1px)]">
-                      <dt className="sr-only">Date</dt>
-                      <dd className="whitespace-nowrap text-sm leading-6">
-                        <time
-                          dateTime={dayjs(post.published_at).format(
-                            'DD MMMM YYYY',
-                          )}
-                        >
-                          {dayjs(post.published_at).format('DD MMMM YYYY')}
-                        </time>
-                      </dd>
-                    </dl>
+                    <div className="prose prose-sm prose-slate prose-a:relative prose-a:z-10 mt-3 max-w-none text-muted-foreground">
+                      <Markdown skipHtml>{post.body}</Markdown>
+                    </div>
                   </div>
-                </article>
+                </motion.article>
               ))}
             </div>
-          </div>
+          </motion.div>
         )}
       </div>
     </MainLayout>

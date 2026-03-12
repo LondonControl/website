@@ -86,7 +86,10 @@ const Login: NextPage = () => {
         canonical={`${AppConfig.site_url}/login`}
       />
 
-      <AuthCard>
+      <AuthCard
+        title="Welcome back"
+        description="Sign in to your account to continue."
+      >
         {/* Session Status */}
         <AuthSessionStatus className="mb-4" status={status} />
 
@@ -166,8 +169,12 @@ const Login: NextPage = () => {
             />
 
             {/* <div className="flex items-center justify-end"> */}
-            <Button type="submit" className="w-full">
-              Login
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={form.formState.isSubmitting}
+            >
+              {form.formState.isSubmitting ? 'Signing in…' : 'Login'}
             </Button>
             {/* </div> */}
           </form>

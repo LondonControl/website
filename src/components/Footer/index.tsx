@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
 
+import ApplicationLogo from '@/components/ApplicationLogo';
+
 interface Props {}
-const navigation = [
+
+const socialLinks = [
   {
     name: 'Twitter',
     href: 'https://twitter.com/LondonControl24',
@@ -27,35 +30,130 @@ const navigation = [
   },
 ];
 
+const navigation = {
+  product: [
+    { name: 'Products', href: '/products' },
+    { name: 'Documents', href: '/documents' },
+    { name: 'Utilities', href: '/utilities' },
+    { name: 'Downloads', href: '/downloads' },
+  ],
+  support: [
+    { name: 'Forum', href: 'https://forum.londoncontrol.com', external: true },
+    { name: 'Contact', href: '/contact' },
+    { name: 'News', href: '/news' },
+  ],
+  legal: [
+    { name: 'Privacy Policy', href: '/privacy' },
+    { name: 'Terms & Conditions', href: '/terms' },
+  ],
+};
+
 const Footer: React.FC<Props> = () => {
   return (
-    <footer className="bg-white">
-      <div className="mx-auto max-w-site px-6 py-12 tablet:flex tablet:items-center tablet:justify-between laptop:px-8">
-        <div className="flex justify-center space-x-6 tablet:order-2">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              target="_blank"
-              className="text-gray-400 hover:text-gray-500"
-            >
-              <span className="sr-only">{item.name}</span>
-              <item.icon className="size-6" aria-hidden="true" />
+    <footer className="border-t border-border bg-background">
+      <div className="mx-auto max-w-site px-6 py-16 laptop:px-8">
+        <div className="grid grid-cols-1 gap-12 laptop:grid-cols-4">
+          {/* Brand column */}
+          <div className="laptop:col-span-1">
+            <Link href="/">
+              <ApplicationLogo className="block h-6 w-auto" />
             </Link>
-          ))}
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              The most sophisticated ATC simulator of its kind.
+            </p>
+            <div className="mt-6 flex gap-4">
+              {socialLinks.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  <span className="sr-only">{item.name}</span>
+                  <item.icon className="size-5" aria-hidden="true" />
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Link columns */}
+          <div className="grid grid-cols-2 gap-8 laptop:col-span-3 laptop:grid-cols-3">
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-foreground">
+                Product
+              </h3>
+              <ul className="mt-4 space-y-3">
+                {navigation.product.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-foreground">
+                Support
+              </h3>
+              <ul className="mt-4 space-y-3">
+                {navigation.support.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      target={(item as any).external ? '_blank' : undefined}
+                      rel={
+                        (item as any).external
+                          ? 'noopener noreferrer'
+                          : undefined
+                      }
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-foreground">
+                Legal
+              </h3>
+              <ul className="mt-4 space-y-3">
+                {navigation.legal.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
 
-        <div className="mt-8 tablet:order-1 tablet:mt-0">
-          <p className="text-center text-xs leading-5 text-gray-500">
+        {/* Bottom bar */}
+        <div className="mt-12 flex flex-col gap-4 border-t border-border pt-8 tablet:flex-row tablet:items-center tablet:justify-between">
+          <p className="text-xs text-muted-foreground">London Control.</p>
+          <p className="text-xs text-muted-foreground">
             Website by{' '}
             <Link
               href="https://geren.uk"
               target="_blank"
-              className="hover:underline"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-foreground hover:underline"
             >
               Gerenuk
             </Link>
-            .
           </p>
         </div>
       </div>

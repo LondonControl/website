@@ -37,12 +37,17 @@ const Privacy: NextPage<Props> = () => {
         />
       }
     >
-      <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-        <h1 className="mt-6 text-2xl font-bold tracking-tight text-primary tablet:text-3xl">
-          Privacy
-        </h1>
+      <div className="mx-auto max-w-site px-4 py-12 tablet:px-6 laptop:px-8">
+        <div className="border-b border-border pb-8">
+          <span className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
+            Legal
+          </span>
+          <h1 className="mt-2 text-3xl font-black tracking-tight text-foreground tablet:text-4xl">
+            Privacy
+          </h1>
+        </div>
 
-        <div ref={observe} className="mx-auto mt-6 laptop:mt-12">
+        <div ref={observe} className="mx-auto mt-8">
           <Document
             file="/assets/pdfs/lc_privacy_policy.pdf"
             onLoadSuccess={onDocumentLoadSuccess}
@@ -55,13 +60,13 @@ const Privacy: NextPage<Props> = () => {
               renderAnnotationLayer={false}
             />
 
-            <div className="absolute bottom-[5%] left-[50%] translate-x-[-50%] rounded-md bg-white text-white opacity-0 shadow-sm group-hover:cursor-pointer group-hover:bg-[#191b1c] group-hover:opacity-100">
+            <div className="absolute bottom-[5%] left-[50%] translate-x-[-50%] rounded-md bg-primary text-primary-foreground opacity-0 shadow-sm group-hover:cursor-pointer group-hover:opacity-100">
               <button
                 disabled={pageNumber <= 1}
                 onClick={() => setPageNumber(pageNumber - 1)}
                 type="button"
                 aria-label="Previous page"
-                className="bg-opacity/5 size-11 border-r-0 hover:rounded-l-sm hover:bg-[#333333]"
+                className="size-11 border-r-0 hover:rounded-l-sm hover:bg-primary-foreground/10"
               >
                 ‹
               </button>
@@ -75,7 +80,7 @@ const Privacy: NextPage<Props> = () => {
                 onClick={() => setPageNumber(pageNumber + 1)}
                 type="button"
                 aria-label="Next page"
-                className="bg-opacity/5 size-11 border-l-0 hover:rounded-r-sm hover:bg-[#333333]"
+                className="size-11 border-l-0 hover:rounded-r-sm hover:bg-primary-foreground/10"
               >
                 ›
               </button>

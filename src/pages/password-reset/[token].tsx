@@ -37,7 +37,7 @@ const formSchema = z
     {
       message: 'Passwords must match',
       path: ['passwordConfirmation'],
-    }
+    },
   );
 
 const PasswordReset: NextPage = () => {

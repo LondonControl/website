@@ -24,18 +24,12 @@ const formSchema = z.object({
 });
 
 const UpdateProfileInformationForm = () => {
-  const { user } = useAuth({
-    middleware: 'auth',
-  });
-
+  const { user } = useAuth({ middleware: 'auth' });
   const [errors, setErrors] = useState<any>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-      email: '',
-    },
+    defaultValues: { name: '', email: '' },
   });
 
   useEffect(() => {
@@ -47,104 +41,58 @@ const UpdateProfileInformationForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setErrors([]);
-
     await csrf();
-
     axios
       .put('/api/profile', { name: values.name, email: values.email })
       .then(() => toast.success('Profile updated successfully!'))
       .catch((error) => {
         if (error.response.status !== 422) throw error;
-
         setErrors(error.response.data.errors);
       });
-
-    if (errors.length > 0) {
+    if (errors.length > 0)
       toast.error('Something went wrong, please try again!');
-    }
   };
 
   return (
-    <section id="update-profile">
-      <header>
-        <h2 className="text-lg font-medium text-primary">
-          Profile Information
-        </h2>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem className="space-y-2">
+              <FormLabel className="text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
+                Name
+              </FormLabel>
+              <FormControl>
+                <Input placeholder="Your name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-        <p className="mt-1 text-sm text-muted-foreground">
-          Update your account&apos;s profile information and email address.
-        </p>
-      </header>
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem className="space-y-2">
+              <FormLabel className="text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
+                Email address
+              </FormLabel>
+              <FormControl>
+                <Input type="email" placeholder="you@example.com" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6 space-y-4">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-
-                <FormControl>
-                  <Input placeholder="Name" {...field} />
-                </FormControl>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-
-                <FormControl>
-                  <Input type="email" placeholder="Email" {...field} />
-                </FormControl>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* {user?.email_verified_at === null && (
-            <div>
-              <p className="mt-2 text-sm text-gray-800">
-                Your email address is unverified.
-                <button
-                  className="ml-2 rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  onClick={() => {
-                    resendEmailVerification({
-                      setStatus: () => {},
-                      setErrors,
-                    });
-
-                    if (errors.length > 0) {
-                      return toast.error(
-                        'Something went wrong, please try again!',
-                      );
-                    }
-
-                    return toast.success(
-                      'Verification email sent successfully',
-                    );
-                  }}
-                >
-                  Click here to re-send the verification email.
-                </button>
-              </p>
-            </div>
-          )} */}
-
-          <div className="flex justify-end">
-            <Button type="submit">Save</Button>
-          </div>
-        </form>
-      </Form>
-    </section>
+        <div className="flex justify-end">
+          <Button type="submit">Save changes</Button>
+        </div>
+      </form>
+    </Form>
   );
 };
 

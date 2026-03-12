@@ -6,6 +6,22 @@ import { AppConfig } from '@/utils/AppConfig';
 
 interface Props {}
 
+const updates = [
+  'West Airspace Development in the south-west implemented',
+  'Airways and waypoints amended, removed or replaced',
+  'Levels and adjacent sector coordination updated',
+  'DCT routings expanded',
+  'Sector dimensions and coordinates amended',
+  'Level bands for some sector blocks amended',
+  'SIDs and STARs amended, removed or replaced',
+  'Call radii and menu layouts repositioned',
+  'Flight plans added, bringing the total available traffic to in excess of 14,000',
+  'SRD and RAD compliance checked',
+  'Errors (over 4,000 at the first testing cycle!) manually corrected',
+  'Route terminators outside London Control airspace re-plotted',
+  'Trigraph-to-callsign links reprogrammed (this is an ongoing piece of work)',
+];
+
 const LearnMore: React.FC<Props> = () => {
   return (
     <MainLayout
@@ -17,80 +33,77 @@ const LearnMore: React.FC<Props> = () => {
         />
       }
     >
-      <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-        <h1 className="text-2xl font-bold tracking-tight text-primary tablet:text-3xl laptop:mt-6">
-          Learn More
+      <div className="mx-auto max-w-site px-4 py-16 tablet:px-6 laptop:px-8 laptop:py-24">
+        {/* Header */}
+        <span className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
+          Latest update
+        </span>
+        <h1 className="mt-4 font-inter text-5xl font-black leading-none tracking-tighter text-foreground tablet:text-6xl laptop:text-7xl">
+          London Control,
+          <br />
+          fully updated.
         </h1>
-        <h2 className="sr-only">Learn More</h2>
 
-        <div className="mt-6 tablet:mt-12">
-          <div className="mx-auto space-y-6">
-            <h2>
-              London Control, fully updated to the latest AIRAC, is now
-              available!
-            </h2>
+        <div className="my-8 h-px w-16 bg-border" />
 
-            <p>
-              We have spent the past six months bringing the simulator
-              up-to-date with the following:
+        <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
+          We have spent the past six months bringing the simulator up-to-date
+          with the latest AIRAC cycle — comprehensive amendments across
+          airspace, procedures and traffic.
+        </p>
+
+        {/* Update list */}
+        <div className="mt-16 max-w-3xl">
+          {updates.map((item, i) => (
+            <div
+              key={item}
+              className="flex items-start gap-6 border-t border-border py-6"
+            >
+              <span className="min-w-[2.5rem] font-jetbrains text-xs font-bold text-muted-foreground/40">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <p className="flex-1 text-sm leading-relaxed text-foreground">
+                {item}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Footer notes */}
+        <div className="mt-16 grid gap-6 tablet:grid-cols-3">
+          <div className="rounded-xl border border-border bg-card p-6">
+            <p className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
+              Full report
             </p>
-
-            <ul className="ml-4 list-disc">
-              <li>West Airspace Development in the south-west implemented</li>
-              <li>Airways and waypoints amended, removed or replaced</li>
-              <li>Levels and adjacent sector coordination updated</li>
-              <li>DCT routings expanded</li>
-              <li>Sector dimensions and coordinates amended</li>
-              <li>Level bands for some sector blocks amended</li>
-              <li>SIDs and STARs amended, removed or replaced</li>
-              <li>Call radii and menu layouts repositioned</li>
-              <li>
-                Flight plans added, bringing the total available traffic to in
-                excess of 14,000
-              </li>
-              <li>SRD and RAD compliance checked</li>
-              <li>
-                Errors (over 4,000 at the first testing cycle!) manually
-                corrected
-              </li>
-              <li>
-                Route terminators outside London Control airspace re-plotted
-              </li>
-              <li>
-                Trigraph-to-callsign links reprogrammed (this is an ongoing
-                piece of work)
-              </li>
-            </ul>
-
-            <p>
-              See the forum{' '}
-              <Link
-                href="https://forum.londoncontrol.com"
-                target="_blank"
-                className="font-medium hover:underline"
-              >
-                (https://forum.londoncontrol.com)
-              </Link>{' '}
-              for a more comprehensive report.
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              See the forum for a more comprehensive breakdown of all changes
+              made in this release.
             </p>
+            <Link
+              href="https://forum.londoncontrol.com"
+              target="_blank"
+              className="mt-4 inline-block text-sm font-medium text-foreground underline underline-offset-4 hover:text-muted-foreground"
+            >
+              forum.londoncontrol.com →
+            </Link>
+          </div>
 
-            <p>
-              The sound system is the next major project that we are working on
-              and further amendments to London Control will be published in
-              conjunction with the AIRAC cycle.
+          <div className="rounded-xl border border-border bg-card p-6">
+            <p className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
+              What&apos;s next
             </p>
-
-            <p>
-              We are a team of three who each has full-time vocational
-              commitments aside from London Control. Whilst we strive to answer
-              emails and forum posts when they are received, there may sometimes
-              be a delay if we are engaged with other things. We respond to all
-              correspondence (where we consider it is required) and appreciate
-              your patience if occasionally there is a delay between receipt and
-              reply.
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              The sound system is the next major project we are working on.
+              Further amendments will be published in conjunction with the AIRAC
+              cycle.
             </p>
+          </div>
 
-            <p>
+          <div className="rounded-xl border border-border bg-card p-6">
+            <p className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
+              From the team
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               Thank you for continuing to support London Control, and thanks to
               Dale McLoughlin for enabling us to continue the excellent work he
               started over twenty years ago.

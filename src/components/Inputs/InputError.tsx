@@ -19,7 +19,7 @@ const InputError: React.FC<Props> = ({
           {messages.map((error: ErrorInput, index) => (
             <p
               {...props}
-              className={`text-sm text-red-600 ${className}`}
+              className={`text-sm text-destructive ${className}`}
               key={index}
             >
               {error.detail}
