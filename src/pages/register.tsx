@@ -83,7 +83,10 @@ const Register: NextPage = () => {
         canonical={`${AppConfig.site_url}/register`}
       />
 
-      <AuthCard>
+      <AuthCard
+        title="Create account"
+        description="Join London Control and start simulating."
+      >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
@@ -184,8 +187,12 @@ const Register: NextPage = () => {
               )}
             />
 
-            <Button type="submit" className="w-full">
-              Register
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={form.formState.isSubmitting}
+            >
+              {form.formState.isSubmitting ? 'Creating account…' : 'Register'}
             </Button>
 
             <p className="mt-4 text-sm">

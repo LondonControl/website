@@ -15,7 +15,6 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
 import { useAuth } from '@/hooks/useAuth';
 
 const DeleteAccountForm = () => {
@@ -27,37 +26,21 @@ const DeleteAccountForm = () => {
   const handleAccountDelete = async (event: any) => {
     event.preventDefault();
     setErrors([]);
-
     await deleteAccount({ setStatus: () => {}, setErrors });
-
-    if (errors.length > 0) {
+    if (errors.length > 0)
       toast.error('Something went wrong, please try again');
-    }
   };
 
   return (
-    <section id="delete-account">
-      <header>
-        <h2 className="text-lg font-medium text-primary">Delete Account</h2>
+    <div className="space-y-4">
+      <Alert type="caution">
+        <strong>Warning</strong> — this is destructive and cannot be undone.
+      </Alert>
 
-        <p className="mt-1 text-sm text-muted-foreground">
-          Use the button below to delete your user account and all identifiable
-          information.
-        </p>
-      </header>
-
-      <div className="mt-6">
-        <Alert type="caution">
-          <strong>Warning</strong> this is destructive and cannot be undone.
-        </Alert>
-      </div>
-
-      <Separator className="mt-6" />
-
-      <div className="mt-6 flex justify-end">
+      <div className="flex justify-end">
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="destructive">Delete Account</Button>
+            <Button variant="destructive">Delete account</Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
@@ -78,7 +61,7 @@ const DeleteAccountForm = () => {
           </AlertDialogContent>
         </AlertDialog>
       </div>
-    </section>
+    </div>
   );
 };
 

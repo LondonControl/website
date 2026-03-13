@@ -12,9 +12,7 @@ interface Props {
 }
 
 const DownloadCard: React.FC<Props> = ({ product, serialKey }) => {
-  const handleDownloadFile = async (event: any, productId: String) => {
-    event.preventDefault();
-
+  const handleDownloadFile = async (productId: string) => {
     await axios
       .get(`/api/products/${productId}/download`)
       .then((res) => {
@@ -26,7 +24,7 @@ const DownloadCard: React.FC<Props> = ({ product, serialKey }) => {
   };
 
   return (
-    <div className="rounded-md border border-gray-200 bg-card text-card-foreground">
+    <div className="rounded-xl border border-border bg-card text-card-foreground">
       <div className="p-4 tablet:p-6">
         <dl className="grid grid-cols-3 items-center gap-x-6 text-sm laptop:grid-cols-6">
           <div className="col-span-2 laptop:col-span-2">
@@ -53,7 +51,7 @@ const DownloadCard: React.FC<Props> = ({ product, serialKey }) => {
           <div className="hidden justify-self-end laptop:flex">
             <Button
               variant="secondary"
-              onClick={(event) => handleDownloadFile(event, product?.id || '')}
+              onClick={() => handleDownloadFile(product?.id || '')}
             >
               Download
             </Button>

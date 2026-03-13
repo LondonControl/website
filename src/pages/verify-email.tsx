@@ -27,45 +27,41 @@ const VerifyEmail: NextPage = () => {
         canonical={`${AppConfig.site_url}/verify-email`}
       />
 
-      <AuthCard>
-        <div className="mb-4 text-sm text-muted-foreground">
-          Thanks for signing up! Before getting started, could you verify your
-          email address by clicking on the link we just emailed to you? If you
-          didn&apos;t receive the email, we will gladly send you another.
-        </div>
+      <AuthCard
+        title="Check your inbox"
+        description="We've sent a verification link to your email address."
+      >
+        <AuthSessionStatus className="mb-6" status={status} />
 
-        {status === 'verification-link-sent' && (
-          <AuthSessionStatus
-            className="mb-4"
-            status="A new verification link has been sent to the email
-                        address you provided during registration"
-          />
-        )}
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          Before getting started, please verify your email address by clicking
+          the link we just sent you. If you didn&apos;t receive it, we can send
+          another.
+        </p>
 
-        <div className="mt-4 flex items-center justify-end">
-          <div className="justify-between">
-            <Button
-              onClick={() => {
-                resendEmailVerification({
-                  setStatus,
-                  setErrors: () => {},
-                });
+        <Button
+          className="mt-6 w-full"
+          onClick={() => {
+            resendEmailVerification({
+              setStatus,
+              setErrors: () => {},
+            });
+            toast.success('Verification email sent successfully');
+          }}
+        >
+          Resend verification email
+        </Button>
 
-                toast.success('Verification email sent successfully');
-              }}
-            >
-              Resend Verification Email
-            </Button>
-
-            <Button
-              type="button"
-              className="text-sm text-gray-600 underline hover:text-primary"
-              onClick={logout}
-            >
-              Logout
-            </Button>
-          </div>
-        </div>
+        <p className="mt-4 text-sm text-muted-foreground">
+          Wrong account?{' '}
+          <Button
+            variant="link"
+            className="h-auto p-0 text-sm"
+            onClick={logout}
+          >
+            Logout
+          </Button>
+        </p>
       </AuthCard>
     </GuestLayout>
   );

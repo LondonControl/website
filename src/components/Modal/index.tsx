@@ -47,7 +47,7 @@ const Modal: React.FC<
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="absolute inset-0 bg-gray-500/75" />
+          <div className="absolute inset-0 bg-black/50" />
         </Transition.Child>
 
         <Transition.Child
@@ -60,7 +60,7 @@ const Modal: React.FC<
           leaveTo="opacity-0 translate-y-4 tablet:translate-y-0 tablet:scale-95"
         >
           <Dialog.Panel
-            className={`tablrt:w-full mb-6 overflow-hidden rounded-lg bg-white shadow-xl transition-all tablet:mx-auto${maxWidthClass}`}
+            className={`tablrt:w-full mb-6 overflow-hidden rounded-xl border border-border bg-card shadow-2xl transition-all tablet:mx-auto${maxWidthClass}`}
           >
             {children}
           </Dialog.Panel>

@@ -2,32 +2,32 @@ const Features = [
   {
     name: 'High fidelity simulation.',
     description:
-      'London Control is a high fidelity simulation of current air traffic control operations over England and Wales. All sectors and operational material are the same as those used in real life.',
+      'Sector configurations, procedures and airspace are identical to real-world NATS operations - London, Scottish and Terminal Control, reproduced in full.',
   },
   {
-    name: 'Sophisticated radar.',
+    name: 'Sophisticated radar display.',
     description:
-      'The system provides a realistic representation of air traffic, with a radar-based situation display and flight data displays to provide supporting information.',
+      'A realistic situation display mirrors live NATS systems: primary and secondary radar returns, flight data displays, sector boundaries and traffic loading indicators.',
   },
   {
-    name: 'Highly customizable.',
+    name: 'Voice recognition.',
     description:
-      'Aut repellendus et officiis dolor possimus. Deserunt velit quasi sunt fuga error labore quia ipsum. Commodi autem voluptatem nam. Quos voluptatem totam.',
+      'Speak your clearances naturally. The integrated voice engine interprets spoken ATC instructions and triggers accurate pilot readbacks and compliance.',
   },
   {
-    name: 'Simulated radio communication.',
+    name: 'Real-world flight plans.',
     description:
-      'London Control features a voice regocnition function that will regocnise spoken clearances and instructions. The aircraft will comply with commands and respond with realistic readbacks.',
+      'Over 21,000 flight plans sourced from live AIRAC data give every session authentic routings, aircraft types and callsigns matching real-world traffic.',
   },
   {
-    name: 'Data driven.',
+    name: 'Fully customisable.',
     description:
-      'Sit minus expedita quam in ullam molestiae dignissimos in harum. Tenetur dolorem iure. Non nesciunt dolorem veniam necessitatibus laboriosam voluptas perspiciatis error.',
+      'Adjust traffic density, weather, simulation speed and sector configuration to tailor every session - from quiet training periods to full-scale rush-hour complexity.',
   },
   {
-    name: 'Extensive documentation.',
+    name: 'Comprehensive documentation.',
     description:
-      'Ipsa in earum deserunt aut. Quos minus aut animi et soluta. Ipsum dicta ut quia eius. Possimus reprehenderit iste aspernatur ut est velit consequatur distinctio.',
+      'Step-by-step sector guides, unit SOPs and training syllabuses ensure you understand the airspace before you work it.',
   },
 ];
 

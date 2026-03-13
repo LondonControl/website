@@ -57,13 +57,22 @@ const getIcon = (type: string) => {
   return icon;
 };
 
-const Alert: React.FC<Props> = ({ type, children }) => {
+const Alert: React.FC<Props> = ({ type = 'info', children }) => {
   const colours = getColours(type);
 
   return (
-    <div className={`border-l-4 p-4 ${colours?.element}`}>
+    <div
+      role={type === 'info' ? 'status' : 'alert'}
+      className={`border-l-4 p-4 ${colours?.element}`}
+    >
       <div className="flex items-center">
-        <div className={`shrink-0 ${colours?.text}`}>{getIcon(type)}</div>
+        <div
+          className={`shrink-0 ${colours?.text}`}
+          aria-hidden="true"
+          data-testid="alert-icon"
+        >
+          {getIcon(type)}
+        </div>
         <div className="ml-3">
           <p className={`text-sm ${colours?.text}`}>{children}</p>
         </div>

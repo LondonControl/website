@@ -67,13 +67,10 @@ const ForgotPassword: NextPage = () => {
         canonical={`${AppConfig.site_url}/forgot-password`}
       />
 
-      <AuthCard>
-        <div className="mb-4 text-sm text-muted-foreground">
-          Forgot your password? No problem. Just let us know your email address
-          and we will email you a password reset link that will allow you to
-          choose a new one.
-        </div>
-
+      <AuthCard
+        title="Reset password"
+        description="Enter your email and we'll send you a link to choose a new one."
+      >
         {/* Session Status */}
         <AuthSessionStatus className="mb-4" status={status} />
 
@@ -103,7 +100,9 @@ const ForgotPassword: NextPage = () => {
             />
 
             <div className="flex justify-end">
-              <Button type="submit">Submit</Button>
+              <Button type="submit" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting ? 'Sending...' : 'Submit'}
+              </Button>
             </div>
           </form>
         </Form>

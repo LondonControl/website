@@ -17,7 +17,7 @@ const OrderCard: React.FC<Props> = ({ order }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <div className="rounded-md border border-gray-200 bg-card text-card-foreground">
+    <div className="rounded-xl border border-border bg-card text-card-foreground">
       <h3 className="sr-only">
         Order placed on{' '}
         <time dateTime={dayjs(order.created_at).format('DD/MM/YYYY hh:mm')}>
@@ -27,7 +27,7 @@ const OrderCard: React.FC<Props> = ({ order }) => {
 
       <div
         className={classNames(
-          'flex items-center border-gray-200 p-4 tablet:p-6 hover:cursor-pointer',
+          'flex items-center border-border p-4 tablet:p-6 hover:cursor-pointer',
           isOpen ? 'border-b' : null,
         )}
         onClick={() => setIsOpen(!isOpen)}
@@ -61,12 +61,12 @@ const OrderCard: React.FC<Props> = ({ order }) => {
 
       {/* Products */}
       <h4 className="sr-only">Items</h4>
-      <ul role="list" className="divide-y divide-gray-200" hidden={!isOpen}>
+      <ul role="list" className="divide-y divide-border" hidden={!isOpen}>
         {order.items?.map((item: OrderItem) => (
           <li key={item.id} className="p-4 tablet:p-6">
             <div className="flex items-center">
               <div className="flex-1 text-sm">
-                <div className="flex justify-between font-medium text-primary">
+                <div className="flex justify-between font-medium text-foreground">
                   <div className="flex space-x-4">
                     <Link
                       href={`/products/${item.product?.id}`}
@@ -75,7 +75,7 @@ const OrderCard: React.FC<Props> = ({ order }) => {
                       {item.product?.title}
                     </Link>
 
-                    <span className="block text-gray-500">|</span>
+                    <span className="block text-muted-foreground">|</span>
 
                     <p>£{item.actual_price / 100}</p>
                   </div>

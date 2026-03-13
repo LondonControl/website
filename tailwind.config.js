@@ -21,8 +21,11 @@ module.exports = {
       },
     },
     fontFamily: {
-      jetbrains: ['JetBrains Mono', ...defaultTheme.fontFamily.sans],
-      inter: ['Inter', ...defaultTheme.fontFamily.sans],
+      jetbrains: [
+        'var(--font-jetbrains-mono)',
+        ...defaultTheme.fontFamily.mono,
+      ],
+      inter: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
     },
     extend: {
       maxWidth: {

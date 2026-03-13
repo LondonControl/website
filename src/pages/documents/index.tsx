@@ -1,10 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import type { NextPage } from 'next';
-import MoonLoader from 'react-spinners/MoonLoader';
 import { toast } from 'sonner';
 import useSWR from 'swr';
 
+import CardGrid from '@/components/CardGrid';
 import Meta from '@/components/Meta';
+import PageHeader from '@/components/PageHeader';
 import { Button } from '@/components/ui/button';
 import type Document from '@/interfaces/Document';
 import MainLayout from '@/layouts/Main';
@@ -20,12 +21,9 @@ const Documents: NextPage<Props> = () => {
     fetcher,
   );
 
-  // eslint-disable-next-line no-console
-  if (error) console.log(error);
+  if (error) toast.error('Something went wrong, please try again!');
 
-  const handleDownloadFile = async (event: any, productId: String) => {
-    event.preventDefault();
-
+  const handleDownloadFile = async (productId: string) => {
     await axios
       .get(`/api/documents/${productId}/download`)
       .then((res) => {
@@ -46,51 +44,40 @@ const Documents: NextPage<Props> = () => {
         />
       }
     >
-      <div className="mx-auto max-w-site px-4 py-6 tablet:px-6 laptop:px-8">
-        <h1 className="text-2xl font-bold tracking-tight text-primary tablet:text-3xl laptop:mt-6">
-          Documents
-        </h1>
+      <div className="mx-auto max-w-site px-4 py-12 tablet:px-6 laptop:px-8">
+        <PageHeader eyebrow="Resources" title="Documents" />
         <h2 className="sr-only">Documents</h2>
 
-        {isLoading ? (
-          <div className="mt-6 flex items-center justify-center laptop:mt-12">
-            <MoonLoader loading={isLoading} />
-          </div>
-        ) : (
-          <div className="mt-6 grid grid-cols-1 gap-y-4 tablet:grid-cols-2 tablet:gap-x-6 tablet:gap-y-10 laptop:mt-12 laptop:grid-cols-3 laptop:gap-x-8 desktop:grid-cols-4">
-            {data?.data.map((document: Document) => (
-              <div
-                key={document.id}
-                className="flex flex-col rounded-md border border-gray-200 bg-card p-4 text-card-foreground"
-              >
-                <div className="grow">
-                  <h3 className="text-base font-medium text-primary">
-                    {document.title}
-                  </h3>
-
-                  <hr className="mt-2 border-gray-100" />
-
-                  <p className="mt-4 text-sm text-primary">
-                    {document.description}
-                  </p>
-                </div>
-
-                <div className="mt-4 content-end">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="w-full"
-                    onClick={(event) =>
-                      handleDownloadFile(event, document?.id || '')
-                    }
-                  >
-                    Download
-                  </Button>
-                </div>
+        <CardGrid isLoading={isLoading}>
+          {data?.data.map((document: Document) => (
+            <div
+              key={document.id}
+              className="flex flex-col rounded-xl border border-border bg-card p-6 transition-shadow duration-200 hover:shadow-md"
+            >
+              <div className="grow">
+                <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+                  Document
+                </p>
+                <h3 className="mt-2 text-sm font-semibold leading-snug text-foreground">
+                  {document.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {document.description}
+                </p>
               </div>
-            ))}
-          </div>
-        )}
+
+              <div className="mt-6">
+                <Button
+                  type="button"
+                  className="w-full"
+                  onClick={() => handleDownloadFile(document?.id || '')}
+                >
+                  Download
+                </Button>
+              </div>
+            </div>
+          ))}
+        </CardGrid>
       </div>
     </MainLayout>
   );

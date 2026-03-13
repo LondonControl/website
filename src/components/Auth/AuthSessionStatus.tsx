@@ -15,6 +15,8 @@ const AuthSessionStatus: React.FC<Props> = ({
     <>
       {status && (
         <div
+          role="status"
+          aria-live="polite"
           className={`${className} text-sm font-medium text-green-600`}
           {...props}
         >
