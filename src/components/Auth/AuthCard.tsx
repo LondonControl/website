@@ -17,7 +17,7 @@ const AuthCard: React.FC<AuthCardProps> = ({
   return (
     <div className="flex min-h-screen">
       {/* Left panel — brand (desktop only) */}
-      <div className="relative hidden flex-col justify-between bg-primary p-12 laptop:flex laptop:w-5/12">
+      <div className="relative hidden flex-col bg-primary p-12 laptop:flex laptop:w-5/12">
         {/* Dot-grid pattern */}
         <div
           className="pointer-events-none absolute inset-0"
@@ -52,16 +52,18 @@ const AuthCard: React.FC<AuthCardProps> = ({
           </Link>
         </div>
 
-        {/* Main brand copy */}
-        <div className="relative">
-          <h1 className="font-inter text-6xl font-black leading-none text-primary-foreground laptop:text-7xl">
-            LONDON
-            <br />
-            CONTROL
-          </h1>
-          <p className="mt-6 font-jetbrains text-xs uppercase tracking-[0.3em] text-primary-foreground/30">
-            Control the skies.
-          </p>
+        {/* Main brand copy — vertically centred in remaining space */}
+        <div className="relative flex flex-1 items-center">
+          <div>
+            <h1 className="font-inter text-6xl font-black leading-none text-primary-foreground laptop:text-7xl">
+              LONDON
+              <br />
+              CONTROL
+            </h1>
+            <p className="mt-6 font-jetbrains text-xs uppercase tracking-[0.3em] text-primary-foreground/30">
+              Control the skies.
+            </p>
+          </div>
         </div>
       </div>
 
