@@ -1,54 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { motion } from 'framer-motion';
-import {
-  BookOpen,
-  FileStack,
-  Mic,
-  Radar,
-  Settings2,
-  Target,
-} from 'lucide-react';
+
+import Features from '@/data/Features';
 
 interface Props {}
-
-const features = [
-  {
-    icon: Target,
-    name: 'High fidelity simulation.',
-    description:
-      'Sector configurations, procedures and airspace are identical to real-world NATS operations — London, Scottish and Terminal Control, reproduced in full.',
-  },
-  {
-    icon: Radar,
-    name: 'Sophisticated radar display.',
-    description:
-      'A realistic situation display mirrors live NATS systems: primary and secondary radar returns, flight data displays, sector boundaries and traffic loading indicators.',
-  },
-  {
-    icon: Mic,
-    name: 'Voice recognition.',
-    description:
-      'Speak your clearances naturally. The integrated voice engine interprets spoken ATC instructions and triggers accurate pilot readbacks and compliance.',
-  },
-  {
-    icon: FileStack,
-    name: 'Real-world flight plans.',
-    description:
-      'Over 21,000 flight plans sourced from live AIRAC data give every session authentic routings, aircraft types and callsigns matching real-world traffic.',
-  },
-  {
-    icon: Settings2,
-    name: 'Fully customisable.',
-    description:
-      'Adjust traffic density, weather, simulation speed and sector configuration — from quiet training periods to full-scale rush-hour complexity.',
-  },
-  {
-    icon: BookOpen,
-    name: 'Comprehensive documentation.',
-    description:
-      'Step-by-step sector guides, unit SOPs and training syllabuses ensure you understand the airspace before you work it.',
-  },
-];
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -96,7 +51,7 @@ const FeaturesSection: React.FC<Props> = () => {
             show: { transition: { staggerChildren: 0.08 } },
           }}
         >
-          {features.map((feature) => {
+          {Features.map((feature) => {
             const Icon = feature.icon;
             return (
               <motion.div
