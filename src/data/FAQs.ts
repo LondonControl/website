@@ -13,9 +13,9 @@ const FAQs: FAQ[] = [
       'Due to the amount of work that has gone into providing the data package, we are unable to provide it for free.',
   },
   {
-    question: 'I am having trouble installing, how do I do it?',
+    question: 'I am having trouble installing/updating, how do I do it?',
     answer:
-      'After following the download procedure, you will see a .ZIP file. You simply need to extract this file to access the required files. If you have purchased just the data, follow the instructions included to update the simulator. If you have also purchased the simulator you first need to run the .EXE which is located in the extracted .ZIP file and then continue with the process to update the data.',
+      'After downloading the file, simply extract the .ZIP archive and run the .EXE file inside to automatically install or update the required files.',
   },
   {
     question: 'After purchasing, where can I download the files from?',
