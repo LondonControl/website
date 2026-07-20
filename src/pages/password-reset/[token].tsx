@@ -45,7 +45,7 @@ const PasswordReset: NextPage = () => {
 
   const { resetPassword } = useAuth({ middleware: 'guest' });
 
-  const [errors, setErrors] = useState<any>([]);
+  const [, setErrors] = useState<any>([]);
   const [status, setStatus] = useState(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -58,15 +58,15 @@ const PasswordReset: NextPage = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await resetPassword({
-      email: values.email,
-      password: values.password,
-      password_confirmation: values.passwordConfirmation,
-      setErrors,
-      setStatus,
-    });
-
-    if (errors.length > 0) {
+    try {
+      await resetPassword({
+        email: values.email,
+        password: values.password,
+        password_confirmation: values.passwordConfirmation,
+        setErrors,
+        setStatus,
+      });
+    } catch {
       toast.error('Something went wrong, please try again');
     }
   };

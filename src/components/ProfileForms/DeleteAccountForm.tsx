@@ -19,16 +19,19 @@ import { useAuth } from '@/hooks/useAuth';
 
 const DeleteAccountForm = () => {
   const { user, deleteAccount } = useAuth({ middleware: 'auth' });
-  const [errors, setErrors] = useState<any>([]);
+  const [, setErrors] = useState<any>([]);
 
   if (!user) return null;
 
   const handleAccountDelete = async (event: any) => {
     event.preventDefault();
     setErrors([]);
-    await deleteAccount({ setStatus: () => {}, setErrors });
-    if (errors.length > 0)
+
+    try {
+      await deleteAccount({ setStatus: () => {}, setErrors });
+    } catch {
       toast.error('Something went wrong, please try again');
+    }
   };
 
   return (

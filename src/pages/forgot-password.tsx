@@ -47,16 +47,15 @@ const ForgotPassword: NextPage = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setErrors([]);
-    await forgotPassword({ email: values.email, setErrors, setStatus });
 
-    if (errors.length > 0) {
+    try {
+      await forgotPassword({ email: values.email, setErrors, setStatus });
+
+      form.reset();
+      toast.success('Password reset email sent successfully!');
+    } catch {
       toast.error('Something went wrong, please try again!');
-
-      return;
     }
-
-    form.reset();
-    toast.success('Password reset email sent successfully!');
   };
 
   return (

@@ -31,7 +31,7 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
       .get(getUserEndpoint())
       .then((res) => res.data.data)
       .catch((err) => {
-        if (err.response.status !== 409) throw err;
+        if (err.response?.status !== 409) throw err;
 
         router.push('/verify-email');
       }),
@@ -44,19 +44,22 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
 
     setErrors([]);
 
-    axios
-      .post('/register', {
+    try {
+      await axios.post('/register', {
         name: props.name,
         email: props.email,
         password: props.password,
         password_confirmation: props.password_confirmation,
-      })
-      .then(() => mutate())
-      .catch((err) => {
-        if (err.response.status !== 422) throw err;
-
-        setErrors(err.response.data.errors);
       });
+
+      await mutate();
+    } catch (err: any) {
+      if (err.response?.status === 422) {
+        setErrors(err.response.data.errors);
+      }
+
+      throw err;
+    }
   };
 
   const login = async (args: ApiRequest) => {
@@ -67,18 +70,21 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
     setErrors([]);
     setStatus(null);
 
-    axios
-      .post('/login', {
+    try {
+      await axios.post('/login', {
         email: props.email,
         password: props.password,
         remember: props.remember,
-      })
-      .then(() => mutate())
-      .catch((err) => {
-        if (err.response.status !== 422) throw err;
-
-        setErrors(err.response.data.errors);
       });
+
+      await mutate();
+    } catch (err: any) {
+      if (err.response?.status === 422) {
+        setErrors(err.response.data.errors);
+      }
+
+      throw err;
+    }
   };
 
   const forgotPassword = async (args: ApiRequest) => {
@@ -88,14 +94,17 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
     setErrors([]);
     setStatus(null);
 
-    axios
-      .post('/forgot-password', { email })
-      .then((response) => setStatus(response.data.status))
-      .catch((err) => {
-        if (err.response.status !== 422) throw err;
+    try {
+      const response = await axios.post('/forgot-password', { email });
 
+      setStatus(response.data.status);
+    } catch (err: any) {
+      if (err.response?.status === 422) {
         setErrors(err.response.data.errors);
-      });
+      }
+
+      throw err;
+    }
   };
 
   const resetPassword = async (args: ApiRequest) => {
@@ -105,16 +114,20 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
     setErrors([]);
     setStatus(null);
 
-    axios
-      .post('/reset-password', { token: router.query.token, ...props })
-      .then((response) =>
-        router.push(`/login?reset=${btoa(response.data.status)}`),
-      )
-      .catch((err) => {
-        if (err.response.status !== 422) throw err;
-
-        setErrors(err.response.data.errors);
+    try {
+      const response = await axios.post('/reset-password', {
+        token: router.query.token,
+        ...props,
       });
+
+      router.push(`/login?reset=${btoa(response.data.status)}`);
+    } catch (err: any) {
+      if (err.response?.status === 422) {
+        setErrors(err.response.data.errors);
+      }
+
+      throw err;
+    }
   };
 
   const resendEmailVerification = (args: ApiRequest) => {
@@ -137,18 +150,18 @@ export const useAuth = ({ middleware, redirectUri }: UseAuth) => {
 
     setErrors([]);
 
-    axios
-      .delete('/api/user')
-      .then(() => {
-        mutate();
+    try {
+      await axios.delete('/api/user');
 
-        window.location.pathname = '/';
-      })
-      .catch((err) => {
-        if (err.response.status !== 422) throw err;
-
+      mutate();
+      window.location.pathname = '/';
+    } catch (err: any) {
+      if (err.response?.status === 422) {
         setErrors(err.response.data.errors);
-      });
+      }
+
+      throw err;
+    }
   };
 
   useEffect(() => {

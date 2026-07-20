@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import * as z from 'zod';
 
 import AuthCard from '@/components/Auth/AuthCard';
@@ -65,17 +66,17 @@ const Login: NextPage = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setErrors([]);
 
-    await login({
-      email: values.email,
-      password: values.password,
-      remember: values.shouldRemember,
-      setErrors,
-      setStatus,
-    });
-
-    // if (errors.length > 0) {
-    //   toast.error('Something went wrong, please try again!');
-    // }
+    try {
+      await login({
+        email: values.email,
+        password: values.password,
+        remember: values.shouldRemember,
+        setErrors,
+        setStatus,
+      });
+    } catch {
+      toast.error('Something went wrong, please try again!');
+    }
   };
 
   return (

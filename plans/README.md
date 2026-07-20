@@ -20,7 +20,7 @@ and update your row when done.
 | Plan | Title | Priority | Effort | Risk | Depends on | Status |
 |------|-------|----------|--------|------|------------|--------|
 | 001 | Get the CI pipeline passing again | P1 | S | LOW | — | DONE |
-| 002 | Make `useAuth.ts` request failures actually reach the user | P1 | M | LOW | — | TODO |
+| 002 | Make `useAuth.ts` request failures actually reach the user | P1 | M | LOW | — | DONE |
 | 003 | Fix missing-await and stale error checks in ProfileForms | P1 | S | LOW | — | TODO |
 | 004 | Fix inverted fixed-amount discount math in `CartContext` | P1 | S | LOW | — | TODO |
 | 005 | Escape and validate contact-form input before it reaches the email | P1 | S | LOW | — | TODO |

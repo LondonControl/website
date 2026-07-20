@@ -61,16 +61,16 @@ const Register: NextPage = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await register({
-      name: values.name,
-      email: values.email,
-      password: values.password,
-      password_confirmation: values.passwordConfirmation,
-      setErrors,
-      setStatus: () => {},
-    });
-
-    if (errors.length > 0) {
+    try {
+      await register({
+        name: values.name,
+        email: values.email,
+        password: values.password,
+        password_confirmation: values.passwordConfirmation,
+        setErrors,
+        setStatus: () => {},
+      });
+    } catch {
       toast.error('Something went wrong, please try again!');
     }
   };
