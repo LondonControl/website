@@ -25,7 +25,7 @@ const formSchema = z.object({
 
 const UpdateProfileInformationForm = () => {
   const { user } = useAuth({ middleware: 'auth' });
-  const [errors, setErrors] = useState<any>([]);
+  const [, setErrors] = useState<any>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -42,15 +42,20 @@ const UpdateProfileInformationForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setErrors([]);
     await csrf();
-    axios
-      .put('/api/profile', { name: values.name, email: values.email })
-      .then(() => toast.success('Profile updated successfully!'))
-      .catch((error) => {
-        if (error.response.status !== 422) throw error;
-        setErrors(error.response.data.errors);
+
+    try {
+      await axios.put('/api/profile', {
+        name: values.name,
+        email: values.email,
       });
-    if (errors.length > 0)
+
+      toast.success('Profile updated successfully!');
+    } catch (error: any) {
+      if (error.response?.status !== 422) throw error;
+
+      setErrors(error.response.data.errors);
       toast.error('Something went wrong, please try again!');
+    }
   };
 
   return (

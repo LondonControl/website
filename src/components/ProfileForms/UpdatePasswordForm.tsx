@@ -29,7 +29,7 @@ const formSchema = z
   });
 
 const UpdatePasswordForm = () => {
-  const [errors, setErrors] = useState<any>([]);
+  const [, setErrors] = useState<any>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,19 +43,21 @@ const UpdatePasswordForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setErrors([]);
     await csrf();
-    axios
-      .put('/api/password', {
+
+    try {
+      await axios.put('/api/password', {
         current_password: values.currentPassword,
         password: values.password,
         password_confirmation: values.passwordConfirmation,
-      })
-      .then(() => toast.success('Password updated successfully!'))
-      .catch((error) => {
-        if (error.response.status !== 422) throw error;
-        setErrors(error.response.data.errors);
       });
-    if (errors.length > 0)
+
+      toast.success('Password updated successfully!');
+    } catch (error: any) {
+      if (error.response?.status !== 422) throw error;
+
+      setErrors(error.response.data.errors);
       toast.error('Something went wrong, please try again!');
+    }
   };
 
   return (
